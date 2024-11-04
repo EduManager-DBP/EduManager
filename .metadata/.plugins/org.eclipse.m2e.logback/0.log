@@ -486,3 +486,135 @@
 2024-11-03 00:42:09,629 [Worker-204: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
 2024-11-03 00:42:09,637 [Worker-204: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2024-11-03 00:42:09,638 [Worker-204: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 01:44:12,935 [Worker-217: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 01:44:12,948 [Worker-217: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from resources to target/classes
+2024-11-03 01:44:12,957 [Worker-217: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 01:44:12,958 [Worker-217: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 20:34:37,840 [Worker-241: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 20:34:37,854 [Worker-241: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 20:34:37,862 [Worker-241: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 20:34:37,863 [Worker-241: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 20:38:42,410 [Worker-244: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 20:38:42,413 [Worker-244: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 20:38:42,415 [Worker-244: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 20:38:42,415 [Worker-244: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 21:48:38,558 [Worker-254: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 21:48:38,572 [Worker-254: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 21:48:38,582 [Worker-254: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 21:48:38,583 [Worker-254: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 21:49:21,306 [Worker-251: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 21:49:21,308 [Worker-251: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 21:49:21,309 [Worker-251: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 21:49:21,310 [Worker-251: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 22:11:27,252 [Worker-252: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:11:27,255 [Worker-252: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 22:11:27,261 [Worker-252: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:11:27,261 [Worker-252: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 22:11:50,786 [Worker-263: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:11:50,802 [Worker-263: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 22:11:50,809 [Worker-263: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:11:50,810 [Worker-263: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 22:43:12,238 [Worker-268: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:43:12,241 [Worker-268: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 22:43:12,246 [Worker-268: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 22:43:12,246 [Worker-268: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-03 23:16:20,853 [Worker-277: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 23:16:20,873 [Worker-277: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-03 23:16:20,882 [Worker-277: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-03 23:16:20,883 [Worker-277: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:12:06,595 [Worker-291: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:12:06,617 [Worker-291: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:12:06,627 [Worker-291: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:12:06,628 [Worker-291: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:12:47,512 [Worker-281: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:12:47,515 [Worker-281: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:12:47,521 [Worker-281: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:12:47,522 [Worker-281: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:19:00,172 [Worker-293: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:19:00,177 [Worker-293: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:19:00,184 [Worker-293: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:19:00,184 [Worker-293: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:20:01,033 [Worker-296: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:20:01,050 [Worker-296: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:20:01,059 [Worker-296: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:20:01,060 [Worker-296: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:22:22,764 [Worker-292: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:22:22,768 [Worker-292: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:22:22,772 [Worker-292: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:22:22,773 [Worker-292: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:33:01,812 [Worker-294: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:33:01,815 [Worker-294: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:33:01,818 [Worker-294: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:33:01,818 [Worker-294: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:34:21,746 [Worker-307: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:34:21,748 [Worker-307: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:34:21,750 [Worker-307: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:34:21,750 [Worker-307: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:36:49,270 [Worker-310: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:36:49,273 [Worker-310: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:36:49,277 [Worker-310: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:36:49,277 [Worker-310: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:39:48,096 [Worker-326: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:39:48,112 [Worker-326: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:39:48,121 [Worker-326: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:39:48,122 [Worker-326: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:44:03,301 [Worker-330: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:44:03,306 [Worker-330: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:44:03,309 [Worker-330: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:44:03,309 [Worker-330: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:56:54,567 [Worker-336: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:56:54,585 [Worker-336: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:56:54,594 [Worker-336: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:56:54,595 [Worker-336: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 00:59:41,292 [Worker-344: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:59:41,298 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 00:59:41,301 [Worker-344: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 00:59:41,302 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:00:00,131 [Worker-353: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:00:00,133 [Worker-353: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:00:00,135 [Worker-353: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:00:00,136 [Worker-353: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:00:34,005 [Worker-348: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:00:34,008 [Worker-348: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:00:34,011 [Worker-348: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:00:34,012 [Worker-348: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:01:25,291 [Worker-344: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:01:25,295 [Worker-344: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:01:25,298 [Worker-344: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:01:25,299 [Worker-344: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:03:23,061 [Worker-359: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:03:23,091 [Worker-359: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:03:23,117 [Worker-359: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:03:23,128 [Worker-359: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:06:13,864 [Worker-369: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:06:13,872 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:06:13,877 [Worker-369: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:06:13,878 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:08:08,057 [Worker-374: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:08:08,059 [Worker-374: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:08:08,060 [Worker-374: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:08:08,061 [Worker-374: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:11:04,376 [Worker-374: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:11:04,380 [Worker-374: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:11:04,383 [Worker-374: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:11:04,383 [Worker-374: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:11:34,647 [Worker-371: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:11:34,649 [Worker-371: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:11:34,653 [Worker-371: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:11:34,653 [Worker-371: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:12:32,864 [Worker-371: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:12:32,898 [Worker-371: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:12:32,910 [Worker-371: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:12:32,911 [Worker-371: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:13:01,250 [Worker-380: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:13:01,253 [Worker-380: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:13:01,256 [Worker-380: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:13:01,257 [Worker-380: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:13:47,807 [Worker-383: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:13:47,810 [Worker-383: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:13:47,813 [Worker-383: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:13:47,814 [Worker-383: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
+2024-11-04 01:21:24,918 [Worker-381: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:21:24,925 [Worker-381: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from resources to target/classes
+2024-11-04 01:21:24,929 [Worker-381: Launching Lab3] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-11-04 01:21:24,931 [Worker-381: Launching Lab3] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /Users/sondahyun/DBP/sample/DBProgrammingPractice/Lab3-JDBC/src/test/resources
