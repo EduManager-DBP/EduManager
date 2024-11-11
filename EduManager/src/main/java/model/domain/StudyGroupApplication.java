@@ -3,10 +3,10 @@ package model.domain;
 import java.sql.Date;
 
 public class StudyGroupApplication {
-    private int studyGroupApplicationId; 
+    private long studyGroupApplicationId; 
     private String status;              
     private String memberId;            
-    private int studyGroupId;          
+    private long studyGroupId;          
     private Date createAt;         
     
    
@@ -14,13 +14,13 @@ public class StudyGroupApplication {
     }
 
     
-    public StudyGroupApplication(String status, String memberId, int studyGroupId) {
+    public StudyGroupApplication(String status, String memberId, long studyGroupId) {
         this.status = status;
         this.memberId = memberId;
         this.studyGroupId = studyGroupId;
     }
 
-    public int getStudyGroupApplicationId() {
+    public long getStudyGroupApplicationId() {
         return studyGroupApplicationId;
     }
 
@@ -44,11 +44,11 @@ public class StudyGroupApplication {
         this.memberId = memberId;
     }
 
-    public int getStudyGroupId() {
+    public long getStudyGroupId() {
         return studyGroupId;
     }
 
-    public void setStudyGroupId(int studyGroupId) {
+    public void setStudyGroupId(long studyGroupId) {
         this.studyGroupId = studyGroupId;
     }
 

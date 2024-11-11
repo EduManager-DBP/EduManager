@@ -7,6 +7,7 @@ import java.util.List;
 import model.domain.StudyGroup;
 import model.domain.StudyGroupApplication;
 
+
 public class StudyGroupDAO {
 private JDBCUtil jdbcUtil = null;
     
@@ -15,38 +16,32 @@ private JDBCUtil jdbcUtil = null;
     }
     
     public StudyGroup create(StudyGroup group) throws SQLException {
-        
-        
-        // 스터디 그룹 생성
-        String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId) "
-                + "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";    
-        Object[] param = new Object[] {
-                group.getName(),             
-                group.getImg(),               
-                group.getDescription(),       
-                group.getCapacity(),        
-                group.getCategory(),          
-                group.getLeaderId()           
-            };         
-        jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil 에 insert문과 매개 변수 설정
-                        
-        String key[] = {"studyGroupId"}; // PK 컬럼의 이름     
-        try {    
-            jdbcUtil.executeUpdate(key);  // insert 문 실행
-            ResultSet rs = jdbcUtil.getGeneratedKeys();
-            if(rs.next()) {
-                int generatedKey = rs.getInt(1);   // 생성된 PK 값
-                group.setStudyGroupId(generatedKey);   // id필드에 저장  
-            }
+        try {
+            String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId) "
+                         + "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";
+            Object[] param = new Object[] {
+                group.getName(),
+                group.getImg(),
+                group.getDescription(),
+                group.getCapacity(),
+                group.getCategory(),
+                group.getLeaderId()
+            };
+
+            jdbcUtil.setSqlAndParameters(sql, param);
+            jdbcUtil.executeUpdate();
+
+            // StudyGroup 생성 후 반환
             return group;
+
         } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();
-        } finally {     
+        } finally {
             jdbcUtil.commit();
-            jdbcUtil.close();   // resource 반환
-        }       
-        return null;            
+            jdbcUtil.close();
+        }
+        return null;
     }
     
     //스터디 그룹 정보 수정
@@ -72,7 +67,7 @@ private JDBCUtil jdbcUtil = null;
     }
     
     //스터디 그룹 정보 불러오기 
-    public StudyGroup findGroupInfo(int groupId) {
+    public StudyGroup findGroupInfo(long groupId) {
         
         try {
             StudyGroup group = new StudyGroup();
@@ -177,7 +172,7 @@ private JDBCUtil jdbcUtil = null;
     }
     
  // 요청 상태를 "수락"으로 변경
-    public void acceptApplication(int applicationId) throws SQLException {
+    public void acceptApplication(long applicationId) throws SQLException {
         
         String updateStatusSql = "UPDATE StudyGroupApplication SET status = '수락' WHERE studyGroupApplicationId = ?";
         
@@ -249,7 +244,7 @@ private JDBCUtil jdbcUtil = null;
     }
     
     
-    public void toggleStudyGroupLike(String memberId, int studyGroupId) throws SQLException {
+    public void toggleStudyGroupLike(String memberId, long studyGroupId) throws SQLException {
         try {
           
             String checkSql = "SELECT COUNT(*) FROM StudyGroupLike WHERE studyGroupId = ? AND memberId = ?";
@@ -282,7 +277,7 @@ private JDBCUtil jdbcUtil = null;
     }
     
     //리뷰 작성을 위한 스터디 그룹 소속인지 아닌지 확인
-    private boolean isMemberOfStudyGroup(String memberId, int studyGroupId) throws SQLException {
+    private boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
         String sql = "SELECT COUNT(*) FROM StudyGroupApplication WHERE studyGroupId = ? AND memberId = ? AND status = '수락'";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGroupId, memberId});
         
@@ -295,7 +290,7 @@ private JDBCUtil jdbcUtil = null;
     }
     
     // 스터디후기 생성
-    public void createReview(String memberId, int studyGroupId, String reviewText) throws SQLException {
+    public void createReview(String memberId, long studyGroupId, String reviewText) throws SQLException {
         try {
             if (isMemberOfStudyGroup(memberId, studyGroupId)) {
               
