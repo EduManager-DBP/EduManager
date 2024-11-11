@@ -33,5 +33,10 @@ public class LectureLike {
         this.memberId = memberId;
     }
     
+    @Override
+    public String toString() {
+        return "LectureLike [lectureLikeId=" + lectureLikeId + ", createAt=" + createAt + ", lectureId=" + lectureId
+                + ", memberId=" + memberId + "]";
+    }
     
 }
