@@ -4,8 +4,29 @@
 <html>
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='../../css/signUp.css' />" type="text/css">
-    <title>EduManager</title>
+<link rel=stylesheet href="<c:url value='../../css/login.css' />" type="text/css">
+    <title>EduManager LoginForm</title>
+  <script>
+  function login() {
+		if (form.userId.value == "") {
+			alert("사용자 ID를 입력하십시오.");
+			form.userId.focus();
+			return false;
+		} 
+		if (form.password.value == "") {
+			alert("비밀번호를 입력하십시오.");
+			form.password.focus();
+			return false;
+		}		
+		form.submit();
+	}
+
+	function userCreate(targetUri) {
+		form.action = targetUri;
+		form.method="GET";		// register form 요청
+		form.submit();
+	}
+  </script>
   </head>
   <body>
     <div class="page" >
@@ -24,15 +45,19 @@
                 <div id="form-container">
                     <div id="sign-up-container">
                         <h3>로그인 </h3>
-                        <form>
+                        <form name="loginForm" method="POST" action="<c:url value='/member/login' />">
                             <div class="input-group">
-                            <label for="email">아이디(이메일)</label>
-                      <input type="email" name="email" id="email" placeholder="Email">
-                     </div>
-                            <label for="password">비밀번호</label>
-                            <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+	                            <label for="email">아이디(이메일)</label>
+	                      		<input type="email" name="email" id="email" placeholder="Email">
+                     		
+	                            <label for="password">비밀번호</label>
+	                            <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+                            </div>
                             <div id="form-controls">
-                                <button type="button" id="nextBt">로그인하기</button>
+                                <button type="button" id="nextBt" onClick="login()">로그인</button>
+                            </div>
+                            <div id="form-controls">
+                                <button type="button" id="nextBt" onClick="userCreate('<c:url value='/member/register'/>')">회원가입</button>
                             </div>
                         </form>
                         
