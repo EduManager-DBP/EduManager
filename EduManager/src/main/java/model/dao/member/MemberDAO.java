@@ -23,7 +23,7 @@ public class MemberDAO {
      */
     public int create(Member member) throws SQLException {
         String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, ?)";
-        Object[] param = new Object[] { member.getId(), member.getPassword(), member.getName(), member.getEmail(),
+        Object[] param = new Object[] { member.getId(), member.getPwd(), member.getName(), member.getEmail(),
                 member.getPhone() };
         jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil 에 insert문과 매개 변수 설정
 
@@ -44,8 +44,8 @@ public class MemberDAO {
      * 기존의 사용자 정보를 수정. (이름, 전화번호)
      */
     public int update(Member member) throws SQLException {
-        String sql = "UPDATE MEMBER " + "SET password=?, phone=? " + "WHERE id=?";
-        Object[] param = new Object[] { member.getPassword(), member.getPhone() };
+        String sql = "UPDATE MEMBER " + "SET pwd=?, phone=? " + "WHERE id=?";
+        Object[] param = new Object[] { member.getPwd(), member.getPhone() };
         jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
 
         try {
@@ -85,15 +85,14 @@ public class MemberDAO {
      * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
      */
     public Member findUser(String id) throws SQLException {
-        String sql = "SELECT password, name, email, phone " + "FROM MEMBER" + "WHERE id=? ";
+        String sql = "SELECT pwd, name, email, phone " + "FROM MEMBER" + "WHERE id=? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] { id }); // JDBCUtil에 query문과 매개 변수 설정
 
         try {
             ResultSet rs = jdbcUtil.executeQuery(); // query 실행
             if (rs.next()) { // 학생 정보 발견
                 Member member = new Member( // User 객체를 생성하여 학생 정보를 저장
-                        id, rs.getString("password"), rs.getString("name"), rs.getString("email"),
-                        rs.getString("phone"));
+                        id, rs.getString("pwd"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));
                 return member;
             }
         } catch (Exception ex) {

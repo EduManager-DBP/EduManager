@@ -2,7 +2,7 @@ package model.domain.member;
 
 public class Member { // 수정은 pw, phone
     private String id;
-    private String password;
+    private String pwd;
     private String name;
     private String email;
     private String phone;
@@ -10,10 +10,10 @@ public class Member { // 수정은 pw, phone
     public Member() {
     }
 
-    public Member(String id, String password, String name, String email, String phone) {
+    public Member(String id, String pwd, String name, String email, String phone) {
         super();
         this.id = id;
-        this.password = password;
+        this.pwd = pwd;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -27,12 +27,12 @@ public class Member { // 수정은 pw, phone
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getName() {
@@ -60,11 +60,11 @@ public class Member { // 수정은 pw, phone
     }
 
     /* 비밀번호 검사 */
-    public boolean matchPassword(String password) {
-        if (password == null) {
+    public boolean matchPassword(String pwd) {
+        if (pwd == null) {
             return false;
         }
-        return this.password.equals(password);
+        return this.pwd.equals(pwd);
     }
 
     public boolean isSameMember(String id) {

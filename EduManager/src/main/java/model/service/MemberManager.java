@@ -12,7 +12,7 @@ import model.domain.member.Member;
  * 클래스를 별도로 둘 수 있다.
  */
 public class MemberManager {
-    private static MemberManager userMan = new MemberManager();
+    private static MemberManager eduManager = new MemberManager();
     private MemberDAO memberDAO;
 
     private MemberAnalysis memberAnalysis;
@@ -27,7 +27,7 @@ public class MemberManager {
     }
 
     public static MemberManager getInstance() {
-        return userMan;
+        return eduManager;
     }
 
     public int create(Member user) throws SQLException, ExistingMemberException {
@@ -37,7 +37,7 @@ public class MemberManager {
         return memberDAO.create(user);
     }
 
-    public Member findMember(String userId) throws SQLException, MemberNotFoundException {
+      public Member findMember(String userId) throws SQLException, MemberNotFoundException {
         Member user = memberDAO.findUser(userId);
 
         if (user == null) {
@@ -54,11 +54,11 @@ public class MemberManager {
         return memberDAO.findMemberList(currentPage, countPerPage);
     }
 
-    public boolean login(String id, String password)
+    public boolean login(String id, String pwd)
             throws SQLException, MemberNotFoundException, PasswordMismatchException {
         Member member = findMember(id);
 
-        if (!member.matchPassword(password)) {
+        if (!member.matchPassword(pwd)) {
             throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
         return true;

@@ -47,11 +47,11 @@
                         <h3>로그인 </h3>
                         <form name="loginForm" method="POST" action="<c:url value='/member/login' />">
                             <div class="input-group">
-	                            <label for="email">아이디(이메일)</label>
-	                      		<input type="email" name="email" id="email" placeholder="Email">
+	                            <label for="email">아이디</label>
+	                      		<input type="email" name="id" id="email" placeholder="Email">
                      		
 	                            <label for="password">비밀번호</label>
-	                            <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+	                            <input type="password" name="pwd" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                             </div>
                             <div id="form-controls">
                                 <button type="button" id="nextBt" onClick="login()">로그인</button>
