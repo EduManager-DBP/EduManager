@@ -24,7 +24,7 @@ public class UpdateMemberController implements Controller {
         if (request.getMethod().equals("GET")) {
             // GET request: 회원정보 수정 form 요청
             // 원래는 UpdateUserFormController가 처리하던 작업을 여기서 수행
-            String updateId = request.getParameter("userId");
+            String updateId = request.getParameter("id");
 
             log.debug("UpdateForm Request : {}", updateId);
 
@@ -33,7 +33,8 @@ public class UpdateMemberController implements Controller {
 
             HttpSession session = request.getSession();
 
-            if (MemberSessionUtils.isLoginUser(updateId, session) || MemberSessionUtils.isLoginUser("admin", session)) {
+            if (MemberSessionUtils.isLoginMember(updateId, session)
+                    || MemberSessionUtils.isLoginMember("admin", session)) {
                 // 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
 
 //                List<Community> commList = manager.findCommunityList(); // 커뮤니티 리스트 검색
@@ -52,7 +53,7 @@ public class UpdateMemberController implements Controller {
         Member updateMember = new Member(request.getParameter("id"), request.getParameter("pwd"),
                 request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));
 
-        log.debug("Update User : {}", updateMember);
+        log.debug("Update Member : {}", updateMember);
 
         manager.update(updateMember);
         return "redirect:/member/list";

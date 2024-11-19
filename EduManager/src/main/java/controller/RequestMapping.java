@@ -5,6 +5,13 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.member.DeleteMemberController;
+import controller.member.ListMemberController;
+import controller.member.LoginController;
+import controller.member.LogoutController;
+import controller.member.RegisterMemberController;
+import controller.member.UpdateMemberController;
+
 //import controller.user.*;
 //import controller.comm.*;
 
@@ -16,9 +23,21 @@ public class RequestMapping {
 
     public void initMapping() {
         // 각 URI에 대응되는 controller 객체를 생성 및 저장
+        // 로그인/로그아웃 요청
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
-        mappings.put("/member/login", new LoginController("/member/login"));
+        mappings.put("/member/login", new LoginController());
+        mappings.put("/member/logout", new LogoutController());
+        mappings.put("/user/list", new ListMemberController());
+
+        // 회원가입 요청
+        mappings.put("/member/register", new RegisterMemberController());
+
+        // 사용자 수정
+        mappings.put("/member/update", new UpdateMemberController());
+
+        // 사용자 삭제
+        mappings.put("/member/delete", new DeleteMemberController());
 
         logger.info("Initialized Request Mapping!");
     }

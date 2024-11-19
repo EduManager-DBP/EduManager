@@ -37,7 +37,31 @@ public class MemberManager {
         return memberDAO.create(user);
     }
 
-      public Member findMember(String userId) throws SQLException, MemberNotFoundException {
+    public int update(Member member) throws SQLException, MemberNotFoundException {
+//        int oldCommId = findMember(member.getMemberId()).getCommId();
+//        if (user.getCommId() != oldCommId) { // 소속 커뮤티니가 변경됨
+//            Community comm = commDAO.findCommunity(oldCommId); // 기존 소속 커뮤니티
+//            if (comm != null && user.getUserId().equals(comm.getChairId())) {
+//                // 사용자가 기존 소속 커뮤니티의 회장인 경우 -> 그 커뮤니티의 회장을 null로 변경 및 저장
+//                comm.setChairId(null);
+//                commDAO.updateChair(comm);
+//            }
+//        }
+        return memberDAO.update(member);
+    }
+
+    public int remove(String id) throws SQLException, MemberNotFoundException {
+//        int commId = findUser(userId).getCommId();
+//        Community comm = commDAO.findCommunity(commId); // 소속 커뮤니티
+//        if (comm != null && userId.equals(comm.getChairId())) {
+//            // 사용자가 소속 커뮤니티의 회장인 경우 -> 그 커뮤니티의 회장을 null로 변경 및 저장
+//            comm.setChairId(null);
+//            commDAO.updateChair(comm);
+//        }
+        return memberDAO.remove(id);
+    }
+
+    public Member findMember(String userId) throws SQLException, MemberNotFoundException {
         Member user = memberDAO.findUser(userId);
 
         if (user == null) {
