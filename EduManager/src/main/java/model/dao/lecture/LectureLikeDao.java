@@ -1,6 +1,7 @@
-package model.dao;
+package model.dao.lecture;
 
-import model.domain.LectureLike;
+import model.dao.JDBCUtil;
+import model.domain.lecture.LectureLike;
 
 public class LectureLikeDao {
     private JDBCUtil jdbcUtil = new JDBCUtil();
@@ -11,11 +12,9 @@ public class LectureLikeDao {
         query.append("INSERT INTO LectureLike (lectureLikeId, createAt, lectureId, memberId) ");
         query.append("VALUES (?, ?, ?, ?)");
 
-        Object[] params = new Object[] {
-            like.getLectureLikeId(),
-            like.getCreateAt(),
-            like.getLectureId().getLectureId(), // Lecture 객체에서 ID 추출
-            // like.getMemberId().getMemberId()   // StudentDTO 객체에서 ID 추출
+        Object[] params = new Object[] { like.getLectureLikeId(), like.getCreateAt(),
+                like.getLectureId().getLectureId(), // Lecture 객체에서 ID 추출
+                // like.getMemberId().getMemberId() // StudentDTO 객체에서 ID 추출
         };
 
         jdbcUtil.setSqlAndParameters(query.toString(), params);
@@ -38,7 +37,7 @@ public class LectureLikeDao {
         StringBuffer query = new StringBuffer();
         query.append("DELETE FROM LectureLike WHERE lectureLikeId = ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {lectureLikeId});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureLikeId });
 
         int result = 0;
         try {

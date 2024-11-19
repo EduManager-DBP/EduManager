@@ -1,10 +1,11 @@
-package model.dao;
+package model.dao.lecture;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.domain.LectureNotice;
+import model.dao.JDBCUtil;
+import model.domain.lecture.LectureNotice;
 
 public class LectureNoticeDao {
 
@@ -16,12 +17,8 @@ public class LectureNoticeDao {
         query.append("INSERT INTO LectureNotice (lectureNoticeId, createAt, title, description) ");
         query.append("VALUES (?, ?, ?, ?)");
 
-        Object[] params = new Object[] {
-            notice.getLectureNoticeId(),
-            notice.getCreateAt(),
-            notice.getTitle(),
-            notice.getDescription()
-        };
+        Object[] params = new Object[] { notice.getLectureNoticeId(), notice.getCreateAt(), notice.getTitle(),
+                notice.getDescription() };
 
         jdbcUtil.setSqlAndParameters(query.toString(), params);
 
@@ -43,7 +40,7 @@ public class LectureNoticeDao {
         StringBuffer query = new StringBuffer();
         query.append("DELETE FROM LectureNotice WHERE lectureNoticeId = ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {lectureNoticeId});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureNoticeId });
 
         int result = 0;
         try {
@@ -65,12 +62,8 @@ public class LectureNoticeDao {
         query.append("SET createAt = ?, title = ?, description = ? ");
         query.append("WHERE lectureNoticeId = ?");
 
-        Object[] params = new Object[] {
-            notice.getCreateAt(),
-            notice.getTitle(),
-            notice.getDescription(),
-            notice.getLectureNoticeId()
-        };
+        Object[] params = new Object[] { notice.getCreateAt(), notice.getTitle(), notice.getDescription(),
+                notice.getLectureNoticeId() };
 
         jdbcUtil.setSqlAndParameters(query.toString(), params);
 
@@ -92,7 +85,7 @@ public class LectureNoticeDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT * FROM LectureNotice WHERE lectureNoticeId = ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {lectureNoticeId});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureNoticeId });
 
         LectureNotice notice = null;
         try {

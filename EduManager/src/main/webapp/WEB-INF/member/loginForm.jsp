@@ -8,14 +8,14 @@
     <title>EduManager LoginForm</title>
   <script>
   function login() {
-		if (form.userId.value == "") {
+		if (form.id.value == "") {
 			alert("사용자 ID를 입력하십시오.");
-			form.userId.focus();
+			form.id.focus();
 			return false;
 		} 
-		if (form.password.value == "") {
+		if (form.pwd.value == "") {
 			alert("비밀번호를 입력하십시오.");
-			form.password.focus();
+			form.pwd.focus();
 			return false;
 		}		
 		form.submit();
@@ -45,18 +45,16 @@
                 <div id="form-container">
                     <div id="sign-up-container">
                         <h3>로그인 </h3>
-                        <form name="loginForm" method="POST" action="<c:url value='/member/login' />">
+                        <form name="form" method="POST" action="<c:url value='/member/login' />">
                             <div class="input-group">
 	                            <label for="email">아이디</label>
-	                      		<input type="email" name="id" id="email" placeholder="Email">
-                     		
+	                      		<input type="text" name="id" id="email" placeholder="id">
 	                            <label for="password">비밀번호</label>
 	                            <input type="password" name="pwd" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                             </div>
                             <div id="form-controls">
                                 <button type="button" id="nextBt" onClick="login()">로그인</button>
-                            </div>
-                            <div id="form-controls">
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                                 <button type="button" id="nextBt" onClick="userCreate('<c:url value='/member/register'/>')">회원가입</button>
                             </div>
                         </form>
