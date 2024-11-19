@@ -1,4 +1,4 @@
-package domain;
+package model.domain;
 
 public class LectureSchedule {
     private long lectureScheduleId;

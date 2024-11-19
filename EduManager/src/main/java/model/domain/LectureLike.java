@@ -1,12 +1,14 @@
-package domain;
+package model.domain;
 
 import java.sql.Date;
+
+import model.domain.user.Student;
 
 public class LectureLike {
     private long lectureLikeId;
     private Date createAt;
     private Lecture lectureId;
-    private StudentDTO memberId;
+    private Student memberId;
     
     public long getLectureLikeId() {
         return lectureLikeId;
@@ -26,10 +28,10 @@ public class LectureLike {
     public void setLectureId(Lecture lectureId) {
         this.lectureId = lectureId;
     }
-    public StudentDTO getMemberId() {
+    public Student getMemberId() {
         return memberId;
     }
-    public void setMemberId(StudentDTO memberId) {
+    public void setMemberId(Student memberId) {
         this.memberId = memberId;
     }
     

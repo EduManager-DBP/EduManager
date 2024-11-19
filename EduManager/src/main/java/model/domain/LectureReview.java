@@ -1,10 +1,12 @@
-package domain;
+package model.domain;
+
+import model.domain.user.Student;
 
 public class LectureReview {
     private long lectureReviewId;
     private String reviewTest;
     private Lecture lectureId;
-    private StudentDTO memberId;
+    private Student memberId;
     
     public long getLectureReviewId() {
         return lectureReviewId;
@@ -24,10 +26,10 @@ public class LectureReview {
     public void setLectureId(Lecture lectureId) {
         this.lectureId = lectureId;
     }
-    public StudentDTO getMemberId() {
+    public Student getMemberId() {
         return memberId;
     }
-    public void setMemberId(StudentDTO memberId) {
+    public void setMemberId(Student memberId) {
         this.memberId = memberId;
     }
     

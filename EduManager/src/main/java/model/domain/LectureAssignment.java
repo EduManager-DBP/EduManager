@@ -1,4 +1,4 @@
-package domain;
+package model.domain;
 
 import java.io.File;
 import java.sql.Date;

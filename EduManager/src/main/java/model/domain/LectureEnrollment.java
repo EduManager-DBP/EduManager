@@ -1,9 +1,11 @@
-package domain;
+package model.domain;
+
+import model.domain.user.Student;
 
 public class LectureEnrollment {
     private long enrollmentId;
     private Lecture lectureId;
-    private StudentDTO memberId;
+    private Student memberId;
     
     public long getEnrollmentId() {
         return enrollmentId;
@@ -17,10 +19,10 @@ public class LectureEnrollment {
     public void setLectureId(Lecture lectureId) {
         this.lectureId = lectureId;
     }
-    public StudentDTO getMemberId() {
+    public Student getMemberId() {
         return memberId;
     }
-    public void setMemberId(StudentDTO memberId) {
+    public void setMemberId(Student memberId) {
         this.memberId = memberId;
     }
     

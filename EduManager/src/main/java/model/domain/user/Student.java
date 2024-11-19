@@ -1,15 +1,13 @@
-package userDAO;
+package model.domain.user;
 
-
-
-public class StudentDTO extends UserDTO {
+public class Student extends Member {
     private int ageRange;  // 10대: 1, 20대: 2, 30대:3, 그 이상: 4
     //private List<String> interestCategory;
 
-    public StudentDTO() {}
+    public Student() {}
 
-    public StudentDTO(String userId, String userName, String password, int ageRange) {
-        super(userId, userName, password);
+    public Student(String memberId, String memberName, String password, int ageRange) {
+        super(memberId, memberName, password);
         this.ageRange = ageRange;
     }
 

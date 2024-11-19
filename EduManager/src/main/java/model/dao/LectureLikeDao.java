@@ -1,6 +1,6 @@
 package model.dao;
 
-import domain.LectureLike;
+import model.domain.LectureLike;
 
 public class LectureLikeDao {
     private JDBCUtil jdbcUtil = new JDBCUtil();

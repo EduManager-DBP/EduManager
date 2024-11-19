@@ -1,9 +1,11 @@
 package model.dao;
 
-import domain.LectureReview;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.domain.LectureReview;
 
 public class LectureReviewDao {
 

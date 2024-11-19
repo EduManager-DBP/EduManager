@@ -1,10 +1,10 @@
 package model.dao;
 
-import domain.LectureNotice;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.domain.LectureNotice;
 
 public class LectureNoticeDao {
 
