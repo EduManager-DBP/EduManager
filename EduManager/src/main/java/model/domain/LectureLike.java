@@ -2,7 +2,7 @@ package model.domain;
 
 import java.sql.Date;
 
-import model.domain.user.Student;
+import model.domain.member.Student;
 
 public class LectureLike {
     private long lectureLikeId;

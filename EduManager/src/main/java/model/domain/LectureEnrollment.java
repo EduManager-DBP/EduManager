@@ -1,6 +1,6 @@
 package model.domain;
 
-import model.domain.user.Student;
+import model.domain.member.Student;
 
 public class LectureEnrollment {
     private long enrollmentId;

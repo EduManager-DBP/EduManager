@@ -1,4 +1,4 @@
-package model.domain.user;
+package model.domain.member;
 
 public class Student extends Member {
     private int ageRange;  // 10대: 1, 20대: 2, 30대:3, 그 이상: 4

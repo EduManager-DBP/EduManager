@@ -1,4 +1,4 @@
-package model.domain.user;
+package model.domain.member;
 
 public class Member {
     private String memberId;
