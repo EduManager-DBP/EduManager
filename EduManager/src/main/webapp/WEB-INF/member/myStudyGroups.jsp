@@ -4,14 +4,14 @@
 <html>
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='../css/myStudyGroups.css' />" type="text/css">
-    <title>Edu Manager</title>
-    <script src="../js/myStudyGroups.js"></script>
+<link rel=stylesheet href="<c:url value='../../css/myStudyGroups.css' />" type="text/css">
+    <title>EduManager</title>
+    <script src="../../js/myStudyGroups.js"></script>
   </head>
   <body>
     <div class="page">
         <header>
-            <img src="../images/eduLogo.png">
+            <img src="../../images/eduLogo.png">
             <nav>
                 <ul>
                     <li class="menu"><a href="main.jsp">홈</a></li>

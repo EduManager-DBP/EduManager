@@ -5,7 +5,7 @@
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='../css/study_make.css' />" type="text/css">
-    <title>Edu Manager</title>
+    <title>EduManager</title>
   </head>
   <body>
     <div class="page">

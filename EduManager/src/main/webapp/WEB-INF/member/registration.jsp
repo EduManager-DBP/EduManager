@@ -5,7 +5,7 @@
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='../css/registration.css' />" type="text/css">
-    <title>Edu Manager</title>
+    <title>EduManager</title>
     <script src="../js/registration.js"></script>
   </head>
   <body>

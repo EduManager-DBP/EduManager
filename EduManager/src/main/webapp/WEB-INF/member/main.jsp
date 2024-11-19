@@ -4,13 +4,13 @@
 <html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='/css/main.css' />" type="text/css">
-    <title>Edu Manager</title>
+<link rel=stylesheet href="<c:url value='../../css/main.css' />" type="text/css">
+    <title>EduManager</title>
   </head>
   <body>
     <div class="page">
       <header>
-        <img src='../images/eduLogo.png' />
+        <img src='../../images/eduLogo.png' />
         <nav>
           <ul>
             <li class="menu"><a href="#">홈</a></li>

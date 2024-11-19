@@ -17,7 +17,7 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 URI에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
+        mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
        
         
         logger.info("Initialized Request Mapping!");
