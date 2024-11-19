@@ -22,7 +22,7 @@ public class LoginController implements Controller {
             HttpSession session = request.getSession();
             session.setAttribute(MemberSessionUtils.USER_SESSION_KEY, id);
 
-            return "redirect:/member/list";
+            return "redirect:/main";
         } catch (Exception e) {
             /*
              * UserNotFoundException이나 PasswordMismatchException 발생 시 다시 login form을 사용자에게
