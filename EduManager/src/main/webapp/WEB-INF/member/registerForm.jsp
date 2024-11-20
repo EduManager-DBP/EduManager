@@ -13,9 +13,9 @@
                <img src='../../images/eduLogo.png' />
             <nav>
                 <ul>
-                    <li class="menu"><a href="main.jsp">홈</a></li>
-                    <li class="menu"><a href="joinForm.jsp">강의/스터디 신청</a></li>
-                    <li class="menu"><a href="studentMypage.jsp">마이 페이지</a></li>
+                    <li class="menu"><a href="../main.jsp">홈</a></li>
+                    <li class="menu"><a href="../joinForm.jsp">강의/스터디 신청</a></li>
+                    <li class="menu"><a href="../studentMypage.jsp">마이 페이지</a></li>
                     <li class="menu"><a href="#">로그인/회원가입</a></li>
                 </ul>
             </nav>
