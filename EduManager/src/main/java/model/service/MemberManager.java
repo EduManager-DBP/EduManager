@@ -61,11 +61,11 @@ public class MemberManager {
         return memberDAO.remove(id);
     }
 
-    public Member findMember(String userId) throws SQLException, MemberNotFoundException {
-        Member user = memberDAO.findUser(userId);
+    public Member findMember(String id) throws SQLException, MemberNotFoundException {
+        Member user = memberDAO.findMember(id);
 
         if (user == null) {
-            throw new MemberNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
+            throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
         }
         return user;
     }

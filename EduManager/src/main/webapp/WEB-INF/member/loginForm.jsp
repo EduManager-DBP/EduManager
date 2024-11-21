@@ -30,21 +30,34 @@
   </head>
   <body>
     <div class="page" >
-          <jsp:include page="../navigation/navigation.jsp" />
+    	  <header>
+	    	  <nav>
+		          <a href="<c:url value='/member/login'/>" id="logo-link">
+		   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
+			  	  </a>
+		  	  </nav>
+	  	  </header>
           <div id="form-container">
               <div id="sign-up-container">
                   <h3>로그인 </h3>
+                  <!-- 로그인이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
+			      <c:if test="${loginFailed}">
+				  	<br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
+				  </c:if>
                   <form name="form" method="POST" action="<c:url value='/member/login' />">
                       <div class="input-group">
                        <label for="email">아이디</label>
-                 		<input type="text" name="id" id="email" placeholder="id">
+                 		<input type="text" name="id" id="id" placeholder="id">
                        <label for="password">비밀번호</label>
-                       <input type="password" name="pwd" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+                       <input type="password" name="pwd" id="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                       </div>
                       <div id="form-controls">
+                      	
                           <button type="button" id="nextBt" onClick="login()">로그인</button>
-                          &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                       
+                      
                           <button type="button" id="nextBt" onClick="userCreate('<c:url value='/member/register'/>')">회원가입</button>
+                      	
                       </div>
                   </form>
                   

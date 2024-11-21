@@ -37,6 +37,7 @@
             <div id="calendarHeader">
               <span class="month">
                 <img src="<c:url value='/images/previousMonth.svg' />" id="previousMonthIcon" />
+                <span>11</span>
                 <img src="<c:url value='/images/nextMonth.svg'  />" id="nextMonthIcon" />
               </span>
 

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.ListMemberController;
 import controller.member.LoginController;
@@ -30,7 +31,7 @@ public class RequestMapping {
         mappings.put("/member/logout", new LogoutController());
 
         // 메인 화면
-        mappings.put("/main/main", new ForwardController("/main/main.jsp"));
+        mappings.put("/main/main", new MainController());
 
         // 회원가입 요청
         mappings.put("/member/register", new RegisterMemberController());

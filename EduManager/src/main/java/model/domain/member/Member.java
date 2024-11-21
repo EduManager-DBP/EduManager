@@ -11,7 +11,6 @@ public class Member { // 수정은 pw, phone
     }
 
     public Member(String id, String pwd, String name, String email, String phone) {
-        super();
         this.id = id;
         this.pwd = pwd;
         this.name = name;
