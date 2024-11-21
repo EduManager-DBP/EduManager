@@ -30,7 +30,7 @@ public class RequestMapping {
         mappings.put("/member/logout", new LogoutController());
 
         // 메인 화면
-        mappings.put("/main", new ForwardController("/main.jsp"));
+        mappings.put("/main/main", new ForwardController("/main/main.jsp"));
 
         // 회원가입 요청
         mappings.put("/member/register", new RegisterMemberController());
@@ -41,6 +41,7 @@ public class RequestMapping {
         // 사용자 삭제
         mappings.put("/member/delete", new DeleteMemberController());
 
+        logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
     }
 

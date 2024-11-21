@@ -27,8 +27,9 @@ header {
     justify-content: space-between;
 }
 
-header > img {
-   margin-top: 30px;
+
+#logo-link {
+	margin-top: 40px;
 }
 
 header > nav {
