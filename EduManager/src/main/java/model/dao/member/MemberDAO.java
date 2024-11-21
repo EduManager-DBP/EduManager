@@ -84,8 +84,8 @@ public class MemberDAO {
     /**
      * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
      */
-    public Member findUser(String id) throws SQLException {
-        String sql = "SELECT pwd, name, email, phone " + "FROM MEMBER" + "WHERE id=? ";
+    public Member findMember(String id) throws SQLException {
+        String sql = "SELECT pwd, name, email, phone " + "FROM MEMBER " + "WHERE id = ? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] { id }); // JDBCUtil에 query문과 매개 변수 설정
 
         try {

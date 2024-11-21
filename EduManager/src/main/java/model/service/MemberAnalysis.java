@@ -21,7 +21,7 @@ public class MemberAnalysis {
 
     // an example business method
     public List<Member> recommendFriends(String id) throws Exception {
-        Member thisuser = dao.findUser(id);
+        Member thisuser = dao.findMember(id);
         if (thisuser == null) {
             throw new Exception("invalid user ID!");
         }

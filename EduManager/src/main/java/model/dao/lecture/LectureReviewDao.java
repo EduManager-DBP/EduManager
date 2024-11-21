@@ -1,11 +1,11 @@
-package model.dao;
-
+package model.dao.lecture;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.domain.LectureReview;
+import model.dao.JDBCUtil;
+import model.domain.lecture.LectureReview;
 
 public class LectureReviewDao {
 
@@ -17,10 +17,8 @@ public class LectureReviewDao {
         query.append("INSERT INTO LectureReview (lectureReviewId, reviewTest, lectureId, memberId) ");
         query.append("VALUES (?, ?, ?, ?)");
 
-        Object[] params = new Object[] {
-            review.getLectureReviewId(),
-            review.getReviewTest(),
-            review.getLectureId().getLectureId(), // Lecture 객체에서 ID 추출
+        Object[] params = new Object[] { review.getLectureReviewId(), review.getReviewTest(),
+                review.getLectureId().getLectureId(), // Lecture 객체에서 ID 추출
         };
 
         jdbcUtil.setSqlAndParameters(query.toString(), params);
@@ -43,7 +41,7 @@ public class LectureReviewDao {
         StringBuffer query = new StringBuffer();
         query.append("DELETE FROM LectureReview WHERE lectureReviewId = ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {lectureReviewId});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureReviewId });
 
         int result = 0;
         try {
@@ -65,11 +63,9 @@ public class LectureReviewDao {
         query.append("SET reviewTest = ?, lectureId = ?, memberId = ? ");
         query.append("WHERE lectureReviewId = ?");
 
-        Object[] params = new Object[] {
-            review.getReviewTest(),
-            review.getLectureId().getLectureId(), // Lecture 객체에서 ID 추출
-            review.getLectureReviewId()
-        };
+        Object[] params = new Object[] { review.getReviewTest(), review.getLectureId().getLectureId(), // Lecture 객체에서
+                                                                                                       // ID 추출
+                review.getLectureReviewId() };
 
         jdbcUtil.setSqlAndParameters(query.toString(), params);
 
@@ -91,7 +87,7 @@ public class LectureReviewDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT * FROM LectureReview WHERE lectureId = ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] {lectureId});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId });
 
         List<LectureReview> reviews = new ArrayList<>();
         try {

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.ListMemberController;
 import controller.member.LoginController;
@@ -28,7 +29,9 @@ public class RequestMapping {
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
         mappings.put("/member/login", new LoginController());
         mappings.put("/member/logout", new LogoutController());
-        mappings.put("/user/list", new ListMemberController());
+
+        // 메인 화면
+        mappings.put("/main/main", new MainController());
 
         // 회원가입 요청
         mappings.put("/member/register", new RegisterMemberController());
@@ -39,6 +42,7 @@ public class RequestMapping {
         // 사용자 삭제
         mappings.put("/member/delete", new DeleteMemberController());
 
+        logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
     }
 

@@ -21,15 +21,15 @@ public class RegisterMemberController implements Controller {
 
         MemberManager manager = MemberManager.getInstance();
 
-//        if (request.getMethod().equals("GET")) {
-//            // GET request: 회원정보 등록 form 요청
-//            log.debug("RegisterForm Request");
+        if (request.getMethod().equals("GET")) {
+            // GET request: 회원정보 등록 form 요청
+            log.debug("RegisterForm Request");
 //
 //            List<Community> commList = manager.findCommunityList(); // 커뮤니티 리스트 검색
 //            request.setAttribute("commList", commList);
-//
-//            return "/user/registerForm.jsp"; // 검색한 커뮤니티 리스트를 registerForm으로 전송
-//        }
+
+            return "/member/registerForm.jsp"; // 검색한 커뮤니티 리스트를 registerForm으로 전송
+        }
 
         // POST request (회원정보가 parameter로 전송됨)
         Member member = new Member(request.getParameter("id"), request.getParameter("pwd"),
@@ -39,7 +39,7 @@ public class RegisterMemberController implements Controller {
 
         try {
             manager.create(member);
-            return "redirect:/member/list"; // 성공 시 사용자 리스트 화면으로 redirect
+            return "redirect:/member/main"; // 성공 시 사용자 리스트 화면으로 redirect
 
         } catch (ExistingMemberException e) { // 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);

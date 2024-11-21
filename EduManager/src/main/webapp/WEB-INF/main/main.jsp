@@ -1,28 +1,15 @@
 <%@page contentType="text/html; charset=utf-8" %>
+<%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='../../css/main.css' />" type="text/css">
+<link rel=stylesheet href="<c:url value='/css/main.css' />" type="text/css">
     <title>EduManager</title>
   </head>
   <body>
     <div class="page">
-      <header>
-        <img src='../../images/eduLogo.png' />
-        <nav>
-          <ul>
-            <li class="menu"><a href="#">홈</a></li>
-            <li class="menu">
-              <a href="registration.jsp">강의/스터디 신청</a>
-            </li>
-            <li class="menu"><a href="studentMypage.jsp">마이페이지</a></li>
-            <li class="menu"><a href="">로그아웃</a></li>
-          </ul>
-        </nav>
-      </header>
-
+      <jsp:include page="../navigation/navigation.jsp" />
       <div id="body">
         <div id="schedule">
           <div id="todaySchedule">
@@ -49,8 +36,9 @@
           <table>
             <div id="calendarHeader">
               <span class="month">
-                <img src="../images/previousMonth.svg" id="previousMonthIcon" />
-                1 <img src="../images/nextMonth.svg" id="nextMonthIcon" />
+                <img src="<c:url value='/images/previousMonth.svg' />" id="previousMonthIcon" />
+                <span>11</span>
+                <img src="<c:url value='/images/nextMonth.svg'  />" id="nextMonthIcon" />
               </span>
 
               <span class="year">2024</span>
