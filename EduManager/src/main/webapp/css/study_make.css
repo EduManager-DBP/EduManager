@@ -1,93 +1,4 @@
-body,
-html {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	font-family: 'Pretendard';
-}
-
-ul {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	outline: none;
-}
-
-.page {
-	/*    width: 1300px;*/
-	min-width: 1000px;
-	margin: 0 auto;
-}
-
-header {
-	width: 100%;
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-header>img {
-	margin-top: 30px;
-	margin-left: 100px;
-}
-
-header>nav {
-	width: 600px;
-	height: 100%;
-	margin-right: 100px;
-}
-
-header ul {
-	margin-top: 30px;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: space-between;
-}
-
-header ul>li {
-	padding: 0px 0px 0px 0px;
-}
-
-header ul>li>a {
-
-	width: 120px;
-	height: 30px;
-	cursor: pointer;
-	padding: 10px 10px;
-	margin: 5px;
-	transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
-	border-radius: 30px;
-	display: inline-block;
-	text-align: center;
-	line-height: 30px;
-	text-decoration: none;
-	color: black;
-	font-weight: 600;
-	font-size: 15px;
-}
-
-.tab-container {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-	margin-top: 50px;
-	font-size: 18px;
-}
-
-header ul>li>a:hover {
-
-	height: 30px;
-	color: #fff;
-	background-color: 1E2A7C;
-	border-radius: 30px;
-	text-decoration: none;
-}
-
+/*강의/스터디 만들기 css*/
 .subTitle {
 	font-size: 24px;
 	color: #643E23;
@@ -123,7 +34,8 @@ header ul>li>a:hover {
 	color: #a6a9af;
 }
 
-.study input {
+.study input,
+select {
 	height: 32px;
 	color: #28292a;
 	margin: 5px 0;
@@ -137,17 +49,33 @@ header ul>li>a:hover {
 	outline: none;
 }
 
+.required {
+	color: #DB1D1D;
+}
+
 /*.study input:focus {
   border: 2px solid blue;
 }*/
 #plus_btn {
-	width: 100%;
+	margin-top: 5px;
+	width: 335px;
 	height: 25px;
 	border: none;
 	border-radius: 5px;
 	background-color: #E5E5EA;
 	color: #643e23;
 	font-size: medium;
+}
+
+.delete_btn {
+	border-radius: 20px;
+	color: #DB1D1D;
+	box-shadow: 1px 2px 15px #f3f3f3;
+	border: none;
+	background-color: #EFEFEF;
+	font-family: 'Pretendard';
+	padding: 5px 10px;
+
 }
 
 .schedule {
@@ -161,7 +89,7 @@ header ul>li>a:hover {
 	text-align: center;
 	font-size: medium;
 	padding: 0 5px;
-
+	margin-right: 10px;
 }
 
 
@@ -175,6 +103,8 @@ header ul>li>a:hover {
 	box-shadow: 1px 2px 15px #f3f3f3;
 	min-width: 60px;
 	margin: 5px 0;
+	margin-right: 5px;
+
 	font-weight: 400;
 	font-family: 'Pretendard';
 	outline: none;
@@ -184,6 +114,17 @@ header ul>li>a:hover {
 .category_select:hover {
 	color: #fff;
 	background-color: #1E2A7C;
+}
+
+
+/* 기본적으로 삭제 버튼은 숨김 */
+.schedule .delete_btn {
+	display: none;
+}
+
+/* article에 커서가 올라가면 버튼 보이기 */
+.schedule:hover .delete_btn {
+	display: inline-block;
 }
 
 #submit {

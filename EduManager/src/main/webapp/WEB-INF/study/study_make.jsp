@@ -11,31 +11,23 @@
 </head>
 <body>
 	<div class="page">
-		<%-- 		<header>
-			<img src='${pageContext.request.contextPath}/images/eduLogo.png' />
-			<nav>
-				<ul>
-					<li class="menu"><a href="main.html">홈</a></li>
-					<li class="menu"><a href="myStudyGroups.html">강의/스터디 신청</a></li>
-					<li class="menu"><a href="#">마이 페이지</a></li>
-					<li class="menu"><a href="">로그아웃</a></li>
-				</ul>
-			</nav>
-		</header> --%>
-		<jsp:include page="./navigation/navigation.jsp" />
+		<jsp:include page="../navigation/navigation.jsp" />
 		<div id="makeStudy_container">
-			<div id="makeStudy_form">
+			<form id="makeStudy_form" method="post"
+				action="${pageContext.request.contextPath}/main/main">
+				<!-- 나중에 다른 uri로 바꿔 줄것임. -->
 				<div class="subTitle">스터디 그룹 만들기</div>
 				<hr style="margin: 20px 0px">
 				<section class="study">
-					<span>스터디명</span><br /> <input type="text" />
+					<span>스터디명</span><span class="required">*</span><br /> <input
+						type="text" required />
 				</section>
 				<section class="study">
 					<span>스터디 소개</span><br /> <input type="text" />
 				</section>
 				<section class="study" style="display: inline-block">
-					<span>모집인원</span> <br /> <input class="small" type="number"
-						min="1" max="99" />
+					<span>모집인원</span><span class="required">*</span> <br /> <input
+						class="small" type="number" min="1" max="99" required />
 				</section>
 				<section class="study" style="display: inline-block">
 					<span>카테고리</span><br />
@@ -49,10 +41,18 @@
 				</section>
 				<br />
 				<section id="schedule" class="study" style="display: inline-block">
-					<span>정기 모임 일정</span><br />
+					<span>정기 모임 일정</span><span class="required">*</span><br />
 					<article class="schedule">
-						<span>요일</span> <input class="small" type="text" /> <span>시간</span>
-						<input type="time" /> - <input type="time" />
+						<span>요일</span> <select class="small" name="day" required>
+							<option value="월">월</option>
+							<option value="화">화</option>
+							<option value="수">수</option>
+							<option value="목">목</option>
+							<option value="금">금</option>
+							<option value="토">토</option>
+							<option value="일">일</option>
+						</select> <span>시간</span> <input type="time" /> ~ <input type="time" />
+						<button class="delete_btn" onClick="deleteSchedule(this)">삭제</button>
 					</article>
 					<button id="plus_btn" onClick="addSchedule()">+</button>
 				</section>
@@ -60,7 +60,7 @@
 				<section>
 					<button id="submit">스터디 그룹 만들기</button>
 				</section>
-			</div>
+			</form>
 		</div>
 	</div>
 </body>

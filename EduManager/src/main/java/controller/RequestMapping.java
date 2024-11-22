@@ -43,10 +43,11 @@ public class RequestMapping {
 
         
         //임시 테스트(은향)
-        mappings.put("/study", new ForwardController("/study_make.jsp"));
+        mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
         mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
         mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
         mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
+        mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");

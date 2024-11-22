@@ -16,3 +16,10 @@ function addSchedule() {
   // 버튼 앞에 새 article을 추가
   section.insertBefore(newArticle, plusButton);
 }
+
+// 일정 삭제 함수
+//다 삭제되면 작동 안함..버그.. 아예 하나는 고정으로 해야지
+function deleteSchedule(button) {
+    const article = button.parentElement; // 해당 버튼의 부모 article
+    article.remove(); // 부모 article 삭제
+}
