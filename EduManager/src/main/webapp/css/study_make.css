@@ -83,7 +83,7 @@ header ul>li>a:hover {
 
 	height: 30px;
 	color: #fff;
-	background-color: rgba(30, 42, 124, 0.8);
+	background-color: 1E2A7C;
 	border-radius: 30px;
 	text-decoration: none;
 }
@@ -183,7 +183,7 @@ header ul>li>a:hover {
 
 .category_select:hover {
 	color: #fff;
-	background-color: rgba(30, 42, 124, 0.8);
+	background-color: #1E2A7C;
 }
 
 #submit {
@@ -199,5 +199,5 @@ header ul>li>a:hover {
 
 #submit:hover {
 	color: #fff;
-	background-color: rgba(30, 42, 124, 0.8);
+	background-color: #1E2A7C;
 }
