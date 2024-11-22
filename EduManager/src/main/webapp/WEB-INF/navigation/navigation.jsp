@@ -17,7 +17,7 @@
           <ul>
               <li class="menu"><a href="<c:url value='/main/main'/>">홈</a></li>
               <li class="menu"><a href="/main/main">강의/스터디 신청</a></li>
-              <li class="menu"><a href="../studentMypage.jsp">마이 페이지</a></li>
+              <li class="menu"><a href="/student/myPage">마이 페이지</a></li>
               <li class="menu"><a href="<c:url value='/member/logout'/>">${curUserId}님 로그아웃</a></li>
           </ul>
       </nav>

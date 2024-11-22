@@ -29,18 +29,17 @@ public class RequestMapping {
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
         mappings.put("/member/login", new LoginController());
         mappings.put("/member/logout", new LogoutController());
-
         // 메인 화면
         mappings.put("/main/main", new MainController());
-
         // 회원가입 요청
         mappings.put("/member/register", new RegisterMemberController());
-
         // 사용자 수정
         mappings.put("/member/update", new UpdateMemberController());
-
         // 사용자 삭제
         mappings.put("/member/delete", new DeleteMemberController());
+        // student
+        // 마이페이지
+        mappings.put("/student/myPage", new ForwardController("/myPage/studentMyPage.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");

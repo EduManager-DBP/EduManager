@@ -4,23 +4,12 @@
 <html>
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='../css/studentMypage.css' />" type="text/css">
+<link rel=stylesheet href="<c:url value='/css/studentMypage.css' />" type="text/css">
     <title>EduManager</title>
   </head>
   <body>
     <div class="page">
-        <header>
-            <img src="../images/eduLogo.png">
-            <nav>
-                 <ul>
-                    <li class="menu"><a href="main.jsp">홈</a></li>
-                    <li class="menu"><a href="registration.jsp">강의/스터디 신청</a></li>
-                    <li class="menu"><a href="#">마이 페이지</a></li>
-                    <li class="menu"><a href="">로그아웃</a></li>
-                </ul>
-            </nav>
-        </header>
-
+        <jsp:include page="../navigation/navigation.jsp" />
         <div class="subTitle">마이 페이지</div>
         <div id="mypage_container">
             <div id="profile_img_container">
