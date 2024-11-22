@@ -1,7 +1,6 @@
 package model.domain.lecture;
 
 import java.sql.Date;
-import java.util.List;
 
 public class Lecture {
     private long lectureId;

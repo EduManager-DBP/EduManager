@@ -1,12 +1,9 @@
 package controller.main;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.member.MemberSessionUtils;
-import model.domain.member.Member;
-import model.service.MemberManager;
 
 public class MainController implements Controller {
     // private static final int countPerPage = 100; // 한 화면에 출력할 사용자 수
