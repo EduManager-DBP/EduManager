@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
-import controller.member.ListMemberController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
@@ -41,6 +40,10 @@ public class RequestMapping {
 
         // 사용자 삭제
         mappings.put("/member/delete", new DeleteMemberController());
+
+        
+        //임시 테스트
+        mappings.put("/study", new ForwardController("/study_make.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
