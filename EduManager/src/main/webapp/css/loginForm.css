@@ -9,10 +9,6 @@ ul {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
-    outline: none;
-}
 
 .page {
     width: 1300px;
@@ -20,12 +16,21 @@ a {
 }
 
 
+
+a {
+	font-size: 14px;
+    font-weight: 500;
+    color: #505154;
+    margin-bottom: 6px;
+    display: block;
+    text-align: center;
+}
+
+
 #logo-link {
-	justify-content: space-between;
+	display: flex;
 	margin-top: 40px;
-	align: center;
-	width: 50%;
-	justify-self: end;
+	justify-self: center;
 }
 
 
@@ -59,15 +64,6 @@ form label {
     color: #505154;
     margin-bottom: 6px;
     display: block;
-}
-
-a {
-	font-size: 14px;
-    font-weight: 500;
-    color: #505154;
-    margin-bottom: 6px;
-    display: block;
-    align: center;
 }
 
 form input {

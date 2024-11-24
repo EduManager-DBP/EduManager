@@ -32,7 +32,7 @@
     <div class="page" >
     	  <header>
 	    	  <nav>
-		          <a href="<c:url value='/member/login'/>" id="logo-link">
+		          <a href="<c:url value='/member/login/form'/>" id="logo-link">
 		   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
 			  	  </a>
 		  	  </nav>
@@ -40,10 +40,10 @@
           <div id="form-container">
               <div id="sign-up-container">
                   <h3>로그인 </h3>
-                  <!-- 로그인이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
+                 <%--  <!-- 로그인이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
 			      <c:if test="${loginFailed}">
 				  	<br><font color="red"><c:out value="${exception.getMessage()}" /></font><br>
-				  </c:if>
+				  </c:if> --%>
                   <form name="form" method="POST" action="<c:url value='/member/login' />">
                       <div class="input-group">
                        <label for="email">아이디</label>

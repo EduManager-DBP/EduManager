@@ -16,7 +16,7 @@
                 <img id="profile_img" src="../images/profileImg.svg">
             </div>
             <div id="mypage_name">
-                <p>000학생</p>
+                <p>${curUserId}님 </p>
             </div>
             <div id="mypage_btn_container">
                 <button class="mypageBtn setting">
