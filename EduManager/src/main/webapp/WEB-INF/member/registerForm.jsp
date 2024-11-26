@@ -9,14 +9,14 @@
   </head>
   <body>
     <div class="page" >
-			<header>
+          <header>
 	    	  <nav>
 		          <a href="<c:url value='/member/login'/>" id="logo-link">
 		   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
 			  	  </a>
 		  	  </nav>
-	  	  	</header>          
-	  	  	<div id="form-container">
+	  	  </header>   
+          <div id="form-container">
               <div id="sign-up-container">
                   <h3>회원가입</h3>
                   <form>

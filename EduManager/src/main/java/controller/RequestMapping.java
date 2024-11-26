@@ -30,7 +30,7 @@ public class RequestMapping {
         mappings.put("/member/logout", new LogoutController());
 
         // 메인 화면
-        mappings.put("/main/main", new MainController());
+        mappings.put("/main/main", new ForwardController("/NewFile.jsp"));
 
         // 회원가입 요청
         mappings.put("/member/register", new RegisterMemberController());
@@ -41,8 +41,7 @@ public class RequestMapping {
         // 사용자 삭제
         mappings.put("/member/delete", new DeleteMemberController());
 
-        
-        //임시 테스트(은향)
+        // 임시 테스트(은향)
         mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
         mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
         mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
