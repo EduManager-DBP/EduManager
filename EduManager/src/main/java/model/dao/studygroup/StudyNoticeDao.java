@@ -1,4 +1,4 @@
-package model.dao.lecture;
+package model.dao.studygroup;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,21 +10,21 @@ import model.domain.Notice;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class LectureNoticeDao {
+public class StudyNoticeDao {
     private JDBCUtil jdbcUtil = null; // JDBCUtil 필드 선언
 
-    public LectureNoticeDao() { // 생성자
+    public StudyNoticeDao() { // 생성자
         jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
     }
 
     // 공지 생성
-    public void createNotice(int lectureId, String title, String description) {
+    public void createNotice(int studygroupid, String title, String description) {
         StringBuffer query = new StringBuffer();
-        query.append("INSERT INTO lecturenotice (lecturenoticeid, lectureid, title, description, createat) ");
-        query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
+        query.append("INSERT INTO studynotice (studynoticeid, studygroupid, title, description, createat) ");
+        query.append("VALUES (SEQ_STUDY_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
 
         // SQL 쿼리와 매개변수 설정
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studygroupid, title, description});
 
         try {
             int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
@@ -44,9 +44,9 @@ public class LectureNoticeDao {
     // 공지 상세 조회
     public Notice findNoticeById(int noticeId) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT lecturenoticeid, lectureid, title, description, createat ");
-        query.append("FROM lecturenotice ");
-        query.append("WHERE lecturenoticeid = ? ");
+        query.append("SELECT studynoticeid, studygroupid, title, description, createat ");
+        query.append("FROM studynotice ");
+        query.append("WHERE studynoticeid = ? ");
 
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
 
@@ -58,7 +58,7 @@ public class LectureNoticeDao {
                 notice.setId(noticeId);
                 notice.setTitle(rs.getString("title"));
                 notice.setDescription(rs.getString("description"));
-                notice.setLectureId(rs.getInt("lectureid"));
+                notice.setStudyId(rs.getInt("studygroupid"));
                 
                 Date sqlDate = rs.getDate("createat");
                 LocalDate localDate = sqlDate.toLocalDate();
@@ -74,23 +74,23 @@ public class LectureNoticeDao {
     }
 
     // 강의 아이디로 강의 공지 목록 조회
-    public List<Notice> findNoticesByLectureId(int lectureId) {
+    public List<Notice> findNoticesBystudygroupid(int studygroupid) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT lecturenoticeid, title, description, createat ");
-        query.append("FROM lecturenotice ");
-        query.append("WHERE lectureid = ? ");
+        query.append("SELECT studynoticeid, title, description, createat ");
+        query.append("FROM studynotice ");
+        query.append("WHERE studygroupid = ? ");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId });
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studygroupid });
         List<Notice> notices = new ArrayList<>();
 
         try {
             ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
             while (rs.next()) {
                 Notice notice = new Notice();
-                notice.setId(rs.getInt("lecturenoticeid"));
+                notice.setId(rs.getInt("studynoticeid"));
                 notice.setTitle(rs.getString("title"));
                 notice.setDescription(rs.getString("description"));
-                notice.setLectureId(lectureId);
+                notice.setStudyId(studygroupid);
                 
                 Date sqlDate = rs.getDate("createat");
                 LocalDate localDate = sqlDate.toLocalDate();
@@ -110,8 +110,8 @@ public class LectureNoticeDao {
     // 공지 삭제
     public void deleteNoticeById(int noticeId) {
         StringBuffer query = new StringBuffer();
-        query.append("DELETE FROM lecturenotice ");
-        query.append("WHERE lecturenoticeid = ?");
+        query.append("DELETE FROM studynotice ");
+        query.append("WHERE studynoticeid = ?");
 
         // SQL 쿼리와 매개변수 설정
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
@@ -134,9 +134,9 @@ public class LectureNoticeDao {
     // 공지 수정
     public void updateNotice(int noticeId, String title, String description) {
         StringBuffer query = new StringBuffer();
-        query.append("UPDATE lecturenotice ");
+        query.append("UPDATE studynotice ");
         query.append("SET title = ?, description = ? ");
-        query.append("WHERE lecturenoticeid = ?");
+        query.append("WHERE studynoticeid = ?");
 
         // SQL 쿼리와 매개변수 설정
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { title, description, noticeId });
