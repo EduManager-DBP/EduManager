@@ -21,9 +21,6 @@ public class MainController implements Controller {
          * = Integer.parseInt(currentPageStr); }
          */
 
-        // 현재 로그인 한 사용자
-        request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
-
         // 사용자 리스트 화면으로 이동(forwarding)
         return "/main/main.jsp";
     }
