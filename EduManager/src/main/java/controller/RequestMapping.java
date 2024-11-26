@@ -51,6 +51,9 @@ public class RequestMapping {
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
+        
+        mappings.put("/myInfo", new ForwardController("/member/myInfo.jsp"));
+        mappings.put("/editMyInfo", new ForwardController("/member/editMyInfo.jsp"));
     }
 
     public Controller findController(String uri) {
