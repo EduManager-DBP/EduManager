@@ -13,6 +13,15 @@ public class Student {
 		return id;
 	}
 
+	public Student(String id, String pwd, String name, String email, String phone) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
 	public Student(String id, String pwd, String name, String email, String phone, int ageRange) {
 		super();
 		this.id = id;
