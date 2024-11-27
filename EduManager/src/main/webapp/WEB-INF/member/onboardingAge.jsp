@@ -21,9 +21,9 @@
 		<!-- action은 임시로 해놓은거라서 변경하면 됩니다. -->
 		<form id="ageForm" class="container" method="POST" action="<c:url value='/onboarding/category'/>">
 			<div style="text-align: center;height:100px">
-			<div class="title">연령대를 선택해주세요</div>
-			<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
-		</div>
+				<div class="title">연령대를 선택해주세요</div>
+				<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
+			</div>
 			<input type="hidden" id="ageInput" name="age" value="" /> <!-- 선택된 연령대를 저장 -->
 
 			<div class="age">
@@ -37,15 +37,14 @@
 					onclick="selectAge('fortyPlus')">40대 이상</button>
 			</div>
 
+
 			<!-- 다음 버튼 -->
 			<button type="button" class="styled-button" onclick="submitAge()">다음</button>
 		</form>
 
 
-<%-- 		<!-- 하단 바 -->
 		<img src="${pageContext.request.contextPath}/images/slidebar3.png"
 			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;"> --%>
-<!-- 	</div> -->
-
+			
 </body>
 </html>

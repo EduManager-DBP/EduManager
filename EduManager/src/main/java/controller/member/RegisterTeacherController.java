@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import model.domain.member.Teacher;
 import model.service.ExistingMemberException;
-import model.service.MemberManager;
+import model.service.TeacherManager;
 
 public class RegisterTeacherController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(RegisterTeacherController.class);
@@ -19,7 +19,7 @@ public class RegisterTeacherController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		MemberManager manager = MemberManager.getInstance();
+		TeacherManager tmanager = TeacherManager.getInstance();
 
 		// POST request (회원정보가 parameter로 전송됨)
 		Teacher teacher = new Teacher(request.getParameter("id"), request.getParameter("pwd"),
@@ -28,7 +28,7 @@ public class RegisterTeacherController implements Controller {
 		log.debug("Create User : {}", teacher);
 
 		try {
-			manager.create(teacher);
+			tmanager.create(teacher);
 			return "redirect:/main/main"; // 성공 시 사용자 리스트 화면으로 redirect
 
 		} catch (ExistingMemberException e) { // 예외 발생 시 회원가입 form으로 forwarding
