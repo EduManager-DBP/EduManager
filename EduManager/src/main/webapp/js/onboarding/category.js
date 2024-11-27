@@ -1,6 +1,6 @@
 let selectedCategory = null;
 
-function selectCategory(category) {
+function selectInterestCategory(category) {
     selectedCategory = category;
     console.log("선택된 분야:", selectedCategory);
 

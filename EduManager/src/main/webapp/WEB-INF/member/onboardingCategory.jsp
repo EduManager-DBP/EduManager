@@ -30,25 +30,25 @@
 		<section id="category">
 			<div class="category">
 				<button id="category1" class="category-button"
-					onclick="selectCategory('1')">토익</button>
+					onclick="selectInterestCategory('1')">토익</button>
 				<button id="category2" class="category-button"
-					onclick="selectCategory('2')">토플</button>
+					onclick="selectInterestCategory('2')">토플</button>
 				<button id="category3" class="category-button"
-					onclick="selectCategory('3')">수능</button>
+					onclick="selectInterestCategory('3')">수능</button>
 				<button id="category4" class="category-button"
-					onclick="selectCategory('4')">취업</button>
+					onclick="selectInterestCategory('4')">취업</button>
 				<button id="category5" class="category-button"
-					onclick="selectCategory('5')">공무원</button>
+					onclick="selectInterestCategory('5')">공무원</button>
 				<button id="category6" class="category-button"
-					onclick="selectCategory('6')">자격증</button>
+					onclick="selectInterestCategory('6')">자격증</button>
 				<button id="category7" class="category-button"
-					onclick="selectCategory('7')">IT</button>
+					onclick="selectInterestCategory('7')">IT</button>
 				<button id="category8" class="category-button"
-					onclick="selectCategory('8')">외국어</button>
+					onclick="selectInterestCategory('8')">외국어</button>
 				<button id="category9" class="category-button"
-					onclick="selectCategory('9')">자기계발</button>
+					onclick="selectInterestCategory('9')">자기계발</button>
 				<button id="category10" class="category-button"
-					onclick="selectCategory('10')">기타</button>
+					onclick="selectInterestCategory('10')">기타</button>
 
 			</div>
 		</section>

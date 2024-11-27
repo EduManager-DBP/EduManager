@@ -1,3 +1,30 @@
+
+function selectLectureCategory(button) {
+    const hiddenInput = document.getElementById('categories');
+    let selectedCategories = hiddenInput.value ? hiddenInput.value.split(',') : [];
+    const index = button.getAttribute('data-index');
+
+    // 선택된 번호가 이미 있다면 제거, 없으면 추가
+    if (selectedCategories.includes(index)) {
+        selectedCategories = selectedCategories.filter(item => item !== index);
+        button.classList.remove('selected'); // 선택 표시 제거
+    } else {
+        selectedCategories.push(index);
+        button.classList.add('selected'); // 선택 표시 추가
+    }
+
+    // 숨겨진 input의 value 업데이트
+    hiddenInput.value = selectedCategories.join(',');
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryButtons = document.querySelectorAll('.category');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectLectureCategory(button);
+        });
+    });
+});
 function addSchedule() {
   // 기존 article 요소를 복제
   const originalArticle = document.querySelector('.schedule');
@@ -20,6 +47,11 @@ function addSchedule() {
 // 일정 삭제 함수
 //다 삭제되면 작동 안함..버그.. 아예 하나는 고정으로 해야지
 function deleteSchedule(button) {
-    const article = button.parentElement; // 해당 버튼의 부모 article
-    article.remove(); // 부모 article 삭제
+    const articles = document.querySelectorAll('.schedule');
+    if (articles.length > 1) {
+        const article = button.parentElement;
+        article.remove();
+    } else {
+        alert("최소 한 개의 일정은 필요합니다.");
+    }
 }
