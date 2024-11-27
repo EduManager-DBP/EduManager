@@ -1,5 +1,25 @@
 body {
 	min-width: 900px;
+    height: 100%;
+	font-family: 'Pretendard', sans-serif;
+}
+
+a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #505154;
+    margin-bottom: 6px;
+    display: block;
+    align: center;
+}
+
+#logo-link {
+	justify-content: space-between;
+	margin-top: 40px;
+	margin-right: 100px;
+	align: center;
+	width: 50%;
+	justify-self: end;
 }
 
 .container {

@@ -55,8 +55,8 @@
                       	
                           <button type="button" id="nextBt" onClick="login()">로그인</button>
                        
-                      
-                          <button type="button" id="nextBt" onClick="userCreate('<c:url value='/member/register'/>')">회원가입</button>
+                      	  <!-- get으로 요청 -->
+                          <button type="button" id="nextBt" onClick="userCreate('<c:url value='/member/register/form'/>')">회원가입</button>
                       	
                       </div>
                   </form>
