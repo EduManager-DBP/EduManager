@@ -83,9 +83,10 @@ select {
 }
 
 .small,
-.category_select {
+.category {
 	height: 32px;
-	width: 50px;
+	width: fit-content;
+	min-width: 60px;
 	text-align: center;
 	font-size: medium;
 	padding: 0 5px;
@@ -93,7 +94,7 @@ select {
 }
 
 
-.category_select,
+.category,
 #submit {
 	background-color: #fff;
 	cursor: pointer;
@@ -111,7 +112,7 @@ select {
 	transition: color 0.2s, background-color 0.2s, border-radius 0.2s;
 }
 
-.category_select:hover {
+.category:hover,.category.selected {
 	color: #fff;
 	background-color: #1E2A7C;
 }
