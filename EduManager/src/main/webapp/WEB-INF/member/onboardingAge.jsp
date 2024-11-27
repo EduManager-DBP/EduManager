@@ -41,8 +41,7 @@
 		</a>
 
 		<!-- 하단 바 -->
-		<img src="${pageContext.request.contextPath}/images/slidebar3.png"
-			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;">
+		<img src="<c:url value='/images/slidebar1.png'/>" alt="bar" style="margin-top: 30px; width: 50px">
 	</div>
 </body>
 </html>

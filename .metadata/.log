@@ -5384,3 +5384,6 @@ Java Model Exception: Error in Java Model (code 979): Invalid path: '/EduManager
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SUBENTRY 1 org.eclipse.jdt.core 4 979 2024-11-22 03:01:46.034
 !MESSAGE Invalid path: '/EduManager/src/main/webapp/css/login.css'
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-11-27 19:07:09.900
+!MESSAGE [Info]	ESLint server running in node v20.16.0
