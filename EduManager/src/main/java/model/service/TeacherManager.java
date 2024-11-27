@@ -34,7 +34,9 @@ public class TeacherManager {
 		if (teacherDAO.existingTeacher(teacher.getId()) == true) {
 			throw new ExistingMemberException(teacher.getId() + "는 존재하는 아이디입니다.");
 		}
-		return teacherDAO.create(teacher);
+		int result = teacherDAO.create(teacher);
+
+		return result;
 	}
 
 	public int update(Teacher teacher) throws SQLException, MemberNotFoundException {

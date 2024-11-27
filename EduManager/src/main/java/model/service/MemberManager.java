@@ -12,32 +12,32 @@ import model.domain.member.Member;
  * 클래스를 별도로 둘 수 있다.
  */
 public class MemberManager {
-    private static MemberManager eduManager = new MemberManager();
-    private MemberDAO memberDAO;
+	private static MemberManager eduManager = new MemberManager();
+	private MemberDAO memberDAO;
 
-    private MemberAnalysis memberAnalysis;
+	private MemberAnalysis memberAnalysis;
 
-    private MemberManager() {
-        try {
-            memberDAO = new MemberDAO();
-            memberAnalysis = new MemberAnalysis(memberDAO);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	private MemberManager() {
+		try {
+			memberDAO = new MemberDAO();
+			memberAnalysis = new MemberAnalysis(memberDAO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public static MemberManager getInstance() {
-        return eduManager;
-    }
+	public static MemberManager getInstance() {
+		return eduManager;
+	}
 
-    public int create(Member user) throws SQLException, ExistingMemberException {
-        if (memberDAO.existingMember(user.getId()) == true) {
-            throw new ExistingMemberException(user.getId() + "는 존재하는 아이디입니다.");
-        }
-        return memberDAO.create(user);
-    }
+	public int create(Member member) throws SQLException, ExistingMemberException {
+		if (memberDAO.existingMember(member.getId()) == true) {
+			throw new ExistingMemberException(member.getId() + "는 존재하는 아이디입니다.");
+		}
+		return memberDAO.create(member);
+	}
 
-    public int update(Member member) throws SQLException, MemberNotFoundException {
+	public int update(Member member) throws SQLException, MemberNotFoundException {
 //        int oldCommId = findMember(member.getMemberId()).getCommId();
 //        if (user.getCommId() != oldCommId) { // 소속 커뮤티니가 변경됨
 //            Community comm = commDAO.findCommunity(oldCommId); // 기존 소속 커뮤니티
@@ -47,10 +47,10 @@ public class MemberManager {
 //                commDAO.updateChair(comm);
 //            }
 //        }
-        return memberDAO.update(member);
-    }
+		return memberDAO.update(member);
+	}
 
-    public int remove(String id) throws SQLException, MemberNotFoundException {
+	public int remove(String id) throws SQLException, MemberNotFoundException {
 //        int commId = findUser(userId).getCommId();
 //        Community comm = commDAO.findCommunity(commId); // 소속 커뮤니티
 //        if (comm != null && userId.equals(comm.getChairId())) {
@@ -58,41 +58,50 @@ public class MemberManager {
 //            comm.setChairId(null);
 //            commDAO.updateChair(comm);
 //        }
-        return memberDAO.remove(id);
-    }
+		return memberDAO.remove(id);
+	}
 
-    public Member findMember(String id) throws SQLException, MemberNotFoundException {
-        Member user = memberDAO.findMember(id);
+	public Member findMember(String id) throws SQLException, MemberNotFoundException {
+		Member member = memberDAO.findMember(id);
 
-        if (user == null) {
-            throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
-        }
-        return user;
-    }
+		if (member == null) {
+			throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
+		}
+		return member;
+	}
 
-    public List<Member> findMemberList() throws SQLException {
-        return memberDAO.findMemberList();
-    }
+	public String findName(String id) throws SQLException, MemberNotFoundException {
+		String name = memberDAO.findName(id);
 
-    public List<Member> findMemberList(int currentPage, int countPerPage) throws SQLException {
-        return memberDAO.findMemberList(currentPage, countPerPage);
-    }
+		if (name == null) {
+			throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
+		}
+		return name;
+	}
 
-    public boolean login(String id, String pwd)
-            throws SQLException, MemberNotFoundException, PasswordMismatchException {
-        Member member = findMember(id);
+	public List<Member> findMemberList() throws SQLException {
+		return memberDAO.findMemberList();
+	}
 
-        if (!member.matchPassword(pwd)) {
-            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
-        }
-        return true;
-    }
+	public List<Member> findMemberList(int currentPage, int countPerPage) throws SQLException {
+		return memberDAO.findMemberList(currentPage, countPerPage);
+	}
 
-    public List<Member> makeFriends(String id) throws Exception {
-        return memberAnalysis.recommendFriends(id);
-    }
+	public boolean login(String id, String pwd)
+			throws SQLException, MemberNotFoundException, PasswordMismatchException {
+		Member member = findMember(id);
 
-    public MemberDAO getMemberDAO() {
-        return this.memberDAO;
-    }
+		if (!member.matchPassword(pwd)) {
+			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
+		}
+		return true;
+	}
+
+	public List<Member> makeFriends(String id) throws Exception {
+		return memberAnalysis.recommendFriends(id);
+	}
+
+	public MemberDAO getMemberDAO() {
+		return this.memberDAO;
+	}
 }

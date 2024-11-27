@@ -23,8 +23,8 @@ public class LoginController implements Controller {
 			HttpSession session = request.getSession();
 			session.setAttribute(MemberSessionUtils.USER_SESSION_KEY, id);
 			// 현재 로그인 한 사용자
-			request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
-
+			request.setAttribute("curUserId", manager.findName(id));
+			System.out.println(manager.findName(id));
 			return "redirect:/main/main";
 		} catch (Exception e) {
 			/*
