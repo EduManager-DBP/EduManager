@@ -35,7 +35,7 @@
 					  <label for="email">이메일</label>
                       <input type="email" name="email" id="email" placeholder="Email">
                       <label for="email">전화번호</label>
-                      <input type="tel" name="phone" id="phone" placeholder="PhoneNumber" pattern="[0-9]{3}-[0-9]-[0-9]" required>
+                      <input type="tel" name="phone" id="phone" placeholder="PhoneNumber" pattern="[0-9]{3}-[0-9]{*}-[0-9]{*}" required>
                      
                       <div id="form-controls">
                           <button type="button" id="nextBt">다음</button>
