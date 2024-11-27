@@ -10,6 +10,8 @@ import controller.member.DeleteMemberController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
+import controller.member.RegisterTeacherController;
+import controller.member.RegisterStudentController;
 import controller.member.UpdateMemberController;
 
 //import controller.user.*;
@@ -33,7 +35,10 @@ public class RequestMapping {
 		mappings.put("/main/main", new MainController());
 
 		// 회원가입 요청
-		mappings.put("/member/register", new RegisterMemberController());
+
+		mappings.put("/member/register/form", new RegisterMemberController());
+		mappings.put("/teacher/register", new RegisterTeacherController());
+		mappings.put("/student/register", new RegisterStudentController());
 
 		// 사용자 수정
 		mappings.put("/member/update", new UpdateMemberController());

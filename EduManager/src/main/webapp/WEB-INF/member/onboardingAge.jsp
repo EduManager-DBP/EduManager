@@ -11,7 +11,13 @@
 	defer></script>
 </head>
 <body>
-	<jsp:include page="../navigation/navigation.jsp" />
+	<header>
+    	  <nav>
+	          <a href="<c:url value='/member/login'/>" id="logo-link">
+	   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
+		  	  </a>
+	  	  </nav>
+	</header> 
 	<div class="container">
 		<div style="text-align: center;">
 			<div class="title">연령대를 선택해주세요</div>
@@ -36,7 +42,7 @@
 
 		<!-- 하단 바 -->
 		<img src="${pageContext.request.contextPath}/images/slidebar3.png"
-			alt="bar" style="margin-top: 30px; width: 50px">
+			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;">
 	</div>
 </body>
 </html>

@@ -15,11 +15,12 @@
 		   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
 			  	  </a>
 		  	  </nav>
-	  	  </header>   
+
+	  	  </header>  
           <div id="form-container">
               <div id="sign-up-container">
-                  <h3>회원가입</h3>
-                  <form>
+                  <h3>학생 회원가입</h3>
+                  <form name="form" method="POST" action="<c:url value='/student/register' />">
                       <div class="input-group">
                       	<label for="id">아이디</label>
                 			<input type="text" name="id" id="id" placeholder="id">
@@ -37,11 +38,9 @@
                           <button type="button" id="nextBt">다음</button>
                       </div>
                   </form>
-                  <div class="page-indicator">
-                	<div class="circle active"></div>
-              	  <div class="circle"></div>
-                  <div class="circle"></div>
-            	  </div>
+                  <!-- 하단 바 -->
+				<img src="<c:url value='/images/slidebar2.png' />"
+					alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;">
               </div>
           </div>
     </div>

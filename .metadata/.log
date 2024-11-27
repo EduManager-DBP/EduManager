@@ -5384,3 +5384,30 @@ Java Model Exception: Error in Java Model (code 979): Invalid path: '/EduManager
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SUBENTRY 1 org.eclipse.jdt.core 4 979 2024-11-22 03:01:46.034
 !MESSAGE Invalid path: '/EduManager/src/main/webapp/css/login.css'
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-11-27 19:03:34.076
+!MESSAGE [Info]	ESLint server running in node v20.16.0
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.842
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/loginForm.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.852
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/loginForm.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.861
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/loginForm.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.867
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/loginForm.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.875
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/onboarding.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.882
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/onboarding.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.888
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/registerForm.css
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-11-27 19:03:34.894
+!MESSAGE [Error]	Unexpected resource file:///Users/sondahyun/DBP/project/EduManager/EduManager/src/main/webapp/css/registerForm.css
