@@ -25,7 +25,7 @@
                       	<label for="id">아이디</label>
                 			<input type="text" name="id" id="id" placeholder="id">
                 			<button type="button" id="checkDuplicate">중복 확인</button>
-              		</div>
+              		  </div>
                       <label for="password">비밀번호</label>
                       <input type="password" name="pwd" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                       <label for="password-confirm">비밀번호 확인</label>

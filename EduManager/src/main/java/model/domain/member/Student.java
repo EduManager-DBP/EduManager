@@ -1,28 +1,18 @@
 package model.domain.member;
 
+import java.util.List;
+
 public class Student {
 	private String id;
 	private String pwd;
 	private String name;
 	private String email;
 	private String phone;
-	private int ageRange; // 10대: 1, 20대: 2, 30대:3, 그 이상: 4
-	// private List<String> interestCategory;
+	private String ageRange; // 10대: 1, 20대: 2, 30대:3, 그 이상: 4
+	private List<String> interestCategory;
 
-	public String getId() {
-		return id;
-	}
-
-	public Student(String id, String pwd, String name, String email, String phone) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-	}
-
-	public Student(String id, String pwd, String name, String email, String phone, int ageRange) {
+	public Student(String id, String pwd, String name, String email, String phone, String ageRange,
+			List<String> interestCategory) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -30,6 +20,11 @@ public class Student {
 		this.email = email;
 		this.phone = phone;
 		this.ageRange = ageRange;
+		this.interestCategory = interestCategory;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public void setId(String id) {
@@ -68,12 +63,20 @@ public class Student {
 		this.phone = phone;
 	}
 
-	public int getAgeRange() {
+	public String getAgeRange() {
 		return ageRange;
 	}
 
-	public void setAgeRange(int ageRange) {
+	public void setAgeRange(String ageRange) {
 		this.ageRange = ageRange;
+	}
+
+	public List<String> getInterestCategory() {
+		return interestCategory;
+	}
+
+	public void setInterestCategory(List<String> interestCategory) {
+		this.interestCategory = interestCategory;
 	}
 
 	/* 비밀번호 검사 */
