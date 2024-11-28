@@ -53,6 +53,14 @@ public class RequestMapping {
         mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
         mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
         mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
+        
+        
+        mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
+        mappings.put("/lecture/over-view", new ForwardController("/lecture/lecture_overview.jsp"));
+        mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));
+        mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
+        mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
+        mappings.put("/study/list", new ForwardController("/study/my_study_list.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");

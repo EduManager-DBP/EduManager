@@ -10,6 +10,7 @@ public class Lecture {
     private long capacity;
     private String level;
     private Date createAt;
+    private String teacherId;
 
     public long getLectureId() {
         return lectureId;
@@ -67,10 +68,20 @@ public class Lecture {
         this.createAt = createAt;
     }
 
+    public String getTeacherId() {
+        return teacherId;
+    }
+    public void setTeacherId(String teacherId) {
+        this.teacherId=teacherId;
+        
+    }
+    
     @Override
     public String toString() {
         return "Lecture [lectureId=" + lectureId + ", name=" + name + ", img=" + img + ", category=" + category
                 + ", capacity=" + capacity + ", level=" + level + ", createAt=" + createAt + "]";
     }
+
+  
 
 }
