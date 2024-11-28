@@ -19,9 +19,9 @@ public class StudentDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int create(Student student) throws SQLException {
-		String sql = "INSERT INTO STUDENT VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO STUDENT VALUES (?, ?, ?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { student.getId(), student.getPwd(), student.getName(), student.getEmail(),
-				student.getPhone(), student.getAgeRange() };
+				student.getPhone(), student.getAgeRange(), student.getInterestCategory() };
 		jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil 에 insert문과 매개 변수 설정
 
 		try {
@@ -82,15 +82,20 @@ public class StudentDAO {
 	 * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 Member 도메인 클래스에 저장하여 반환.
 	 */
 	public Student findStudent(String id) throws SQLException {
-		String sql = "SELECT pwd, name, email, phone, ageRange " + "FROM STUDENT " + "WHERE id = ? ";
+		String sql = "SELECT pwd, name, email, phone, ageRange, interestCategory " + "FROM STUDENT " + "WHERE id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { id }); // JDBCUtil에 query문과 매개 변수 설정
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery(); // query 실행
 			if (rs.next()) { // 학생 정보 발견
+				String interestCategoryStr = rs.getString("interestCategory");
+				List<String> interestCategory = new ArrayList<>();
+				if (interestCategoryStr != null && !interestCategoryStr.isEmpty()) {
+					interestCategory = List.of(interestCategoryStr.split(",")); // 콤마로 분리하여 리스트로 변환
+				}
 				Student student = new Student( // User 객체를 생성하여 학생 정보를 저장
 						id, rs.getString("pwd"), rs.getString("name"), rs.getString("email"), rs.getString("phone"),
-						rs.getInt("ageRange"));
+						rs.getString("ageRange"), interestCategory);
 				return student;
 			}
 		} catch (Exception ex) {
@@ -112,9 +117,14 @@ public class StudentDAO {
 			ResultSet rs = jdbcUtil.executeQuery(); // query 실행
 			List<Student> memberList = new ArrayList<Student>(); // User들의 리스트 생성
 			while (rs.next()) {
+				String interestCategoryStr = rs.getString("interestCategory");
+				List<String> interestCategory = new ArrayList<>();
+				if (interestCategoryStr != null && !interestCategoryStr.isEmpty()) {
+					interestCategory = List.of(interestCategoryStr.split(",")); // 콤마로 분리하여 리스트로 변환
+				}
 				Student student = new Student( // User 객체를 생성하여 현재 행의 정보를 저장
 						rs.getString("id"), null, rs.getString("name"), rs.getString("email"), rs.getString("phone"),
-						rs.getInt("ageRange"));
+						rs.getString("ageRange"), interestCategory);
 				memberList.add(student); // List에 User 객체 저장
 			}
 			return memberList;
@@ -142,9 +152,14 @@ public class StudentDAO {
 			if ((start >= 0) && rs.absolute(start)) { // 커서를 시작 행으로 이동
 				List<Student> studentList = new ArrayList<Student>(); // User들의 리스트 생성
 				do {
+					String interestCategoryStr = rs.getString("interestCategory");
+					List<String> interestCategory = new ArrayList<>();
+					if (interestCategoryStr != null && !interestCategoryStr.isEmpty()) {
+						interestCategory = List.of(interestCategoryStr.split(",")); // 콤마로 분리하여 리스트로 변환
+					}
 					Student student = new Student( // User 객체를 생성하여 현재 행의 정보를 저장
 							rs.getString("id"), null, rs.getString("name"), rs.getString("email"),
-							rs.getString("phone"), rs.getInt("ageRange"));
+							rs.getString("phone"), rs.getString("ageRange"), interestCategory);
 					studentList.add(student); // 리스트에 User 객체 저장
 				} while ((rs.next()) && (--countPerPage > 0));
 				return studentList;
