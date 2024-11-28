@@ -131,7 +131,7 @@ public class LectureDao {
             jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
         }
         return null;
-
+    }
     
     public List<Lecture> getAllLectures() {
         StringBuffer query = new StringBuffer();
@@ -152,7 +152,7 @@ public class LectureDao {
                 lecture.setImg(rs.getString("img"));
                 lecture.setCategory(rs.getString("category"));
                 lecture.setCapacity(rs.getInt("capacity"));
-                lecture.setLevel(rs.getString("lecturelevel"));
+                lecture.setLevel(rs.getInt("lecturelevel"));
 
                 // 로그 찍기: Lecture 객체의 각 필드 값 출력
                 System.out.println("Lecture ID: " + lecture.getLectureId());
@@ -196,7 +196,7 @@ public class LectureDao {
                 String img = rs.getString("img");
                 String category = rs.getString("category");
                 int capacity = rs.getInt("capacity");
-                String level = rs.getString("lecturelevel");
+                int level = rs.getInt("lecturelevel");
                 String teacherId = rs.getString("teacherId");
 
                 lecture.setLectureId(lectureId); // lectureId는 메서드 파라미터로 전달받음
