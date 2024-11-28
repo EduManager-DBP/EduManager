@@ -8,14 +8,53 @@ public class Lecture {
     private String img;
     private String category;
     private long capacity;
-    private String level;
+    private int level;
+    private String description;
     private Date createAt;
+    private String teacherId;
+    private String teacherName;
+    private Integer lectureRoom;
+    //전화번호
 
-    public long getLectureId() {
+
+	 public Lecture() {}
+	 
+	 
+    public Lecture(long lectureId, String name, String img, String category, long capacity, int level,
+			String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom) {
+		super();
+		this.lectureId = lectureId;
+		this.name = name;
+		this.img = img;
+		this.category = category;
+		this.capacity = capacity;
+		this.level = level;
+		this.description = description;
+		this.createAt = createAt;
+		this.setTeacherId(teacherId);
+		this.setTeacherName(teacherName);
+		this.lectureRoom = lectureRoom;
+	}
+	public Lecture(String name, String img, String category, long capacity, int level, String description,
+			String teacherId, Integer lectureRoom) {
+		super();
+		this.name = name;
+		this.img = img;
+		this.category = category;
+		this.capacity = capacity;
+		this.level = level;
+		this.description = description;
+		this.setTeacherId(teacherId);
+		this.lectureRoom = lectureRoom;
+	}
+	
+	
+
+	public long getLectureId() {
         return lectureId;
     }
 
-    public void setLectureId(long lectureId) {
+	public void setLectureId(long lectureId) {
         this.lectureId = lectureId;
     }
 
@@ -51,11 +90,11 @@ public class Lecture {
         this.capacity = capacity;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -67,10 +106,44 @@ public class Lecture {
         this.createAt = createAt;
     }
 
-    @Override
-    public String toString() {
-        return "Lecture [lectureId=" + lectureId + ", name=" + name + ", img=" + img + ", category=" + category
-                + ", capacity=" + capacity + ", level=" + level + ", createAt=" + createAt + "]";
-    }
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getLectureRoom() {
+		return lectureRoom;
+	}
+
+	public void setLectureRoom(Integer lectureRoom) {
+		this.lectureRoom = lectureRoom;
+	}
+
+
+	public String getTeacherId() {
+		return teacherId;
+	}
+
+
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
+	}
+
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 
 }

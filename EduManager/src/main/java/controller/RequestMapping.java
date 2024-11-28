@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.lecture.CreateLectureController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -46,6 +47,11 @@ public class RequestMapping {
 		// 사용자 삭제
 		mappings.put("/member/delete", new DeleteMemberController());
         
+		//강의 등록
+        mappings.put("/lecture/create", new CreateLectureController());
+
+		
+		
         //임시 테스트(은향)
         mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
         mappings.put("/onboarding/role", new ForwardController("/member/onboardingRole.jsp"));

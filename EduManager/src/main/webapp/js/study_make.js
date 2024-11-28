@@ -1,4 +1,21 @@
+//단일선택
+function selectLectureCategory(button) {
+    const hiddenInput = document.getElementById('categories');
+    const selectedButton = document.querySelector('.category.selected');
 
+    // 이전에 선택된 버튼이 있으면 선택 해제
+    if (selectedButton) {
+        selectedButton.classList.remove('selected');
+    }
+
+    // 선택한 버튼 스타일 추가
+    button.classList.add('selected');
+
+    // 숨겨진 input의 value를 업데이트
+    hiddenInput.value = button.getAttribute('data-index');
+}
+
+/*//다중선택
 function selectLectureCategory(button) {
     const hiddenInput = document.getElementById('categories');
     let selectedCategories = hiddenInput.value ? hiddenInput.value.split(',') : [];
@@ -15,7 +32,7 @@ function selectLectureCategory(button) {
 
     // 숨겨진 input의 value 업데이트
     hiddenInput.value = selectedCategories.join(',');
-}
+}*/
 document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('.category');
 
