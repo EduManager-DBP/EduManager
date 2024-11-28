@@ -18,5 +18,19 @@ public class LectureManager {
         return instance;
     }
 
+	/*
+	 * public List<Lecture> findLectureList() throws SQLException{ return
+	 * lectureDao.getAllLectures(); }
+	 */
     
+    public Lecture findLectureById(long lectureId) throws SQLException {
+        return lectureDao.findLectureById(lectureId);
+    }
+    public Lecture createLecture(Lecture lecture) throws SQLException {
+		return lectureDao.createLecture(lecture);		
+	}
+    public int updateLecture(Lecture lecture) throws SQLException{//, LectureNotFoundException {
+		return lectureDao.updateLecture(lecture);
+	}	
+
 }

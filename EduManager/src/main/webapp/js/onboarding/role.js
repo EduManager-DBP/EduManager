@@ -1,23 +1,17 @@
 let selectedRole = '';
 
 function selectRole(role) {
-    selectedRole = role;
-    
-    const teacherButton = document.getElementById('teacherButton');
-    const studentButton = document.getElementById('studentButton');
+	selectedRole = role;
 
-    // Reset styles
-    teacherButton.classList.remove('selected');
-    studentButton.classList.remove('selected');
+	const teacherLabel = document.getElementById('teacherLabel');
+	const studentLabel = document.getElementById('studentLabel');
 
-    // Apply selected style
-    if (role === 'TEACHER') {
-        teacherButton.classList.add('selected');
-    } else if (role === 'STUDENT') {
-        studentButton.classList.add('selected');
-    }
-}
-
-function saveRole() {
-	
+	// Apply selected style
+	if (role === 'TEACHER') {
+		studentLabel.classList.remove('selected');
+		teacherLabel.classList.add('selected');
+	} else if (role === 'STUDENT') {
+		teacherLabel.classList.remove('selected');
+		studentLabel.classList.add('selected');
+	}
 }
