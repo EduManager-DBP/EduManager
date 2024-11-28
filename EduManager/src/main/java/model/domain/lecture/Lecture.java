@@ -124,10 +124,6 @@ public class Lecture {
         this.createAt = createAt;
     }
 
-
-
-
-
 	public String getDescription() {
 		return description;
 	}
@@ -182,5 +178,4 @@ public class Lecture {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 }

@@ -32,4 +32,5 @@ public class LectureManager {
     public int updateLecture(Lecture lecture) throws SQLException{//, LectureNotFoundException {
 		return lectureDao.updateLecture(lecture);
 	}	
+
 }
