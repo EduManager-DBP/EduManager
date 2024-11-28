@@ -11,14 +11,16 @@ import model.service.LectureManager;
 public class CreateLectureController implements Controller {
 	@Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//teacherId는 세션에 저장했다가 가져와야 할 수도
 		if (!MemberSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/form";		// login form 요청으로 redirect
+            return "redirect:/member/login/form";		// login form 요청으로 redirect
         }
+		if (request.getMethod().equals("GET")) {
+			return "/lecture/creationForm.jsp";
+		}
 		String teacherId = MemberSessionUtils.getLoginMemberId(request.getSession());
 		System.out.print("내 아이디 : 선생일 때:"+ teacherId);
 		
-		Lecture lecture = new Lecture(
+		Lecture lecture = new Lecture(0L,
 			    request.getParameter("name"),
 			    request.getParameter("img"),
 			    request.getParameter("category"),

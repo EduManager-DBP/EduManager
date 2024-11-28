@@ -29,4 +29,7 @@ public class LectureManager {
     public Lecture createLecture(Lecture lecture) throws SQLException {
 		return lectureDao.createLecture(lecture);		
 	}
+    public int updateLecture(Lecture lecture) throws SQLException{//, LectureNotFoundException {
+		return lectureDao.updateLecture(lecture);
+	}	
 }

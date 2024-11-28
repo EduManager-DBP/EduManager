@@ -24,7 +24,7 @@
 	font-weight: 600;
 }
 
-.study>input[type='text'] {
+.study>input[type='text'], .study>input[type='number'] {
 	width: 100%;
 	padding: 15px;
 	height: 32px;

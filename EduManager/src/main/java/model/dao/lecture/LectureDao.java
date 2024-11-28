@@ -71,11 +71,11 @@ public class LectureDao {
         StringBuffer query = new StringBuffer();
         int result = 0;
         query.append("UPDATE Lecture ");
-        query.append("SET name = ?, img = ?, category = ?, capacity = ?, level = ?, createAt = ? ");
+        query.append("SET name = ?, img = ?, category = ?, capacity = ?, lectureLevel = ?, lectureRoom = ?, description = ? ");
         query.append("WHERE lectureId = ?");
 
         Object[] param = new Object[] { lecture.getName(), lecture.getImg(), lecture.getCategory(),
-                lecture.getCapacity(), lecture.getLevel(), lecture.getCreateAt(), lecture.getLectureId() };
+                lecture.getCapacity(), lecture.getLevel(), lecture.getLectureRoom(), lecture.getDescription(), lecture.getLectureId() };
 
         jdbcUtil.setSqlAndParameters(query.toString(), param); // JDBCUtil에 질의문과 파라미터 설정
 
@@ -94,7 +94,7 @@ public class LectureDao {
     //강의 상세 조회
     public Lecture findLectureById(long lectureId) {
     	StringBuffer query = new StringBuffer();
-        query.append("SELECT lectureId, name, description, img, category, capacity, level, teacherId, createAt, lectureroom ");
+        query.append("SELECT name, description, img, category, capacity, lectureLevel, teacherId, createdAt, lectureroom ");
         query.append("FROM lecture ");
         query.append("WHERE lectureId = ? ");
 
@@ -111,11 +111,11 @@ public class LectureDao {
             	lecture.setImg(rs.getString("img"));
             	lecture.setCategory(rs.getString("category"));
             	lecture.setCapacity(rs.getLong("capacity"));
-                lecture.setLevel(rs.getInt("level"));
+                lecture.setLevel(rs.getInt("lectureLevel"));
             	lecture.setTeacherId(rs.getString("teacherId"));
             	lecture.setLectureRoom(rs.getInt("lectureroom"));
 				/*
-				 * Date sqlDate = rs.getDate("createat"); LocalDate localDate =
+				 * Date sqlDate = rs.getDate("createdAt"); LocalDate localDate =
 				 * sqlDate.toLocalDate(); lecture.setCreateAt(localDate);
 				 */
             }

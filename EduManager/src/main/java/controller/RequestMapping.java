@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
+import controller.lecture.UpdateLectureController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -47,8 +48,11 @@ public class RequestMapping {
 		// 사용자 삭제
 		mappings.put("/member/delete", new DeleteMemberController());
         
-		//강의 등록
+		//강의 등록 : get->page 띄우기 post:등록 요청
         mappings.put("/lecture/create", new CreateLectureController());
+        
+        //강의 수정: get->page 띄우기 post:등록 요청
+        mappings.put("/lecture/update", new UpdateLectureController());
 
 		
 		
@@ -57,7 +61,6 @@ public class RequestMapping {
         mappings.put("/onboarding/role", new ForwardController("/member/onboardingRole.jsp"));
         mappings.put("/onboarding/age", new ForwardController("/member/onboardingAge.jsp"));
         mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
-        mappings.put("/lecture_make", new ForwardController("/lecture/creationForm.jsp"));
 
 		logger.info("Mappings initialized: {}", mappings.keySet());
 		logger.info("Initialized Request Mapping!");

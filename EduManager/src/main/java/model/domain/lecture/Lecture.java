@@ -15,13 +15,14 @@ public class Lecture {
     private String teacherName;
     private Integer lectureRoom;
     //전화번호
-
+    private String phone;
 
 	 public Lecture() {}
 	 
 	 
+	 //변수 다 있는 생성자 
     public Lecture(long lectureId, String name, String img, String category, long capacity, int level,
-			String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom) {
+			String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom, String phone) {
 		super();
 		this.lectureId = lectureId;
 		this.name = name;
@@ -34,10 +35,14 @@ public class Lecture {
 		this.setTeacherId(teacherId);
 		this.setTeacherName(teacherName);
 		this.lectureRoom = lectureRoom;
+		this.phone = phone;
 	}
-	public Lecture(String name, String img, String category, long capacity, int level, String description,
+    
+    //create,update에 사용
+	public Lecture(Long lectureId, String name, String img, String category, long capacity, int level, String description,
 			String teacherId, Integer lectureRoom) {
 		super();
+		this.lectureId = lectureId;
 		this.name = name;
 		this.img = img;
 		this.category = category;
@@ -47,8 +52,21 @@ public class Lecture {
 		this.setTeacherId(teacherId);
 		this.lectureRoom = lectureRoom;
 	}
-	
-	
+	//위에거에서 phone 추가
+	public Lecture(Long lectureId, String name, String img, String category, long capacity, int level, String description,
+			String teacherId, Integer lectureRoom,String phone) {
+		super();
+		this.lectureId = lectureId;
+		this.name = name;
+		this.img = img;
+		this.category = category;
+		this.capacity = capacity;
+		this.level = level;
+		this.description = description;
+		this.setTeacherId(teacherId);
+		this.lectureRoom = lectureRoom;
+		this.phone = phone;
+	}
 
 	public long getLectureId() {
         return lectureId;
@@ -144,6 +162,25 @@ public class Lecture {
 
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Lecture [lectureId=" + lectureId + ", name=" + name + ", img=" + img + ", category=" + category
+				+ ", capacity=" + capacity + ", level=" + level + ", description=" + description + ", createAt="
+				+ createAt + ", teacherId=" + teacherId + ", teacherName=" + teacherName + ", lectureRoom="
+				+ lectureRoom + "]";
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
