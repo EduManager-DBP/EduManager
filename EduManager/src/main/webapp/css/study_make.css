@@ -1,0 +1,145 @@
+/*강의/스터디 만들기 css*/
+.subTitle {
+	font-size: 24px;
+	color: #643E23;
+	font-weight: bold;
+}
+
+#makeStudy_container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#makeStudy_form {
+	width: 50%;
+	min-width: 600px;
+	margin-top: 50px;
+}
+
+.study {
+	margin: 10px 10px;
+	/*  font-size: 1.05rem;
+*/
+	font-weight: 600;
+}
+
+.study>input[type='text'], .study>input[type='number'] {
+	width: 100%;
+	padding: 15px;
+	height: 32px;
+}
+
+.study input::placeholder {
+	color: #a6a9af;
+}
+
+.study input,
+select {
+	height: 32px;
+	color: #28292a;
+	margin: 5px 0;
+	border-radius: 5px;
+	/*      border: 1px solid #a6a9af;
+*/
+	border: none;
+	box-shadow: 1px 2px 15px #f3f3f3;
+	font-weight: 500;
+	font-family: 'Pretendard';
+	outline: none;
+}
+
+.required {
+	color: #DB1D1D;
+}
+
+/*.study input:focus {
+  border: 2px solid blue;
+}*/
+#plus_btn {
+	margin-top: 5px;
+	width: 335px;
+	height: 25px;
+	border: none;
+	border-radius: 5px;
+	background-color: #E5E5EA;
+	color: #643e23;
+	font-size: medium;
+}
+
+.delete_btn {
+	border-radius: 20px;
+	color: #DB1D1D;
+	box-shadow: 1px 2px 15px #f3f3f3;
+	border: none;
+	background-color: #EFEFEF;
+	font-family: 'Pretendard';
+	padding: 5px 10px;
+
+}
+
+.schedule {
+	margin: 10px 0;
+}
+
+.small,
+.category {
+	height: 32px;
+	width: fit-content;
+	min-width: 60px;
+	text-align: center;
+	font-size: medium;
+	padding: 0 5px;
+	margin-right: 10px;
+}
+
+
+.category,
+#submit {
+	background-color: #fff;
+	cursor: pointer;
+	color: #a6a9af;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 1px 2px 15px #f3f3f3;
+	min-width: 60px;
+	margin: 5px 0;
+	margin-right: 5px;
+
+	font-weight: 400;
+	font-family: 'Pretendard';
+	outline: none;
+	transition: color 0.2s, background-color 0.2s, border-radius 0.2s;
+}
+
+.category:hover,.category.selected {
+	color: #fff;
+	background-color: #1E2A7C;
+}
+
+
+/* 기본적으로 삭제 버튼은 숨김 */
+.schedule .delete_btn {
+	display: none;
+}
+
+/* article에 커서가 올라가면 버튼 보이기 */
+.schedule:hover .delete_btn {
+	display: inline-block;
+}
+
+#submit {
+	min-height: 50px;
+	padding: 0 30px;
+	font-size: medium;
+	border-radius: 10px;
+	font-weight: 600;
+	float: right;
+	background-color: #E5E5EA;
+	color: #643E23;
+}
+
+#submit:hover {
+	color: #fff;
+	background-color: #1E2A7C;
+}
