@@ -3,41 +3,43 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.dao.member.MemberDAO;
-import model.domain.member.Member;
+import model.dao.member.TeacherDAO;
+import model.domain.member.Teacher;
 
 /**
  * 사용자 관리 API를 사용하는 개발자들이 직접 접근하게 되는 클래스. UserDAO를 이용하여 데이터베이스에 데이터 조작 작업이 가능하도록
  * 하며, 데이터베이스의 데이터들을 이용하여 비지니스 로직을 수행하는 역할을 한다. 비지니스 로직이 복잡한 경우에는 비지니스 로직만을 전담하는
  * 클래스를 별도로 둘 수 있다.
  */
-public class MemberManager {
-	private static MemberManager eduManager = new MemberManager();
-	private MemberDAO memberDAO;
+public class TeacherManager {
+	private static TeacherManager eduManager = new TeacherManager();
+	private TeacherDAO teacherDAO;
 
-	private MemberAnalysis memberAnalysis;
+	private TeacherAnalysis teacherAnalysis;
 
-	private MemberManager() {
+	private TeacherManager() {
 		try {
-			memberDAO = new MemberDAO();
-			memberAnalysis = new MemberAnalysis(memberDAO);
+			teacherDAO = new TeacherDAO();
+			teacherAnalysis = new TeacherAnalysis(teacherDAO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static MemberManager getInstance() {
+	public static TeacherManager getInstance() {
 		return eduManager;
 	}
 
-	public int create(Member member) throws SQLException, ExistingMemberException {
-		if (memberDAO.existingMember(member.getId()) == true) {
-			throw new ExistingMemberException(member.getId() + "는 존재하는 아이디입니다.");
+	public int create(Teacher teacher) throws SQLException, ExistingMemberException {
+		if (teacherDAO.existingTeacher(teacher.getId()) == true) {
+			throw new ExistingMemberException(teacher.getId() + "는 존재하는 아이디입니다.");
 		}
-		return memberDAO.create(member);
+		int result = teacherDAO.create(teacher);
+
+		return result;
 	}
 
-	public int update(Member member) throws SQLException, MemberNotFoundException {
+	public int update(Teacher teacher) throws SQLException, MemberNotFoundException {
 //        int oldCommId = findMember(member.getMemberId()).getCommId();
 //        if (user.getCommId() != oldCommId) { // 소속 커뮤티니가 변경됨
 //            Community comm = commDAO.findCommunity(oldCommId); // 기존 소속 커뮤니티
@@ -47,7 +49,7 @@ public class MemberManager {
 //                commDAO.updateChair(comm);
 //            }
 //        }
-		return memberDAO.update(member);
+		return teacherDAO.update(teacher);
 	}
 
 	public int remove(String id) throws SQLException, MemberNotFoundException {
@@ -58,50 +60,41 @@ public class MemberManager {
 //            comm.setChairId(null);
 //            commDAO.updateChair(comm);
 //        }
-		return memberDAO.remove(id);
+		return teacherDAO.remove(id);
 	}
 
-	public Member findMember(String id) throws SQLException, MemberNotFoundException {
-		Member member = memberDAO.findMember(id);
+	public Teacher findTeacher(String id) throws SQLException, MemberNotFoundException {
+		Teacher teacher = teacherDAO.findTeacher(id);
 
-		if (member == null) {
+		if (teacher == null) {
 			throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
 		}
-		return member;
+		return teacher;
 	}
 
-	public String findName(String id) throws SQLException, MemberNotFoundException {
-		String name = memberDAO.findName(id);
-
-		if (name == null) {
-			throw new MemberNotFoundException(id + "는 존재하지 않는 아이디입니다.");
-		}
-		return name;
+	public List<Teacher> findTeacherList() throws SQLException {
+		return teacherDAO.findTeacherList();
 	}
 
-	public List<Member> findMemberList() throws SQLException {
-		return memberDAO.findMemberList();
-	}
-
-	public List<Member> findMemberList(int currentPage, int countPerPage) throws SQLException {
-		return memberDAO.findMemberList(currentPage, countPerPage);
+	public List<Teacher> findTeacherList(int currentPage, int countPerPage) throws SQLException {
+		return teacherDAO.findTeacherList(currentPage, countPerPage);
 	}
 
 	public boolean login(String id, String pwd)
 			throws SQLException, MemberNotFoundException, PasswordMismatchException {
-		Member member = findMember(id);
+		Teacher teacher = findTeacher(id);
 
-		if (!member.matchPassword(pwd)) {
+		if (!teacher.matchPassword(pwd)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 		}
 		return true;
 	}
 
-	public List<Member> makeFriends(String id) throws Exception {
-		return memberAnalysis.recommendFriends(id);
+	public List<Teacher> makeFriends(String id) throws Exception {
+		return teacherAnalysis.recommendFriends(id);
 	}
 
-	public MemberDAO getMemberDAO() {
-		return this.memberDAO;
+	public TeacherDAO getTeacherDAO() {
+		return this.teacherDAO;
 	}
 }

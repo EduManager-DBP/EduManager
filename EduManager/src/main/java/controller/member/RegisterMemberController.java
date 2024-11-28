@@ -12,38 +12,27 @@ import model.service.ExistingMemberException;
 import model.service.MemberManager;
 
 public class RegisterMemberController implements Controller {
-    private static final Logger log = LoggerFactory.getLogger(RegisterMemberController.class);
+	private static final Logger log = LoggerFactory.getLogger(RegisterMemberController.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (request.getMethod().equals("GET")) {
+			// GET request: 역할 선택 form 요청
+			log.debug("RegisterForm Request");
+			return "/member/onboardingRole.jsp";
+		}
 
-        MemberManager manager = MemberManager.getInstance();
+		// POST request: 역할에 따라 회원가입 폼으로 이동
+		String role = request.getParameter("role");
+		log.debug("Selected Role: {}", role);
 
-        if (request.getMethod().equals("GET")) {
-            // GET request: 회원정보 등록 form 요청
-            log.debug("RegisterForm Request");
-//
-//            List<Community> commList = manager.findCommunityList(); // 커뮤니티 리스트 검색
-//            request.setAttribute("commList", commList);
+		if ("TEACHER".equalsIgnoreCase(role)) {
+			return "/member/teacherRegisterForm.jsp"; // 강사 회원가입 페이지로 이동
+		} else if ("STUDENT".equalsIgnoreCase(role)) {
+			return "/member/studentRegisterForm.jsp"; // 학생 회원가입 페이지로 이동
+		}
 
-            return "/member/registerForm.jsp"; // 검색한 커뮤니티 리스트를 registerForm으로 전송
-        }
-
-        // POST request (회원정보가 parameter로 전송됨)
-        Member member = new Member(request.getParameter("id"), request.getParameter("pwd"),
-                request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));
-
-        log.debug("Create Member : {}", member);
-
-        try {
-            manager.create(member);
-            return "redirect:/member/main"; // 성공 시 사용자 리스트 화면으로 redirect
-
-        } catch (ExistingMemberException e) { // 예외 발생 시 회원가입 form으로 forwarding
-            request.setAttribute("registerFailed", true);
-            request.setAttribute("exception", e);
-            request.setAttribute("member", member);
-            return "/member/registerForm.jsp";
-        }
-    }
+		// 기본 처리: 역할 선택 페이지로 리다이렉트
+		return "/member/onboardingRole.jsp";
+	}
 }
