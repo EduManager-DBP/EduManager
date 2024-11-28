@@ -47,18 +47,23 @@ public class RequestMapping {
 		mappings.put("/member/delete", new DeleteMemberController());
         
         //임시 테스트(은향)
-        mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
-        mappings.put("/onboarding/role", new ForwardController("/member/onboardingRole.jsp"));
-        mappings.put("/onboarding/age", new ForwardController("/member/onboardingAge.jsp"));
-        mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
-        mappings.put("/lecture_make", new ForwardController("/lecture/creationForm.jsp"));
 
-		logger.info("Mappings initialized: {}", mappings.keySet());
-		logger.info("Initialized Request Mapping!");
-	}
+        mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
+        mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
+        mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
+        mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
+        mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
 
-	public Controller findController(String uri) {
-		// 주어진 URI에 대응되는 controller 객체를 찾아 반환
-		return mappings.get(uri);
-	}
+        logger.info("Mappings initialized: {}", mappings.keySet());
+        logger.info("Initialized Request Mapping!");
+        
+        mappings.put("/myInfo", new ForwardController("/member/myInfo.jsp"));
+        mappings.put("/editMyInfo", new ForwardController("/member/editMyInfo.jsp"));
+    }
+
+    public Controller findController(String uri) {
+        // 주어진 URI에 대응되는 controller 객체를 찾아 반환
+        return mappings.get(uri);
+    }
+
 }
