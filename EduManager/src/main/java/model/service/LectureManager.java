@@ -18,12 +18,5 @@ public class LectureManager {
         return instance;
     }
 
-    public List<Lecture> findLectureList() throws SQLException{
-        return lectureDao.getAllLectures();
-    }
-    
-    public Lecture findLectureById(long lectureId) throws SQLException {
-        return lectureDao.getLectureById(lectureId);
-    }
     
 }
