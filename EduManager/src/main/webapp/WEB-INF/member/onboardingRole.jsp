@@ -12,12 +12,12 @@
 </head>
 <body>
 	<header>
-	   	  <nav>
-	          <a href="<c:url value='/member/login'/>" id="logo-link">
-	   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
-		  	  </a>
-	  	  </nav>
-	</header> 
+		<nav>
+			<a href="<c:url value='/member/login'/>" id="logo-link"> <img
+				src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
+			</a>
+		</nav>
+	</header>
 	<div class="container">
 		<div style="text-align: center;">
 			<div class="title">역할을 선택해주세요</div>
@@ -26,17 +26,22 @@
 		</div>
 		<!-- 역 선택 -->
 		<form action="<c:url value='/member/register/form'/>" method="POST">
-        <div class="role">
-            <input type="radio" id="teacher" name="role" value="TEACHER" required>
-            <label for="teacher" class="role-button">강사</label>
-            <input type="radio" id="student" name="role" value="STUDENT" required>
-            <label for="student" class="role-button">학생</label>
-        </div>
-        <button type="submit" class="styled-button">다음</button>
-    </form>
+			<div class="role">
+				<label id="teacherLabel" class="role-button"
+					onclick="selectRole('TEACHER')"> <input type="radio"
+					name="role" value="TEACHER" required> 강사
+				</label> 
+				<label id="studentLabel" class="role-button"
+					onclick="selectRole('STUDENT')"> <input type="radio"
+					name="role" value="STUDENT" required> 학생
+				</label>
+			</div>
+			<button type="submit" class="styled-button">다음</button>
+		</form>
 
 		<!-- 하단 바 -->
-		<img src="<c:url value='/images/slidebar1.png'/>" alt="bar" style="margin-top: 30px; width: 50px">
+		<%-- 		<img src="<c:url value='/images/slidebar1.png'/>" alt="bar" style="margin-top: 30px; width: 50px">
+ --%>
 	</div>
 </body>
 </html>
