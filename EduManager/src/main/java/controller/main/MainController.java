@@ -6,22 +6,22 @@ import controller.Controller;
 import controller.member.MemberSessionUtils;
 
 public class MainController implements Controller {
-    // private static final int countPerPage = 100; // 한 화면에 출력할 사용자 수
+	// private static final int countPerPage = 100; // 한 화면에 출력할 사용자 수
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 로그인 여부 확인
-        if (!MemberSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/member/login/form"; // login form 요청으로 redirect
-        }
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 로그인 여부 확인
+		if (!MemberSessionUtils.hasLogined(request.getSession())) {
+			return "redirect:/member/login/form"; // login form 요청으로 redirect
+		}
 
-        /*
-         * String currentPageStr = request.getParameter("currentPage"); int currentPage
-         * = 1; if (currentPageStr != null && !currentPageStr.equals("")) { currentPage
-         * = Integer.parseInt(currentPageStr); }
-         */
+		/*
+		 * String currentPageStr = request.getParameter("currentPage"); int currentPage
+		 * = 1; if (currentPageStr != null && !currentPageStr.equals("")) { currentPage
+		 * = Integer.parseInt(currentPageStr); }
+		 */
 
-        // 사용자 리스트 화면으로 이동(forwarding)
-        return "/main/main.jsp";
-    }
+		// 사용자 리스트 화면으로 이동(forwarding)
+		return "/main/main.jsp";
+	}
 }

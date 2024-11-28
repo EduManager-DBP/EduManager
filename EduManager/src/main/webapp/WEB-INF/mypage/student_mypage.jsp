@@ -24,8 +24,7 @@
 				<button class="mypageBtn setting">설정</button>
 				<button class="mypageBtn myinfo">내 정보</button>
 				<button class="mypageBtn myclass">내 강의</button>
-				<button class="mypageBtn mystudyroom"
-					onclick="window.location.href='myStudyGroups.jsp';">
+				<button class="mypageBtn mystudyroom" onclick="window.location.href='<c:url value='/study/list' />'">
 					내스터디그룹</button>
 			</div>
 		</div>

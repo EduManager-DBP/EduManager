@@ -1,5 +1,12 @@
 body {
 	min-width: 900px;
+    height: 100%;
+	font-family: 'Pretendard', sans-serif;
+}
+nav{
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
 }
 
 .container {
@@ -29,17 +36,17 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 250px;
+	height: 200px;
 	gap: 10px;
 	/* 버튼 간격 설정 */
 
 }
 
 #category {
-	height: 250px;
 	display: flex;
 	align-items: center;
-
+	flex-direction: column;
+	margin-bottom: 0px;
 }
 
 .category {
@@ -50,13 +57,14 @@ body {
 	width: 700px;
 	gap: 10px;
 	/* 버튼 간격 설정 */
-
+	height: 120px;
+	margin: 40px auto;
 }
 
 
 .role-button,
 .age-button,
-.category-button {
+.category label {
 	font-family: 'Pretendard';
 	font-size: 1.1em;
 	font-weight: 400;
@@ -75,7 +83,7 @@ body {
 }
 
 .age-button,
-.category-button {
+.category label {
 	width: 120px;
 	/*	margin: auto 10px;
 */
@@ -84,11 +92,7 @@ body {
 .role-button.selected,
 .styled-button.selected,
 .role-button:hover,
-.styled-button:hover,
-.age-button.selected,
-.age-button:hover,
-.category-button.selected,
-.category-button:hover {
+.styled-button:hover{
 	background-color: #1E2A7C;
 	color: white;
 }
@@ -109,3 +113,21 @@ body {
 	border-radius: 5px;
 	margin-top: 30px;
 }
+
+/* 체크박스 스타일링 */
+.category label {
+	display: inline-block;
+	display: flex;
+    align-items: center;        /* 세로 중앙 정렬 */
+    justify-content: center;    /* 가로 중앙 정렬 */}
+
+.category input[type="checkbox"] {
+	display: none;
+}
+
+
+.category label:checked, .category label:hover {
+	background-color: #1E2A7C;
+	color: white;
+/*	border: 1px solid #1E2A7C;
+*/}

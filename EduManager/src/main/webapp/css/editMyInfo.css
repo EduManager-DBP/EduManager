@@ -10,12 +10,8 @@ ul {
 }
 
 a {
-    font-size: 14px;
-    font-weight: 500;
-    color: #505154;
-    margin-bottom: 6px;
-    display: block;
-    align: center;
+    text-decoration: none;
+    outline: none;
 }
 
 .page {
@@ -23,14 +19,57 @@ a {
     margin: 0 auto;
 }
 
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-#logo-link {
-	justify-content: space-between;
-	margin-top: 40px;
-	margin-right: 100px;
-	align: center;
-	width: 50%;
-	justify-self: end;
+header > img {
+   margin-top: 30px;
+}
+
+header > nav {
+    width: 600px;
+    height: 100%;
+    margin-right: 100px;
+}
+
+header ul {
+    margin-top: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header ul > li {
+    padding: 0;
+}
+
+header ul > li > a {
+    width: 120px;
+    height: 30px;
+    cursor: pointer;
+    padding: 10px 10px;
+    margin: 5px;
+    transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+header ul > li > a:hover {
+    color: #fff;
+    background-color: rgba(30, 42, 124, 0.8);
+    border-radius: 30px;
 }
 
 
@@ -90,7 +129,7 @@ form input::placeholder {
 }
 
 
-#nextBt{
+#updateBt{
    background-color: #1e2a7c;
     color: white;
     font-size: 16px;
@@ -144,21 +183,3 @@ button:hover {
 .input-group button:hover {
     background-color: #4a54a1;   
 }
-.page-indicator {
-    display: flex;
-    justify-content: center; 
-    gap: 15px; 
-    margin-top: 50px;
-}
-
-.circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%; 
-    background-color: #c1c1c1; 
-}
-
-.circle.active {
-    background-color: #000; 
-}
-
