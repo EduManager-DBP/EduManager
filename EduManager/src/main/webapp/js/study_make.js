@@ -1,4 +1,36 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // 전역 변수 selectedCategory는 JSP에서 전달됨
+    if (typeof selectedCategory !== 'undefined' && selectedCategory) {
+        const buttonToSelect = document.querySelector(`.category[data-index="${selectedCategory}"]`);
+        const hiddenInput = document.getElementById('categories');
 
+        // 해당 버튼이 존재하면 선택 상태로 설정
+        if (buttonToSelect) {
+            buttonToSelect.classList.add('selected');
+            hiddenInput.value = selectedCategory;
+        }
+    }
+});
+
+// 단일 선택을 처리하는 함수
+function selectLectureCategory(button) {
+    const hiddenInput = document.getElementById('categories');
+    const selectedButton = document.querySelector('.category.selected');
+
+    // 이전 선택 해제
+    if (selectedButton) {
+        selectedButton.classList.remove('selected');
+    }
+
+    // 선택한 버튼 스타일 추가
+    button.classList.add('selected');
+
+    // 숨겨진 input 값 업데이트
+    hiddenInput.value = button.getAttribute('data-index');
+}
+
+
+/*//다중선택
 function selectLectureCategory(button) {
     const hiddenInput = document.getElementById('categories');
     let selectedCategories = hiddenInput.value ? hiddenInput.value.split(',') : [];
@@ -15,7 +47,7 @@ function selectLectureCategory(button) {
 
     // 숨겨진 input의 value 업데이트
     hiddenInput.value = selectedCategories.join(',');
-}
+}*/
 document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('.category');
 

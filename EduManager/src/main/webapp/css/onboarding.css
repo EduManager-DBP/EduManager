@@ -92,7 +92,11 @@ nav{
 .role-button.selected,
 .styled-button.selected,
 .role-button:hover,
-.styled-button:hover{
+.styled-button:hover,
+.category label.selected,
+.category label:hover,
+.age-button:hover,
+.age-button.selected{
 	background-color: #1E2A7C;
 	color: white;
 }
@@ -115,19 +119,15 @@ nav{
 }
 
 /* 체크박스 스타일링 */
-.category label {
+.category label, .role label, .age label{
 	display: inline-block;
 	display: flex;
     align-items: center;        /* 세로 중앙 정렬 */
-    justify-content: center;    /* 가로 중앙 정렬 */}
+    justify-content: center;    /* 가로 중앙 정렬 */
+}
 
-.category input[type="checkbox"] {
+.category input[type="checkbox"],input[type="radio"] {
 	display: none;
 }
 
 
-.category label:checked, .category label:hover {
-	background-color: #1E2A7C;
-	color: white;
-/*	border: 1px solid #1E2A7C;
-*/}

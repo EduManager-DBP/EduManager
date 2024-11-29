@@ -1,0 +1,82 @@
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Pretendard'
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+.page {
+	width: 1300px;
+	margin: 0 auto;
+}
+
+.subTitle {
+	margin-top: 50px;
+	font-size: 20px;
+	color: #643E23;
+	font-weight: bold;
+}
+
+.requestProfile {
+	width: 80px;
+	height: 80px;
+	border-radius: 30px;
+}
+
+.requestProfileName {
+	font-size: 20px;
+	font-weight: 600;
+	color: #643E23;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.requestProfileContainer {
+	display: flex;
+}
+
+.requestContainer {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-radius: 0px;
+}
+
+.requestListContainer {
+	margin-top: 80px;
+}
+
+#acceptBtn {
+	font-size: 20px;
+	font-weight: 600;
+	width: 80px;
+	height: 55px;
+	margin-top: 10px;
+	background-color: #1E2A7C;
+	color: #fff;
+	border: 1px solid #FFFFFF; /* 테두리를 제거 */
+	border-radius: 30px;
+	cursor: pointer;
+}
+
+#rejectBtn {
+	font-size: 20px;
+	font-weight: 600;
+	width: 80px;
+	height: 60px;
+	margin-left: 15px;
+	background-color: lightgrey;
+	color: #643E23;
+	border: 1px solid #FFFFFF; /* 테두리를 제거 */
+	border-radius: 30px;
+	cursor: pointer;
+}

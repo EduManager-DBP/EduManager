@@ -1,5 +1,6 @@
 package controller.member;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,10 @@ public class RegisterStudentController implements Controller {
 		MemberManager manager = MemberManager.getInstance();
 
 		// POST request (회원정보가 parameter로 전송됨)
+
 //		Student student = new Student(request.getParameter("id"), request.getParameter("pwd"),
 //				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"),
-//				request.getParameter("ageRange"), request.getParameterValues("interestCategory"));
+//				request.getParameter("ageRange"), Arrays.asList(request.getParameterValues("interestCategory")));
 
 		Member member = new Member(request.getParameter("id"), request.getParameter("pwd"),
 				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));

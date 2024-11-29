@@ -68,16 +68,6 @@
 				value="<%=request.getParameter("age")%>" />
 			<button type="submit" class="styled-button">에듀매니저 시작하기</button>
 		</form>
-
-		<%-- <!-- 회원가입 완료 -->
-		<a href="${pageContext.request.contextPath}/main/main">
-			<button class="styled-button" onclick="saveCategory()">에듀매니저
-				시작하기</button>
-		</a> --%>
-
-		<!-- 하단 바 -->
-		<img src="<c:url value='/images/slidebar1.png'/>" alt="bar" style="margin-top: 30px; width: 50px">
-
 	</div>
 </body>
 </html>

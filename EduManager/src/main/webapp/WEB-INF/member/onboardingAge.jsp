@@ -11,40 +11,36 @@
 </head>
 <body>
 	<header>
-    	  <nav>
-	          <a href="<c:url value='/member/login'/>" id="logo-link">
-	   		 	<img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
-		  	  </a>
-	  	  </nav>
-	</header> 
-		<!-- 연령 선택 -->
-		<!-- action은 임시로 해놓은거라서 변경하면 됩니다. -->
-		<form id="ageForm" class="container" method="POST" action="<c:url value='/student/register2'/>">
-			<div style="text-align: center;height:100px">
-				<div class="title">연령대를 선택해주세요</div>
-				<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
-			</div>
-			<input type="hidden" id="ageInput" name="age" value="" /> <!-- 선택된 연령대를 저장 -->
-
-			<div class="age">
-				<button type="button" id="teenButton" class="age-button"
-					onclick="selectAge('teen')">10대</button>
-				<button type="button" id="twentiesButton" class="age-button"
-					onclick="selectAge('twenties')">20대</button>
-				<button type="button" id="thirtiesButton" class="age-button"
-					onclick="selectAge('thirties')">30대</button>
-				<button type="button" id="fortyPlusButton" class="age-button"
-					onclick="selectAge('fortyPlus')">40대 이상</button>
-			</div>
-
-
-			<!-- 다음 버튼 -->
-			<button type="button" class="styled-button" onclick="submitAge()">다음</button>
-		</form>
-
-
-		<img src="${pageContext.request.contextPath}/images/slidebar3.png"
+		<nav>
+			<a href="<c:url value='/member/login'/>" id="logo-link"> <img
+				src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
+			</a>
+		</nav>
+	</header>
+	<!-- 연령 선택 -->
+	<form id="ageForm" class="container" method="POST"
+		action="<c:url value='/onboarding/category'/>">
+		<div style="text-align: center; height: 100px">
+			<div class="title">연령대를 선택해주세요</div>
+			<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
+		</div>
+		<div class="age">
+			<label id="teenLabel" class="age-button" onclick="selectAge('teen')">
+				<input type="radio"  name="age" value="10" required>10대</label> 
+			<label id="twentiesLabel" class="age-button" onclick="selectAge('twenties')">
+				<input type="radio" name="age" value="20" required>20대</label> 
+			<label id="thirtiesLabel" class="age-button" onclick="selectAge('thirties')">
+				<input type="radio" name="age" value="30" required> 30대</label> 
+			<label id="fortyPlusLabel" class="age-button" onclick="selectAge('fortyPlus')">
+				<input type="radio"	name="age" value="40" required> 40대 이상</label>
+		</div>
+		
+		<!-- 다음 버튼 -->
+		<button type="submit" class="styled-button">다음</button>
+	</form>
+	
+	<img src="${pageContext.request.contextPath}/images/slidebar3.png"
 			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;"> --%>
-			
+	
 </body>
 </html>

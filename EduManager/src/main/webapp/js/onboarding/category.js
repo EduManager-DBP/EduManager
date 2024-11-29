@@ -15,12 +15,14 @@ function updateCategoryStyle(checkbox) {
 			return;
 		}
 		selectedCount++; // 선택된 체크박스 개수 증가
-		label.style.backgroundColor = '#1E2A7C'; // 체크된 상태 배경색
-		label.style.color = 'white'; // 체크된 상태 텍스트 색상
+		label.classList.add('selected');
+		/*label.style.backgroundColor = '#1E2A7C'; // 체크된 상태 배경색
+		label.style.color = 'white'; // 체크된 상태 텍스트 색상*/
 	} else {
 		selectedCount--; // 선택 해제된 체크박스 개수 감소
-		label.style.backgroundColor = 'white'; // 체크되지 않은 상태 배경색
-		label.style.color = '#a8a7a7'; // 체크되지 않은 상태 텍스트 색상
+		label.classList.remove('selected');
+		/*label.style.backgroundColor = 'white'; // 체크되지 않은 상태 배경색
+		label.style.color = '#a8a7a7'; // 체크되지 않은 상태 텍스트 색상*/
 	}
 
 
