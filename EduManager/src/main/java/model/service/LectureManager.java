@@ -37,8 +37,20 @@ public class LectureManager {
 		return lectureDao.updateLecture(lecture);
 	}	
     
+    //정기 일정
     public int createSchedule (Schedule schedule)throws SQLException{
     	return scheduleDao.createSchedule(schedule);
     }
-
+    public List<Schedule> findScheduleById(long lectureId) throws SQLException {
+    	return scheduleDao.findSchedulesBylectureId(lectureId);
+    }
+    public void updateSchedule (Schedule schedule)throws SQLException{
+    	scheduleDao.updateSchedule(schedule);
+    }
+    public List<Integer> findScheduleIdsBylectureId(long lectureId) throws SQLException {
+    	return scheduleDao.findScheduleIdsBylectureId(lectureId);
+    }
+    public void deleteScheduleById(int scheduleId) {
+    	scheduleDao.deleteScheduleById(scheduleId);
+    }
 }
