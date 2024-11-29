@@ -6,11 +6,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-     <link rel=stylesheet href="<c:url value='/css/myInfo.css' />" type="text/css">
+     <link rel="stylesheet" href="<c:url value='/css/myInfo.css' />" type="text/css">
     <title>내 정보 확인</title>
-    <style>
-        
-    </style>
 </head>
 <body>
     <div class="page">
@@ -18,28 +15,45 @@
         <div id="form-container">
             <div id="info-container">
                 <div id="info-title">내 정보</div>
+                
+                <!-- 아이디 -->
                 <div>
                     <label class="info-label" for="id">아이디</label>
-                    <div class="info-box" id="id">exampleUser</div>
+                    <div class="info-box" id="id">
+                        <c:out value="${member.id}" />
+                    </div>
                 </div>
+                
+                <!-- 비밀번호 -->
                 <div>
                     <label class="info-label" for="password">비밀번호</label>
-                    <div class="info-box" id="password">1234</div>
+                    <div class="info-box" id="password">
+                        ********
+                    </div>
                 </div>
+                
+                <!-- 이름 -->
                 <div>
                     <label class="info-label" for="name">이름</label>
-                    <div class="info-box" id="name">홍길동</div>
+                    <div class="info-box" id="name">
+                        <c:out value="${member.name}" />
+                    </div>
                 </div>
+                
+                <!-- 전화번호 -->
                 <div>
                     <label class="info-label" for="phoneNumber">전화번호</label>
-                    <div class="info-box" id="phoneNumber">01012345678</div>
+                    <div class="info-box" id="phoneNumber">
+                        <c:out value="${member.phone}" />
+                    </div>
                 </div>
+                
                 <div id="button-container">
                     <button class="footer-button" id="deleteAccount">탈퇴하기</button>
                     <button class="footer-button" id="editInfo">수정하기 > </button>
                 </div>
-
                 
+                <!-- 모달 -->
                 <div id="confirmationModal" class="modal">
                     <div class="modal-content">
                       <h4>정말 탈퇴하시겠습니까?</h4>
