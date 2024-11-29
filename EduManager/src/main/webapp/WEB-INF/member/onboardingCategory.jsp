@@ -23,7 +23,7 @@
 		<!-- 분야는 db에서 받아와야 할 것 같긴 함.-->
 		<!-- action 링크 임시로 해놨습니다 -->
 		<form id="category" id="categoryForm" method="POST"
-			action="<c:url value='/onboarding/category'/>">
+			action="<c:url value='/student/register3'/>">
 			<div style="text-align: center; height: 100px">
 				<div class="title">관심있는 분야를 모두 선택해주세요</div>
 				<div style="color: #A6A9AF; margin-top: 20px;">

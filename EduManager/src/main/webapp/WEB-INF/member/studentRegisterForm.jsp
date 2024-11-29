@@ -20,7 +20,7 @@
           <div id="form-container">
               <div id="sign-up-container">
                   <h3>학생 회원가입</h3>
-                  <form name="form" method="POST" action="<c:url value='/student/register' />">
+                  <form name="form" method="POST" action="<c:url value='/student/register1' />">
                       <div class="input-group">
                       	<label for="id">아이디</label>
                 			<input type="text" name="id" id="id" placeholder="id">

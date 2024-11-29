@@ -19,7 +19,7 @@
 	</header> 
 		<!-- 연령 선택 -->
 		<!-- action은 임시로 해놓은거라서 변경하면 됩니다. -->
-		<form id="ageForm" class="container" method="POST" action="<c:url value='/onboarding/category'/>">
+		<form id="ageForm" class="container" method="POST" action="<c:url value='/student/register2'/>">
 			<div style="text-align: center;height:100px">
 				<div class="title">연령대를 선택해주세요</div>
 				<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>

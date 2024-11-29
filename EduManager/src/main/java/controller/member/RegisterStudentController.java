@@ -25,9 +25,9 @@ public class RegisterStudentController implements Controller {
 		MemberManager manager = MemberManager.getInstance();
 
 		// POST request (회원정보가 parameter로 전송됨)
-		Student student = new Student(request.getParameter("id"), request.getParameter("pwd"),
-				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"),
-				request.getParameter("ageRange"), request.getParameterValues("interestCategory"));
+//		Student student = new Student(request.getParameter("id"), request.getParameter("pwd"),
+//				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"),
+//				request.getParameter("ageRange"), request.getParameterValues("interestCategory"));
 
 		Member member = new Member(request.getParameter("id"), request.getParameter("pwd"),
 				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));

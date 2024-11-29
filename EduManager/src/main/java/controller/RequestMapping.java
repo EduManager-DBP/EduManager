@@ -12,6 +12,9 @@ import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
 import controller.member.RegisterTeacherController;
 import controller.member.RegisterStudentController;
+import controller.member.RegisterStudent1Controller;
+import controller.member.RegisterStudent2Controller;
+import controller.member.RegisterStudent3Controller;
 import controller.member.UpdateMemberController;
 
 //import controller.user.*;
@@ -35,35 +38,36 @@ public class RequestMapping {
 		mappings.put("/main/main", new MainController());
 
 		// 회원가입 요청
-
 		mappings.put("/member/register/form", new RegisterMemberController());
 		mappings.put("/teacher/register", new RegisterTeacherController());
-		mappings.put("/student/register", new RegisterStudentController());
+		mappings.put("/student/register1", new RegisterStudent1Controller());
+		mappings.put("/student/register2", new RegisterStudent2Controller());
+		mappings.put("/student/register3", new RegisterStudent3Controller());
 
 		// 사용자 수정
 		mappings.put("/member/update", new UpdateMemberController());
 
 		// 사용자 삭제
 		mappings.put("/member/delete", new DeleteMemberController());
-        
-        //임시 테스트(은향)
 
-        mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
-        mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
-        mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
-        mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
-        mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
+		// 임시 테스트(은향)
 
-        logger.info("Mappings initialized: {}", mappings.keySet());
-        logger.info("Initialized Request Mapping!");
-        
-        mappings.put("/myInfo", new ForwardController("/member/myInfo.jsp"));
-        mappings.put("/editMyInfo", new ForwardController("/member/editMyInfo.jsp"));
-    }
+		mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
+		mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
+		mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
+		mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
+		mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
 
-    public Controller findController(String uri) {
-        // 주어진 URI에 대응되는 controller 객체를 찾아 반환
-        return mappings.get(uri);
-    }
+		logger.info("Mappings initialized: {}", mappings.keySet());
+		logger.info("Initialized Request Mapping!");
+
+		mappings.put("/myInfo", new ForwardController("/member/myInfo.jsp"));
+		mappings.put("/editMyInfo", new ForwardController("/member/editMyInfo.jsp"));
+	}
+
+	public Controller findController(String uri) {
+		// 주어진 URI에 대응되는 controller 객체를 찾아 반환
+		return mappings.get(uri);
+	}
 
 }
