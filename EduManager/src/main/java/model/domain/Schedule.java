@@ -10,15 +10,15 @@ public class Schedule {
     private LocalTime endTime;
     private String frequency;
     private int studyGroupId;
-    private int lectureId;
+    private long lectureId;
     private LocalDate startDate;
-    private String type;
+    private String type;//special:특수 , regular: 정규
     private String title;
     // 생성자
     public Schedule() {}
 
     public Schedule(int scheduleId, String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency,
-            int studyGroupId, int lectureId, LocalDate startDate, String type, String title) {
+            int studyGroupId, long lectureId, LocalDate startDate, String type, String title) {
         super();
         this.scheduleId = scheduleId;
         this.dayOfWeek = dayOfWeek;
@@ -28,6 +28,17 @@ public class Schedule {
         this.studyGroupId = studyGroupId;
         this.lectureId = lectureId;
         this.startDate = startDate;
+        this.title = title;
+        this.type = type;
+    }
+    public Schedule(String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency,
+    		long lectureId, String type, String title) {
+        super();
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.frequency = frequency;
+        this.lectureId = lectureId;
         this.title = title;
         this.type = type;
     }
@@ -81,11 +92,11 @@ public class Schedule {
         this.studyGroupId = studyGroupId;
     }
 
-    public int getLectureId() {
+    public long getLectureId() {
         return lectureId;
     }
 
-    public void setLectureId(int lectureId) {
+    public void setLectureId(long lectureId) {
         this.lectureId = lectureId;
     }
 
