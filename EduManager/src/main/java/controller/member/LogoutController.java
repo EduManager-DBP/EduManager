@@ -1,4 +1,5 @@
 package controller.member;
+import controller.member.MemberSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
