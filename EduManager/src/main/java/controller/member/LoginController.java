@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import model.service.MemberManager;
+import controller.member.MemberSessionUtils;
+
 
 public class LoginController implements Controller {
 	@Override
