@@ -15,18 +15,25 @@ public class LectureScheduleDao {
     }
 
     // 스케줄 생성
-    public void createSchedule(int lectureid, String dayOfWeek, Time startTime, Time endTime, String frequency, Date startDate, String type, String title) {
+    public int createSchedule(Schedule schedule) {
         StringBuffer query = new StringBuffer();
+        int generatedKey = 0;
+        
         query.append("INSERT INTO lectureschedule (lecturescheduleid, dayofweek, starttime, endtime, frequency, lectureid, startdate, type, title) ");
-        query.append("VALUES (SEQ_LECTURE_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, ?, ?, ?)");
+        query.append("VALUES (SEQ_LECTURE_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?)");
 
         jdbcUtil.setSqlAndParameters(query.toString(), 
-            new Object[] { dayOfWeek, startTime, endTime, frequency, lectureid, startDate, type ,title});
+            new Object[] { schedule.getDayOfWeek(), schedule.getStartTime(), schedule.getEndTime(), schedule.getFrequency(), schedule.getLectureId(),  schedule.getType() ,schedule.getTitle()});
 
         try {
-            int rs = jdbcUtil.executeUpdate();
-            if (rs > 0) {
+            int result = jdbcUtil.executeUpdate();
+		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
+		   	if(rs.next()) {
+		   		generatedKey = rs.getInt(1);   // 생성된 PK 값
+		   	}
+            if (result > 0) {
                 System.out.println("스케줄이 성공적으로 생성되었습니다.");
+                return generatedKey;
             } else {
                 System.out.println("스케줄 생성에 실패했습니다.");
             }
@@ -36,6 +43,8 @@ public class LectureScheduleDao {
             jdbcUtil.commit();
             jdbcUtil.close();
         }
+        return generatedKey;
+
     }
 
     // 스케줄 조회 by ID
