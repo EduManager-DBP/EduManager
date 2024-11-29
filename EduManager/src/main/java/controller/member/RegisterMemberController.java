@@ -16,6 +16,11 @@ public class RegisterMemberController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
+		
 		if (request.getMethod().equals("GET")) {
 			// GET request: 역할 선택 form 요청
 			log.debug("RegisterForm Request");

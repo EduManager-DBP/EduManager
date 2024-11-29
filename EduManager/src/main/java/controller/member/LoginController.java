@@ -12,6 +12,11 @@ import controller.member.MemberSessionUtils;
 public class LoginController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
+		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
