@@ -40,6 +40,12 @@
                     </div>
                 </div>
                 
+                 <!-- 이메일 추가 부분 -->
+                <div>
+                    <label class="info-label" for="email">이메일</label>
+                    <div class="info-box" id="email"><c:out value="${member.email}" /></div> <!-- 이메일 출력 -->
+                </div>
+                
                 <!-- 전화번호 -->
                 <div>
                     <label class="info-label" for="phoneNumber">전화번호</label>
