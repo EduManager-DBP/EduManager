@@ -64,8 +64,6 @@
 					기타
 				</label>
 			</div>
-			<input type="hidden" name="age"
-				value="<%=request.getParameter("age")%>" />
 			<button type="submit" class="styled-button">에듀매니저 시작하기</button>
 		</form>
 	</div>

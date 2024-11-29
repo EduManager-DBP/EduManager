@@ -45,6 +45,7 @@ public class RequestMapping {
 		mappings.put("/student/register1", new RegisterStudent1Controller());
 		mappings.put("/student/register2", new RegisterStudent2Controller());
 		mappings.put("/student/register3", new RegisterStudent3Controller());
+		mappings.put("/student/register", new RegisterStudentController());
 
 		// 사용자 수정
 		mappings.put("/member/update", new UpdateMemberController());

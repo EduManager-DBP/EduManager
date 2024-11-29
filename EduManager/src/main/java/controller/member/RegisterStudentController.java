@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,20 +26,33 @@ public class RegisterStudentController implements Controller {
 		StudentManager smanager = StudentManager.getInstance();
 		MemberManager manager = MemberManager.getInstance();
 
-		// POST request (회원정보가 parameter로 전송됨)
+		// 세션에서 모든 데이터 가져오기
+		HttpSession session = request.getSession();
 
-//		Student student = new Student(request.getParameter("id"), request.getParameter("pwd"),
-//				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"),
-//				request.getParameter("ageRange"), Arrays.asList(request.getParameterValues("interestCategory")));
+		String id = (String) session.getAttribute("id");
+		String pwd = (String) session.getAttribute("pwd");
+		String name = (String) session.getAttribute("name");
+		String email = (String) session.getAttribute("email");
+		String phone = (String) session.getAttribute("phone");
+		String ageRange = (String) session.getAttribute("age");
 
-		Member member = new Member(request.getParameter("id"), request.getParameter("pwd"),
-				request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));
+		// interest 데이터를 배열로 가져오기
+		String[] interestArray = ((String) session.getAttribute("interest")).split(",");
+		List<String> interestCategory = Arrays.asList(interestArray);
 
-		log.debug("Create User : {}", student);
+		// 학생 객체 생성
+		Student student = new Student(id, pwd, name, email, phone, ageRange, interestCategory);
+		Member member = new Member(id, pwd, name, email, phone);
 
 		try {
 			smanager.create(student);
 			manager.create(member); // member DB에 생성
+
+			// 세션 정리
+			session.invalidate(); // 세션 전체 무효화
+
+			response.getWriter().write("Student registration successful!");
+			log.debug("Create User : {}", student);
 
 			return "redirect:/main/main"; // 성공 시 사용자 리스트 화면으로 redirect
 

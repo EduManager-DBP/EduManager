@@ -19,7 +19,7 @@
 	</header>
 	<!-- 연령 선택 -->
 	<form id="ageForm" class="container" method="POST"
-		action="<c:url value='/onboarding/category'/>">
+		action="<c:url value='/student/register2'/>">
 		<div style="text-align: center; height: 100px">
 			<div class="title">연령대를 선택해주세요</div>
 			<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
@@ -40,7 +40,7 @@
 	</form>
 	
 	<img src="${pageContext.request.contextPath}/images/slidebar3.png"
-			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;"> --%>
+			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;"> 
 	
 </body>
 </html>

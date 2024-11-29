@@ -18,7 +18,7 @@
 				<img id="profile_img"src="<c:url value='/images/profileImg.svg' />" >
 			</div>
 			<div id="mypage_name">
-				<p>000학생</p>
+				<p>${curUserId} 학생</p>
 			</div>
 			<div id="mypage_btn_container">
 				<button class="mypageBtn setting">설정</button>

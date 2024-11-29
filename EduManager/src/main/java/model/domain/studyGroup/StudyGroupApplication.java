@@ -1,62 +1,60 @@
-package model.domain;
+package model.domain.studyGroup;
 
 import java.sql.Date;
 
 public class StudyGroupApplication {
-    private long studyGroupApplicationId; 
-    private String status;              
-    private String memberId;            
-    private long studyGroupId;          
-    private Date createAt;         
-    
-   
-    public StudyGroupApplication() {
-    }
+	private long studyGroupApplicationId;
+	private String status;
+	private String memberId;
+	private long studyGroupId;
+	private Date createAt;
 
-    
-    public StudyGroupApplication(String status, String memberId, long studyGroupId) {
-        this.status = status;
-        this.memberId = memberId;
-        this.studyGroupId = studyGroupId;
-    }
+	public StudyGroupApplication() {
+	}
 
-    public long getStudyGroupApplicationId() {
-        return studyGroupApplicationId;
-    }
+	public StudyGroupApplication(String status, String memberId, long studyGroupId) {
+		this.status = status;
+		this.memberId = memberId;
+		this.studyGroupId = studyGroupId;
+	}
 
-    public void setStudyGroupApplicationId(int studyGroupApplicationId) {
-        this.studyGroupApplicationId = studyGroupApplicationId;
-    }
+	public long getStudyGroupApplicationId() {
+		return studyGroupApplicationId;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setStudyGroupApplicationId(int studyGroupApplicationId) {
+		this.studyGroupApplicationId = studyGroupApplicationId;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public String getMemberId() {
-        return memberId;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
+	public String getMemberId() {
+		return memberId;
+	}
 
-    public long getStudyGroupId() {
-        return studyGroupId;
-    }
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
-    public void setStudyGroupId(long studyGroupId) {
-        this.studyGroupId = studyGroupId;
-    }
+	public long getStudyGroupId() {
+		return studyGroupId;
+	}
 
-    public Date getCreateAt() {
-        return createAt;
-    }
+	public void setStudyGroupId(long studyGroupId) {
+		this.studyGroupId = studyGroupId;
+	}
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 }

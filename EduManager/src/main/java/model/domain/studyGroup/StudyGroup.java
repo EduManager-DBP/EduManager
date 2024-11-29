@@ -1,90 +1,89 @@
-package model.domain;
+package model.domain.studyGroup;
 
 import java.sql.Date;
 
 public class StudyGroup {
-    
-    private long studyGroupId;   
-    private String name;        
-    private String img;         
-    private String description;  
-    private long capacity;       
-    private String category;    
-    private Date createAt;
-    private String leaderId;     
 
- 
-    public StudyGroup() {}
+	private long studyGroupId;
+	private String name;
+	private String img;
+	private String description;
+	private long capacity;
+	private String category;
+	private Date createAt;
+	private String leaderId;
 
-  
-    public long getStudyGroupId() {
-        return studyGroupId;
-    }
+	public StudyGroup() {
+	}
 
-    public void setStudyGroupId(long studyGroupId) {
-        this.studyGroupId = studyGroupId;
-    }
+	public long getStudyGroupId() {
+		return studyGroupId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setStudyGroupId(long studyGroupId) {
+		this.studyGroupId = studyGroupId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getImg() {
-        return img;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+	public String getImg() {
+		return img;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setImg(String img) {
+		this.img = img;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public long getCapacity() {
-        return capacity;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setCapacity(long capacity) {
-        this.capacity = capacity;
-    }
+	public long getCapacity() {
+		return capacity;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public void setCapacity(long capacity) {
+		this.capacity = capacity;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public Date getCreateAt() {
-        return createAt;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
+	public Date getCreateAt() {
+		return createAt;
+	}
 
-    public String getLeaderId() {
-        return leaderId;
-    }
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 
-    public void setLeaderId(String leaderId) {
-        this.leaderId = leaderId;
-    }
+	public String getLeaderId() {
+		return leaderId;
+	}
 
-    @Override
-    public String toString() {
-        return "StudyGroup [studyGroupId=" + studyGroupId + ", name=" + name + ", img=" + img + ", description="
-                + description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
-                + ", leaderId=" + leaderId + "]";
-    }
+	public void setLeaderId(String leaderId) {
+		this.leaderId = leaderId;
+	}
+
+	@Override
+	public String toString() {
+		return "StudyGroup [studyGroupId=" + studyGroupId + ", name=" + name + ", img=" + img + ", description="
+				+ description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
+				+ ", leaderId=" + leaderId + "]";
+	}
 }

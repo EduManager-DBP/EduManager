@@ -38,7 +38,7 @@
                       <input type="tel" name="phone" id="phone" placeholder="PhoneNumber" pattern="[0-9]{3}-[0-9]{*}-[0-9]{*}" required>
                      
                       <div id="form-controls">
-                          <button type="button" id="nextBt">다음</button>
+                          <button type="submit" id="nextBt">다음</button>
                       </div>
                   </form>
               </div>
