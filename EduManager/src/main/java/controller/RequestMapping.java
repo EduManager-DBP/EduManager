@@ -18,6 +18,7 @@ import controller.member.RegisterStudent1Controller;
 import controller.member.RegisterStudent2Controller;
 import controller.member.RegisterStudent3Controller;
 import controller.member.UpdateMemberController;
+import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewMyInfoController;
 
 //import controller.user.*;
@@ -52,6 +53,9 @@ public class RequestMapping {
 		//마이페이지 내 정보 보기
 		mappings.put("/mypage/myInfo", new ViewMyInfoController());
 		
+		//마이페이지 탈퇴하기
+		mappings.put("/mypage/deleteAccount", new DeleteAccountController());
+				
 		// 사용자 수정
 		mappings.put("/member/update", new UpdateMemberController());
 
@@ -82,7 +86,6 @@ public class RequestMapping {
 		logger.info("Mappings initialized: {}", mappings.keySet());
 		logger.info("Initialized Request Mapping!");
 
-		mappings.put("/myInfo", new ForwardController("/mypage/myInfo.jsp"));
 		mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
 	}
 
