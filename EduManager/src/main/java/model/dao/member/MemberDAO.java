@@ -199,5 +199,26 @@ public class MemberDAO {
 		}
 		return false;
 	}
+	
+	/**
+	 * 주어진 사용자 ID와 비밀번호가 일치하는지 확인
+	 */
+	public boolean verifyPassword(String id, String pwd) throws SQLException {
+	    String sql = "SELECT count(*) FROM MEMBER WHERE id=? AND pwd=?";
+	    jdbcUtil.setSqlAndParameters(sql, new Object[] { id, pwd });
+
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) == 1; // ID와 비밀번호가 일치하면 true
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        jdbcUtil.close();
+	    }
+	    return false;
+	}
+
 
 }
