@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-     <link rel="stylesheet" href="<c:url value='/css/myInfo.css' />" type="text/css">
+    <link rel="stylesheet" href="<c:url value='/css/myInfo.css' />" type="text/css">
     <title>내 정보 확인</title>
 </head>
 <body>
@@ -24,14 +24,6 @@
                     </div>
                 </div>
                 
-                <!-- 비밀번호 -->
-                <div>
-                    <label class="info-label" for="password">비밀번호</label>
-                    <div class="info-box" id="password">
-                        ********
-                    </div>
-                </div>
-                
                 <!-- 이름 -->
                 <div>
                     <label class="info-label" for="name">이름</label>
@@ -43,7 +35,9 @@
                 <!-- 이메일 -->
                 <div>
                     <label class="info-label" for="email">이메일</label>
-                    <div class="info-box" id="email"><c:out value="${member.email}" /></div>
+                    <div class="info-box" id="email">
+                        <c:out value="${member.email}" />
+                    </div>
                 </div>
                 
                 <!-- 전화번호 -->
@@ -57,12 +51,13 @@
                 <!-- 버튼 -->
                 <div id="button-container">
                     <!-- 탈퇴하기 버튼 -->
-                    <form action="<c:url value='/mypage/deleteAccount' />" method="post" style="display:inline;">
+                    
+                    <form action="<c:url value='/mypage/deleteConfirm' />" method="get">
                         <button class="footer-button" id="deleteAccount" type="submit">탈퇴하기</button>
                     </form>
                     <!-- 수정하기 버튼 -->
-                    <form action="<c:url value='/mypage/editMyInfo' />" method="get" style="display:inline;">
-                        <button class="footer-button" id="editInfo" type="submit">수정하기 > </button>
+                    <form action="<c:url value='/mypage/editMyInfo' />" method="get">
+                        <button class="footer-button" id="editInfo" type="submit">수정하기</button>
                     </form>
                 </div>
             </div>

@@ -54,6 +54,7 @@ public class RequestMapping {
 		mappings.put("/mypage/myInfo", new ViewMyInfoController());
 		
 		//마이페이지 탈퇴하기
+		mappings.put("/mypage/deleteConfirm", new ForwardController("/mypage/deleteConfirm.jsp"));
 		mappings.put("/mypage/deleteAccount", new DeleteAccountController());
 				
 		// 사용자 수정
