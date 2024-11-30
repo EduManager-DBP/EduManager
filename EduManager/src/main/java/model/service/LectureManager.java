@@ -32,5 +32,13 @@ public class LectureManager {
     public int updateLecture(Lecture lecture) throws SQLException{//, LectureNotFoundException {
 		return lectureDao.updateLecture(lecture);
 	}	
+    
+    public Lecture getLectureById(long lectureId) throws SQLException {
+        return lectureDao.getLectureById(lectureId);
+    }
+    
+    public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
+        return lectureDao.getLecturesExcludingStudent(stuId);
+    }
 
 }

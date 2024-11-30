@@ -21,20 +21,20 @@
 						id="lectureOverviewImg">
 				</div>
 				<div class="overViewInfo">
-					<div class="overViewInfoText" id="lectureTeacherName">000 강사님</div>
+					<div class="overViewInfoText" id="lectureTeacherName"> ${teacherName} 강사님</div>
 					<div class="overViewInfoText" id="lectureTeacherPhone">
 						<img src="<c:url value='/images/phoneIcon.svg"' />"
-							class="infoIcon" />000-0000-0000
+							class="infoIcon" />${teacherPhone}
 					</div>
 					<div class="overViewInfoText" id="lectureTeacherRoom">
 						<img src="<c:url value='/images/roomIcon.svg"' />"
-							class="infoIcon" />000호
+							class="infoIcon" />${lectureroom}호
 					</div>
 				</div>
 			</div>
 			<div class="section2">
-				<div id="lectureOverviewTitle">강의명</div>
-				<div id="lectureOverviewDescription">강의소개</div>
+				<div id="lectureOverviewTitle">${lectureName}</div>
+				<div id="lectureOverviewDescription">${description}</div>
 
 				<div class="section3">
 					<div class="likeButtonContainer">
