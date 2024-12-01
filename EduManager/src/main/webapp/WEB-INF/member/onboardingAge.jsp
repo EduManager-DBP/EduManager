@@ -39,8 +39,5 @@
 		<button type="submit" class="styled-button">다음</button>
 	</form>
 	
-	<img src="${pageContext.request.contextPath}/images/slidebar3.png"
-			alt="bar" style="margin-top: 30px; width: 50px; justify-self=center;"> 
-	
 </body>
 </html>

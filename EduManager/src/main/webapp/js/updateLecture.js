@@ -60,6 +60,9 @@ function addSchedule() {
   timeInputs[0].name = `schedule[${scheduleCount}][startTime]`;
   timeInputs[1].name = `schedule[${scheduleCount}][endTime]`;
 
+  const scheduleIdInput = newArticle.querySelector('#scheduleId');
+	scheduleIdInput.name = `schedule[${scheduleCount}][scheduleId]`;
+
   // scheduleCount 증가
   scheduleCount++;
  // hidden input에 scheduleCount 값을 반영
@@ -100,7 +103,12 @@ function adjustScheduleNames() {
     const timeInputs = article.querySelectorAll('input[type="time"]');
     timeInputs[0].name = `schedule[${index}][startTime]`;
     timeInputs[1].name = `schedule[${index}][endTime]`;
+
+      const scheduleIdInput = article.querySelector('#scheduleId');
+	scheduleIdInput.name = `schedule[${index}][scheduleId]`;
+
   });
+  
 
   // scheduleCount는 현재의 일정 개수로 갱신
   scheduleCount = articles.length;

@@ -26,6 +26,12 @@
 		form.method="GET";		// register form 요청
 		form.submit();
 	}
+	function userCreate(targetUri) {
+	    form.reset();  // 폼 초기화
+	    form.action = targetUri;
+	    form.method = "GET";  // register form 요청
+	    form.submit();
+	}
   </script>
   </head>
   <body>

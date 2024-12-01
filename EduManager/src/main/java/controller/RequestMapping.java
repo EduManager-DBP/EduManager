@@ -18,6 +18,8 @@ import controller.member.RegisterStudent1Controller;
 import controller.member.RegisterStudent2Controller;
 import controller.member.RegisterStudent3Controller;
 import controller.member.UpdateMemberController;
+import controller.mypage.DeleteAccountController;
+import controller.mypage.ViewMyInfoController;
 
 //import controller.user.*;
 //import controller.comm.*;
@@ -47,7 +49,14 @@ public class RequestMapping {
 		mappings.put("/student/register3", new RegisterStudent3Controller());
 		mappings.put("/student/register", new RegisterStudentController());
 
-		// member
+		// 마이페이지 내 정보 보기
+		mappings.put("/mypage/myInfo", new ViewMyInfoController());
+
+		// 마이페이지 탈퇴하기
+		mappings.put("/mypage/deleteConfirm", new ForwardController("/mypage/deleteConfirm.jsp"));
+		mappings.put("/mypage/deleteAccount", new DeleteAccountController());
+
+		// 사용자 수정
 		mappings.put("/member/update", new UpdateMemberController());
 		mappings.put("/member/delete", new DeleteMemberController());
 
@@ -70,17 +79,10 @@ public class RequestMapping {
 		mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
 		mappings.put("/study/list", new ForwardController("/study/my_study_list.jsp"));
 
-		mappings.put("/study_make", new ForwardController("/study/study_make.jsp"));
-		mappings.put("/onboarding/role", new ForwardController("/onboarding/role.jsp"));
-		mappings.put("/onboarding/age", new ForwardController("/onboarding/age.jsp"));
-		mappings.put("/onboarding/category", new ForwardController("/onboarding/category.jsp"));
-		mappings.put("/lecture_make", new ForwardController("/lecture/lecture_make.jsp"));
-
 		logger.info("Mappings initialized: {}", mappings.keySet());
 		logger.info("Initialized Request Mapping!");
 
-		mappings.put("/myInfo", new ForwardController("/member/myInfo.jsp"));
-		mappings.put("/editMyInfo", new ForwardController("/member/editMyInfo.jsp"));
+		mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
 	}
 
 	public Controller findController(String uri) {

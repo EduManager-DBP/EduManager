@@ -1,4 +1,16 @@
 /*강의/스터디 만들기 css*/
+#logo-link {
+	margin-left: 100px;
+	
+	margin-top: 30px;
+}
+
+header > nav {
+    width: 600px;
+    height: 100%;
+    margin-right: 100px;
+    
+}
 .subTitle {
 	font-size: 24px;
 	color: #643E23;

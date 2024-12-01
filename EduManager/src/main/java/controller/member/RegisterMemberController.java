@@ -16,6 +16,8 @@ public class RegisterMemberController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+
 		if (request.getMethod().equals("GET")) {
 			// GET request: 역할 선택 form 요청
 			log.debug("RegisterForm Request");
