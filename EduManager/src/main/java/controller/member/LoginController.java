@@ -5,16 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.service.MemberManager;
+import model.service.member.MemberManager;
 import controller.member.MemberSessionUtils;
-
 
 public class LoginController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 
-		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
