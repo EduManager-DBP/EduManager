@@ -14,7 +14,7 @@ import controller.member.MemberSessionUtils;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.service.LectureManager;
-import model.service.MemberManager;
+import model.service.member.MemberManager;
 
 public class CreateLectureController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(CreateLectureController.class);
@@ -49,7 +49,8 @@ public class CreateLectureController implements Controller {
 			lecture = manager.createLecture(lecture);
 			log.debug("Create Lecture : {}", lecture.getLectureId());
 //
-			int scheduleCount = Integer.parseInt(request.getParameter("scheduleCount"));//처음에 value를 안정해줌. jsp에서 오류계속 났었음.
+			int scheduleCount = Integer.parseInt(request.getParameter("scheduleCount"));// 처음에 value를 안정해줌. jsp에서 오류계속
+																						// 났었음.
 //			// 일정의 개수
 //			log.debug("scheduleCount : {}", scheduleCount);
 			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
@@ -60,11 +61,10 @@ public class CreateLectureController implements Controller {
 				LocalTime endTime = LocalTime.parse(request.getParameter("schedule[" + i + "][endTime]"));
 //				log.debug("startTime : {} endTime:{}", startTime, endTime);
 
-
 //				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, 19L, "regular",
 //						null);
 //				log.debug("Schedule{} : {}", i, schedule);
-				
+
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, lecture.getLectureId(), "regular",
 						null);
 				log.debug("Schedule{} : {}", i, schedule);
@@ -73,7 +73,7 @@ public class CreateLectureController implements Controller {
 				log.debug("Create Schedule : {}", scheduleId);
 			}
 
-		 return "redirect:/main/main";
+			return "redirect:/main/main";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
