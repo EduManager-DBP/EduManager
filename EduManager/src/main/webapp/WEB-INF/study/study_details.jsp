@@ -14,15 +14,8 @@
   <body>
     <div class="main-container">
       <div class="study-detail">
-        <div class="flex-row-eaac">
-          <div class="bulb-on-outline"><div class="vector"></div></div>
-          <div class="rectangle"><span class="logout">로그아웃</span></div>
-          <div class="rectangle-1">
-            <span class="my-page">마이 페이지</span>
-          </div>
-          <span class="edu">에듀</span><span class="manager">매니저</span
-          ><span class="lecture">강의</span><span class="home">홈</span>
-        </div>
+        <jsp:include page="../navigation/navigation.jsp" />
+        
         <div class="flex-row-d">
           <span class="study-detail-view">스터디 상세보기</span
           ><span class="toeic-study">단기간 토익 점수 상승을 위한 스터디</span>
