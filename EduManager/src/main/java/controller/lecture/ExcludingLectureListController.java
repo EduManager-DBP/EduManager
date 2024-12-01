@@ -18,27 +18,31 @@ public class ExcludingLectureListController implements Controller {
             return "redirect:/member/login/form"; // login form 요청으로 redirect
         }
 
-      
+        String stuId = "admin";
       LectureManager manager = LectureManager.getInstance();
         
       
-      String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
-        // 강의 목록 조회
-        List<Lecture> lectureList = manager.getLecturesExcludingStudent(stuId);
+      List<Lecture> lectureList = manager.getLecturesExcludingStudent(stuId);
+      
+      System.out.println("강의 목록:");
+      for (Lecture lecture : lectureList) {
+          System.out.println("강의 ID: " + lecture.getLectureId() +
+                             ", 강의 이름: " + lecture.getName() +
+                             ", 카테고리: " + lecture.getCategory());
+      }
+      
+      // 강의 목록을 request 객체에 저장
+      request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
+      request.setAttribute("lectureList", lectureList);
+
+
+      return "/registration/registration.jsp";
         
-        System.out.println("강의 목록:");
-        for (Lecture lecture : lectureList) {
-            System.out.println("강의 ID: " + lecture.getLectureId() +
-                               ", 강의 이름: " + lecture.getName() +
-                               ", 카테고리: " + lecture.getCategory());
-        }
+        
 
         
         
-
-        
-        
-        return "/registration/registration.jsp";
+       
     }
 
 }

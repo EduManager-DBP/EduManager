@@ -227,7 +227,7 @@ public class LectureDao {
         query.append("FROM Lecture ");
         query.append("WHERE lectureId NOT IN (");
         query.append("    SELECT lectureId ");
-        query.append("    FROM Enrollment ");
+        query.append("    FROM LectureEnrollment ");
         query.append("    WHERE stuid = ? ");
         query.append(")");
 

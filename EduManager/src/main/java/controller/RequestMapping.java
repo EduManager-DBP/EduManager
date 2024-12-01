@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
+import controller.lecture.ExcludingLectureListController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -16,6 +17,7 @@ import controller.member.RegisterMemberController;
 import controller.member.RegisterTeacherController;
 import controller.member.RegisterStudentController;
 import controller.member.UpdateMemberController;
+
 
 //import controller.user.*;
 //import controller.comm.*;
@@ -57,7 +59,7 @@ public class RequestMapping {
 
         mappings.put("/lecture/over-view", new ViewLectureController());
         
-        mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
+        mappings.put("/registration", new ExcludingLectureListController());
         
         //임시 테스트(은향)
         mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
@@ -65,8 +67,7 @@ public class RequestMapping {
         mappings.put("/onboarding/age", new ForwardController("/member/onboardingAge.jsp"));
         mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
 
-        mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
-      
+     
         mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));
         mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
