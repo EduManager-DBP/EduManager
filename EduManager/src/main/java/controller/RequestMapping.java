@@ -2,6 +2,7 @@ package controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,11 +13,11 @@ import controller.member.DeleteMemberController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
-import controller.member.RegisterTeacherController;
-import controller.member.RegisterStudentController;
 import controller.member.RegisterStudent1Controller;
 import controller.member.RegisterStudent2Controller;
 import controller.member.RegisterStudent3Controller;
+import controller.member.RegisterStudentController;
+import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewMyInfoController;
@@ -28,7 +29,7 @@ public class RequestMapping {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
 	// 각 요청 URI에 대한 controller 객체를 저장할 HashMap 생성
-	private Map<String, Controller> mappings = new HashMap<String, Controller>();
+	private Map<String, Controller> mappings = new HashMap<>();
 
 	public void initMapping() {
 		// 각 URI에 대응되는 controller 객체를 생성 및 저장
