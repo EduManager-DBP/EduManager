@@ -1,4 +1,4 @@
-package model.service;
+package model.service.member;
 
 import java.util.ArrayList;
 import java.util.Iterator;
