@@ -21,6 +21,8 @@ import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewMyInfoController;
+import controller.study.CreateStudyController;
+import controller.study.UpdateStudyController;
 
 //import controller.user.*;
 //import controller.comm.*;
@@ -64,15 +66,18 @@ public class RequestMapping {
 		// study
 		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
 
-		// 임시 테스트(은향)
 		// 강의 등록 : get->page 띄우기 post:등록 요청
 		mappings.put("/lecture/create", new CreateLectureController());
 
 		// 강의 수정: get->page 띄우기 post:등록 요청
 		mappings.put("/lecture/update", new UpdateLectureController());
+		
+		//스터디 등록
+		mappings.put("/study/create", new CreateStudyController());
 
-		// 임시 테스트(은향)
-		mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
+		//스터디 수정
+		mappings.put("/study/update", new UpdateStudyController());
+
 		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
 		mappings.put("/lecture/over-view", new ForwardController("/lecture/lecture_overview.jsp"));
 		mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));

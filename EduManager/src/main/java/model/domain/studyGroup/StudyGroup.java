@@ -16,6 +16,19 @@ public class StudyGroup {
 	public StudyGroup() {
 	}
 
+	public StudyGroup(long studyGroupId, String name, String img, String description, long capacity, String category,
+			Date createAt, String leaderId) {
+		super();
+		this.studyGroupId = studyGroupId;
+		this.name = name;
+		this.img = img;
+		this.description = description;
+		this.capacity = capacity;
+		this.category = category;
+		this.createAt = createAt;
+		this.leaderId = leaderId;
+	}
+
 	public long getStudyGroupId() {
 		return studyGroupId;
 	}
