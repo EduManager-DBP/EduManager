@@ -371,3 +371,16 @@ Java Model Exception: Error in Java Model (code 979): Invalid path: '/EduManager
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SUBENTRY 1 org.eclipse.jdt.core 4 979 2024-12-01 20:15:43.909
 !MESSAGE Invalid path: '/EduManager/src/main/webapp/WEB-INF/web.xml'
+!SESSION 2024-12-09 21:28:43.362 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/sondahyun/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/sondahyun/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-09 21:28:46.846
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-09 21:28:52.936
+!MESSAGE Logback config file: /Users/sondahyun/DBP/project/EduManager/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
