@@ -371,3 +371,37 @@ Java Model Exception: Error in Java Model (code 979): Invalid path: '/EduManager
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SUBENTRY 1 org.eclipse.jdt.core 4 979 2024-12-01 20:15:43.909
 !MESSAGE Invalid path: '/EduManager/src/main/webapp/WEB-INF/web.xml'
+
+!ENTRY org.eclipse.jst.jsp.core 4 4 2024-12-10 13:26:20.662
+!MESSAGE A workspace crash was detected. The previous session did not exit normally. Not using saved taglib indexes.
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.961
+!MESSAGE The given URI https://jakarta.ee/xml/ns/jakartaee/application-client_9.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.969
+!MESSAGE The given URI https://jakarta.ee/xml/ns/jakartaee/jobXML_2_0.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.970
+!MESSAGE The given URI https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.971
+!MESSAGE The given URI https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.977
+!MESSAGE The given URI https://jakarta.ee/xml/ns/validation/validation-configuration-3.0.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+
+!ENTRY org.eclipse.wildwebdeveloper.xml 2 0 2024-12-10 13:26:28.979
+!MESSAGE The given URI http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_1.xsd from org.eclipse.jst.standard.schemas could not be resolved for local access
+!SESSION 2024-12-14 20:21:57.758 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/sondahyun/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/sondahyun/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-14 20:22:02.095
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-14 20:22:07.168
+!MESSAGE Logback config file: /Users/sondahyun/DBP/project/EduManager/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
