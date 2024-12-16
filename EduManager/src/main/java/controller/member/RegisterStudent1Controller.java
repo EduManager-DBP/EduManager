@@ -16,14 +16,20 @@ public class RegisterStudent1Controller implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
 		// 입력받은 데이터 세션에 저장
-		session.setAttribute("id", request.getParameter("id"));
-		session.setAttribute("pwd", request.getParameter("pwd"));
-		session.setAttribute("name", request.getParameter("name"));
-		session.setAttribute("email", request.getParameter("email"));
-		session.setAttribute("phone", request.getParameter("phone"));
+		session.setAttribute("id", id);
+		session.setAttribute("pwd", pwd);
+		session.setAttribute("name", name);
+		session.setAttribute("email", email);
+		session.setAttribute("phone", phone);
 
-		log.debug("id, pwd, name, email, phone setAttribute 완료 ");
+		log.debug("RegisterStudent1Controller - User Input: id={}, pwd={}, name={}, email={}, phone={}", id, name,
+				email, phone);
 
 		return "/member/onboardingAge.jsp";
 	}

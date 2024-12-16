@@ -71,11 +71,11 @@ public class RequestMapping {
 
 		// 강의 수정: get->page 띄우기 post:등록 요청
 		mappings.put("/lecture/update", new UpdateLectureController());
-		
-		//스터디 등록
+
+		// 스터디 등록
 		mappings.put("/study/create", new CreateStudyController());
 
-		//스터디 수정
+		// 스터디 수정
 		mappings.put("/study/update", new UpdateStudyController());
 
 		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));

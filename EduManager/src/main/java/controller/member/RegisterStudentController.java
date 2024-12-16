@@ -40,6 +40,8 @@ public class RegisterStudentController implements Controller {
 		String[] interestArray = ((String) session.getAttribute("interest")).split(",");
 		List<String> interestCategory = Arrays.asList(interestArray);
 
+		log.debug("Create Student : {}", id, pwd, name, email, phone, ageRange, interestArray, interestCategory);
+
 		// 학생 객체 생성
 		Student student = new Student(id, pwd, name, email, phone, ageRange, interestCategory);
 		Member member = new Member(id, pwd, name, email, phone);
