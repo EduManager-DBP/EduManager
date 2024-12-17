@@ -1,26 +1,8 @@
-.main-container {
-	overflow: hidden;
-}
-
-.main-container, .main-container * {
-	box-sizing: border-box;
-}
-
-input, select, textarea, button {
-	outline: 0;
-}
-
 :root {
 	--default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
 		"Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
 		"Source Han Sans CN", sans-serif;
-}
-
-.main-container {
-	width: 897px;
-	height: 723px;
-	margin: 0 auto;
 }
 
 
@@ -35,32 +17,30 @@ input, select, textarea, button {
 /* 제목 */
 .title {
 	display: block;
-	position: relative;
 	height: 30px;
-	margin: 6px 0 0 357px;
+	justify-self: center;
+	margin-top: 130px;
 	color: #000000;
 	font-size: 30px;
 	font-weight: 600;
 	line-height: 30px;
 	text-align: left;
 	white-space: nowrap;
-	z-index: 14;
 }
 
 /* 폼 컨테이너 */
 .form {
-	position: relative;
 	width: 690px;
-	height: 413px;
-	margin: 80px 0 0 104px;
-	z-index: 2;
+	height: 100%;
+	margin-top: 40px;
+	justify-self: center;
 }
 
 /* 과제 명 입력 */
 .task-name-input {
 	width: 690px;
 	height: 90px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 .assignment-name {
@@ -69,14 +49,13 @@ input, select, textarea, button {
 	color: #000000;
 	font-size: 20px;
 	font-weight: 500;
-	line-height: 19px;
 	text-align: left;
-	margin-bottom: 8px;
+	margin-bottom: 11px;
 }
 
 .input {
 	width: 100%;
-	height: 50px;
+	height: 25px;
 	padding: 10px;
 	background: #ffffff;
 	border: 1px solid rgba(0, 0, 0, 0.1);
@@ -88,7 +67,8 @@ input, select, textarea, button {
 /* 마감일 선택 */
 .deadline-input {
 	width: 100%;
-	margin-bottom: 20px;
+	height: 90px;
+	margin-bottom: 40px;
 }
 
 .deadline {
@@ -97,14 +77,14 @@ input, select, textarea, button {
 	color: #000000;
 	font-size: 20px;
 	font-weight: 500;
-	line-height: 19px;
 	text-align: left;
-	margin-bottom: 8px;
+	margin-bottom: 11px;
+	
 }
 
 .input-field {
 	width: 100%;
-	height: 50px;
+	height: 25px;
 	padding: 10px;
 	background: #ffffff;
 	border: 1px solid rgba(0, 0, 0, 0.1);
@@ -125,9 +105,8 @@ input, select, textarea, button {
 	color: #000000;
 	font-size: 20px;
 	font-weight: 500;
-	line-height: 19px;
 	text-align: left;
-	margin-bottom: 8px;
+	margin-bottom: 11px;
 }
 
 .input-field-1 {
@@ -144,12 +123,11 @@ input, select, textarea, button {
 
 /* 제출 버튼 */
 .complete-button {
-	position: relative;
-	width: 230px;
+	width: 200px;
 	height: 52px;
-	margin-top: 20px;
-	margin-left: auto;
-	background-color: #4caf50;
+	margin-top: 50px;
+	margin-left: 68%;
+	background-color: #1E2A7C;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
@@ -158,193 +136,3 @@ input, select, textarea, button {
 	cursor: pointer;
 }
 
-.main-container {
-	position: relative;
-	width: 897px;
-	height: 723px;
-	margin: 0 auto;
-}
-
-.close-button {
-	position: relative;
-	width: 20px;
-	height: 20px;
-	margin: 36px 0 0 823px;
-	background:
-		url("./assets/images/0caee8f3-1a85-4d4b-b5b6-847573292aa6.png")
-		no-repeat center;
-	background-size: 100% 100%;
-	z-index: 15;
-}
-
-.title {
-	display: block;
-	height: 30px;
-	color: #000000;
-	font-family: Inter, "var(--default-font-family)";
-	font-size: 30px;
-	font-weight: 600;
-	line-height: 30px;
-	text-align: left;
-	white-space: nowrap;
-	z-index: 14;
-}
-
-.form {
-	width: 690px;
-	height: 413px;
-	z-index: 2;
-	overflow: visible auto;
-	border-radius: 6px;
-}
-
-.task-name-input {
-	width: 690px;
-	height: 81px;
-	font-size: 0px;
-	z-index: 10;
-	overflow: visible auto;
-	border-radius: 6px;
-}
-
-
-
-.input {
-	width: 690px;
-	height: 50px;
-	top: 31px;
-	left: 0;
-	background: #ffffff;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	overflow: hidden;
-	border-radius: 6px;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-.placeholder {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 19.75%;
-	top: 60.49%;
-	left: 2.32%;
-	color: #505153;
-	font-family: Pretendard, "var(--default-font-family)";
-	font-size: 13px;
-	font-weight: 500;
-	line-height: 15.514px;
-	text-align: left;
-	white-space: nowrap;
-	letter-spacing: -0.52px;
-	z-index: 12;
-}
-
-.deadline-input {
-	width: 149px;
-	height: 66px;
-	margin: 38px 0 0 0;
-	font-size: 0px;
-	z-index: 6;
-	overflow: visible auto;
-	border-radius: 6px;
-}
-
-.deadline {
-	display: block;
-	height: 19px;
-	color: #000000;
-	font-family: "Abril Fatface", "var(--default-font-family)";
-	font-size: 20px;
-	font-weight: 400;
-	line-height: 19px;
-	text-align: left;
-	white-space: nowrap;
-	letter-spacing: -0.8px;
-	z-index: 9;
-}
-
-.input-field {
-	width: 149px;
-	height: 30px;
-	top: 36px;
-	left: 0;
-	background: #ffffff;
-	border: 1px solid rgba(170, 170, 170, 0.02);
-	z-index: 7;
-	overflow: hidden;
-	border-radius: 6px;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-.date-text {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 24.24%;
-	top: 65.15%;
-	left: 9.4%;
-	color: #505153;
-	font-size: 13px;
-	font-weight: 500;
-	line-height: 15.514px;
-	text-align: left;
-	white-space: nowrap;
-	letter-spacing: -0.52px;
-}
-
-.detail-input {
-	width: 690px;
-	height: 189px;
-	margin: 39px 0 0 0;
-	font-size: 0px;
-	z-index: 3;
-	overflow: visible auto;
-	border-radius: 6px;
-}
-
-.detail-text {
-	display: block;
-	height: 19px;
-	color: #000000;
-	font-family: Pretendard, "var(--default-font-family)";
-	font-size: 20px;
-	font-weight: 500;
-	line-height: 19px;
-	text-align: left;
-	white-space: nowrap;
-	letter-spacing: -0.8px;
-	z-index: 5;
-}
-
-.input-field-1 {
-	width: 690px;
-	height: 148px;
-	background: #ffffff;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	z-index: 4;
-	overflow: hidden;
-	border-radius: 6px;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-.complete-button {
-	width: 230px;
-	height: 52px;
-	background:
-		url("./assets/images/0e72ba53-6100-41a6-96e1-91c44914c54a.png")
-		no-repeat center;
-	background-size: cover;
-	z-index: 1;
-	border-radius: 10px;
-}
-
-.all {
-	width: 897px;
-	height: 723px;
-	top: 0;
-	left: 0;
-	background: #ffffff;
-	border: 1px solid rgba(170, 170, 170, 0.02);
-	border-radius: 15px;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-}
