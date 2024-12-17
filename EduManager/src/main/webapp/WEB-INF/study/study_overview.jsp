@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="<c:url value='/css/study_overview.css' />"
 	type="text/css">
 <title>EduManager</title>
+<script>
+	function submitLikeForm() {
+		document.getElementById("likeForm").submit(); // 폼을 제출하여 리다이렉트
+	}
+</script>
 </head>
 <body>
 	<div class="page">
@@ -22,8 +27,7 @@
 				</div>
 				<div class="overViewInfo">
 					<div class="overViewInfoText" id="studyGroupPlace">
-						<img src="<c:url value='/images/roomIcon.svg' />"
-							class="infoIcon" />000호
+						<img src="<c:url value='/images/roomIcon.svg' />" class="infoIcon" />000호
 					</div>
 					<div class="overViewInfoText" id="studyGroupTime">
 						<img src="<c:url value='/images/overViewTime.svg' />"
@@ -37,13 +41,28 @@
 
 				<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/studyGroup/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="groupId" value="${groupId}" /> <input
+								type="hidden" name="memberId" value="${curUserId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
-						<input type="button" class="applyButton" value="가입 요청 보내기">
+						<input type="button" class="applyButton" value="가입 요청하기">
 					</div>
 				</div>
 			</div>

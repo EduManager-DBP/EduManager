@@ -26,4 +26,21 @@ public class StudyGroupManager {
         return studyGroupDao.getStudyGroupsExcludingStudent(stuId);
     }
 
+    
+    public boolean isLikedByUser(String memberId, long studyGroupId) throws SQLException {
+        return studyGroupDao.isLikedByUser(memberId, studyGroupId);
+    }
+
+    // 좋아요 토글
+    public void toggleStudyGroupLike(String memberId, long studyGroupId) throws SQLException {
+        boolean isLiked = isLikedByUser(memberId, studyGroupId);
+        if (isLiked) {
+            // 좋아요가 있다면 삭제
+            studyGroupDao.removeLike(memberId, studyGroupId);
+        } else {
+            // 좋아요가 없다면 추가
+            studyGroupDao.addLike(memberId, studyGroupId);
+        }
+    }
+    
 }

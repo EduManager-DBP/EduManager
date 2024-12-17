@@ -10,6 +10,12 @@ import model.service.StudyGroupManager;
 
 public class ViewStudyGroupController implements Controller {
 
+    private final StudyGroupManager studyGroupManager;
+
+    public ViewStudyGroupController() {
+        this.studyGroupManager = StudyGroupManager.getInstance();  // 싱글톤 인스턴스 가져오기
+    }
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 로그인 여부 확인
@@ -19,7 +25,7 @@ public class ViewStudyGroupController implements Controller {
 
         // PathVariable을 사용하여 lectureId를 URL 경로에서 받도록 수정
         Long groupId = Long.parseLong(request.getParameter("groupId"));
-
+        String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
         // LectureManager를 통해 강의 정보 조회
         StudyGroupManager manager = StudyGroupManager.getInstance();
         StudyGroup group = manager.findStudyGroupById(groupId);
@@ -36,8 +42,13 @@ public class ViewStudyGroupController implements Controller {
 
         // 로그인한 사용자 ID를 request에 저장
         request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
+        request.setAttribute("groupId", groupId);
         request.setAttribute("groupName",  group.getName());
         request.setAttribute("description", group.getDescription());
+        
+        boolean isLiked = studyGroupManager.isLikedByUser(stuId, groupId); // 인스턴스를 통해 호출
+        System.out.println("그룹 ID: "+ isLiked );
+        request.setAttribute("isLiked", isLiked);
    
         // 강의 상세 페이지로 이동
         return "/study/study_overview.jsp";

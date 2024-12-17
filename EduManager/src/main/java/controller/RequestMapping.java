@@ -17,6 +17,7 @@ import controller.member.RegisterMemberController;
 import controller.member.RegisterTeacherController;
 import controller.member.RegisterStudentController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewStudyGroupController;
 
 
@@ -60,7 +61,8 @@ public class RequestMapping {
         
         mappings.put("/lecture/over-view", new ViewLectureController());
         mappings.put("/study/over-view", new ViewStudyGroupController());
-        
+        mappings.put("/studyGroup/like", new ToggleStudyGroupLikeController()); 
+
         mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
         
         //임시 테스트(은향)

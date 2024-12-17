@@ -279,38 +279,47 @@ private JDBCUtil jdbcUtil = null;
     }
     
     
-    public void toggleStudyGroupLike(String memberId, long studyGroupId) throws SQLException {
+    public boolean isLikedByUser(String memberId, long studyGroupId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM StudyGroupLike WHERE stuId = ? AND studyGroupId = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, studyGroupId});
+
+        ResultSet rs = jdbcUtil.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0; // 좋아요가 있으면 true, 없으면 false
+        }
+        return false;
+    }
+
+    // 좋아요 추가
+    public void addLike(String memberId, long studyGroupId) throws SQLException {
+        String sql = "INSERT INTO StudyGroupLike (studyLikeId, createAt, studyGroupId, stuId) "
+                     + "VALUES (SEQ_STUDY_GROUP_LIKE_ID.nextval, SYSDATE, ?, ?)";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGroupId, memberId});
         try {
-          
-            String checkSql = "SELECT COUNT(*) FROM StudyGroupLike WHERE studyGroupId = ? AND memberId = ?";
-            jdbcUtil.setSqlAndParameters(checkSql, new Object[]{studyGroupId, memberId});
-            
-            ResultSet rs = jdbcUtil.executeQuery();
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                
-                if (count > 0) {
-                  
-                    String deleteSql = "DELETE FROM StudyGroupLike WHERE studyGroupId = ? AND memberId = ?";
-                    jdbcUtil.setSqlAndParameters(deleteSql, new Object[]{studyGroupId, memberId});
-                    jdbcUtil.executeUpdate();
-                } else {
-                    // 좋아요가 없다면 추가
-                    String insertSql = "INSERT INTO StudyGroupLike (studyLikeId, createAt, studyGroupId, memberId) "
-                                        + "VALUES (SEQ_STUDY_GROUP_LIKE_ID.nextval, SYSDATE, ?, ?)";
-                    jdbcUtil.setSqlAndParameters(insertSql, new Object[]{studyGroupId, memberId});
-                    jdbcUtil.executeUpdate();
-                }
-            }
+            jdbcUtil.executeUpdate();
         } catch (Exception ex) {
-            jdbcUtil.rollback();  
+            jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
-            jdbcUtil.commit();  
-            jdbcUtil.close(); 
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
         }
     }
-    
+
+    // 좋아요 삭제
+    public void removeLike(String memberId, long studyGroupId) throws SQLException {
+        String sql = "DELETE FROM StudyGroupLike WHERE studyGroupId = ? AND stuId = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGroupId, memberId});
+        try {
+            jdbcUtil.executeUpdate();
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
+        }
+    }
     //리뷰 작성을 위한 스터디 그룹 소속인지 아닌지 확인
     private boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
         String sql = "SELECT COUNT(*) FROM StudyGroupApplication WHERE studyGroupId = ? AND memberId = ? AND status = '수락'";
