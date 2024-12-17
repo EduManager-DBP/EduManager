@@ -18,7 +18,7 @@
 				<div class="task-name-input">
 					<label for="assignment-name" class="assignment-name">과제 명</label> 
 					<input type="text" name="assignmentName"
-						placeholder="예: 정처기 4인팟" class="input" required />
+						placeholder="과제" class="input" required />
 				</div>
 				<!-- 마감일 -->
 				<div class="deadline-input">
