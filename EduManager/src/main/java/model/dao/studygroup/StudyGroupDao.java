@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.JDBCUtil;
-import model.domain.StudyGroup;
-import model.domain.StudyGroupApplication;
+import model.domain.studyGroup.StudyGroup;
+import model.domain.studyGroup.StudyGroupApplication;
+
 
 
 public class StudyGroupDao {
