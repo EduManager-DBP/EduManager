@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
 	type="text/css">
-
+<title>스터디 상세보기</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;900&amp;display=swap" />
 <link rel="stylesheet"
@@ -173,7 +173,7 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">공지사항</div>
-						<div class="more-link">더보기</div>
+						<a href="<c:url value='/study/listNotice' />" class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
 						<li>아주아주아주아주아주아주 중요한 공지</li>
@@ -187,7 +187,7 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">과제</div>
-						<div class="more-link">더보기</div>
+						<a href="<c:url value='/study/listAssignment' />" class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
 						<li>토익 필수 영문법 23~36p</li>
