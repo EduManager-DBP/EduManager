@@ -15,7 +15,8 @@
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" />
 </head>
 <body>
-	<div><jsp:include page="../navigation/navigation.jsp" /></div>
+	<div style="width: 90%; justify-self: center;"><jsp:include
+			page="../navigation/navigation.jsp" /></div>
 	<div class="study-container">
 		<div class="study-detail">
 			<h2 class="study-title">강의 상세보기</h2>
@@ -164,7 +165,8 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">과제</div>
-						<a href="<c:url value='/study/listAssignment' />" class="more-link">더보기</a>
+						<a href="<c:url value='/study/listAssignment' />"
+							class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
 						<li>토익 필수 영문법 23~36p</li>

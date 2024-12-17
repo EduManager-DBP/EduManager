@@ -1,9 +1,22 @@
 body, html {
-	height: 100%;
-	width: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: 'Pretendard';
+	height: 100%;
+	font-family: 'Pretendard', sans-serif;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+.page {
+	width: 1300px;
+	margin: 0 auto;
 }
 
 a {
@@ -22,12 +35,12 @@ a {
 }
 
 .calendarTable {
-	width: 90%;
-	margin-top: 20px;
+	width: 90%; margin-top : 20px;
 	border-collapse: collapse;
 	/* To remove gaps between table borders */
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-	border-collapse: collapse; /* Shadow effect */
+	border-collapse: collapse;
+	margin-top: 20px; /* Shadow effect */
 }
 
 .calendarTable th, .calendarTable td {
@@ -157,8 +170,7 @@ a {
 }
 
 .team-members-box {
-	width: 60%;
-	height: 222px;
+	width: 60%; height : 222px;
 	margin-top: 40px;
 	background: #ffffff;
 	border: 1px solid rgba(170, 170, 170, 0.02);
@@ -168,6 +180,7 @@ a {
 	z-index: 1;
 	justify-self: center;
 	background: #ffffff;
+	height: 222px;
 }
 
 .team-header {
@@ -394,8 +407,6 @@ input, select, textarea, button {
 	white-space: nowrap;
 }
 
-
-
 .schedule-add-button {
 	width: 30%;
 	height: 30px; /* 버튼의 컨테이너 높이 */
@@ -407,7 +418,6 @@ input, select, textarea, button {
 	height: 20px; /* 세로 15px */
 	margin-left: 5%;
 	cursor: pointer;
-	
 }
 
 .notice-add-button {
@@ -493,14 +503,13 @@ input, select, textarea, button {
 	font-weight: 600;
 	line-height: 17.9px;
 	text-align: left;
-    cursor: pointer;
-        transition: color 0.2s, filter 0.2s; /* 부드러운 색상 변화 효과 */
-    
+	cursor: pointer;
+	transition: color 0.2s, filter 0.2s; /* 부드러운 색상 변화 효과 */
 }
 
 .more-link:hover {
-    color: #163580; /* 조금 더 어두운 색상 */
-    filter: brightness(90%); /* 밝기를 90%로 조정해 어두워지게 */
+	color: #163580; /* 조금 더 어두운 색상 */
+	filter: brightness(90%); /* 밝기를 90%로 조정해 어두워지게 */
 }
 
 .time-ago {
