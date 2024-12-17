@@ -63,14 +63,14 @@ li {
 }
 
 .leaderRoom {
-  display: flex;
+  display:flex;
   align-items: center;
   flex-direction: column;
-  padding: 42px;
+  padding: 20px;
 }
 
 .studyRoom {
-  padding: 42px;
+  padding: 20px;
 }
 .leaderRoomBtn {
   margin-top: 20px;
@@ -130,46 +130,58 @@ li {
   margin-right: 8px;
 }
 
-
 .groupGallery {
-	width: 350px;
-	height: 280px;
-	border-radius: 30px;
-	padding: 0px;
-	cursor: pointer;
-	overflow: hidden;
-	position: relative;
-	border: 1px solid white; /* 테두리를 제거 */
-	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1); /* 그림자 추가 */
+    width: 100%; /* 그리드에서 전체 너비를 채우도록 설정 */
+    height: 280px;
+    border-radius: 30px;
+    padding: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid white; /* 테두리를 제거 */
+    box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1); /* 그림자 추가 */
 }
 
 .groupGallery img {
-	width: 100%; /* 부모의 너비를 가득 채우도록 설정 */
-	height: 75%; /* 비율을 유지하면서 높이 설정 */
-	object-fit: cover; /* 이미지가 부모 안에 맞게 조정되도록 설정 */
-	display: block; /* 이미지 하단 여백 제거 */
+    width: 100%; /* 부모의 너비를 가득 채우도록 설정 */
+    height: 75%; /* 비율을 유지하면서 높이 설정 */
+    object-fit: cover; /* 이미지가 부모 안에 맞게 조정되도록 설정 */
+    display: block; /* 이미지 하단 여백 제거 */
 }
 
 .groupGalleryTitle {
-	font-size: 20px;
-	font-weight: 600;
-	padding-left: 20px;
-	margin-top: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 20px;
+    margin-top: 8px;
 }
 
 .groupGalleryCategory {
-	display: inline-block;
-	font-size: 11px;
-	margin-left: 20px;
-	margin-top: 8px;
-	padding: 3px 5px;
-	background-color: lightpink;
-	border-radius: 20px;
+    display: inline-block;
+    font-size: 11px;
+    margin-left: 20px;
+    margin-top: 8px;
+    padding: 3px 5px;
+    background-color: lightpink;
+    border-radius: 20px;
 }
 
 .class {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 42px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3열 그리드 */
+    gap: 20px; /* 요소 간의 간격 */
+    padding: 42px;
+    justify-items: center; /* 그리드 아이템들을 중앙 정렬 */
+}
+
+@media (max-width: 1024px) {
+    .class {
+        grid-template-columns: repeat(2, 1fr); /* 화면 크기가 작아지면 2열로 변경 */
+    }
+}
+
+@media (max-width: 768px) {
+    .class {
+        grid-template-columns: 1fr; /* 화면 크기가 더 작아지면 1열로 변경 */
+    }
 }
