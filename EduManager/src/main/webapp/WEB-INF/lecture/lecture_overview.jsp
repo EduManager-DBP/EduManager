@@ -35,13 +35,27 @@
 			<div class="section2">
 				<div id="lectureOverviewTitle">${lectureName}</div>
 				<div id="lectureOverviewDescription">${description}</div>
-
-				<div class="section3">
+					<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg"' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg"' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/lecture/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="lectureId" value="${lectureId}" /> 
+							<input type="hidden" name="memberId" value="${curUserId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
 						<input type="button" class="applyButton" value="수강신청하기">

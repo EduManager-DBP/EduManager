@@ -9,6 +9,7 @@ import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
 import controller.lecture.ExcludingLectureAndStudyGroupController;
+import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -60,6 +61,8 @@ public class RequestMapping {
         mappings.put("/lecture/update", new UpdateLectureController());
         
         mappings.put("/lecture/over-view", new ViewLectureController());
+        mappings.put("/lecture/like", new ToggleLectureLikeController()); 
+
         mappings.put("/study/over-view", new ViewStudyGroupController());
         mappings.put("/studyGroup/like", new ToggleStudyGroupLikeController()); 
 

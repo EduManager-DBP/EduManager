@@ -47,7 +47,7 @@ public class ViewStudyGroupController implements Controller {
         request.setAttribute("description", group.getDescription());
         
         boolean isLiked = studyGroupManager.isLikedByUser(stuId, groupId); // 인스턴스를 통해 호출
-        System.out.println("그룹 ID: "+ isLiked );
+        System.out.println("좋아요 여부: "+ isLiked );
         request.setAttribute("isLiked", isLiked);
    
         // 강의 상세 페이지로 이동

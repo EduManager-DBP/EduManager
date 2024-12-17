@@ -6,11 +6,6 @@
 <link rel="stylesheet" href="<c:url value='/css/study_overview.css' />"
 	type="text/css">
 <title>EduManager</title>
-<script>
-	function submitLikeForm() {
-		document.getElementById("likeForm").submit(); // 폼을 제출하여 리다이렉트
-	}
-</script>
 </head>
 <body>
 	<div class="page">
