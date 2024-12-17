@@ -6,68 +6,70 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel=stylesheet href="<c:url value='/css/study_details.css' />"
+<link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
 	type="text/css">
 
 <link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;900&display=swap" />
+	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;900&amp;display=swap" />
 <link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" />
 </head>
 <body>
-	<div class="main-container">
-		<jsp:include page="../navigation/navigation.jsp" />
-		<span class="inform">
-			<section class="study-detail">
-				<h2 class="study-title">스터디 상세보기</h2>
-				<div class="study-info-box"></div>
-				<div class="team-members-box">
-					<div class="team-header">
-						<div class="team-icon"></div>
-						<span class="team-count">팀원들 (6/10)</span>
-					</div>
-					<ul class="member-list">
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">조은향</span>
-						</li>
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">김희선</span>
-						</li>
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">손다현</span>
-						</li>
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">김지은</span>
-						</li>
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">김솜솜</span>
-						</li>
-						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">양갱이</span>
-						</li>
-					</ul>
+	<div><jsp:include page="../navigation/navigation.jsp" /></div>
+	<div class="study-container">
+		<div class="study-detail">
+			<h2 class="study-title">스터디 상세보기</h2>
+			<div class="study-info-box"></div>
+			<table class="study-location">
+				<tr class="icon">
+					<td class="location-icon"></td>
+					<td class="location-inform">301호</td>
+				</tr>
+				<tr class="icon">
+					<td class="time-icon"></td>
+					<td class="location-inform">수요일 6시 반</td>
+				</tr>
+			</table>
+			<div class="team-members-box">
+				<div class="team-header">
+					<div class="team-icon"></div>
+					<span class="team-count">팀원들 (6/10)</span>
 				</div>
-				<div class="study-location">
-					<div class="location-icon"></div>
-					<span>301호</span>
-				</div>
-				<div class="study-time">
-					<div class="time-icon"></div>
-					<span>수요일 6시 반</span>
-				</div>
-			</section>
+				<ul class="member-list">
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">조은향</span>
+					</li>
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">김희선</span>
+					</li>
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">손다현</span>
+					</li>
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">김지은</span>
+					</li>
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">김솜솜</span>
+					</li>
+					<li class="member-item">
+						<div class="member-icon"></div> <span class="member-name">양갱이</span>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-		</span> 
-		<span class="mainInform">
+		<div class="mainInform">
 			<div class="title">단기간 토익 점수 상승을 위한 스터디</div>
-			<table>
-				<div id="calendarHeader">
-					<span class="month"> <img
-						src="<c:url value='/images/previousMonth.svg' />"
-						id="previousMonthIcon" /> <span>11</span> <img
-						src="<c:url value='/images/nextMonth.svg'  />" id="nextMonthIcon" />
-					</span> <span class="year">2024</span>
-				</div>
+			<div id="calendarHeader">
+				<span class="month"> <img
+					src="<c:url value='/images/previousMonth.svg' />"
+					id="previousMonthIcon" alt="" /> <span>11</span> <img
+					src="<c:url value='/images/nextMonth.svg'  />" id="nextMonthIcon"
+					alt="" />
+				</span> <span class="year">2024</span>
+			</div>
+			<table class="calendarTable">
+
 				<thead>
 					<th class="sunday">일</th>
 					<th>월</th>
@@ -75,7 +77,7 @@
 					<th>수</th>
 					<th>목</th>
 					<th>금</th>
-					<th>토</th>
+					<th>토 </th>
 				</thead>
 				<tbody>
 					<tr>
@@ -126,64 +128,77 @@
 				</tbody>
 			</table>
 			<div class="main-container">
-      <div class="rectangle"></div>
-      <div class="schedule">
-        <span class="schedule-1">일정 </span
-        ><span class="emergency-rescue-operation"
-          >비상비상 발등튀김 구출작전</span
-        >
-        <div class="add-button"></div>
-      </div>
-      <div class="notice">
-        <span class="notice-item">공지 사항</span
-        ><span class="important-notice">아주 중요한 공지</span>
-        <div class="add-button-2"></div>
-      </div>
-      <div class="assignment">
-        <span class="assignment-3">과제</span
-        ><span class="toeic-grammar">토익 필수 영문법 23~36p</span
-        ><span class="toeic-vocabulary">토익 필수 영단어 Day7~9 암기</span>
-        <div class="add-button-4">
-          <div class="basil-plus-solid"></div>
-          <div class="rectangle-5"></div>
-        </div>
-      </div>
-    </div>
-			<div class="flex-row">
-				<div class="rectangle-6c">
-					<div class="flex-column-fc">
-						<span class="announcement">공지사항</span><span
-							class="very-important-notice">아주아주아주아주아주아주 중요한 공지</span><span
-							class="very-important-notice-6d">아주아주아주아주아주아주 중요한 공지</span>
+				<div class="rectangle-1">
+					<div class="schedule">
+						<div class="schedule_title">일정</div>
+						<div class="schedule_content">
+							<li>content</li>
+						</div>
 					</div>
-					<div class="flex-column-df">
-						<div class="ant-design-notification-outlined"></div>
-						<div class="mdi-dot"></div>
-						<div class="mdi-dot-6e"></div>
+					<div class="notice">
+						<div class="notice_title">공지 사항</div>
+						<div class="notice_content">
+							<li>content</li>
+						</div>
+					</div>
+					<div class="assignment">
+						<div class="assignment_title">과제</div>
+						<div class="assignment_content">
+							<li>content</li>
+						</div>
+					</div>
+					<div class="schedule-add-button">
+						<a href="<c:url value='/study/addSchedule' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
+					</div>
+
+					<div class="notice-add-button">
+						<a href="<c:url value='/study/addNotice' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
+					</div>
+
+					<div class="assignment-add-button">
+						<a href="<c:url value='/study/addAssignment' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
 					</div>
 				</div>
-				<span class="see-more">더보기</span><span class="text-58">3시간 전</span><span
-					class="text-59">3시간 전</span>
 			</div>
-			<div class="flex-row-ec">
-				<div class="rectangle-6f">
-					<div class="flex-column-def">
-						<span class="assignment-70">과제</span><span
-							class="toeic-grammar-page-23-36-71">토익 필수 영문법 23~36p</span><span
-							class="toeic-vocabulary-day-7-9-72">토익 필수 영단어 Day7~9 암기</span><span
-							class="mock-test-wrong-answer-note">제 n회 모의고사 오답노트</span>
-					</div>
+			<div class="rectangle">
+				<div class="flex-column-fc">
 					<div class="flex-column">
-						<div class="tabler-book"></div>
-						<div class="mdi-dot-73"></div>
-						<div class="mdi-dot-74"></div>
-						<div class="mdi-dot-75"></div>
+						<div class="notice_main">공지사항</div>
+						<div class="more-link">더보기</div>
+					</div>
+					<div class="important-notice">
+						<li>아주아주아주아주아주아주 중요한 공지</li>
+					</div>
+					<div class="important-notice">
+						<li>아주아주아주아주아주아주 중요한 공지</li>
 					</div>
 				</div>
-				<span class="see-more-76">더보기</span><span class="d-day">D-Day</span><span
-					class="d-day-77">D-Day</span><span class="d-3">D-3</span>
 			</div>
-		</span>
+			<div class="rectangle">
+				<div class="flex-column-fc">
+					<div class="flex-column">
+						<div class="notice_main">과제</div>
+						<div class="more-link">더보기</div>
+					</div>
+					<div class="important-notice">
+						<li>토익 필수 영문법 23~36p</li>
+					</div>
+					<div class="important-notice">
+						<li>토익 필수 영문법 23~36p</li>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>
