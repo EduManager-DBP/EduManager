@@ -1,23 +1,20 @@
 package model.service;
 
 import java.sql.SQLException;
-import model.dao.lecture.LectureDao;
-import model.dao.lecture.LectureScheduleDao;
-import model.dao.studygroup.StudyGroupDAO;
+import model.dao.studygroup.StudyGroupDao;
 import model.dao.studygroup.StudyScheduleDao;
 import model.domain.Schedule;
-import model.domain.lecture.Lecture;
 import model.domain.studyGroup.StudyGroup;
 
 import java.util.List;
 
 public class StudyManager {
     private static StudyManager instance = new StudyManager();
-    private StudyGroupDAO studyDao;
+    private StudyGroupDao studyDao;
     private StudyScheduleDao scheduleDao;
     
     private StudyManager() {
-        studyDao = new StudyGroupDAO();
+        studyDao = new StudyGroupDao();
         scheduleDao = new StudyScheduleDao();
     }
 

@@ -4,7 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.dao.studygroup.StudyGroupDao;
-import model.domain.StudyGroup;
+import model.domain.studyGroup.StudyGroup;
+
 
 public class StudyGroupManager {
     

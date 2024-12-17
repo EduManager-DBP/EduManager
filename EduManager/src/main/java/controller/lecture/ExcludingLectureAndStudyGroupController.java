@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
-import model.domain.StudyGroup;
 import model.domain.lecture.Lecture;
+import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
 

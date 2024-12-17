@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
-import model.domain.StudyGroup;
+import model.domain.studyGroup.StudyGroup;
 import model.service.StudyGroupManager;
 
 public class ViewStudyGroupController implements Controller {
