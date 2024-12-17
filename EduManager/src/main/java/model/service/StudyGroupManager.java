@@ -30,6 +30,11 @@ public class StudyGroupManager {
     public List<StudyGroup> StudyGroupListByLeader(String stuId) throws SQLException {
         return studyGroupDao.getStudyGroupListByLeader(stuId);
     }
+    
+    public List<StudyGroup> StudyGroupListByMember(String stuId) throws SQLException {
+        return studyGroupDao.getStudyGroupListByMember(stuId);
+    }
+    
     public boolean isLikedByUser(String memberId, long studyGroupId) throws SQLException {
         return studyGroupDao.isLikedByUser(memberId, studyGroupId);
     }

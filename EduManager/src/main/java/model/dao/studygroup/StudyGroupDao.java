@@ -232,7 +232,7 @@ private JDBCUtil jdbcUtil = null;
         String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category " +
                      "FROM StudyGroup sg " +
                      "JOIN StudyGroupApplication sga ON sg.studyGroupId = sga.studyGroupId " +
-                     "WHERE sga.memberId = ? AND sga.status = '수락' AND sg.leaderId != ?";
+                     "WHERE sga.stuId = ? AND sga.status = '수락' AND sg.leaderId != ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, memberId}); // memberId를 두 번 파라미터로 설정
         ResultSet rs = jdbcUtil.executeQuery();
