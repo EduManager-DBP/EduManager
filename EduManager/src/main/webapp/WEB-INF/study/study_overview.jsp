@@ -32,8 +32,8 @@
 				</div>
 			</div>
 			<div class="section2">
-				<div id="groupOverviewTitle">스터디그룹 명</div>
-				<div id="groupOverviewDescription">스터디 그룹 소개</div>
+				<div id="groupOverviewTitle">${groupName}</div>
+				<div id="groupOverviewDescription">${description}</div>
 
 				<div class="section3">
 					<div class="likeButtonContainer">

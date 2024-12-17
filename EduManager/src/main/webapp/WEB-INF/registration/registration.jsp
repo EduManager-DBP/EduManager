@@ -57,9 +57,12 @@
     <div class="class"> 
         <c:forEach var="group" items="${lectureList}">
             <div class="groupGallery">
+            <a href="<c:url value='/lecture/over-view'> <c:param name='groupId' value='${group.lectureId}'/>
+			 	 </c:url>">
                 <img src="<c:url value='/images/white.png' />" alt="Group Image">
                 <div class="groupGalleryTitle">${group.name}</div>
                 <div class="groupGalleryCategory">${group.category}</div>
+              </a>
             </div>
         </c:forEach>
     </div>
@@ -70,9 +73,12 @@
     <div class="class">
         <c:forEach var="studyGroup" items="${studyGroupList}">
             <div class="groupGallery">
+            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+			 	 </c:url>">
                 <img src="<c:url value='/images/white.png' />">
                 <div class="groupGalleryTitle">${studyGroup.name}</div>
                 <div class="groupGalleryCategory">${studyGroup.category}</div>
+              </a>
             </div>
         </c:forEach>
     </div>

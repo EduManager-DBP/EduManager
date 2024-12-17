@@ -10,10 +10,9 @@ ul {
 }
 
 a {
-	text-decoration: none;
-	outline: none;
+    text-decoration: none;
+    outline: none;
 }
-
 .page {
 	width: 1300px;
 	margin: 0 auto;

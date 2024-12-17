@@ -17,6 +17,7 @@ import controller.member.RegisterMemberController;
 import controller.member.RegisterTeacherController;
 import controller.member.RegisterStudentController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.ViewStudyGroupController;
 
 
 //import controller.user.*;
@@ -56,8 +57,9 @@ public class RequestMapping {
         
         //강의 수정: get->page 띄우기 post:등록 요청
         mappings.put("/lecture/update", new UpdateLectureController());
-
+        
         mappings.put("/lecture/over-view", new ViewLectureController());
+        mappings.put("/study/over-view", new ViewStudyGroupController());
         
         mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
         
@@ -68,7 +70,7 @@ public class RequestMapping {
         mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
 
      
-        mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));
+       
         mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
         mappings.put("/study/list", new ForwardController("/study/my_study_list.jsp"));
