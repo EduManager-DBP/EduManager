@@ -43,8 +43,7 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
                              ", 카테고리: " + studyGroup.getCategory());
       }
       
-      // 강의 목록을 request 객체에 저장
-      request.setAttribute("curUserId", stuId);
+
       request.setAttribute("lectureList", lectureList);
       request.setAttribute("studyGroupList", studyGroupList);
 
