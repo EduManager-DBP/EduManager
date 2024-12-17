@@ -8,14 +8,15 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.domain.member.Member;
-import model.service.ExistingMemberException;
-import model.service.MemberManager;
+import model.service.member.ExistingMemberException;
+import model.service.member.MemberManager;
 
 public class RegisterMemberController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(RegisterMemberController.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		if (request.getMethod().equals("GET")) {
 			// GET request: 역할 선택 form 요청
 			log.debug("RegisterForm Request");

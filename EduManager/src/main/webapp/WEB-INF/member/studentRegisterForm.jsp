@@ -20,7 +20,7 @@
           <div id="form-container">
               <div id="sign-up-container">
                   <h3>학생 회원가입</h3>
-                  <form name="form" method="POST" action="<c:url value='/student/register' />">
+                  <form name="form" method="POST" action="<c:url value='/student/register1' />">
                       <div class="input-group">
                       	<label for="id">아이디</label>
                 			<input type="text" name="id" id="id" placeholder="id">
@@ -38,7 +38,7 @@
                       <input type="tel" name="phone" id="phone" placeholder="PhoneNumber" pattern="[0-9]{3}-[0-9]{*}-[0-9]{*}" required>
                      
                       <div id="form-controls">
-                          <button type="button" id="nextBt">다음</button>
+                          <button type="submit" id="nextBt">다음</button>
                       </div>
                   </form>
               </div>

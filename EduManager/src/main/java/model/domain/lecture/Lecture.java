@@ -32,7 +32,7 @@ public class Lecture {
 		this.level = level;
 		this.description = description;
 		this.createAt = createAt;
-		this.setTeacherId(teacherId);
+		this.teacherId = teacherId;
 		this.setTeacherName(teacherName);
 		this.lectureRoom = lectureRoom;
 		this.phone = phone;
@@ -49,7 +49,7 @@ public class Lecture {
 		this.capacity = capacity;
 		this.level = level;
 		this.description = description;
-		this.setTeacherId(teacherId);
+		this.teacherId = teacherId;
 		this.lectureRoom = lectureRoom;
 	}
 	//위에거에서 phone 추가
@@ -63,7 +63,7 @@ public class Lecture {
 		this.capacity = capacity;
 		this.level = level;
 		this.description = description;
-		this.setTeacherId(teacherId);
+		this.teacherId = teacherId;
 		this.lectureRoom = lectureRoom;
 		this.phone = phone;
 	}

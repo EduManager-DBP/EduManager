@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.service.MemberManager;
+import model.service.member.MemberManager;
+import controller.member.MemberSessionUtils;
 
 public class LoginController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
@@ -24,7 +26,8 @@ public class LoginController implements Controller {
 			session.setAttribute(MemberSessionUtils.USER_SESSION_KEY, id);
 			// 현재 로그인 한 사용자
 			request.setAttribute("curUserId", manager.findName(id));
-			System.out.println(manager.findName(id));
+			session.setAttribute("curUserId", manager.findName(id));
+
 			return "redirect:/main/main";
 		} catch (Exception e) {
 			/*

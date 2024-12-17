@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/study_make.css" />
 <title>EduManager</title>
-<script src="${pageContext.request.contextPath}/js/study_make.js"></script>
+<script src="${pageContext.request.contextPath}/js/updateLecture.js"></script>
 <script>
 	// 서버에서 전달된 category 값을 전역 변수로 정의
 	const selectedCategory = "${lecture.category}";
@@ -39,31 +39,30 @@
 						value="${lecture.description}" />
 				</section>
 				<div style="display: flex;">
-			<section class="study" style="width: 20%;">
-					<span>강사명</span><br /> <input type="text" name="teacherName"
-						value="${lecture.teacherName}" readonly
-				 />
-				</section>
-								<section class="study" style="width: 20%;">
-					<span>강의실</span><br /> <input type="text" name="lectureRoom"
-						value="${lecture.lectureRoom}"
-						 />
-				</section>
-				<section class="study"style="width: 20%;">
-					<span>모집인원</span><span class="required">*</span> <br /> <input
-						type="number" name="capacity" required min="1" max="99"
-						value="${lecture.capacity}" />
-				</section>
+					<section class="study" style="width: 20%;">
+						<span>강사명</span><br /> <input type="text" name="teacherName"
+							value="${lecture.teacherName}" readonly />
+					</section>
+					<section class="study" style="width: 20%;">
+						<span>강의실</span><br /> <input type="text" name="lectureRoom"
+							value="${lecture.lectureRoom}" />
+					</section>
+					<section class="study" style="width: 20%;">
+						<span>모집인원</span><span class="required">*</span> <br /> <input
+							type="number" name="capacity" required min="1" max="99"
+							value="${lecture.capacity}" />
+					</section>
 
-				<section class="study"style="width: 20%;">
-					<span>난이도</span><br /> <select class="small" name="level" style="width:100%;">
-						<option value="1" ${lecture.level == 1 ? 'selected' : ''}>초급</option>
-						<option value="2" ${lecture.level == 2 ? 'selected' : ''}>중급</option>
-						<option value="3" ${lecture.level == 3 ? 'selected' : ''}>고급</option>
-					</select>
-				</section>	
+					<section class="study" style="width: 20%;">
+						<span>난이도</span><br /> <select class="small" name="level"
+							style="width: 100%;">
+							<option value="1" ${lecture.level == 1 ? 'selected' : ''}>초급</option>
+							<option value="2" ${lecture.level == 2 ? 'selected' : ''}>중급</option>
+							<option value="3" ${lecture.level == 3 ? 'selected' : ''}>고급</option>
+						</select>
+					</section>
 				</div>
-				
+
 
 				<section class="study">
 					<span>카테고리</span><br />
@@ -84,22 +83,36 @@
 				<!-- 정기 수업 일정은 일단 요청 따로 처리 -->
 				<section id="schedule" class="study" style="display: inline-block">
 					<span>정기 수업 일정</span><span class="required">*</span><br />
-					<article class="schedule">
-						<span>요일</span> <select class="small" name="day" required>
-							<option value="월">월</option>
-							<option value="화">화</option>
-							<option value="수">수</option>
-							<option value="목">목</option>
-							<option value="금">금</option>
-							<option value="토">토</option>
-							<option value="일">일</option>
-						</select> <span>시간</span> <input type="time" /> ~ <input type="time" />
-						<button class="delete_btn" onClick="deleteSchedule(this)">삭제</button>
-					</article>
-					<button id="plus_btn" onClick="addSchedule()">+</button>
+					<c:forEach var="schedule" items="${scheduleList}"
+						varStatus="status">
+						<article class="schedule">
+							<span>요일</span> <select class="small"
+								name="schedule[${status.index}][day]" required>
+								<option value="월" ${schedule.dayOfWeek == '월' ? 'selected' : ''}>월</option>
+								<option value="화" ${schedule.dayOfWeek == '화' ? 'selected' : ''}>화</option>
+								<option value="수" ${schedule.dayOfWeek == '수' ? 'selected' : ''}>수</option>
+								<option value="목" ${schedule.dayOfWeek == '목' ? 'selected' : ''}>목</option>
+								<option value="금" ${schedule.dayOfWeek == '금' ? 'selected' : ''}>금</option>
+								<option value="토" ${schedule.dayOfWeek == '토' ? 'selected' : ''}>토</option>
+								<option value="일" ${schedule.dayOfWeek == '일' ? 'selected' : ''}>일</option>
+							</select> <span>시간</span> <input type="time"
+								name="schedule[${status.index}][startTime]"
+								value="${schedule.startTime}" required/> ~ <input type="time"
+								name="schedule[${status.index}][endTime]"
+								value="${schedule.endTime}" required />
+							<button type="button" class="delete_btn"
+								onClick="deleteSchedule(this)">삭제</button>
+							<input id="scheduleId" type="hidden"
+								value="${schedule.scheduleId}" name="schedule[${status.index}][scheduleId]">
+						</article>
+					</c:forEach>
+					<button type="button" id="plus_btn" onClick="addSchedule()">+</button>
 				</section>
 
 				<section>
+					<input id="scheduleCountInput" type="hidden"
+						value="${scheduleCount}" name="scheduleCount">
+
 					<button id="submit">강의 정보 수정하기</button>
 				</section>
 			</form>

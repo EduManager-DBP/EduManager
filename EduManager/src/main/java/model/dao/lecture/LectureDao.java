@@ -28,14 +28,19 @@ public class LectureDao {
 
         jdbcUtil.setSqlAndParameters(query.toString(), param); // JDBCUtil에 질의문과 파라미터 설정
 
+        String key[]={"lectureId"};  // PK 컬럼(들)의 이름 배열       
         try {
-            result = jdbcUtil.executeUpdate();
-		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
-		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // 생성된 PK 값
-		   		lecture.setLectureId(generatedKey); 	// id필드에 저장  
-		   	}
-		   	return lecture;
+            result = jdbcUtil.executeUpdate(key);
+            if (result > 0) {
+            	ResultSet rs = jdbcUtil.getGeneratedKeys();
+    		   	if(rs.next()) {
+    		   		long generatedKey = rs.getLong(1);   // 생성된 PK 값
+    		   		lecture.setLectureId(generatedKey); 	// id필드에 저장  
+    		   	}
+    		   	return lecture;
+            }
+            
+            
         } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();

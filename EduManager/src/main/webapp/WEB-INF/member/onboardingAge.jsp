@@ -19,7 +19,7 @@
 	</header>
 	<!-- 연령 선택 -->
 	<form id="ageForm" class="container" method="POST"
-		action="<c:url value='/onboarding/category'/>">
+		action="<c:url value='/student/register2'/>">
 		<div style="text-align: center; height: 100px">
 			<div class="title">연령대를 선택해주세요</div>
 			<div style="color: #A6A9AF; height: 20px; margin-top: 20px;"></div>
@@ -38,5 +38,6 @@
 		<!-- 다음 버튼 -->
 		<button type="submit" class="styled-button">다음</button>
 	</form>
+	
 </body>
 </html>
