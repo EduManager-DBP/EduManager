@@ -94,17 +94,28 @@ input, select, textarea, button {
 }
 
 /* 제출 버튼 */
+.button-container {
+	display: block;
+    width: 100%;
+    height: 50px;
+    justify-items: center;
+    margin-top: 20px;
+}
 .complete-button {
-	width: 200px;
-	height: 52px;
-	margin-top: 50px;
-	margin-left: 68%;
-	background-color: #1E2A7C;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	border: none;
-	border-radius: 10px;
-	cursor: pointer;
+    display: block;
+    width: 200px;
+    height: 50px;
+    background-color: #1E2A7C;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.complete-button:hover {
+    background-color: #163580;
 }
 

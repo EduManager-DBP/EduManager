@@ -34,7 +34,9 @@
 				</div>
 			</div>
 			<!-- 제출 버튼 -->
-			<button type="submit" class="complete-button">제출</button>
+			<div class="button-container">
+				<button type="submit" class="complete-button">제출</button>
+			</div>
 		</form>
 	</div>
 </body>
