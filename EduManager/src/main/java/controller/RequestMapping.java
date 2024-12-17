@@ -68,6 +68,8 @@ public class RequestMapping {
 		mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
 		mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
 		mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
+		mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
+		mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
 
 		// 강의 등록 : get->page 띄우기 post:등록 요청
 		mappings.put("/lecture/create", new CreateLectureController());

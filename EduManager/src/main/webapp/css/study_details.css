@@ -491,6 +491,14 @@ input, select, textarea, button {
 	font-weight: 600;
 	line-height: 17.9px;
 	text-align: left;
+    cursor: pointer;
+        transition: color 0.2s, filter 0.2s; /* 부드러운 색상 변화 효과 */
+    
+}
+
+.more-link:hover {
+    color: #163580; /* 조금 더 어두운 색상 */
+    filter: brightness(90%); /* 밝기를 90%로 조정해 어두워지게 */
 }
 
 .time-ago {
