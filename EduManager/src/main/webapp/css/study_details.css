@@ -22,6 +22,7 @@ a {
 }
 
 .calendarTable {
+	width: 90%;
 	margin-top: 20px;
 	border-collapse: collapse;
 	/* To remove gaps between table borders */
@@ -144,8 +145,8 @@ a {
 }
 
 .study-info-box {
-	width: 200px;
-	height: 150px;
+	width: 60%;
+	height: 300px;
 	margin-top: 20px;
 	background: #ffffff;
 	border: 1px solid rgba(170, 170, 170, 0.02);
@@ -156,6 +157,7 @@ a {
 }
 
 .team-members-box {
+	width: 50%;
 	height: 222px;
 	margin-top: 40px;
 	background: #ffffff;
@@ -179,7 +181,7 @@ a {
 }
 
 .team-icon {
-	width: 30px;
+	width: 5%;
 	height: 14.308px;
 	background:
 		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/e035bd1d-2c2f-437d-8157-920f9df60b7c.png)
@@ -278,7 +280,7 @@ input, select, textarea, button {
 }
 
 .main-container {
-	width: 100%;
+	width: 90%;
 	height: 198px;
 	margin-top: 30px;
 }
@@ -422,7 +424,7 @@ input, select, textarea, button {
 
 .rectangle {
 	margin-top: 30px;
-	width: 100%;
+	width: 90%;
 	height: 188px;
 	background: #ffffff;
 	border: 1px solid rgba(170, 170, 170, 0.02);
