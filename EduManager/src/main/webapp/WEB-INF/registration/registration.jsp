@@ -23,56 +23,67 @@
 		</div>
 
 		<div id="tabBtn-container">
-			<div class="tab-container">
-				<div class="tabs on " onclick="openTab('Tab1')">
-					<div>
-						<img src="<c:url value='/images/class.svg"' />" id="tab1Icon">
-					</div>
-					<div>강의</div>
-				</div>
-				<div class="tabs" onclick="openTab('Tab2')">
-					<div>
-						<img src="<c:url value='/images/studyIcon.svg"' />" id="tab2Icon">
-					</div>
-					<div>스터디</div>
-				</div>
+	<div class="tab-container">
+		<div class="tabs on" onclick="openTab('Tab1')">
+			<div>
+				<img src="<c:url value='/images/class.svg' />" id="tab1Icon">
 			</div>
-			<div id="makeStudyBtn-container">
-				<button id="makeStudyBtn" onclick="">
-					<img src="<c:url value='/images/plus.svg"' />" id="plusIcon">
-					스터디 만들기
-				</button>
-			</div>
+			<div>강의</div>
 		</div>
-		<div class="hr-wrapper">
-			<hr id="registration_mainHr">
-			<hr id="registration_hr1">
-			<hr id="registration_hr2">
-		</div>
-		<div class="tab_wrap">
-			<div id="Tab1" class="tab on">
-				<div id="leaderRoom1" class="class">
-
-					<div class="groupGallery">
-						<img src="<c:url value='/images/white.png"' />">
-						<div class="groupGalleryTitle">이름</div>
-						<div class="groupGalleryCategory">카테고리</div>
-
-					</div>
-				</div>
-
+		<div class="tabs" onclick="openTab('Tab2')">
+			<div>
+				<img src="<c:url value='/images/studyIcon.svg' />" id="tab2Icon">
 			</div>
-			<div id="Tab2" class="tab">
-				<div id="studyRoom1" class="studyGroup">
-					<div class="groupGallery">
-						<img src="<c:url value='/images/white.png"' />">
-						<div class="groupGalleryTitle">이름</div>
-						<div class="groupGalleryCategory">카테고리</div>
-					</div>
-
-				</div>
-			</div>
+			<div>스터디</div>
 		</div>
 	</div>
+	<div id="makeStudyBtn-container">
+		<button id="makeStudyBtn" onclick="">
+			<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
+			스터디 만들기
+		</button>
+	</div>
+</div>
+
+<div class="hr-wrapper">
+	<hr id="registration_mainHr">
+	<hr id="registration_hr1">
+	<hr id="registration_hr2">
+</div>
+
+<div class="tab_wrap">
+	<!-- Tab 1 -->
+	<div id="Tab1" class="tab on">
+    <div class="class"> 
+        <c:forEach var="group" items="${lectureList}">
+            <div class="groupGallery">
+            <a href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
+			 	 </c:url>">
+                <img src="<c:url value='/images/white.png' />" alt="Group Image">
+                <div class="groupGalleryTitle">${group.name}</div>
+                <div class="groupGalleryCategory">${group.category}</div>
+              </a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+	<!-- Tab 2 -->
+	<div id="Tab2" class="tab">
+    <div class="class">
+        <c:forEach var="studyGroup" items="${studyGroupList}">
+            <div class="groupGallery">
+            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+			 	 </c:url>">
+                <img src="<c:url value='/images/white.png' />">
+                <div class="groupGalleryTitle">${studyGroup.name}</div>
+                <div class="groupGalleryCategory">${studyGroup.category}</div>
+              </a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>

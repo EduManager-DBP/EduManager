@@ -22,8 +22,7 @@
 				</div>
 				<div class="overViewInfo">
 					<div class="overViewInfoText" id="studyGroupPlace">
-						<img src="<c:url value='/images/roomIcon.svg' />"
-							class="infoIcon" />000호
+						<img src="<c:url value='/images/roomIcon.svg' />" class="infoIcon" />000호
 					</div>
 					<div class="overViewInfoText" id="studyGroupTime">
 						<img src="<c:url value='/images/overViewTime.svg' />"
@@ -32,18 +31,33 @@
 				</div>
 			</div>
 			<div class="section2">
-				<div id="groupOverviewTitle">스터디그룹 명</div>
-				<div id="groupOverviewDescription">스터디 그룹 소개</div>
+				<div id="groupOverviewTitle">${groupName}</div>
+				<div id="groupOverviewDescription">${description}</div>
 
 				<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/studyGroup/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="groupId" value="${groupId}" /> <input
+								type="hidden" name="memberId" value="${curUserId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
-						<input type="button" class="applyButton" value="가입 요청 보내기">
+						<input type="button" class="applyButton" value="가입 요청하기">
 					</div>
 				</div>
 			</div>

@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
+import controller.lecture.ViewLectureController;
+import controller.lecture.ExcludingLectureAndStudyGroupController;
+import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -19,10 +22,14 @@ import controller.member.RegisterStudent3Controller;
 import controller.member.RegisterStudentController;
 import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.ToggleStudyGroupLikeController;
+import controller.studyGroup.ViewStudyGroupController;
+
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewMyInfoController;
 import controller.study.CreateStudyController;
 import controller.study.UpdateStudyController;
+
 
 //import controller.user.*;
 //import controller.comm.*;
@@ -83,9 +90,17 @@ public class RequestMapping {
 		// 스터디 수정
 		mappings.put("/study/update", new UpdateStudyController());
 
-		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
-		mappings.put("/lecture/over-view", new ForwardController("/lecture/lecture_overview.jsp"));
-		mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));
+    //강의 신청 페이지
+    mappings.put("/lecture/over-view", new ViewLectureController());
+    mappings.put("/lecture/like", new ToggleLectureLikeController()); 
+
+    //스터디그룹 요청 페이지
+    mappings.put("/study/over-view", new ViewStudyGroupController());
+    mappings.put("/studyGroup/like", new ToggleStudyGroupLikeController()); 
+
+    // 강의,스터디 신청
+    mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
+
 		mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
 		mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
 		mappings.put("/study/list", new ForwardController("/study/my_study_list.jsp"));

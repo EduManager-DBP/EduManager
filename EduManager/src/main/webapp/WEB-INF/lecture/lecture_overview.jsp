@@ -21,27 +21,41 @@
 						id="lectureOverviewImg">
 				</div>
 				<div class="overViewInfo">
-					<div class="overViewInfoText" id="lectureTeacherName">000 강사님</div>
+					<div class="overViewInfoText" id="lectureTeacherName"> ${teacherName} 강사님</div>
 					<div class="overViewInfoText" id="lectureTeacherPhone">
 						<img src="<c:url value='/images/phoneIcon.svg"' />"
-							class="infoIcon" />000-0000-0000
+							class="infoIcon" />${teacherPhone}
 					</div>
 					<div class="overViewInfoText" id="lectureTeacherRoom">
 						<img src="<c:url value='/images/roomIcon.svg"' />"
-							class="infoIcon" />000호
+							class="infoIcon" />${lectureroom}호
 					</div>
 				</div>
 			</div>
 			<div class="section2">
-				<div id="lectureOverviewTitle">강의명</div>
-				<div id="lectureOverviewDescription">강의소개</div>
-
-				<div class="section3">
+				<div id="lectureOverviewTitle">${lectureName}</div>
+				<div id="lectureOverviewDescription">${description}</div>
+					<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg"' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg"' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/lecture/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="lectureId" value="${lectureId}" /> 
+							<input type="hidden" name="memberId" value="${curUserId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
 						<input type="button" class="applyButton" value="수강신청하기">
