@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div class="main-container">
-		<jsp:include page="../navigation/navigation.jsp" />
+		<div style="width: 90%; justify-self: center;"><jsp:include
+				page="../navigation/navigation.jsp" /></div>
 		<form action="/submit-schedule" method="POST">
 			<span class="title">일정 추가하기</span>
 			<div class="form">

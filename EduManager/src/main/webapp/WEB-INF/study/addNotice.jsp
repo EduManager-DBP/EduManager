@@ -10,15 +10,16 @@
 </head>
 <body>
 	<div class="main-container">
-	<jsp:include page="../navigation/navigation.jsp" />
+		<div style="width: 90%; justify-self: center;"><jsp:include
+				page="../navigation/navigation.jsp" /></div>
 		<form action="/submit-assignment" method="POST">
 			<span class="title">공지사항 추가하기</span>
 			<div class="form">
 				<!-- 과제 명 -->
 				<div class="task-name-input">
-					<label for="assignment-name" class="assignment-name">공지 명</label> 
-					<input type="text" name="assignmentName"
-						placeholder="공지" class="input" required />
+					<label for="assignment-name" class="assignment-name">공지 명</label> <input
+						type="text" name="assignmentName" placeholder="공지" class="input"
+						required />
 				</div>
 				<!-- 세부 내용 -->
 				<div class="detail-input">
