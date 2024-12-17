@@ -22,8 +22,8 @@
 				</div>
 				<!-- 마감일 -->
 				<div class="deadline-input">
-					<label for="deadline" class="deadline">마감일</label> <input
-						type="date" id="deadline" name="deadline" class="input-field"
+					<label for="deadline" class="deadline">마감일</label> 
+					<input type="date" id="deadline" name="deadline" class="input-field"
 						required>선택</input>
 				</div>
 				<!-- 세부 내용 -->
