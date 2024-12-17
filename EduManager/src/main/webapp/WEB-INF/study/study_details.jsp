@@ -8,11 +8,12 @@
 
 <link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
 	type="text/css">
+<script src="<c:url value='/js/study_calendar.js' />"></script>
 <title>스터디 상세보기</title>
 </head>
 <body>
-	<div style="width: 90%; justify-self: center;"><jsp:include
-			page="../navigation/navigation.jsp" /></div>
+	<jsp:include page="../navigation/navigation.jsp" />
+
 	<div class="study-container">
 		<div class="study-detail">
 			<h2 class="study-title">스터디 상세보기</h2>
@@ -66,64 +67,24 @@
 				</span> <span class="year">2024</span>
 			</div>
 			<table class="calendarTable">
-
 				<thead>
-					<th class="sunday">일</th>
-					<th>월</th>
-					<th>화</th>
-					<th>수</th>
-					<th>목</th>
-					<th>금</th>
-					<th>토 </th>
+					<tr>
+						<th class="sunday">일</th>
+						<th>월</th>
+						<th>화</th>
+						<th>수</th>
+						<th>목</th>
+						<th>금</th>
+						<th>토</th>
+					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="previousMonth">31</td>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-					</tr>
-					<tr>
-						<td class="sunday">7</td>
-						<td>8</td>
-						<td>9</td>
-						<td id="today">10</td>
-						<td>11</td>
-						<td>12</td>
-						<td>13</td>
-					</tr>
-					<tr>
-						<td class="sunday">14</td>
-						<td>15</td>
-						<td>16</td>
-						<td>17</td>
-						<td>18</td>
-						<td>19</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td class="sunday">21</td>
-						<td>22</td>
-						<td>23</td>
-						<td>24</td>
-						<td>25</td>
-						<td>26</td>
-						<td>27</td>
-					</tr>
-					<tr>
-						<td class="sunday">28</td>
-						<td>29</td>
-						<td>30</td>
-						<td>31</td>
-						<td class="nextMonth">1</td>
-						<td class="nextMonth">2</td>
-						<td class="nextMonth">3</td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
+				<!-- JavaScript에서 동적으로 채움 -->
 			</table>
+			<form id="dateForm" action="<c:url value='/study/selectDate' />"
+				method="post">
+				<input type="hidden" name="selectedDate" id="selectedDate" value="">
+			</form>
 			<div class="main-container">
 				<div class="rectangle-1">
 					<div class="schedule">

@@ -23,6 +23,7 @@ import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewMyInfoController;
 import controller.study.CreateStudyController;
 import controller.study.UpdateStudyController;
+import controller.study.ViewMyStudyController;
 
 //import controller.user.*;
 //import controller.comm.*;
@@ -83,6 +84,10 @@ public class RequestMapping {
 		// 스터디 수정
 		mappings.put("/study/update", new UpdateStudyController());
 
+		//내 스터디 상세보기
+		mappings.put("/study/selectDate", new ViewMyStudyController());
+
+		
 		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
 		mappings.put("/lecture/over-view", new ForwardController("/lecture/lecture_overview.jsp"));
 		mappings.put("/study/over-view", new ForwardController("/study/study_overview.jsp"));
