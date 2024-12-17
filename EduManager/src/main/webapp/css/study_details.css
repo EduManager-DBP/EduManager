@@ -249,7 +249,7 @@ a {
 }
 
 .study-location {
-	width: 110px;
+	width: 150px;
 }
 
 .location-icon {
@@ -261,8 +261,9 @@ a {
 }
 
 .location-inform {
-	width: 80%;
+	width: 100%;
 	height: 20px;
+	font-size: 13px;
 }
 
 .time-icon {
@@ -271,7 +272,6 @@ a {
 		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/128f9afb-93e3-4b33-b9bd-e3cbbf906bdc.png)
 		no-repeat center;
 }
-
 
 input, select, textarea, button {
 	outline: 0;
@@ -282,8 +282,6 @@ input, select, textarea, button {
 	height: 198px;
 	margin-top: 30px;
 }
-
-
 
 .rectangle-1 {
 	height: 198px;
@@ -296,7 +294,6 @@ input, select, textarea, button {
 	border: 1px solid rgba(170, 170, 170, 0.02);
 	border-radius: 15px;
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
-
 }
 
 .schedule {
@@ -309,7 +306,8 @@ input, select, textarea, button {
 
 .schedule_title {
 	display: block;
-	margin-left: 7px; height : 40px;
+	margin-left: 17px;
+	height: 40px;
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 23.4px;
@@ -321,11 +319,13 @@ input, select, textarea, button {
 .schedule_content {
 	display: block;
 	height: 19px;
+	margin-left: 10px;
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 19px;
 	text-align: left;
 	white-space: nowrap;
+	font-size: 18px;
 }
 
 .notice {
@@ -338,7 +338,7 @@ input, select, textarea, button {
 
 .notice_title {
 	display: block;
-	margin-left: 7px;
+	margin-left: 17px;
 	width: 30%;
 	height: 40px;
 	font-size: 20px;
@@ -351,6 +351,7 @@ input, select, textarea, button {
 .notice_content {
 	display: block;
 	height: 19px;
+	margin-left: 10px;
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 19px;
@@ -368,7 +369,7 @@ input, select, textarea, button {
 
 .assignment_title {
 	display: block;
-	margin-left: 7px;
+	margin-left: 17px;
 	height: 40px;
 	color: #000000;
 	font-size: 20px;
@@ -381,6 +382,7 @@ input, select, textarea, button {
 .assignment_content {
 	display: block;
 	height: 19px;
+	margin-left: 10px;
 	color: #000000;
 	font-family: Inter, var(--default-font-family);
 	font-size: 18px;
@@ -390,20 +392,7 @@ input, select, textarea, button {
 	white-space: nowrap;
 }
 
-.assignment_content2 {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	width: 149px;
-	height: 23px;
-	margin: 1px 0 0 0;
-	color: #000000;
-	font-family: Inter, var(--default-font-family);
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 19px;
-	text-align: left;
-}
+
 
 .schedule-add-button {
 	width: 30%;
@@ -415,6 +404,8 @@ input, select, textarea, button {
 	width: 90%; /* 가로 30px */
 	height: 20px; /* 세로 15px */
 	margin-left: 5%;
+	cursor: pointer;
+	
 }
 
 .notice-add-button {
@@ -428,8 +419,6 @@ input, select, textarea, button {
 	height: 30px; /* 버튼의 컨테이너 높이 */
 	align-content: center;
 }
-
-
 
 .rectangle {
 	margin-top: 30px;
@@ -481,14 +470,12 @@ input, select, textarea, button {
 	white-space: nowrap;
 }
 
-
 .flex-column-df {
 	width: 32.096px;
 	height: 127.322px;
 	top: 15.912px;
 	left: 24.075px;
 }
-
 
 .more-link {
 	display: inline-block;

@@ -27,7 +27,7 @@
 				</tr>
 				<tr class="icon">
 					<td class="time-icon"></td>
-					<td class="time-inform">수요일 6시 반</td>
+					<td class="location-inform">수요일 6시 반</td>
 				</tr>
 			</table>
 			<div class="team-members-box">
@@ -146,21 +146,26 @@
 						<div class="assignment_content">
 							<li>content</li>
 						</div>
-						<div class="assignment_content2">
-							<li>content</li>
-						</div>
 					</div>
 					<div class="schedule-add-button">
-						<img src="<c:url value='/images/addNotification.png' />"
-							alt="추가 버튼" class="button-image">
+						<a href="<c:url value='/study/addSchedule' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
 					</div>
+
 					<div class="notice-add-button">
-						<img src="<c:url value='/images/addNotification.png' />"
-							alt="추가 버튼" class="button-image">
+						<a href="<c:url value='/study/addNotice' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
 					</div>
+
 					<div class="assignment-add-button">
-						<img src="<c:url value='/images/addNotification.png' />"
-							alt="추가 버튼" class="button-image">
+						<a href="<c:url value='/study/addAssignment' />"> <img
+							src="<c:url value='/images/addNotification.png' />" alt="추가 버튼"
+							class="button-image">
+						</a>
 					</div>
 				</div>
 			</div>
