@@ -1,17 +1,19 @@
-package model.dao;
+package model.dao.studygroup;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.dao.JDBCUtil;
 import model.domain.StudyGroup;
 import model.domain.StudyGroupApplication;
 
 
-public class StudyGroupDAO {
+public class StudyGroupDao {
 private JDBCUtil jdbcUtil = null;
     
-    public StudyGroupDAO() {         
+    public StudyGroupDao() {         
         jdbcUtil = new JDBCUtil();  // JDBCUtil 객체 생성
     }
     
@@ -137,6 +139,39 @@ private JDBCUtil jdbcUtil = null;
         return groupList;
     }
     
+    
+    public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT studyGroupId, name, img, description, capacity, category ");
+        query.append("FROM StudyGroup ");
+        query.append("WHERE studyGroupId NOT IN (");
+        query.append("    SELECT studyGroupId ");
+        query.append("    FROM StudyGroupApplication ");
+        query.append("    WHERE stuId = ? AND status ='수락' ");
+        query.append(")");
+
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId }); // stuId 파라미터 전달
+        List<StudyGroup> studyGroupList = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                StudyGroup studyGroup = new StudyGroup();
+                studyGroup.setStudyGroupId(rs.getLong("studyGroupId"));
+                studyGroup.setName(rs.getString("name"));
+                studyGroup.setCategory(rs.getString("category"));
+                studyGroup.setCapacity(rs.getInt("capacity"));
+                studyGroupList.add(studyGroup);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+
+        return studyGroupList;
+    }
     
     public StudyGroupApplication createApplication(StudyGroupApplication application) throws SQLException { 
         

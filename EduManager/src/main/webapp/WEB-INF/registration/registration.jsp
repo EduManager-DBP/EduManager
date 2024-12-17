@@ -54,29 +54,29 @@
 <div class="tab_wrap">
 	<!-- Tab 1 -->
 	<div id="Tab1" class="tab on">
-		<div id="leaderRoom1" class="class">
-			<c:forEach var="group" items="${lectureList}">
-				<div class="groupGallery">
-					<img src="<c:url value='/images/white.png' />">
-					<div class="groupGalleryTitle">${group.name}</div>
-					<div class="groupGalleryCategory">${group.category}</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
+    <div class="class"> 
+        <c:forEach var="group" items="${lectureList}">
+            <div class="groupGallery">
+                <img src="<c:url value='/images/white.png' />" alt="Group Image">
+                <div class="groupGalleryTitle">${group.name}</div>
+                <div class="groupGalleryCategory">${group.category}</div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 
 	<!-- Tab 2 -->
 	<div id="Tab2" class="tab">
-		<div id="studyRoom1" class="studyGroup">
-			<c:forEach var="studyGroup" items="${studyGroupList}">
-				<div class="groupGallery">
-					<img src="<c:url value='/images/white.png' />">
-					<div class="groupGalleryTitle">${studyGroup.name}</div>
-					<div class="groupGalleryCategory">${studyGroup.category}</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
+    <div class="class">
+        <c:forEach var="studyGroup" items="${studyGroupList}">
+            <div class="groupGallery">
+                <img src="<c:url value='/images/white.png' />">
+                <div class="groupGalleryTitle">${studyGroup.name}</div>
+                <div class="groupGalleryCategory">${studyGroup.category}</div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 </div>
 </div>
 </body>

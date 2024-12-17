@@ -44,8 +44,6 @@ public class ViewLectureController  implements Controller {
         request.setAttribute("description", lecture.getDescription());
         request.setAttribute("lectureroom", lecture.getLectureRoom());
         
-
-        
         
         return "/lecture/lecture_overview.jsp";
     }

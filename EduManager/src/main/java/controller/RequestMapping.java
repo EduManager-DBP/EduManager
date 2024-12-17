@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
-import controller.lecture.ExcludingLectureListController;
+import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
 import controller.member.LoginController;
@@ -59,7 +59,7 @@ public class RequestMapping {
 
         mappings.put("/lecture/over-view", new ViewLectureController());
         
-        mappings.put("/registration", new ExcludingLectureListController());
+        mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
         
         //임시 테스트(은향)
         mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
