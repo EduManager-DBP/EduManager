@@ -1,7 +1,5 @@
 package controller.member;
 
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
+import model.dao.member.StudentInterestCategoryDAO;
 import model.domain.member.Member;
 import model.domain.member.Student;
 import model.service.member.ExistingMemberException;
@@ -17,48 +16,66 @@ import model.service.member.MemberManager;
 import model.service.member.StudentManager;
 
 public class RegisterStudentController implements Controller {
-	private static final Logger log = LoggerFactory.getLogger(RegisterStudentController.class);
 
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private static final Logger log = LoggerFactory.getLogger(RegisterStudentController.class);
 
-		StudentManager smanager = StudentManager.getInstance();
-		MemberManager manager = MemberManager.getInstance();
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 객체 초기화
+        StudentManager smanager = StudentManager.getInstance();
+        MemberManager manager = MemberManager.getInstance();
+        StudentInterestCategoryDAO dao = new StudentInterestCategoryDAO();
 
-		// 세션에서 모든 데이터 가져오기
-		HttpSession session = request.getSession();
+        // 세션에서 데이터 가져오기
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
+        String pwd = (String) session.getAttribute("pwd");
+        String name = (String) session.getAttribute("name");
+        String email = (String) session.getAttribute("email");
+        String phone = (String) session.getAttribute("phone");
+        String ageRange = (String) session.getAttribute("age");
+        int[] interestCategoryIds = (int[]) session.getAttribute("interest");
 
-		String id = (String) session.getAttribute("id");
-		String pwd = (String) session.getAttribute("pwd");
-		String name = (String) session.getAttribute("name");
-		String email = (String) session.getAttribute("email");
-		String phone = (String) session.getAttribute("phone");
-		String ageRange = (String) session.getAttribute("age");
+      
 
+        // 학생 객체 생성
+        Student student = new Student(id, pwd, name, email, phone, ageRange);
+        Member member = new Member(id, pwd, name, email, phone);
 
-		log.debug("Create Student : {}", id, pwd, name, email, phone, ageRange);
+        try {
+            // 데이터베이스 등록
+            log.debug("Registering student: {}", student);
+            smanager.create(student);
 
-		// 학생 객체 생성
-		Student student = new Student(id, pwd, name, email, phone, ageRange);
-		Member member = new Member(id, pwd, name, email, phone);
+            log.debug("Registering member: {}", member);
+            manager.create(member);
+            
+            //관심분야등록
+            if (interestCategoryIds != null && interestCategoryIds.length != 0) {
+            	for (int interestId : interestCategoryIds) {
+                    log.debug("Registering interest category: {}", interestId);
+                    int result = dao.create(id, interestId);
+                    log.debug("Interest category registration result: {}", result);
+                }
+            }
+            
+            // 세션 무효화
+            session.invalidate();
+            log.debug("Session invalidated.");
 
-		try {
-			smanager.create(student);
-			manager.create(member); // member DB에 생성
+            response.getWriter().write("Student registration successful!");
+            return "redirect:/main/main"; // 성공 시 메인 페이지로 리다이렉트
 
-			// 세션 정리
-			session.invalidate(); // 세션 전체 무효화
-
-			response.getWriter().write("Student registration successful!");
-			log.debug("Create User : {}", student);
-
-			return "redirect:/main/main"; // 성공 시 사용자 리스트 화면으로 redirect
-
-		} catch (ExistingMemberException e) { // 예외 발생 시 회원가입 form으로 forwarding
-			request.setAttribute("registerFailed", true);
-			request.setAttribute("exception", e);
-			request.setAttribute("student", student);
-			return "/member/studentRegisterForm.jsp";
-		}
-	}
+        } catch (ExistingMemberException e) {
+            log.error("ExistingMemberException occurred: ", e);
+            request.setAttribute("registerFailed", true);
+            request.setAttribute("exception", e);
+            request.setAttribute("student", student);
+            return "/member/studentRegisterForm.jsp";
+        } catch (Exception ex) {
+            log.error("Unexpected error during registration: ", ex);
+            response.getWriter().write("Error: Registration failed.");
+            return "/member/studentRegisterForm.jsp";
+        }
+    }
 }
