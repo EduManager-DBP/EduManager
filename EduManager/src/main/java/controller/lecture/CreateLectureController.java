@@ -14,7 +14,7 @@ import controller.member.MemberSessionUtils;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.service.LectureManager;
-import model.service.MemberManager;
+import model.service.member.MemberManager;
 
 public class CreateLectureController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(CreateLectureController.class);

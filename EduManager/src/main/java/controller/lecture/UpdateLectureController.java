@@ -16,7 +16,7 @@ import controller.member.MemberSessionUtils;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.service.LectureManager;
-import model.service.MemberManager;
+import model.service.member.MemberManager;
 
 public class UpdateLectureController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(UpdateLectureController.class);
@@ -89,10 +89,6 @@ public class UpdateLectureController implements Controller {
 	
 
 			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
-				int scheduleId = 0;
-
-
-
 				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
 				log.debug("dayOfWeek : {}", dayOfWeek);
 
@@ -105,6 +101,10 @@ public class UpdateLectureController implements Controller {
 				
 				log.debug("Schedule{} : {}", i, schedule);
 
+			    String scheduleIdStr = request.getParameter("schedule[" + i + "][scheduleId]");
+			    int scheduleId = scheduleIdStr.equals("") ? 0 : Integer.parseInt(scheduleIdStr);
+			    log.debug("scheduleId : {}", scheduleId);
+			    
 				if(scheduleId > 0) {//있던 일정이면 추가
 					scheduleId = Integer.parseInt(request.getParameter("schedule[" + i + "][scheduleId]"));
 					log.debug("scheduleId : {}", scheduleId);

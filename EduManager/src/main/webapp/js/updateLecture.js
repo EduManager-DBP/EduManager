@@ -62,7 +62,6 @@ function addSchedule() {
 
   const scheduleIdInput = newArticle.querySelector('#scheduleId');
 	scheduleIdInput.name = `schedule[${scheduleCount}][scheduleId]`;
-
   // scheduleCount 증가
   scheduleCount++;
  // hidden input에 scheduleCount 값을 반영
