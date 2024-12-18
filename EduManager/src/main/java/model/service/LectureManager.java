@@ -1,13 +1,17 @@
 package model.service;
 
 import java.sql.SQLException;
+
+import model.dao.lecture.LectureAssignmentDao;
 import model.dao.lecture.LectureDao;
 import model.dao.lecture.LectureLikeDao;
+import model.dao.lecture.LectureNoticeDao;
 import model.dao.lecture.LectureScheduleDao;
 import model.domain.Schedule;
-
+import model.domain.calendar.CalendarDTO;
 import model.domain.lecture.Lecture;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LectureManager {
@@ -31,6 +35,28 @@ public class LectureManager {
 	 * public List<Lecture> findLectureList() throws SQLException{ return
 	 * lectureDao.getAllLectures(); }
 	 */
+    // 특정 연도와 월의 데이터를 캘린더에 띄우기
+    public List<CalendarDTO> getCalendarList(int year, int month) {
+    	// DTO List 생성
+    	List<CalendarDTO> calendarEntries = new ArrayList<>();
+
+        // DAO 호출
+        List<CalendarDTO> schedules = LectureScheduleDao.getSchedules(year, month);
+        List<CalendarDTO> assignments = LectureAssignmentDao.getAssignments(year, month);
+        List<CalendarDTO> notices = LectureNoticeDao.getNotices(year, month);
+
+        // 데이터 통합
+        calendarEntries.addAll(schedules);
+        calendarEntries.addAll(assignments);
+        calendarEntries.addAll(notices);
+
+        return calendarEntries;
+    }
+    
+    
+    
+    
+    
     
     public Lecture findLectureById(long lectureId) throws SQLException {
         return lectureDao.findLectureById(lectureId);
