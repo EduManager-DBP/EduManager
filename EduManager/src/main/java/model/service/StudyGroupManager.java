@@ -72,6 +72,11 @@ public class StudyGroupManager {
                  
     }
     
+    //스터디 가입 요청 리스트 
+    public List<StudyGroupApplication> getStudyRequestList(long studyGroupId) throws SQLException {
+        return  studyGroupDao.getStudyRequestList(studyGroupId);
+    }
+ 
     
     //스터디 요청 상태 확인하기
     public String getStatusByMemberIdAndGroupId(String memberId, long studyGroupId) throws SQLException {

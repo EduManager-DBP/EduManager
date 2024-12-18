@@ -15,16 +15,19 @@
 		<!-- 제목 -->
 		<div class="subTitle">스터디 그룹 참여 요청</div>
 		<div class="requestListContainer">
-			<div class="requestContainer">
+		  <c:forEach var="studyGroup" items="${requestList}">
+				   <div class="requestContainer">
 				<div class="requestProfileContainer">
 					<img src="<c:url value='/images/profileImg.svg' />" class="requestProfile" />
-					<div class="requestProfileName">학생 이름</div>
+					<div class="requestProfileName">${studyGroup.memberName}</div>
 				</div>
 				<div class="buttonContainter">
 					<input type="button" id="acceptBtn" value="수락" /> <input
 						type="button" id="rejectBtn" value="거절" />
 				</div>
 			</div>
+        </c:forEach>
+			
 
 		</div>
 

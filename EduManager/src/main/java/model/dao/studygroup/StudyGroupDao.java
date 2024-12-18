@@ -275,6 +275,34 @@ public StudyGroup findGroupInfo(long groupId) {
         return null; // 조회된 값이 없으면 null 반환
     }
     
+    public List<StudyGroupApplication> getStudyRequestList(long groupId) throws SQLException {
+        List<StudyGroupApplication> groupList = new ArrayList<>();
+       
+        String sql = "SELECT sga.studygroupapplicationId, sga.status, sga.createat, sga.stuid, sga.studygroupid, m.name AS student_name " +
+                "FROM studygroupapplication sga " +
+                "JOIN member m ON sga.stuId = m.id " +
+                "WHERE sga.status = '진행중' AND sga.studygroupid = ?";
+
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{groupId}); // memberId를 두 번 파라미터로 설정
+        ResultSet rs = jdbcUtil.executeQuery();
+        
+        while (rs.next()) {
+            StudyGroupApplication group = new StudyGroupApplication();
+            group.setStudyGroupApplicationId(rs.getLong("studygroupapplicationId")); 
+            group.setStatus(rs.getString("status")); 
+            group.setCreateAt(rs.getDate("createat"));
+            group.setMemberId(rs.getString("stuId")); 
+            group.setStudyGroupId(rs.getLong("studygroupid")); 
+            group.setMemberName(rs.getString("student_name")); // 학생 이름
+
+            groupList.add(group);
+        }
+        
+        jdbcUtil.close();
+        return groupList;
+    }
+    
     
  // 요청 상태를 "수락"으로 변경
     public void acceptApplication(long applicationId) throws SQLException {

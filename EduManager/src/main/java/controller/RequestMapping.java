@@ -30,7 +30,7 @@ import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
-
+import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
@@ -128,7 +128,10 @@ public class RequestMapping {
         //스터디 그룹 가입 요청
         mappings.put("/studyGroup/join-request", new StudyGroupJoinRequestController());
 
-        mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
+        //스터디 그룹 가입 요청 리스트
+        mappings.put("/study/requests", new ViewStudyRequestListController());
+        
+        
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());

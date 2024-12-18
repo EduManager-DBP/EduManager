@@ -13,7 +13,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">강의 소개</div>
+		<div class="subTitle">강의 수강 신청</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
