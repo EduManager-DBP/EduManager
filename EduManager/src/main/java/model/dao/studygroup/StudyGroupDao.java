@@ -216,29 +216,34 @@ public StudyGroup findGroupInfo(long groupId) {
         return studyGroupList;
     }
     
-    public StudyGroupApplication createApplication(StudyGroupApplication application) throws SQLException { 
-        
+    public StudyGroupApplication createApplication(String memberId, long studyGroupId) throws SQLException { 
+        // 새로운 StudyGroupApplication 객체 생성
+        StudyGroupApplication application = new StudyGroupApplication();
         application.setStatus("진행중");
+        application.setMemberId(memberId);
+        application.setStudyGroupId(studyGroupId);
         
-        // 스터디 그룹 요청 생성
-        String sql = "INSERT INTO StudyGroupApplication (studyGroupApplicationId, status, createAt, memberId, studyGroupId) "
-                     + "VALUES (SEQ_STUDY_GROUP_APPLICATION_ID.nextval, ?, SYSDATE, ?, ?)";    
+        // 스터디 그룹 요청 생성 SQL
+        String sql = "INSERT INTO StudyGroupApplication (studyGroupApplicationId, status, createAt, stuId, studyGroupId) "
+                   + "VALUES (SEQ_STUDY_GROUP_APPLICATION_ID.nextval, ?, SYSDATE, ?, ?)";
+        
         Object[] param = new Object[] {
-                application.getStatus(),        
-                application.getMemberId(),       
-                application.getStudyGroupId()    
-            };         
-        jdbcUtil.setSqlAndParameters(sql, param);  // JDBCUtil에 insert문과 매개 변수 설정
-                        
-        String key[] = {"studyGroupApplicationId"};  
+            application.getStatus(),   
+            memberId,                 
+            studyGroupId               
+        };         
+        
+        jdbcUtil.setSqlAndParameters(sql, param); // SQL과 매개변수 설정
+                            
+        String key[] = {"studyGroupApplicationId"}; // 자동 생성된 키 반환 설정
         try {    
             jdbcUtil.executeUpdate(key);  
             ResultSet rs = jdbcUtil.getGeneratedKeys();
-            if(rs.next()) {
-                int generatedKey = rs.getInt(1);   
-                application.setStudyGroupApplicationId(generatedKey);  // id필드에 저장  
+            if (rs.next()) {
+                int generatedKey = rs.getInt(1);  // 자동 생성된 ID 가져오기
+                application.setStudyGroupApplicationId(generatedKey);  
             }
-            return application;
+            return application;  // 생성된 객체 반환
         } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();
@@ -248,6 +253,28 @@ public StudyGroup findGroupInfo(long groupId) {
         }       
         return null;            
     }
+    
+    //스터디 그룹 요청 상태 가져오기
+    public String getStatusByMemberIdAndGroupId(String memberId, long studyGroupId) throws SQLException {
+        String sql = "SELECT status " +
+                     "FROM StudyGroupApplication " +
+                     "WHERE stuId = ? AND studyGroupId = ?";
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, studyGroupId}); // SQL과 매개변수 설정
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+            if (rs.next()) {
+                return rs.getString("status"); // status 값 반환
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+        return null; // 조회된 값이 없으면 null 반환
+    }
+    
     
  // 요청 상태를 "수락"으로 변경
     public void acceptApplication(long applicationId) throws SQLException {

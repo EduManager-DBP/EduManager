@@ -57,13 +57,31 @@
 						</form>
 					</div>
 					<div>
-						<input type="button" class="applyButton" value="가입 요청하기">
+						<form action="<c:url value='/studyGroup/join-request' />"
+							method="post" id="requestForm">
+							<input type="hidden" name="groupId" value="${groupId}" /> <input
+								type="hidden" name="memberId" value="${userId}" />
+
+							<c:choose>
+								<c:when test="${requestStatus == '진행중'}">
+									<input type="button" class="statusInProgress" value="가입 요청중" disabled/>
+								</c:when>
+								<c:when test="${requestStatus == '수락'}">
+									<input type="button" class="statusAccepted" value="가입 완료" disabled/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="applyButton" value="가입 요청하기"
+										onclick="document.getElementById('requestForm').submit();" />
+								</c:otherwise>
+							</c:choose>
+						</form>
+
 					</div>
 				</div>
 			</div>
 
 		</div>
-			<div class="section4">
+		<div class="section4">
 			<div class="reviewIconContainer">
 				<img src="<c:url value='/images/reviewIcon.svg"' />"
 					class="reviewIcon" />
@@ -79,24 +97,17 @@
 					<!-- 리뷰 내용을 작성할 textarea -->
 					<textarea class="reviewTextArea" name="reviewText"
 						placeholder="후기를 작성해주세요"></textarea>
-
 					<!-- 리뷰 제출 버튼 -->
-					
-					
 					<c:choose>
-								<c:when test="${isInclude}">
-									<input type="button" class="reviewSubmit" value="작성"
-						onclick="document.getElementById('studyReviewForm').submit();" />
-								</c:when>
-								<c:otherwise>
-									<input type="button" class="reviewSubmit" value="작성"
-						 onclick="alert('스터디원만 후기를 작성할 수 있어요!')"  />
-								</c:otherwise>
-							</c:choose>
-							
-							
-							
-					
+						<c:when test="${isInclude}">
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="document.getElementById('studyReviewForm').submit();" />
+						</c:when>
+						<c:otherwise>
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="alert('스터디원만 후기를 작성할 수 있어요!')" />
+						</c:otherwise>
+					</c:choose>
 				</form>
 			</div>
 			<div class="reviewListContainer">
@@ -117,6 +128,6 @@
 
 
 	</div>
-	
+
 </body>
 </html>

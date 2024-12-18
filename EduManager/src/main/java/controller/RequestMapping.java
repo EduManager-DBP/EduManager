@@ -26,6 +26,7 @@ import controller.member.RegisterStudentController;
 import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
 import controller.studyGroup.CreateStudyReviewController;
+import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
@@ -124,7 +125,8 @@ public class RequestMapping {
         mappings.put("/lecture/createReview", new CreateLectureReviewController());
         mappings.put("/study/createReview", new CreateStudyReviewController());
         
-        
+        //스터디 그룹 가입 요청
+        mappings.put("/studyGroup/join-request", new StudyGroupJoinRequestController());
 
         mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
