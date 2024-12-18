@@ -1,22 +1,22 @@
 :root {
-    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-        Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .main-container {
-    width: 100%;
-    margin: 0 auto;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .title {
-    display: block;
+	display: block;
 	height: 30px;
 	justify-self: center;
 	margin-top: 100px;
 	color: #000000;
-    font-size: 30px;
-    font-weight: 600;
-    text-align: center;
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
 }
 
 .form {
@@ -26,14 +26,20 @@
 	justify-self: center;
 }
 
-.task-name-input, .deadline-input, .time-input, .detail-input {
+.task-name-input,
+.deadline-input,
+.time-input,
+.detail-input {
 	width: 690px;
 	height: 80px;
 	margin-bottom: 15px;
 }
 
-.assignment-name, .deadline, .time-label, .detail-text {
-    display: block;
+.assignment-name,
+.deadline,
+.time-label,
+.detail-text {
+	display: block;
 	height: 19px;
 	color: #000000;
 	font-size: 20px;
@@ -42,8 +48,11 @@
 	margin-bottom: 11px;
 }
 
-.input, .input-field, .input-field-1, .time-selector {
-    width: 100%;
+.input,
+.input-field,
+.input-field-1,
+.time-selector {
+	width: 100%;
 	height: 25px;
 	padding: 10px;
 	background: #ffffff;
@@ -54,33 +63,35 @@
 }
 
 .input-field-1 {
-    height: 100px;
-    resize: vertical;
+	height: 100px;
+	resize: vertical;
 }
 
 .time-input {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
+
 .button-container {
 	display: block;
-    width: 100%;
-    height: 50px;
-    justify-items: center;
+	width: 100%;
+	height: 50px;
+	justify-items: center;
 }
+
 .complete-button {
-    display: block;
-    width: 200px;
-    height: 50px;
-    background-color: #1E2A7C;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+	display: block;
+	width: 200px;
+	height: 50px;
+	background-color: #1E2A7C;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 .complete-button:hover {
-    background-color: #163580;
+	background-color: #163580;
 }
