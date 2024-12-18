@@ -9,6 +9,7 @@ import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
+import controller.member.InterestCategoryController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
@@ -46,7 +47,8 @@ public class RequestMapping {
 		mappings.put("/teacher/register", new RegisterTeacherController());
 		mappings.put("/student/register1", new RegisterStudent1Controller());
 		mappings.put("/student/register2", new RegisterStudent2Controller());
-		mappings.put("/student/register3", new RegisterStudent3Controller());
+		mappings.put("/student/register3", new InterestCategoryController());
+		mappings.put("/student/register4", new RegisterStudent3Controller());
 		mappings.put("/student/register", new RegisterStudentController());
 
 		
@@ -72,9 +74,9 @@ public class RequestMapping {
 
 		// 임시 테스트(은향)
 		mappings.put("/study_make", new ForwardController("/study/creationForm.jsp"));
-		mappings.put("/onboarding/role", new ForwardController("/member/onboardingRole.jsp"));
-		mappings.put("/onboarding/age", new ForwardController("/member/onboardingAge.jsp"));
-		mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
+//		mappings.put("/onboarding/role", new ForwardController("/member/onboardingRole.jsp"));
+//		mappings.put("/onboarding/age", new ForwardController("/member/onboardingAge.jsp"));
+//		mappings.put("/onboarding/category", new ForwardController("/member/onboardingCategory.jsp"));
 
 		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
 		mappings.put("/lecture/over-view", new ForwardController("/lecture/lecture_overview.jsp"));
