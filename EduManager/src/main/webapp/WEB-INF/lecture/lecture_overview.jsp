@@ -80,7 +80,7 @@
 
 					<!-- 리뷰 내용을 작성할 textarea -->
 					<textarea class="reviewTextArea" name="reviewText"
-						placeholder="리뷰를 작성해주세요"></textarea>
+						placeholder="후기를 작성해주세요"></textarea>
 
 					<!-- 리뷰 제출 버튼 -->
 					<input type="button" class="reviewSubmit" value="작성"
@@ -102,5 +102,6 @@
 				</c:forEach>
 			</div>
 		</div>
+	</div>	
 </body>
 </html>
