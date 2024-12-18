@@ -542,3 +542,13 @@ input, select, textarea, button {
     text-align: center;
     padding: 10px;
 }*/
+/* 선택된 날짜에 대한 스타일 */
+/*.selected-date {
+    font-size: 1.5em;  글씨 크기 증가 
+    background-color: #f0f0f0;  배경색 추가 (선택된 날짜 구분) 
+    font-weight: bold;  글씨 굵게 
+}*/
+.selected {
+    font-weight: bold; /* 글씨를 굵게 표시 (선택사항) */
+    color: #007bff; /* 색상 변경 (선택사항) */
+}

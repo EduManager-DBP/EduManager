@@ -84,7 +84,7 @@ public class StudyAssignmentDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT studyassignmentid, duedate, title, description, createat, textfile, studygroupid ");
         query.append("FROM studyassignment ");
-        query.append("WHERE studyid = ?");
+        query.append("WHERE studygroupid = ?");
 
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studyId });
         List<Assignment> assignments = new ArrayList<>();
@@ -124,11 +124,11 @@ public class StudyAssignmentDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT studyassignmentid, duedate, title, description, createat, textfile, studygroupid ");
         query.append("FROM studyassignment ");
-        query.append("WHERE studyid = ? and duedate = ?");
+        query.append("WHERE studygroupid = ? AND TRUNC(duedate) = ?");
 
         java.sql.Date sqlDueDate = java.sql.Date.valueOf(dueDate);
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studyId, sqlDueDate });
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studyId, sqlDueDate});
         List<Assignment> assignments = new ArrayList<>();
 
         try {

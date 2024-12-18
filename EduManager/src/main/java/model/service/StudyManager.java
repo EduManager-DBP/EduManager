@@ -3,28 +3,29 @@ package model.service;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import model.dao.lecture.LectureDao;
-import model.dao.lecture.LectureScheduleDao;
 import model.dao.studygroup.StudyAssignmentDao;
-import model.dao.studygroup.StudyGroupDAO;
+import model.dao.studygroup.StudyGroupDao;
+import model.dao.studygroup.StudyNoticeDao;
 import model.dao.studygroup.StudyScheduleDao;
 import model.domain.Assignment;
+import model.domain.Notice;
 import model.domain.Schedule;
-import model.domain.lecture.Lecture;
 import model.domain.studyGroup.StudyGroup;
 
 import java.util.List;
 
 public class StudyManager {
     private static StudyManager instance = new StudyManager();
-    private StudyGroupDAO studyDao;
+    private StudyGroupDao studyDao;
     private StudyScheduleDao scheduleDao;
     private StudyAssignmentDao assignmentDao;
+    private StudyNoticeDao noticeDao;
     
     private StudyManager() {
-        studyDao = new StudyGroupDAO();
+        studyDao = new StudyGroupDao();
         scheduleDao = new StudyScheduleDao();
         assignmentDao = new StudyAssignmentDao();
+        noticeDao = new StudyNoticeDao();
     }
 
     public static StudyManager getInstance() {
@@ -68,4 +69,13 @@ public class StudyManager {
     public List<Assignment> findAssignmentsByStudyIdAndDueDate(int studyId, LocalDate dueDate) {
     	return assignmentDao.findAssignmentsByStudyIdAndDueDate(studyId, dueDate);
     }
+    //스터디 공지 목록 조회(특정 날짜)
+    public List<Notice> findNoticesByStudyIdAndDueDate(int studyId, LocalDate createdAt) {
+    	return noticeDao.findNoticesByStudyIdAndDueDate(studyId, createdAt);
+    }
+    //스터디 일정 목록 조회
+    public List<Schedule> findSchedulesByFilters(long studygroupid, LocalDate startDate, String type, String dayOfWeek) {
+    	return scheduleDao.findSchedulesByFilters(studygroupid, startDate, type, dayOfWeek);
+    }
+
 }

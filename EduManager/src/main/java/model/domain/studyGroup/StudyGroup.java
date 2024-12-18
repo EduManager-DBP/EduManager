@@ -12,6 +12,7 @@ public class StudyGroup {
 	private String category;
 	private Date createAt;
 	private String leaderId;
+	private String leaderName;
 
 	public StudyGroup() {
 	}
@@ -98,5 +99,13 @@ public class StudyGroup {
 		return "StudyGroup [studyGroupId=" + studyGroupId + ", name=" + name + ", img=" + img + ", description="
 				+ description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
 				+ ", leaderId=" + leaderId + "]";
+	}
+
+	public String getLeaderName() {
+		return leaderName;
+	}
+
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
 	}
 }

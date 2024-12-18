@@ -65,7 +65,7 @@ public class RequestMapping {
 		mappings.put("/member/delete", new DeleteMemberController());
 
 		// study
-		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
+//		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
 		mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
 		mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
 		mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
@@ -85,7 +85,8 @@ public class RequestMapping {
 		mappings.put("/study/update", new UpdateStudyController());
 
 		//내 스터디 상세보기
-		mappings.put("/study/selectDate", new ViewMyStudyController());
+//		mappings.put("/study/selectDate", new ViewMyStudyController());
+		mappings.put("/mystudy/view", new ViewMyStudyController());
 
 		
 		mappings.put("/registration", new ForwardController("/registration/registration.jsp"));
