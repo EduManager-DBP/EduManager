@@ -90,6 +90,10 @@ public class StudyGroupManager {
         
     }
     
+    public void  deleteApplication(long applicationId) throws SQLException {
+        studyGroupDao.deleteApplication(applicationId);
+        
+    }
     public StudyGroupApplication findApplicationById(Long applicationId) throws SQLException{
         return studyGroupDao.findById(applicationId);  // DAO에서 findById 호출
     }

@@ -27,6 +27,7 @@ import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
 import controller.studyGroup.AcceptedRequestController;
 import controller.studyGroup.CreateStudyReviewController;
+import controller.studyGroup.DeleteRequestController;
 import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
@@ -133,7 +134,9 @@ public class RequestMapping {
         mappings.put("/study/requests", new ViewStudyRequestListController());
         
         //스터디 그룹 가입 요청 수락
-        mappings.put("/studyGroup/accepted", new AcceptedRequestController());
+        mappings.put("/studyGroup/accepted-request", new AcceptedRequestController());
+        
+        mappings.put("/studyGroup/delete-request", new DeleteRequestController());
         
         
         

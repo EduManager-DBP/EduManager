@@ -25,25 +25,26 @@
 				
 				<div class="buttonContainter">
 				
-				<form action="<c:url value='/studyGroup/accepted' />" method="post"
+				<form action="<c:url value='/studyGroup/accepted-request' />" method="post"
 					id="acceptedForm">
-					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					
 					<input type="hidden" name="studyGroupApplicationId" value="${studyGroup.studyGroupApplicationId}" />
 					<input type="hidden" name="groupId" value="${studyGroup.studyGroupId}" /> 
 					<input type="button" id="acceptBtn" value="수락" onclick="document.getElementById('acceptedForm').submit();" />
 					
 				</form>
 				
-				<form action="<c:url value='/studyGroup/accepted' />" method="post"
-					id="acceptedForm">
+				<form action="<c:url value='/studyGroup/delete-request' />" method="post"
+					id="deleteRequestForm">
 					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
 					<input type="hidden" name="studyGroupApplicationId" value="${studyGroup.studyGroupApplicationId}" />
 					<input type="hidden" name="groupId" value="${studyGroup.studyGroupId}" /> 
 					<input
-						type="button" id="rejectBtn" value="거절" />
+						type="button" id="rejectBtn" value="거절"  onclick="document.getElementById('deleteRequestForm').submit();"/>
 			
 				</form>
 					 
+			</div>
 			</div>
         </c:forEach>
 			

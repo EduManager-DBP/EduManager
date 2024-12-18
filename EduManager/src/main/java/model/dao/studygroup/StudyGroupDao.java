@@ -254,6 +254,7 @@ public StudyGroup findGroupInfo(long groupId) {
         return null;            
     }
     
+    
     //스터디 그룹 요청 상태 가져오기
     public String getStatusByMemberIdAndGroupId(String memberId, long studyGroupId) throws SQLException {
         String sql = "SELECT status " +
@@ -333,6 +334,23 @@ public StudyGroup findGroupInfo(long groupId) {
     public void acceptApplication(long applicationId) throws SQLException {
         
         String updateStatusSql = "UPDATE StudyGroupApplication SET status = '수락' WHERE studyGroupApplicationId = ?";
+        
+        try {
+            // 상태 변경 실행
+            jdbcUtil.setSqlAndParameters(updateStatusSql, new Object[]{applicationId});
+            jdbcUtil.executeUpdate();
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
+        }
+    }
+    
+  public void deleteApplication(long applicationId) throws SQLException {
+        
+        String updateStatusSql = "DELETE FROM StudyGroupApplication WHERE studyGroupApplicationId = ?";
         
         try {
             // 상태 변경 실행
