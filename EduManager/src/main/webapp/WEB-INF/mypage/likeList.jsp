@@ -14,13 +14,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">강의/스터디 신청하기</div>
-		<div>
-			<div class="search">
-				<input type="text" placeholder="검색어 입력"> <img
-					src="<c:url value='/images/searchIcon.svg"' />">
-			</div>
-		</div>
+		<div class="subTitle">찜한 목록</div>
 
 		<div id="tabBtn-container">
 	<div class="tab-container">
@@ -36,12 +30,6 @@
 			</div>
 			<div>스터디</div>
 		</div>
-	</div>
-	<div id="makeStudyBtn-container">
-		<button id="makeStudyBtn" onclick="">
-			<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
-			스터디 만들기
-		</button>
 	</div>
 </div>
 

@@ -1,12 +1,10 @@
 package model.dao.lecture;
 
-
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import model.dao.JDBCUtil;
 import model.domain.Notice;
@@ -103,31 +101,37 @@ public class LectureDao {
 
     //강의 상세 조회
     public Lecture findLectureById(long lectureId) {
-    	StringBuffer query = new StringBuffer();
-        query.append("SELECT name, description, img, category, capacity, lectureLevel, teacherId, createdAt, lectureroom ");
-        query.append("FROM lecture ");
-        query.append("WHERE lectureId = ? ");
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT l.name AS lectureName, l.description, l.img, l.category, l.capacity, ");
+        query.append("l.lectureLevel, l.teacherId, l.createdAt, l.lectureroom, ");
+        query.append("t.name AS teacherName, t.phone AS teacherPhone ");
+        query.append("FROM lecture l ");
+        query.append("JOIN teacher t ON l.teacherId = t.id "); // TEACHER 테이블과 JOIN
+        query.append("WHERE l.lectureId = ?");
 
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId });
 
         try {
-        	Lecture lecture = null;
+            Lecture lecture = null;
             ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
             if (rs.next()) {
-            	lecture = new Lecture();
-            	lecture.setLectureId(lectureId);
-            	lecture.setName(rs.getString("name"));
-            	lecture.setDescription(rs.getString("description"));
-            	lecture.setImg(rs.getString("img"));
-            	lecture.setCategory(rs.getString("category"));
-            	lecture.setCapacity(rs.getLong("capacity"));
+                lecture = new Lecture();
+                lecture.setLectureId(lectureId);
+                lecture.setName(rs.getString("lectureName"));
+                lecture.setDescription(rs.getString("description"));
+                lecture.setImg(rs.getString("img"));
+                lecture.setCategory(rs.getString("category"));
+                lecture.setCapacity(rs.getLong("capacity"));
                 lecture.setLevel(rs.getInt("lectureLevel"));
-            	lecture.setTeacherId(rs.getString("teacherId"));
-            	lecture.setLectureRoom(rs.getInt("lectureroom"));
-				/*
-				 * Date sqlDate = rs.getDate("createdAt"); LocalDate localDate =
-				 * sqlDate.toLocalDate(); lecture.setCreateAt(localDate);
-				 */
+                lecture.setTeacherId(rs.getString("teacherId"));
+                lecture.setLectureRoom(rs.getInt("lectureroom"));
+                
+                String teacherName = rs.getString("teacherName");
+                String teacherPhone = rs.getString("teacherPhone");
+                lecture.setTeacherName(teacherName); 
+                lecture.setPhone(teacherPhone); 
+
+               
             }
             return lecture;
         } catch (Exception ex) {
@@ -220,4 +224,85 @@ public class LectureDao {
 
         return lecture; // 결과 반환
     }
+    
+    //수강하지 않고 있는 강의 목록 보여주기(수강 신청용)
+    public List<Lecture> getLecturesExcludingStudent(String stuid) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT lectureId, name, img, category, capacity, lecturelevel, teacherId ");
+        query.append("FROM Lecture ");
+        query.append("WHERE lectureId NOT IN (");
+        query.append("    SELECT lectureId ");
+        query.append("    FROM LectureEnrollment ");
+        query.append("    WHERE stuid = ? ");
+        query.append(")");
+
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuid }); // stuid 파라미터 전달
+        List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 Lecture 객체에 매핑
+                Lecture lecture = new Lecture();
+                lecture.setLectureId(rs.getLong("lectureId"));
+                lecture.setName(rs.getString("name"));
+                lecture.setImg(rs.getString("img"));
+                lecture.setCategory(rs.getString("category"));
+                lecture.setCapacity(rs.getInt("capacity"));
+                lecture.setLevel(rs.getInt("lecturelevel"));
+
+                // 로그 찍기: Lecture 객체의 각 필드 값 출력
+                System.out.println("Lecture ID: " + lecture.getLectureId());
+                System.out.println("Lecture Name: " + lecture.getName());
+                System.out.println("Lecture Img: " + lecture.getImg());
+                System.out.println("Lecture Category: " + lecture.getCategory());
+                System.out.println("Lecture Capacity: " + lecture.getCapacity());
+                System.out.println("Lecture Level: " + lecture.getLevel());
+
+                lectureList.add(lecture); // 리스트에 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return lectureList; // 결과 반환
+    }
+    
+    
+    public List<Lecture> getMyLectureList(String stuid) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT l.lectureId, l.name, l.img, l.category, l.teacherId ");
+        query.append("FROM Lecture l ");
+        query.append("JOIN LectureEnrollment le ON l.lectureId = le.lectureId ");
+        query.append("WHERE le.stuId = ?");
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuid }); // stuid 파라미터 전달
+        List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 Lecture 객체에 매핑
+                Lecture lecture = new Lecture();
+                lecture.setLectureId(rs.getLong("lectureId"));
+                lecture.setName(rs.getString("name"));
+                lecture.setImg(rs.getString("img"));
+                lecture.setCategory(rs.getString("category"));
+ 
+                lectureList.add(lecture); // 리스트에 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return lectureList; // 결과 반환
+    }
+
 }
+
