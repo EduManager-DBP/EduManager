@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import controller.lecture.CreateLectureController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
+import controller.lecture.ViewMyLectureListController;
 import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
@@ -104,6 +105,7 @@ public class RequestMapping {
 
         // 내 스터디그룹 리스트 보기
         mappings.put("/study/list", new ViewMyStudyListController());
+        mappings.put("/lecture/list", new ViewMyLectureListController());
         
         mappings.put("/mypage/like-list", new ViewLikeListController());
 
