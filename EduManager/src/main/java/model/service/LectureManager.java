@@ -66,6 +66,11 @@ public class LectureManager {
         }
     }
     
+    public List<Lecture> LectureLikeList(String stuId) throws SQLException {
+        return lectureLikeDao.getLikedLectures(stuId);
+    }
+  
+    
     //정기 일정
     public int createSchedule (Schedule schedule)throws SQLException{
     	return scheduleDao.createSchedule(schedule);

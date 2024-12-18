@@ -25,7 +25,7 @@ public class ViewLikeListController implements Controller {
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
       
-      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);;
+      List<Lecture> lectureList = lectureManager.LectureLikeList(stuId);;
       List<StudyGroup> studyGroupList = studyGroupManager. StudyGroupLikeList(stuId);
 
 
