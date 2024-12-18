@@ -70,17 +70,21 @@
 					class="reviewIcon" />
 				<div class="reviewIconText">수강 후기</div>
 			</div>
-			<div class="reviewListContainer">
-				<div class="reviewContainer">
-					<img src="<c:url value='/images/profileImg.svg"' />"
-						class="reviewProfileImg" />
-					<div class="reviewTextContainer">
-						<div class="reviewUserName">OOO학생</div>
-						<div class="reviewText">수강 후기</div>
-					</div>
-				</div>
+			<div class="writeReviewContainer">
+				<textarea class="reviewTextArea"></textarea>
+				<input type="submit" class="reviewSubmit" value="작성"/>
 
 			</div>
+			    <div class="reviewListContainer">
+            <div class="reviewContainer">
+               <img src="<c:url value='/images/profileImg.svg"' />"
+                  class="reviewProfileImg" />
+               <div class="reviewTextContainer">
+                  <div class="reviewUserName">OOO학생</div>
+                  <div class="reviewText">수강 후기</div>
+               </div>
+            </div>
+			
 		</div>
 
 	</div>
