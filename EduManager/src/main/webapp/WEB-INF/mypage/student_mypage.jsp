@@ -21,8 +21,8 @@
 				<p>${curUserId} 학생</p>
 			</div>
 			<div id="mypage_btn_container">
-				<button class="mypageBtn setting">설정</button>
 				<button class="mypageBtn myinfo" onclick="window.location.href='<c:url value='/mypage/myInfo' />'">내 정보</button>
+				<button class="mypageBtn setting"  onclick="window.location.href='<c:url value='/mypage/like-list' />'">찜 목록</button>
 				<button class="mypageBtn myclass">내 강의</button>
 				<button class="mypageBtn mystudyroom" onclick="window.location.href='<c:url value='/study/list' />'">
 					내스터디그룹</button>

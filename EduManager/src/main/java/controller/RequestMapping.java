@@ -27,6 +27,7 @@ import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
 
 import controller.mypage.DeleteAccountController;
+import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
 import controller.study.CreateStudyController;
 import controller.study.UpdateStudyController;
@@ -103,6 +104,8 @@ public class RequestMapping {
 
         // 내 스터디그룹 리스트 보기
         mappings.put("/study/list", new ViewMyStudyListController());
+        
+        mappings.put("/mypage/like-list", new ViewLikeListController());
 
         mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
