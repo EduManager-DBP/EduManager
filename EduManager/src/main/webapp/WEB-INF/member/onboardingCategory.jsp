@@ -23,7 +23,7 @@
 		<!-- 분야는 db에서 받아와야 할 것 같긴 함.-->
 		<!-- action 링크 임시로 해놨습니다 -->
 		<form id="category" id="categoryForm" method="POST"
-			action="<c:url value='/student/register3'/>">
+			action="<c:url value='/student/register4'/>">
 			<div style="text-align: center; height: 100px">
 				<div class="title">관심있는 분야를 모두 선택해주세요</div>
 				<div style="color: #A6A9AF; margin-top: 20px;">
@@ -32,37 +32,16 @@
 				</div>
 			</div>
 			<div class="category">
-
-				<label> <input type="checkbox" name="categories" value="1" onclick="updateCategoryStyle(this)" />
-					토익
-				</label> 
-				<label> <input type="checkbox" name="categories" value="2" onclick="updateCategoryStyle(this)"/>
-					토플
-				</label> 
-				<label> <input type="checkbox" name="categories" value="3" onclick="updateCategoryStyle(this)"/>
-					수능
-				</label> 
-				<label> <input type="checkbox" name="categories" value="4" onclick="updateCategoryStyle(this)"/>
-					취업
-				</label> 
-				<label> <input type="checkbox" name="categories" value="5" onclick="updateCategoryStyle(this)"/>
-					공무원
-				</label> 
-				<label> <input type="checkbox" name="categories" value="6" onclick="updateCategoryStyle(this)"/>
-					자격증
-				</label> 
-				<label> <input type="checkbox" name="categories" value="7" onclick="updateCategoryStyle(this)"/>
-					IT
-				</label> 
-				<label> <input type="checkbox" name="categories" value="8" onclick="updateCategoryStyle(this)"/>
-					외국어
-				</label> 
-				<label> <input type="checkbox" name="categories" value="9" onclick="updateCategoryStyle(this)"/>
-					자기계발
-				</label> 
-				<label> <input type="checkbox" name="categories" value="10" onclick="updateCategoryStyle(this)"/>
-					기타
-				</label>
+			<!-- categories 확인 -->
+				<c:if test="${empty categories}">
+				    <p>카테고리가 없습니다.</p>
+				</c:if>
+				<c:forEach var="category" items="${categories}">
+					<label> 
+						<input type="checkbox" name="categories" value="${category.id}" onclick="updateCategoryStyle(this)" />
+						${category.name}
+					</label> 
+				</c:forEach>
 			</div>
 			<button type="submit" class="styled-button">에듀매니저 시작하기</button>
 		</form>

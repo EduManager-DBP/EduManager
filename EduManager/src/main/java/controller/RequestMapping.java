@@ -15,6 +15,7 @@ import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
+import controller.member.InterestCategoryController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
@@ -34,11 +35,14 @@ import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
 import controller.study.CreateStudyController;
 import controller.study.UpdateStudyController;
+import controller.study.ViewMyStudyController;
 
 //import controller.user.*;
 //import controller.comm.*;
 
 public class RequestMapping {
+
+
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
     // 각 요청 URI에 대한 controller 객체를 저장할 HashMap 생성
@@ -56,12 +60,13 @@ public class RequestMapping {
         mappings.put("/main/main", new MainController());
 
         // 회원가입 요청
-        mappings.put("/member/register/form", new RegisterMemberController());
-        mappings.put("/teacher/register", new RegisterTeacherController());
-        mappings.put("/student/register1", new RegisterStudent1Controller());
-        mappings.put("/student/register2", new RegisterStudent2Controller());
-        mappings.put("/student/register3", new RegisterStudent3Controller());
-        mappings.put("/student/register", new RegisterStudentController());
+		  mappings.put("/member/register/form", new RegisterMemberController());
+		  mappings.put("/teacher/register", new RegisterTeacherController());
+		  mappings.put("/student/register1", new RegisterStudent1Controller());
+		  mappings.put("/student/register2", new RegisterStudent2Controller());
+		  mappings.put("/student/register3", new InterestCategoryController());
+		  mappings.put("/student/register4", new RegisterStudent3Controller());
+		  mappings.put("/student/register", new RegisterStudentController());
 
         // 마이페이지 내 정보 보기
         mappings.put("/mypage/myInfo", new ViewMyInfoController());
@@ -75,7 +80,7 @@ public class RequestMapping {
         mappings.put("/member/delete", new DeleteMemberController());
 
         // study
-        mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
+      //		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
         mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
         mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
         mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
@@ -94,6 +99,10 @@ public class RequestMapping {
         // 스터디 수정
         mappings.put("/study/update", new UpdateStudyController());
 
+      		//내 스터디 상세보기
+//		mappings.put("/study/selectDate", new ViewMyStudyController());
+		mappings.put("/mystudy/view", new ViewMyStudyController());
+      
         // 강의 신청 페이지
         mappings.put("/lecture/over-view", new ViewLectureController());
         mappings.put("/lecture/like", new ToggleLectureLikeController());

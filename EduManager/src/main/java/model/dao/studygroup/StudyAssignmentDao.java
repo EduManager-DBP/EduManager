@@ -1,6 +1,7 @@
 package model.dao.studygroup;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class StudyAssignmentDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT studyassignmentid, duedate, title, description, createat, textfile, studygroupid ");
         query.append("FROM studyassignment ");
-        query.append("WHERE studyid = ?");
+        query.append("WHERE studygroupid = ?");
 
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studyId });
         List<Assignment> assignments = new ArrayList<>();
@@ -118,7 +119,45 @@ public class StudyAssignmentDao {
 
         return assignments;
     }
+ // 스터디 아이디랑 마감날짜로 스터디 과제 목록 조회
+    public List<Assignment> findAssignmentsByStudyIdAndDueDate(int studyId, LocalDate dueDate) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT studyassignmentid, duedate, title, description, createat, textfile, studygroupid ");
+        query.append("FROM studyassignment ");
+        query.append("WHERE studygroupid = ? AND TRUNC(duedate) = ?");
 
+        java.sql.Date sqlDueDate = java.sql.Date.valueOf(dueDate);
+
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studyId, sqlDueDate});
+        List<Assignment> assignments = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+            while (rs.next()) {
+                Assignment ass = new Assignment();
+                ass.setId(rs.getInt("studyassignmentid"));
+                ass.setTitle(rs.getString("title"));
+                ass.setDescription(rs.getString("description"));
+                ass.setTextFile(rs.getString("textfile"));
+                ass.setLectureId(rs.getInt("studygroupid"));
+
+                ass.setDueDate(rs.getDate("duedate").toLocalDate());
+                
+                Date sqlCreateAt = rs.getDate("createat"); 
+                if (sqlCreateAt != null) {
+                    ass.setCreateat(sqlCreateAt.toLocalDate());
+                }
+
+                assignments.add(ass); // 리스트에 과제 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+
+        return assignments;
+    }
     // 과제 삭제
     public void deleteAssignmentById(int assignmentId) {
         StringBuffer query = new StringBuffer();

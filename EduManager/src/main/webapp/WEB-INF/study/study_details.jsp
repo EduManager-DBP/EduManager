@@ -8,11 +8,12 @@
 
 <link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
 	type="text/css">
+<script src="<c:url value='/js/study_calendar.js' />"></script>
 <title>스터디 상세보기</title>
 </head>
 <body>
-	<div style="width: 90%; justify-self: center;"><jsp:include
-			page="../navigation/navigation.jsp" /></div>
+	<jsp:include page="../navigation/navigation.jsp" />
+
 	<div class="study-container">
 		<div class="study-detail">
 			<h2 class="study-title">스터디 상세보기</h2>
@@ -33,30 +34,20 @@
 					<span class="team-count">팀원들 (6/10)</span>
 				</div>
 				<ul class="member-list">
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">조은향</span>
-					</li>
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">김희선</span>
-					</li>
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">손다현</span>
-					</li>
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">김지은</span>
-					</li>
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">김솜솜</span>
-					</li>
-					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">양갱이</span>
-					</li>
+				<li class="member-item">
+							<div class="member-icon"></div> <span class="member-name">${studyInfo.leaderName}</span>
+						</li>
+			<%-- 		<c:forEach var="member" items="${memberList}">
+						<li class="member-item">
+							<div class="member-icon"></div> <span class="member-name">${member.name}</span>
+						</li>
+					</c:forEach> --%>
 				</ul>
 			</div>
 		</div>
 
 		<div class="mainInform">
-			<div class="title">단기간 토익 점수 상승을 위한 스터디</div>
+			<div class="title">${studyInfo.name}</div>
 			<div id="calendarHeader">
 				<span class="month"> <img
 					src="<c:url value='/images/previousMonth.svg' />"
@@ -66,82 +57,57 @@
 				</span> <span class="year">2024</span>
 			</div>
 			<table class="calendarTable">
-
 				<thead>
-					<th class="sunday">일</th>
-					<th>월</th>
-					<th>화</th>
-					<th>수</th>
-					<th>목</th>
-					<th>금</th>
-					<th>토 </th>
+					<tr>
+						<th class="sunday">일</th>
+						<th>월</th>
+						<th>화</th>
+						<th>수</th>
+						<th>목</th>
+						<th>금</th>
+						<th>토</th>
+					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="previousMonth">31</td>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-					</tr>
-					<tr>
-						<td class="sunday">7</td>
-						<td>8</td>
-						<td>9</td>
-						<td id="today">10</td>
-						<td>11</td>
-						<td>12</td>
-						<td>13</td>
-					</tr>
-					<tr>
-						<td class="sunday">14</td>
-						<td>15</td>
-						<td>16</td>
-						<td>17</td>
-						<td>18</td>
-						<td>19</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td class="sunday">21</td>
-						<td>22</td>
-						<td>23</td>
-						<td>24</td>
-						<td>25</td>
-						<td>26</td>
-						<td>27</td>
-					</tr>
-					<tr>
-						<td class="sunday">28</td>
-						<td>29</td>
-						<td>30</td>
-						<td>31</td>
-						<td class="nextMonth">1</td>
-						<td class="nextMonth">2</td>
-						<td class="nextMonth">3</td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
+				<!-- JavaScript에서 동적으로 채움 -->
 			</table>
+			<form id="dateForm" action="<c:url value='/mystudy/view' />"
+				method="post">
+				<input type="hidden" name="selectedDate" id="selectedDate" value="${selectedDate}">
+			</form>
 			<div class="main-container">
 				<div class="rectangle-1">
 					<div class="schedule">
 						<div class="schedule_title">일정</div>
 						<div class="schedule_content">
-							<li>content</li>
+							<c:forEach var="schedule" items="${regularSchedules}">
+								<li class="schedule-item">
+									${schedule.title} : ${schedule.startTime}~ ${schedule.endTime}
+									<!-- 다른 schedule 속성들도 필요에 따라 추가 -->
+								</li>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="notice">
 						<div class="notice_title">공지 사항</div>
 						<div class="notice_content">
-							<li>content</li>
+							<c:forEach var="notice" items="${noticeList}">
+								<li class="notice-item">
+									${notice.title}
+								</li>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="assignment">
 						<div class="assignment_title">과제</div>
 						<div class="assignment_content">
-							<li>content</li>
+
+							<c:forEach var="assignment" items="${assignmentList}">
+								<li class="assignment-item">
+									${assignment.title}
+								</li>
+							</c:forEach>
+
 						</div>
 					</div>
 					<div class="schedule-add-button">

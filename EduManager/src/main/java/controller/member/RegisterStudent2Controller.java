@@ -22,6 +22,6 @@ public class RegisterStudent2Controller implements Controller {
 
 		log.debug("age: {}", age);
 
-		return "/member/onboardingCategory.jsp";
+		return "redirect:/student/register3";
 	}
 }

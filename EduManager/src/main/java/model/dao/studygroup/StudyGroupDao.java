@@ -14,7 +14,6 @@ import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
 import model.domain.studyGroup.StudyGroupReview;
 
-
 public class StudyGroupDao {
    private JDBCUtil jdbcUtil = null;
 
@@ -107,24 +106,25 @@ public StudyGroup findGroupInfo(long groupId) {
     return null;
 }
 
-   // 특정 스터디그룹에 해당하는 정보 삭제
-   public int remove(String groupId) throws SQLException {
-      String sql = "DELETE FROM StudyGroup WHERE studyGroupId=?";
-      jdbcUtil.setSqlAndParameters(sql, new Object[] { groupId }); // JDBCUtil에 delete문과 매개 변수 설정
 
-      try {
-         int result = jdbcUtil.executeUpdate(); // delete 문 실행
-         return result;
-      } catch (Exception ex) {
-         jdbcUtil.rollback();
-         ex.printStackTrace();
-      } finally {
-         jdbcUtil.commit();
-         jdbcUtil.close(); // resource 반환
-      }
-      return 0;
-   }
-   
+	// 특정 스터디그룹에 해당하는 정보 삭제
+	public int remove(String groupId) throws SQLException {
+		String sql = "DELETE FROM StudyGroup WHERE studyGroupId=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { groupId }); // JDBCUtil에 delete문과 매개 변수 설정
+
+		try {
+			int result = jdbcUtil.executeUpdate(); // delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close(); // resource 반환
+		}
+		return 0;
+	}
+
 
    // 스터디그룹 전체 보여주기
    public List<StudyGroup> getStudyGroupList() throws SQLException {
@@ -181,9 +181,7 @@ public StudyGroup findGroupInfo(long groupId) {
          jdbcUtil.commit();
          jdbcUtil.close();
       }
-   }
-
-    
+   }    
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
         StringBuffer query = new StringBuffer();
@@ -450,8 +448,8 @@ public StudyGroup findGroupInfo(long groupId) {
             jdbcUtil.close();  // 자원 해제
         }
     }
-    
-    
+  
+  //스터디 그룹 리뷰 
     public List<StudyGroupReview> getReviewsByGroupId(long groupId) {
         StringBuffer query = new StringBuffer();
         query.append("""
@@ -491,6 +489,7 @@ public StudyGroup findGroupInfo(long groupId) {
         }
         return reviews;
     }
+
 
 }
 
