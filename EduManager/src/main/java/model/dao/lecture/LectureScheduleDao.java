@@ -15,40 +15,40 @@ public class LectureScheduleDao {
 		jdbcUtil = new JDBCUtil();
 	}
 
-	// 스케줄 조회 by 날짜 (년, 월)
-	public List<CalendarDTO> findSchedulesByDate(long lectureid) {
-		StringBuffer query = new StringBuffer();
-		query.append("SELECT * ");
-		query.append("FROM lectureschedule ");
-		query.append("WHERE STARTDATE = ?");
-
-		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureid });
-		List<CalendarDTO> schedules = new ArrayList<>();
-
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();
-			while (rs.next()) {
-				CalendarDTO schedule = new CalendarDTO();
-				schedule.setLectureId(lectureid);
-				schedule.setScheduleId(rs.getInt("lecturescheduleid"));
-				schedule.setDayOfWeek(rs.getString("dayofweek"));
-				schedule.setStartTime(rs.getTime("starttime").toLocalTime());
-				schedule.setEndTime(rs.getTime("endtime").toLocalTime());
-				schedule.setFrequency(rs.getString("frequency"));
-				schedule.setLectureId(lectureid);
-				schedule.setStartDate(rs.getDate("startdate").toLocalDate());
-				schedule.setType(rs.getString("type"));
-				schedule.setTitle(rs.getString("title"));
-				schedules.add(schedule);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();
-		}
-
-		return schedules;
-	}
+//	// 스케줄 조회 by 날짜 (년, 월)
+//	public List<CalendarDTO> findSchedulesByDate(long lectureid) {
+//		StringBuffer query = new StringBuffer();
+//		query.append("SELECT * ");
+//		query.append("FROM lectureschedule ");
+//		query.append("WHERE STARTDATE = ?");
+//
+//		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureid });
+//		List<CalendarDTO> schedules = new ArrayList<>();
+//
+//		try {
+//			ResultSet rs = jdbcUtil.executeQuery();
+//			while (rs.next()) {
+//				CalendarDTO schedule = new CalendarDTO();
+//				schedule.setLectureId(lectureid);
+//				schedule.setScheduleId(rs.getInt("lecturescheduleid"));
+//				schedule.setDayOfWeek(rs.getString("dayofweek"));
+//				schedule.setStartTime(rs.getTime("starttime").toLocalTime());
+//				schedule.setEndTime(rs.getTime("endtime").toLocalTime());
+//				schedule.setFrequency(rs.getString("frequency"));
+//				schedule.setLectureId(lectureid);
+//				schedule.setStartDate(rs.getDate("startdate").toLocalDate());
+//				schedule.setType(rs.getString("type"));
+//				schedule.setTitle(rs.getString("title"));
+//				schedules.add(schedule);
+//			}
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			jdbcUtil.close();
+//		}
+//
+//		return schedules;
+//	}
 	
 	// 스케줄 생성
 	public int createSchedule(Schedule schedule) {

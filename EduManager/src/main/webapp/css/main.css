@@ -20,7 +20,11 @@ a {
     margin: 0 auto;
 }
 
-
+/* .todayDate {
+    color: red !important; 강제 적용
+    font-weight: bold;
+}
+ */
 .tab-container {
   display: flex;
   justify-content: center;
@@ -44,7 +48,7 @@ td{text-align: left; vertical-align: text-top; width: 95px; height: 105px; paddi
 
 .sunday{color: red;}
 
-#today{font-weight: bolder;  color: #1E2A7C; 
+.todayDate{font-weight: bolder;  background: #CBDEFF; 
 }
 
 .year{font-size: 25px; font-weight:bold; float: right; padding-top: 10px; margin-right: 40px;}

@@ -2,6 +2,8 @@
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
+// 캘린더 가져오기 
+
 // 현재 연도와 월 가져오기
 java.util.Calendar calendar = java.util.Calendar.getInstance();
 int currentYear = calendar.get(java.util.Calendar.YEAR);
@@ -28,21 +30,23 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 <script>
 	// 이전/다음 달 이동 함수
 	function changeMonth(offset) {
-		const currentYear = parseInt(document.getElementById("currentYear").value);
-		const currentMonth = parseInt(document.getElementById("currentMonth").value);
-		let newYear = currentYear;
-		let newMonth = currentMonth + offset;
+        const currentYear = parseInt(document.getElementById("year").value);
+        const currentMonth = parseInt(document.getElementById("month").value);
+        let newYear = currentYear;
+        let newMonth = currentMonth + offset;
 
-		if (newMonth < 0) { // 이전 년도로 이동
-			newMonth = 11;
-			newYear--;
-		} else if (newMonth > 11) { // 다음 년도로 이동
-			newMonth = 0;
-			newYear++;
-		}
+        if (newMonth < 0) { // 이전 연도로 이동
+            newMonth = 11;
+            newYear--;
+        } else if (newMonth > 11) { // 다음 연도로 이동
+            newMonth = 0;
+            newYear++;
+        }
 
-		// 새로운 URL로 이동
-		window.location.href = `/main/main?year=${newYear}&month=${newMonth + 1}`;
+        // 폼 데이터 설정
+        document.getElementById("year").value = newYear;
+        document.getElementById("month").value = newMonth+1;
+        document.getElementById("calendarForm").submit();
 	}
 </script>
 <title>EduManager</title>
@@ -71,8 +75,6 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 			<div id="calendar">
 				<div id="calendarHeader">
 					<!-- 현재 연도와 월을 숨겨서 JavaScript에서 사용 -->
-					<input type="hidden" id="currentYear" value="<%=currentYear%>" />
-					<input type="hidden" id="currentMonth" value="<%=currentMonth%>" />
 					<img src="<c:url value='/images/previousMonth.svg' />"
 						id="previousMonthIcon" onclick="changeMonth(-1)" /> <span
 						class="month"><%=currentMonth + 1%>월</span> <img
@@ -93,17 +95,27 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 					</thead>
 					<tbody>
 						<%
+						java.util.Calendar now = java.util.Calendar.getInstance(); // 현재 날짜 다시 가져오기
+						int todayYear = now.get(java.util.Calendar.YEAR);
+						int todayMonth = now.get(java.util.Calendar.MONTH);
+						int todayDate = now.get(java.util.Calendar.DATE);
+						
 						int day = 1;
 						boolean started = false;
 						for (int i = 0; i < 6; i++) { // 최대 6줄 (달력 한 페이지 기준)
 							out.println("<tr>");
 							for (int j = 1; j <= 7; j++) { // 한 주의 7일
 								if (!started && j == firstDayOfWeek) {
-							started = true; // 달의 첫 시작점
+									started = true; // 달의 첫 시작점
 								}
 								if (started && day <= daysInMonth) {
-							out.println("<td>" + day + "</td>");
-							day++;
+									boolean isToday = (currentYear == todayYear && currentMonth == todayMonth && day == todayDate);
+									if (isToday) {
+				                        out.println("<td class='todayDate'>" + day + "</td>");
+				                    } else {
+				                        out.println("<td>" + day + "</td>");
+				                    }
+									 day++;
 								} else {
 							out.println("<td></td>");
 								}
@@ -116,6 +128,11 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 					</tbody>
 				</table>
 			</div>
+			<form id="calendarForm" method="get" action="<c:url value='/main/main' />">
+				<input type="hidden" id="year" name="year" value="<%=currentYear%>" />
+				<input type="hidden" id="month" name="month" value="<%=currentMonth%>" />
+			</form>
+
 		</div>
 	</div>
 </body>
