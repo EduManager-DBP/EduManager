@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.dao.studygroup.StudyGroupDao;
 import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
+import model.domain.studyGroup.StudyGroupApplication;
 import model.domain.studyGroup.StudyGroupReview;
 
 
@@ -63,7 +64,41 @@ public class StudyGroupManager {
     public boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
         return studyGroupDao.isMemberOfStudyGroup(memberId, studyGroupId);
     }
-
+    
+    
+    //스터디 가입 요청 보내기
+    public StudyGroupApplication createApplication(String memberId, long studyGroupId) throws SQLException {
+        return studyGroupDao.createApplication(memberId, studyGroupId);
+                 
+    }
+    
+    //스터디 가입 요청 리스트 
+    public List<StudyGroupApplication> getStudyRequestList(long studyGroupId) throws SQLException {
+        return  studyGroupDao.getStudyRequestList(studyGroupId);
+    }
+ 
+    
+    //스터디 요청 상태 확인하기
+    public String getStatusByMemberIdAndGroupId(String memberId, long studyGroupId) throws SQLException {
+        return studyGroupDao.getStatusByMemberIdAndGroupId(memberId, studyGroupId);
+                 
+    }
+    
+    
+    public void  acceptApplication(long applicationId) throws SQLException {
+        studyGroupDao.acceptApplication(applicationId);
+        
+    }
+    
+    public void  deleteApplication(long applicationId) throws SQLException {
+        studyGroupDao.deleteApplication(applicationId);
+        
+    }
+    public StudyGroupApplication findApplicationById(Long applicationId) throws SQLException{
+        return studyGroupDao.findById(applicationId);  // DAO에서 findById 호출
+    }
+   
+    
     
     //스터디 후기 작성
     public StudyGroupReview createStudyReview(StudyGroupReview groupReview) throws SQLException {

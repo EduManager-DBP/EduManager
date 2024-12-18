@@ -58,6 +58,11 @@ public class ViewStudyGroupController implements Controller {
         boolean isInclude = studyGroupManager.isMemberOfStudyGroup(stuId, groupId); // 인스턴스를 통해 호출
         System.out.println("소속 여부: "+ isInclude);
         request.setAttribute("isInclude", isInclude);
+        
+        
+        String requestStatus = studyGroupManager.getStatusByMemberIdAndGroupId(stuId, groupId);
+        System.out.println("요청 상태: "+ requestStatus);
+        request.setAttribute("requestStatus", requestStatus);
    
         // 강의 상세 페이지로 이동
         return "/study/study_overview.jsp";

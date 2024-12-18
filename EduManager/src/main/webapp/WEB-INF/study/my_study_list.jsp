@@ -36,39 +36,43 @@
 		</div>
 		<div class="tab_wrap">
 			<div id="Tab1" class="tab on">
-			<div class="class">
-				   <c:forEach var="studyGroup" items="${studyGroupListByLeader}">
-				   <div class="leaderRoom">
-            <div class="groupGallery">
-            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+				<div class="class">
+					<c:forEach var="studyGroup" items="${studyGroupListByLeader}">
+						<div class="leaderRoom">
+							<div class="groupGallery">
+								<a
+									href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
-                <img src="<c:url value='/images/white.png' />">
-                <div class="groupGalleryTitle">${studyGroup.name}</div>
-                <div class="groupGalleryCategory">${studyGroup.category}</div>
-              </a>
-            </div>
-            <button class="leaderRoomBtn"  onclick="window.location.href='<c:url value='/study/requests' />'">가입 요청 확인하기</button>
+									<img src="<c:url value='/images/white.png' />">
+									<div class="groupGalleryTitle">${studyGroup.name}</div>
+									<div class="groupGalleryCategory">${studyGroup.category}</div>
+								</a>
+							</div>
+							<button class="leaderRoomBtn"
+								onclick="window.location.href='<c:url value='/study/requests' />?groupId=${studyGroup.studyGroupId}'">
+								가입 요청 확인하기</button>
+						</div>
+					</c:forEach>
 				</div>
-        </c:forEach>
 			</div>
-			</div>
-					
+
 			<div id="Tab2" class="tab">
-			<div class="class">
-				   <c:forEach var="studyGroup" items="${studyGroupListByMember}">
-				<div class="studyRoom">
-					<div class="groupGallery">
-            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+				<div class="class">
+					<c:forEach var="studyGroup" items="${studyGroupListByMember}">
+						<div class="studyRoom">
+							<div class="groupGallery">
+								<a
+									href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
-                <img src="<c:url value='/images/white.png' />">
-                <div class="groupGalleryTitle">${studyGroup.name}</div>
-                <div class="groupGalleryCategory">${studyGroup.category}</div>
-              </a>
-            </div>
+									<img src="<c:url value='/images/white.png' />">
+									<div class="groupGalleryTitle">${studyGroup.name}</div>
+									<div class="groupGalleryCategory">${studyGroup.category}</div>
+								</a>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
- </c:forEach>
 			</div>
-		</div>
 
 		</div>
 	</div>
