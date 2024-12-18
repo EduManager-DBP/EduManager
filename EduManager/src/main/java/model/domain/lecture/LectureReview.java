@@ -1,12 +1,21 @@
 package model.domain.lecture;
 
-import model.domain.member.Student;
-
 public class LectureReview {
     private long lectureReviewId;
-    private String reviewTest;
-    private Lecture lectureId;
-    private Student memberId;
+    private String reviewText;
+    private long lectureId;
+    private String memberId;
+    private String memberName;
+    
+    public LectureReview() {}
+
+    public LectureReview(Long lectureReviewId, String reviewText, long lectureId, String memberId, String memberName) {
+        this.lectureReviewId = lectureReviewId;
+        this.reviewText = reviewText;
+        this.lectureId = lectureId;
+        this.memberId = memberId;
+        this.memberName = memberName;
+    }
 
     public long getLectureReviewId() {
         return lectureReviewId;
@@ -16,33 +25,42 @@ public class LectureReview {
         this.lectureReviewId = lectureReviewId;
     }
 
-    public String getReviewTest() {
-        return reviewTest;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setReviewTest(String reviewTest) {
-        this.reviewTest = reviewTest;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
-    public Lecture getLectureId() {
+    public long getLectureId() {
         return lectureId;
     }
 
-    public void setLectureId(Lecture lectureId) {
+    public void setLectureId(long lectureId) {
         this.lectureId = lectureId;
     }
 
-    public Student getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Student memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
+    
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+   
 
     @Override
     public String toString() {
-        return "LectureReview [lectureReviewId=" + lectureReviewId + ", reviewTest=" + reviewTest + ", lectureId="
+        return "LectureReview [lectureReviewId=" + lectureReviewId + ", reviewTest=" + reviewText + ", lectureId="
                 + lectureId + ", memberId=" + memberId + "]";
     }
 

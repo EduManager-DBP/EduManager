@@ -3,10 +3,12 @@ package model.service;
 import java.sql.SQLException;
 import model.dao.lecture.LectureDao;
 import model.dao.lecture.LectureLikeDao;
+import model.dao.lecture.LectureReviewDao;
 import model.dao.lecture.LectureScheduleDao;
 import model.domain.Schedule;
 
 import model.domain.lecture.Lecture;
+import model.domain.lecture.LectureReview;
 
 import java.util.List;
 
@@ -16,11 +18,13 @@ public class LectureManager {
 
     private LectureScheduleDao scheduleDao;
     private LectureLikeDao lectureLikeDao;
+    private LectureReviewDao lectureReviewDao;
     
     private LectureManager() {
         lectureDao = new LectureDao();
         scheduleDao = new LectureScheduleDao();
        lectureLikeDao = new LectureLikeDao();
+       lectureReviewDao = new LectureReviewDao();
     }
 
     public static LectureManager getInstance() {
@@ -72,6 +76,22 @@ public class LectureManager {
     public List<Lecture> LectureLikeList(String stuId) throws SQLException {
         return lectureLikeDao.getLikedLectures(stuId);
     }
+    
+    //현재 수강중인 강의인지 확인
+    public boolean isEnrolledInLecture(String memberId, long lectureId) throws SQLException {
+        return lectureReviewDao.isEnrolledInLecture(memberId, lectureId);
+    }
+    
+    //강의 후기 작성
+    public LectureReview createLectureReview(LectureReview lectureReview) throws SQLException {
+        return lectureReviewDao.insertReview(lectureReview);       
+    }
+   
+    //강의 후기 가져오기
+    public List<LectureReview> getReviewsByLectureId(Long lectureId) throws SQLException {
+        return lectureReviewDao.getReviewsByLectureId(lectureId);
+    }
+    
     
     
     //정기 일정

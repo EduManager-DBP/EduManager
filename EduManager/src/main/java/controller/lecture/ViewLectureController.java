@@ -1,11 +1,14 @@
 package controller.lecture;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
 import model.domain.lecture.Lecture;
+import model.domain.lecture.LectureReview;
 import model.service.LectureManager;
 
 
@@ -23,12 +26,22 @@ public class ViewLectureController implements Controller {
         String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
 
         // LectureManager를 통해 강의 정보 조회
-        LectureManager manager = LectureManager.getInstance();
-        Lecture lecture = manager.findLectureById(lectureId);
-
-        boolean isLiked = manager.isLikedByUser(stuId, lectureId); // 인스턴스를 통해 호출
+        LectureManager lectureManager = LectureManager.getInstance();
+        Lecture lecture = lectureManager.findLectureById(lectureId);
+        
+        List<LectureReview> lectureReviewList = lectureManager.getReviewsByLectureId(lectureId);
+      
+        
+        boolean isLiked = lectureManager.isLikedByUser(stuId, lectureId); // 인스턴스를 통해 호출
         System.out.println("좋아요 여부: "+ isLiked );
         request.setAttribute("isLiked", isLiked);
+        
+        boolean isInclude = lectureManager.isEnrolledInLecture(stuId, lectureId); // 인스턴스를 통해 호출
+        System.out.println("수강 여부: "+ isInclude );
+        request.setAttribute("isInclude", isInclude);
+        
+        
+       
         
         // 강의 상세 정보 출력 (디버깅용)
         System.out.println("강의 ID: " + lecture.getLectureId() +
@@ -37,6 +50,11 @@ public class ViewLectureController implements Controller {
                            ", 강의실: " + lecture.getLectureRoom() +
                            ", 강사 이름: " + lecture.getTeacherName() +
                            ", 강사 번호: " + lecture.getPhone());
+        
+        for (LectureReview review : lectureReviewList) {
+            System.out.println("리뷰 내용: " + review.getMemberName());
+            System.out.println("리뷰 내용: " + review.getReviewText());
+        }
 
         // 로그인한 사용자 ID를 request에 저장
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
@@ -47,6 +65,7 @@ public class ViewLectureController implements Controller {
         request.setAttribute("lectureroom", lecture.getLectureRoom());
         request.setAttribute("description", lecture.getDescription());
         request.setAttribute("lectureroom", lecture.getLectureRoom());
+        request.setAttribute("reviewList", lectureReviewList);
         
         
         // 강의 상세 페이지로 이동
