@@ -16,10 +16,11 @@ public class RegisterStudent2Controller implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
+		String age = request.getParameter("age");
 		// 입력받은 데이터 세션에 저장
-		session.setAttribute("age", request.getParameter("age"));
+		session.setAttribute("age", age);
 
-		log.debug("age: ", request.getParameter("age"));
+		log.debug("age: {}", age);
 
 		return "redirect:/student/register3";
 	}

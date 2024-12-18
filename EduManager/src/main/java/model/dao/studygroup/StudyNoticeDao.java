@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.JDBCUtil;
+import model.domain.Assignment;
 import model.domain.Notice;
 
 import java.sql.Date;
@@ -95,6 +96,38 @@ public class StudyNoticeDao {
                 Date sqlDate = rs.getDate("createat");
                 LocalDate localDate = sqlDate.toLocalDate();
                 notice.setCreateat(localDate);
+
+                notices.add(notice); // 리스트에 공지 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+
+        return notices;
+    }
+ // 강의 아이디로 강의 공지 목록 조회
+    public List<Notice> findNoticesByStudyIdAndDueDate(int studygroupid, LocalDate createdAt) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT studynoticeid, title, description, createat ");
+        query.append("FROM studynotice ");
+        query.append("WHERE studygroupid = ? AND TRUNC(createat) = ?");
+
+        java.sql.Date sqlDueDate = java.sql.Date.valueOf(createdAt);
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studygroupid, sqlDueDate });
+        List<Notice> notices = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+            while (rs.next()) {
+                Notice notice = new Notice();
+                notice.setId(rs.getInt("studynoticeid"));
+                notice.setTitle(rs.getString("title"));
+                notice.setDescription(rs.getString("description"));
+                notice.setStudyId(studygroupid);
+                notice.setCreateat(rs.getDate("createat").toLocalDate());
 
                 notices.add(notice); // 리스트에 공지 추가
             }

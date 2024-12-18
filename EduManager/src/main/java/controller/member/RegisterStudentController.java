@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import model.domain.member.Member;
 import model.domain.member.Student;
-import model.service.ExistingMemberException;
-import model.service.MemberManager;
-import model.service.StudentManager;
+import model.service.member.ExistingMemberException;
+import model.service.member.MemberManager;
+import model.service.member.StudentManager;
 
 public class RegisterStudentController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(RegisterStudentController.class);
@@ -35,6 +35,8 @@ public class RegisterStudentController implements Controller {
 		String phone = (String) session.getAttribute("phone");
 		String ageRange = (String) session.getAttribute("age");
 
+
+		log.debug("Create Student : {}", id, pwd, name, email, phone, ageRange);
 
 		// 학생 객체 생성
 		Student student = new Student(id, pwd, name, email, phone, ageRange);
