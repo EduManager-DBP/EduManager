@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
+import controller.lecture.CreateLectureReviewController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
 import controller.lecture.ViewMyLectureListController;
@@ -24,6 +25,7 @@ import controller.member.RegisterStudent3Controller;
 import controller.member.RegisterStudentController;
 import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.CreateStudyReviewController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
@@ -117,6 +119,12 @@ public class RequestMapping {
         mappings.put("/lecture/list", new ViewMyLectureListController());
         
         mappings.put("/mypage/like-list", new ViewLikeListController());
+        
+        //강의 리뷰 생성
+        mappings.put("/lecture/createReview", new CreateLectureReviewController());
+        mappings.put("/study/createReview", new CreateStudyReviewController());
+        
+        
 
         mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));

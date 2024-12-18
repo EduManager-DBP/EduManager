@@ -108,4 +108,5 @@ public class StudyGroup {
 	public void setLeaderName(String leaderName) {
 		this.leaderName = leaderName;
 	}
+
 }

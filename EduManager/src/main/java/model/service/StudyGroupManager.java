@@ -3,8 +3,12 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import model.dao.studygroup.StudyGroupDao;
+import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
+import model.domain.studyGroup.StudyGroupReview;
 
 
 public class StudyGroupManager {
@@ -54,5 +58,24 @@ public class StudyGroupManager {
             studyGroupDao.addLike(memberId, studyGroupId);
         }
     }
+    
+
+    public boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
+        return studyGroupDao.isMemberOfStudyGroup(memberId, studyGroupId);
+    }
+
+    
+    //스터디 후기 작성
+    public StudyGroupReview createStudyReview(StudyGroupReview groupReview) throws SQLException {
+        return studyGroupDao.insertReview(groupReview);
+                 
+    }
+   
+    //강의 후기 가져오기
+    public List< StudyGroupReview> getReviewsByGroupId(Long groupId) throws SQLException {
+        return  studyGroupDao.getReviewsByGroupId(groupId);
+    }
+    
+   
     
 }
