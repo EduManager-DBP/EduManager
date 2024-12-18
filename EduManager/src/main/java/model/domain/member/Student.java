@@ -1,6 +1,5 @@
 package model.domain.member;
 
-import java.util.List;
 
 public class Student {
 	private String id;
@@ -9,10 +8,8 @@ public class Student {
 	private String email;
 	private String phone;
 	private String ageRange; // 10대: 1, 20대: 2, 30대:3, 그 이상: 4
-	private List<String> interestCategory;
 
-	public Student(String id, String pwd, String name, String email, String phone, String ageRange,
-			List<String> interestCategory) {
+	public Student(String id, String pwd, String name, String email, String phone, String ageRange) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -20,7 +17,7 @@ public class Student {
 		this.email = email;
 		this.phone = phone;
 		this.ageRange = ageRange;
-		this.interestCategory = interestCategory;
+
 	}
 
 	public String getId() {
@@ -71,13 +68,6 @@ public class Student {
 		this.ageRange = ageRange;
 	}
 
-	public List<String> getInterestCategory() {
-		return interestCategory;
-	}
-
-	public void setInterestCategory(List<String> interestCategory) {
-		this.interestCategory = interestCategory;
-	}
 
 	/* 비밀번호 검사 */
 	public boolean matchPassword(String pwd) {

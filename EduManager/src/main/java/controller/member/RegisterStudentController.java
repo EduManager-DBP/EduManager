@@ -1,7 +1,6 @@
 package controller.member;
 
-import java.util.Arrays;
-import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,12 +35,9 @@ public class RegisterStudentController implements Controller {
 		String phone = (String) session.getAttribute("phone");
 		String ageRange = (String) session.getAttribute("age");
 
-		// interest 데이터를 배열로 가져오기
-		String[] interestArray = ((String) session.getAttribute("interest")).split(",");
-		List<String> interestCategory = Arrays.asList(interestArray);
 
 		// 학생 객체 생성
-		Student student = new Student(id, pwd, name, email, phone, ageRange, interestCategory);
+		Student student = new Student(id, pwd, name, email, phone, ageRange);
 		Member member = new Member(id, pwd, name, email, phone);
 
 		try {
