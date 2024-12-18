@@ -83,9 +83,16 @@
 						placeholder="후기를 작성해주세요"></textarea>
 
 					<!-- 리뷰 제출 버튼 -->
-					<input type="button" class="reviewSubmit" value="작성"
-						onclick="document.getElementById('reviewForm').submit();" />
-				</form>
+					<c:choose>
+						<c:when test="${isInclude}">
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="document.getElementById('reviewForm').submit();" />
+						</c:when>
+						<c:otherwise>
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="alert('수강생만 후기를 작성할 수 있어요!')" />
+						</c:otherwise>
+					</c:choose>				</form>
 			</div>
 			<div class="reviewListContainer">
 				<c:forEach var="group" items="${reviewList}">
