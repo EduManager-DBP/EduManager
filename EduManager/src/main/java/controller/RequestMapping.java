@@ -14,6 +14,7 @@ import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
+import controller.member.InterestCategoryController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
@@ -39,6 +40,7 @@ import controller.study.ViewMyStudyController;
 
 public class RequestMapping {
 
+
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
     // 각 요청 URI에 대한 controller 객체를 저장할 HashMap 생성
@@ -56,12 +58,13 @@ public class RequestMapping {
         mappings.put("/main/main", new MainController());
 
         // 회원가입 요청
-        mappings.put("/member/register/form", new RegisterMemberController());
-        mappings.put("/teacher/register", new RegisterTeacherController());
-        mappings.put("/student/register1", new RegisterStudent1Controller());
-        mappings.put("/student/register2", new RegisterStudent2Controller());
-        mappings.put("/student/register3", new RegisterStudent3Controller());
-        mappings.put("/student/register", new RegisterStudentController());
+		  mappings.put("/member/register/form", new RegisterMemberController());
+		  mappings.put("/teacher/register", new RegisterTeacherController());
+		  mappings.put("/student/register1", new RegisterStudent1Controller());
+		  mappings.put("/student/register2", new RegisterStudent2Controller());
+		  mappings.put("/student/register3", new InterestCategoryController());
+		  mappings.put("/student/register4", new RegisterStudent3Controller());
+		  mappings.put("/student/register", new RegisterStudentController());
 
         // 마이페이지 내 정보 보기
         mappings.put("/mypage/myInfo", new ViewMyInfoController());
