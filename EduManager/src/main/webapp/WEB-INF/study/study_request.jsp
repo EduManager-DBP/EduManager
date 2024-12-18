@@ -21,10 +21,29 @@
 					<img src="<c:url value='/images/profileImg.svg' />" class="requestProfile" />
 					<div class="requestProfileName">${studyGroup.memberName}</div>
 				</div>
+				
+				
 				<div class="buttonContainter">
-					<input type="button" id="acceptBtn" value="수락" /> <input
+				
+				<form action="<c:url value='/studyGroup/accepted' />" method="post"
+					id="acceptedForm">
+					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					<input type="hidden" name="studyGroupApplicationId" value="${studyGroup.studyGroupApplicationId}" />
+					<input type="hidden" name="groupId" value="${studyGroup.studyGroupId}" /> 
+					<input type="button" id="acceptBtn" value="수락" onclick="document.getElementById('acceptedForm').submit();" />
+					
+				</form>
+				
+				<form action="<c:url value='/studyGroup/accepted' />" method="post"
+					id="acceptedForm">
+					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					<input type="hidden" name="studyGroupApplicationId" value="${studyGroup.studyGroupApplicationId}" />
+					<input type="hidden" name="groupId" value="${studyGroup.studyGroupId}" /> 
+					<input
 						type="button" id="rejectBtn" value="거절" />
-				</div>
+			
+				</form>
+					 
 			</div>
         </c:forEach>
 			

@@ -303,6 +303,31 @@ public StudyGroup findGroupInfo(long groupId) {
         return groupList;
     }
     
+    public StudyGroupApplication findById(Long applicationId) throws SQLException {
+        StudyGroupApplication application = null;
+        
+        String sql = "SELECT studygroupapplicationId, status, createat, stuId, studygroupid " +
+                "FROM studygroupapplication " +
+                "WHERE studygroupapplicationId = ?";
+        
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{applicationId});
+        ResultSet rs = jdbcUtil.executeQuery();
+
+        if (rs.next()) {
+            application = new StudyGroupApplication();
+            application.setStudyGroupApplicationId(rs.getLong("studygroupapplicationId"));
+            application.setStatus(rs.getString("status"));
+            application.setCreateAt(rs.getDate("createat"));
+            application.setMemberId(rs.getString("stuId"));
+            application.setStudyGroupId(rs.getLong("studygroupid"));
+            application.setMemberName(rs.getString("student_name"));
+        }
+        
+        jdbcUtil.close();
+        return application;
+    }
+    
     
  // 요청 상태를 "수락"으로 변경
     public void acceptApplication(long applicationId) throws SQLException {

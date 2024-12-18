@@ -25,6 +25,7 @@ import controller.member.RegisterStudent3Controller;
 import controller.member.RegisterStudentController;
 import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.AcceptedRequestController;
 import controller.studyGroup.CreateStudyReviewController;
 import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
@@ -130,6 +131,10 @@ public class RequestMapping {
 
         //스터디 그룹 가입 요청 리스트
         mappings.put("/study/requests", new ViewStudyRequestListController());
+        
+        //스터디 그룹 가입 요청 수락
+        mappings.put("/studyGroup/accepted", new AcceptedRequestController());
+        
         
         
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));

@@ -85,6 +85,17 @@ public class StudyGroupManager {
     }
     
     
+    public void  acceptApplication(long applicationId) throws SQLException {
+        studyGroupDao.acceptApplication(applicationId);
+        
+    }
+    
+    public StudyGroupApplication findApplicationById(Long applicationId) throws SQLException{
+        return studyGroupDao.findById(applicationId);  // DAO에서 findById 호출
+    }
+   
+    
+    
     //스터디 후기 작성
     public StudyGroupReview createStudyReview(StudyGroupReview groupReview) throws SQLException {
         return studyGroupDao.insertReview(groupReview);
