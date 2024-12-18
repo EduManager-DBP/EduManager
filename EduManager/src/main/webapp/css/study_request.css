@@ -45,10 +45,15 @@ a {
 }
 
 .requestContainer {
-	
+	display: flex;
 	justify-content: space-between;
 	padding: 10px;
 	border-radius: 0px;
+}
+
+.buttonContainter{
+	display:flex;
+
 }
 
 .requestListContainer {
@@ -72,7 +77,8 @@ a {
 	font-size: 20px;
 	font-weight: 600;
 	width: 80px;
-	height: 60px;
+	height: 55px;
+	margin-top: 10px;
 	margin-left: 15px;
 	background-color: lightgrey;
 	color: #643E23;
