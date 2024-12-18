@@ -27,6 +27,17 @@ public class StudyGroupManager {
         return studyGroupDao.getStudyGroupsExcludingStudent(stuId);
     }
 
+    public List<StudyGroup> StudyGroupListByLeader(String stuId) throws SQLException {
+        return studyGroupDao.getStudyGroupListByLeader(stuId);
+    }
+    
+    public List<StudyGroup> StudyGroupListByMember(String stuId) throws SQLException {
+        return studyGroupDao.getStudyGroupListByMember(stuId);
+    }
+    
+    public List<StudyGroup> StudyGroupLikeList(String stuId) throws SQLException {
+        return studyGroupDao.getLikedStudyGroups(stuId);
+    }
     
     public boolean isLikedByUser(String memberId, long studyGroupId) throws SQLException {
         return studyGroupDao.isLikedByUser(memberId, studyGroupId);

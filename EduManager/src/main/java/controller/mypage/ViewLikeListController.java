@@ -1,4 +1,4 @@
-package controller.lecture;
+package controller.mypage;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
 
-public class ExcludingLectureAndStudyGroupController implements Controller {
+public class ViewLikeListController implements Controller {
     
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 로그인 여부 확인
@@ -25,8 +25,8 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
       
-      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);;
-      List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(stuId);
+      List<Lecture> lectureList = lectureManager.LectureLikeList(stuId);;
+      List<StudyGroup> studyGroupList = studyGroupManager. StudyGroupLikeList(stuId);
 
 
       System.out.println("강의 목록:");
@@ -47,13 +47,11 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
       request.setAttribute("lectureList", lectureList);
       request.setAttribute("studyGroupList", studyGroupList);
 
-      return "/registration/registration.jsp";
+      return "/mypage/likeList.jsp";
         
         
 
         
         
-       
     }
-
-}
+   }

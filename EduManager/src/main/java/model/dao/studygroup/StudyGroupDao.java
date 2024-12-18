@@ -232,7 +232,7 @@ private JDBCUtil jdbcUtil = null;
         String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category " +
                      "FROM StudyGroup sg " +
                      "JOIN StudyGroupApplication sga ON sg.studyGroupId = sga.studyGroupId " +
-                     "WHERE sga.memberId = ? AND sga.status = '수락' AND sg.leaderId != ?";
+                     "WHERE sga.stuId = ? AND sga.status = '수락' AND sg.leaderId != ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, memberId}); // memberId를 두 번 파라미터로 설정
         ResultSet rs = jdbcUtil.executeQuery();
@@ -321,6 +321,34 @@ private JDBCUtil jdbcUtil = null;
             jdbcUtil.close(); // resource 반환
         }
     }
+    
+    //좋아요 누른 스터디 그룹들 가지고 오기
+    public List<StudyGroup> getLikedStudyGroups(String memberId) throws SQLException {
+        List<StudyGroup> groupList = new ArrayList<>();
+        
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.category " +
+                     "FROM StudyGroupLike sgLike " +
+                     "JOIN StudyGroup sg ON sgLike.studyGroupId = sg.studyGroupId " +
+                     "WHERE sgLike.stuId = ?";
+                     
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId});
+        ResultSet rs = jdbcUtil.executeQuery();
+        
+        
+        while (rs.next()) {
+            StudyGroup group = new StudyGroup();
+            group.setStudyGroupId(rs.getInt("studyGroupId"));
+            group.setName(rs.getString("name"));
+            group.setImg(rs.getString("img"));
+            group.setCategory(rs.getString("category"));
+            
+            groupList.add(group);
+        }
+        
+        jdbcUtil.close();
+        return groupList;
+    }
+    
     //리뷰 작성을 위한 스터디 그룹 소속인지 아닌지 확인
     private boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
         String sql = "SELECT COUNT(*) FROM StudyGroupApplication WHERE studyGroupId = ? AND memberId = ? AND status = '수락'";

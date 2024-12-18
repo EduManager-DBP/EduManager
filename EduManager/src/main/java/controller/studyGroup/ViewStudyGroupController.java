@@ -41,7 +41,7 @@ public class ViewStudyGroupController implements Controller {
                            );
 
         // 로그인한 사용자 ID를 request에 저장
-        request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
+        request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("groupId", groupId);
         request.setAttribute("groupName",  group.getName());
         request.setAttribute("description", group.getDescription());

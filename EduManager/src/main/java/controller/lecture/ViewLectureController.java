@@ -39,7 +39,7 @@ public class ViewLectureController implements Controller {
                            ", 강사 번호: " + lecture.getPhone());
 
         // 로그인한 사용자 ID를 request에 저장
-        request.setAttribute("curUserId", MemberSessionUtils.getLoginMemberId(request.getSession()));
+        request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("lectureId",  lectureId);
         request.setAttribute("lectureName",  lecture.getName());
         request.setAttribute("teacherName", lecture.getTeacherName());

@@ -50,6 +50,9 @@ public class LectureManager {
         return lectureDao.getLecturesExcludingStudent(stuId);
     }
     
+    public List<Lecture> MyLectureList(String stuId) throws SQLException {
+        return lectureDao.getMyLectureList(stuId);
+    }
     
     public boolean isLikedByUser(String memberId, long lectureId) throws SQLException {
         return lectureLikeDao.isLikedByUser(memberId, lectureId);
@@ -65,6 +68,11 @@ public class LectureManager {
             lectureLikeDao.addLike(memberId, lectureId);
         }
     }
+    
+    public List<Lecture> LectureLikeList(String stuId) throws SQLException {
+        return lectureLikeDao.getLikedLectures(stuId);
+    }
+    
     
     //정기 일정
     public int createSchedule (Schedule schedule)throws SQLException{

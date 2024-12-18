@@ -12,7 +12,7 @@ import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
 
-public class ExcludingLectureAndStudyGroupController implements Controller {
+public class ViewMyLectureListController  implements Controller {
     
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 로그인 여부 확인
@@ -23,10 +23,8 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
       String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
         
       LectureManager lectureManager = LectureManager.getInstance();
-      StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
       
-      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);;
-      List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(stuId);
+      List<Lecture> lectureList = lectureManager.MyLectureList(stuId);;
 
 
       System.out.println("강의 목록:");
@@ -35,19 +33,10 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
                              ", 강의 이름: " + lecture.getName() +
                              ", 카테고리: " + lecture.getCategory());
       }
-      
-      System.out.println("강의 목록:");
-      for (StudyGroup studyGroup : studyGroupList) {
-          System.out.println("강의 ID: " + studyGroup.getStudyGroupId() +
-                             ", 강의 이름: " + studyGroup.getName() +
-                             ", 카테고리: " + studyGroup.getCategory());
-      }
-      
-
+     
       request.setAttribute("lectureList", lectureList);
-      request.setAttribute("studyGroupList", studyGroupList);
 
-      return "/registration/registration.jsp";
+      return "/lecture/my_lecture_list.jsp";
         
         
 
@@ -57,3 +46,6 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
     }
 
 }
+
+
+

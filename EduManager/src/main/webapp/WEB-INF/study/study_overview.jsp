@@ -39,7 +39,7 @@
 						<form action="<c:url value='/studyGroup/like' />" method="post"
 							id="likeForm">
 							<input type="hidden" name="groupId" value="${groupId}" /> <input
-								type="hidden" name="memberId" value="${curUserId}" />
+								type="hidden" name="memberId" value="${userId}" />
 							<c:choose>
 								<c:when test="${isLiked}">
 									<img src="<c:url value='/images/likeButton.svg' />"
