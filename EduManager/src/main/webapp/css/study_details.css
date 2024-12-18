@@ -1,27 +1,14 @@
-body, html {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	font-family: 'Pretendard', sans-serif;
+#logo-link {
+	margin-left: 100px;
+	
+	margin-top: 30px;
 }
 
-ul {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	outline: none;
-}
-
-.page {
-	width: 1300px;
-	margin: 0 auto;
-}
-
-a {
-	text-decoration: none;
-	outline: none;
+header > nav {
+    width: 600px;
+    height: 100%;
+    margin-right: 100px;
+    
 }
 
 .title {
@@ -57,7 +44,7 @@ a {
 	text-align: left;
 	vertical-align: text-top;
 	width: 95px;
-	height: 105px;
+	height: 70px;
 	padding: 10px
 }
 
@@ -541,4 +528,28 @@ input, select, textarea, button {
 	font-weight: 600;
 	line-height: 17.9px;
 	text-align: left;
+}
+/*추가*/
+#today {
+    font-weight: bold;
+    color: red;
+}
+
+.previousMonth, .nextMonth {
+    color: #ccc;
+}
+/*
+.calendarTable td {
+    text-align: center;
+    padding: 10px;
+}*/
+/* 선택된 날짜에 대한 스타일 */
+/*.selected-date {
+    font-size: 1.5em;  글씨 크기 증가 
+    background-color: #f0f0f0;  배경색 추가 (선택된 날짜 구분) 
+    font-weight: bold;  글씨 굵게 
+}*/
+.selected {
+    font-weight: bold; /* 글씨를 굵게 표시 (선택사항) */
+    color: #007bff; /* 색상 변경 (선택사항) */
 }

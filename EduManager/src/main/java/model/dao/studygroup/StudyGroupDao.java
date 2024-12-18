@@ -10,94 +10,97 @@ import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
 
 
-
 public class StudyGroupDao {
-private JDBCUtil jdbcUtil = null;
-    
-    public StudyGroupDao() {         
-        jdbcUtil = new JDBCUtil();  // JDBCUtil 객체 생성
-    }
-    
-	public StudyGroup create(StudyGroup group) throws SQLException {
-		try {
-			String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId) "
-					+ "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";
-			Object[] param = new Object[] { group.getName(), group.getImg(), group.getDescription(),
-					group.getCapacity(), group.getCategory(), group.getLeaderId() };
+   private JDBCUtil jdbcUtil = null;
 
-			jdbcUtil.setSqlAndParameters(sql, param);
+   public StudyGroupDao() {
+      jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
+   }
 
-			// StudyGroup에 id setting
-			String key[]={"studyGroupId"};  // PK 컬럼(들)의 이름 배열       
-			int result = jdbcUtil.executeUpdate(key);
+   public StudyGroup create(StudyGroup group) throws SQLException {
+      try {
+         String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId) "
+               + "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";
+         Object[] param = new Object[] { group.getName(), group.getImg(), group.getDescription(),
+               group.getCapacity(), group.getCategory(), group.getLeaderId() };
+
+         jdbcUtil.setSqlAndParameters(sql, param);
+
+         // StudyGroup에 id setting
+         String key[]={"studyGroupId"};  // PK 컬럼(들)의 이름 배열       
+         int result = jdbcUtil.executeUpdate(key);
             if (result > 0) {
-            	ResultSet rs = jdbcUtil.getGeneratedKeys();
-    		   	if(rs.next()) {
-    		   		long generatedKey = rs.getLong(1);   // 생성된 PK 값
-    		   		group.setStudyGroupId(generatedKey); 	// id필드에 저장  
-    		   	}
-    			return group;
+               ResultSet rs = jdbcUtil.getGeneratedKeys();
+                if(rs.next()) {
+                   long generatedKey = rs.getLong(1);   // 생성된 PK 값
+                   group.setStudyGroupId(generatedKey);    // id필드에 저장  
+                }
+             return group;
             } 
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();
-		}
-		return null;
-	}
+      } catch (Exception ex) {
+         jdbcUtil.rollback();
+         ex.printStackTrace();
+      } finally {
+         jdbcUtil.commit();
+         jdbcUtil.close();
+      }
+      return null;
+   }
 
-	// 스터디 그룹 정보 수정
-	public int update(StudyGroup group) throws SQLException {
-		String sql = "UPDATE StudyGroup " + "SET name=?, img=?, description=?, capacity=?, category=? "
-				+ "WHERE studyGroupId=? ";
-		Object[] param = new Object[] { group.getName(), group.getImg(), group.getDescription(), group.getCapacity(),
-				group.getCategory(), group.getStudyGroupId() };
-		jdbcUtil.setSqlAndParameters(sql, param);
-		try {
-			int result = jdbcUtil.executeUpdate(); // update 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.commit();
-			jdbcUtil.close(); // resource 반환
-		}
-		return 0;
-	}
+   // 스터디 그룹 정보 수정
+   public int update(StudyGroup group) throws SQLException {
+      String sql = "UPDATE StudyGroup " + "SET name=?, img=?, description=?, capacity=?, category=? "
+            + "WHERE studyGroupId=? ";
+      Object[] param = new Object[] { group.getName(), group.getImg(), group.getDescription(), group.getCapacity(),
+            group.getCategory(), group.getStudyGroupId() };
+      jdbcUtil.setSqlAndParameters(sql, param);
+      try {
+         int result = jdbcUtil.executeUpdate(); // update 문 실행
+         return result;
+      } catch (Exception ex) {
+         jdbcUtil.rollback();
+         ex.printStackTrace();
+      } finally {
+         jdbcUtil.commit();
+         jdbcUtil.close(); // resource 반환
+      }
+      return 0;
+   }
 
-	// 스터디 그룹 정보 불러오기
-	public StudyGroup findGroupInfo(long groupId) {
+// 스터디 그룹 정보 불러오기
+public StudyGroup findGroupInfo(long groupId) {
+    try {
+        StudyGroup group = new StudyGroup();
+        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.leaderId, " +
+                       "m.name AS leaderName " +
+                       "FROM StudyGroup sg " +
+                       "JOIN Member m ON sg.leaderId = m.id " +
+                       "WHERE sg.studyGroupId = ?";
+        jdbcUtil.setSqlAndParameters(query, new Object[] { groupId });
 
-		try {
-			StudyGroup group = new StudyGroup();
-			String query = "SELECT studyGroupId, name, img, description, capacity, category, leaderId FROM StudyGroup WHERE studyGroupId= ?";
-			jdbcUtil.setSqlAndParameters(query, new Object[] { groupId });
+        ResultSet rs = jdbcUtil.executeQuery();
 
-			ResultSet rs = jdbcUtil.executeQuery();
+        if (rs.next()) {
+            group.setStudyGroupId(groupId);
+            group.setName(rs.getString("name"));
+            group.setImg(rs.getString("img"));
+            group.setDescription(rs.getString("description"));
+            group.setCapacity(rs.getInt("capacity"));
+            group.setCategory(rs.getString("category"));
+            group.setLeaderId(rs.getString("leaderId"));
+            group.setLeaderName(rs.getString("leaderName")); // 리더 이름 설정
+        } else {
+            System.out.println("스터디그룹 정보를 찾을 수 없습니다.  " + groupId);
+        }
+        return group;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        jdbcUtil.close();
+    }
 
-			if (rs.next()) {
-				group.setStudyGroupId(groupId);
-				group.setName(rs.getString("name"));
-				group.setImg(rs.getString("img"));
-				group.setDescription(rs.getString("description"));
-				group.setCapacity(rs.getInt("capacity"));
-				group.setCategory(rs.getString("category"));
-				group.setLeaderId(rs.getString("leaderId"));
-			} else {
-				System.out.println("스터디그룹 정보를 찾을 수 없습니다.  " + groupId);
-			}
-			return group;
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();
-		}
-
-		return null;
-	}
+    return null;
+}
 
 	// 특정 스터디그룹에 해당하는 정보 삭제
 	public int remove(String groupId) throws SQLException {
@@ -116,29 +119,67 @@ private JDBCUtil jdbcUtil = null;
 		}
 		return 0;
 	}
-    
-    //스터디그룹 전체 보여주기
-    public List<StudyGroup> getStudyGroupList() throws SQLException {
-        List<StudyGroup> groupList = new ArrayList<>();
-        String sql = "SELECT studyGroupId, name, img, description, capacity, category FROM StudyGroup";
-        
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{});
-        ResultSet rs = jdbcUtil.executeQuery();
-        
-        while (rs.next()) {
-            StudyGroup group = new StudyGroup();
-            group.setStudyGroupId(rs.getInt("studyGroupId"));
-            group.setName(rs.getString("name"));
-            group.setImg(rs.getString("img"));
-            group.setDescription(rs.getString("description"));
-            group.setCapacity(rs.getInt("capacity"));
-            group.setCategory(rs.getString("category"));
-            groupList.add(group);
-        }
-        
-        jdbcUtil.close();
-        return groupList;
-    }
+   
+
+   // 스터디그룹 전체 보여주기
+   public List<StudyGroup> getStudyGroupList() throws SQLException {
+      List<StudyGroup> groupList = new ArrayList<>();
+      String sql = "SELECT studyGroupId, name, img, description, capacity, category FROM StudyGroup";
+
+      jdbcUtil.setSqlAndParameters(sql, new Object[] {});
+      ResultSet rs = jdbcUtil.executeQuery();
+
+      while (rs.next()) {
+         StudyGroup group = new StudyGroup();
+         group.setStudyGroupId(rs.getInt("studyGroupId"));
+         group.setName(rs.getString("name"));
+         group.setImg(rs.getString("img"));
+         group.setDescription(rs.getString("description"));
+         group.setCapacity(rs.getInt("capacity"));
+         group.setCategory(rs.getString("category"));
+         groupList.add(group);
+      }
+
+      jdbcUtil.close();
+      return groupList;
+   }
+
+
+
+   public void toggleStudyGroupLike(String memberId, long studyGroupId) throws SQLException {
+      try {
+
+         String checkSql = "SELECT COUNT(*) FROM StudyGroupLike WHERE studyGroupId = ? AND memberId = ?";
+         jdbcUtil.setSqlAndParameters(checkSql, new Object[] { studyGroupId, memberId });
+
+         ResultSet rs = jdbcUtil.executeQuery();
+         if (rs.next()) {
+            int count = rs.getInt(1);
+
+            if (count > 0) {
+
+               String deleteSql = "DELETE FROM StudyGroupLike WHERE studyGroupId = ? AND memberId = ?";
+               jdbcUtil.setSqlAndParameters(deleteSql, new Object[] { studyGroupId, memberId });
+               jdbcUtil.executeUpdate();
+            } else {
+               // 좋아요가 없다면 추가
+               String insertSql = "INSERT INTO StudyGroupLike (studyLikeId, createAt, studyGroupId, memberId) "
+                     + "VALUES (SEQ_STUDY_GROUP_LIKE_ID.nextval, SYSDATE, ?, ?)";
+               jdbcUtil.setSqlAndParameters(insertSql, new Object[] { studyGroupId, memberId });
+               jdbcUtil.executeUpdate();
+            }
+         }
+      } catch (Exception ex) {
+         jdbcUtil.rollback();
+         ex.printStackTrace();
+      } finally {
+         jdbcUtil.commit();
+         jdbcUtil.close();
+      }
+   }
+
+
+
     
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
@@ -384,4 +425,6 @@ private JDBCUtil jdbcUtil = null;
             jdbcUtil.close();  
         }
     }
+
 }
+
