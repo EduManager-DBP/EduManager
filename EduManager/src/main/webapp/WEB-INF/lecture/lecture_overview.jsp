@@ -21,7 +21,8 @@
 						id="lectureOverviewImg">
 				</div>
 				<div class="overViewInfo">
-					<div class="overViewInfoText" id="lectureTeacherName"> ${teacherName} 강사님</div>
+					<div class="overViewInfoText" id="lectureTeacherName">
+						${teacherName} 강사님</div>
 					<div class="overViewInfoText" id="lectureTeacherPhone">
 						<img src="<c:url value='/images/phoneIcon.svg"' />"
 							class="infoIcon" />${teacherPhone}
@@ -35,12 +36,12 @@
 			<div class="section2">
 				<div id="lectureOverviewTitle">${lectureName}</div>
 				<div id="lectureOverviewDescription">${description}</div>
-					<div class="section3">
+				<div class="section3">
 					<div class="likeButtonContainer">
 						<form action="<c:url value='/lecture/like' />" method="post"
 							id="likeForm">
-							<input type="hidden" name="lectureId" value="${lectureId}" /> 
-							<input type="hidden" name="memberId" value="${userId}" />
+							<input type="hidden" name="lectureId" value="${lectureId}" /> <input
+								type="hidden" name="memberId" value="${userId}" />
 							<c:choose>
 								<c:when test="${isLiked}">
 									<img src="<c:url value='/images/likeButton.svg' />"
@@ -71,22 +72,33 @@
 				<div class="reviewIconText">수강 후기</div>
 			</div>
 			<div class="writeReviewContainer">
-				<textarea class="reviewTextArea"></textarea>
-				<input type="submit" class="reviewSubmit" value="작성"/>
+				<form action="<c:url value='/lecture/createReview' />" method="post"
+					id="reviewForm">
+					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					<input type="hidden" name="lectureId" value="${lectureId}" /> <input
+						type="hidden" name="memberId" value="${userId}" />
+
+					<!-- 리뷰 내용을 작성할 textarea -->
+					<textarea class="reviewTextArea" name="reviewText" 
+						placeholder="리뷰를 작성해주세요"></textarea>
+
+					<!-- 리뷰 제출 버튼 -->
+					<input type="button" class="reviewSubmit" value="작성" onclick="document.getElementById('reviewForm').submit();"  />
+				</form>
+			</div>
+			<div class="reviewListContainer">
+				<div class="reviewContainer">
+					<c:forEach var="group" items="${reviewList}">
+					<img src="<c:url value='/images/profileImg.svg"' />"
+						class="reviewProfileImg" />
+					<div class="reviewTextContainer">
+						<div class="reviewUserName">${group.memberName}</div>
+						<div class="reviewText">${group.reviewText}</div>
+					</div>
+					</c:forEach>
+				</div>
 
 			</div>
-			    <div class="reviewListContainer">
-            <div class="reviewContainer">
-               <img src="<c:url value='/images/profileImg.svg"' />"
-                  class="reviewProfileImg" />
-               <div class="reviewTextContainer">
-                  <div class="reviewUserName">OOO학생</div>
-                  <div class="reviewText">수강 후기</div>
-               </div>
-            </div>
-			
 		</div>
-
-	</div>
 </body>
 </html>
