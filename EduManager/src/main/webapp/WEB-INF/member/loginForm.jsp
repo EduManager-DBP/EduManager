@@ -4,7 +4,7 @@
 <html>
   <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <link rel=stylesheet href="<c:url value='/css/loginForm.css' />" type="text/css">
+ <link rel=stylesheet href="<c:url value='/css/loginForm.css' />" type="text/css" >
     <title>EduManager LoginForm</title>
   <script>
   function login() {
