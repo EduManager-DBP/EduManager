@@ -1,5 +1,6 @@
 package model.service;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
@@ -83,4 +84,9 @@ public class StudyManager {
     public void createNotice(Notice notice) {
     	noticeDao.createNotice(notice.getStudyId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
     }
+    public void createAssignment(Assignment ass) {
+    	assignmentDao.createAssignment(ass.getStudyId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
+    }
+    
+    
 }
