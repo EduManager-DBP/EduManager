@@ -35,9 +35,11 @@ import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
 import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
+import controller.mypage.EditController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
 import controller.mypage.ViewMyPageController;
+import controller.mypage.EditMyInfoController;
 import controller.study.CreateStudyAssignmentController;
 import controller.study.CreateStudyController;
 import controller.study.CreateStudyNoticeController;
@@ -83,12 +85,18 @@ public class RequestMapping {
         // 마이페이지 탈퇴하기
         mappings.put("/mypage/deleteConfirm", new ForwardController("/mypage/deleteConfirm.jsp"));
         mappings.put("/mypage/deleteAccount", new DeleteAccountController());
+        
+        //마이페이지 내 정보 수정하기
+        mappings.put("/mypage/editMyInfo", new EditController());
+        mappings.put("/mypage/edit", new EditMyInfoController());
 
         // 사용자 수정
         mappings.put("/member/update", new UpdateMemberController());
         mappings.put("/member/delete", new DeleteMemberController());
 
+
         
+
         // 강의 등록 : get->page 띄우기 post:등록 요청
         mappings.put("/lecture/create", new CreateLectureController());
 
@@ -148,15 +156,15 @@ public class RequestMapping {
         
         //강의 수강 신청
         mappings.put("/lecture/join", new CreateLectureEnrollmentController());
-        
-        
+       
+       //마이페이지 
         mappings.put("/mypage", new ViewMyPageController());
 
         
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
-        mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+
         mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
 
