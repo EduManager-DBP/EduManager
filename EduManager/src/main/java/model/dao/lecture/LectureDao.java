@@ -322,10 +322,9 @@ public class LectureDao {
         StringBuffer query = new StringBuffer();
         query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName, ic.color ");
         query.append("FROM Lecture l ");
-        query.append("JOIN LectureEnrollment le ON l.lectureId = le.lectureId ");
         query.append("JOIN Teacher t ON l.teacherId = t.Id "); 
         query.append("JOIN InterestCategory ic ON l.category = ic.Id "); 
-        query.append("WHERE le.teacherId = ?");
+        query.append("WHERE l.teacherId = ?");
         
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { teacherId }); // stuid 파라미터 전달
         List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
