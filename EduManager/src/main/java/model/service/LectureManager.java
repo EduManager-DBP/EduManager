@@ -110,6 +110,10 @@ public class LectureManager {
 	public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
 		return lectureDao.getLecturesExcludingStudent(stuId);
 	}
+	
+	public List<Lecture> getLecturesSearch(String stuId, String searchName) throws SQLException {
+        return lectureDao.getLecturesSearch(stuId, searchName);
+    }
 
 	public List<Lecture> MyLectureList(String stuId) throws SQLException {
 		return lectureDao.getMyLectureList(stuId);

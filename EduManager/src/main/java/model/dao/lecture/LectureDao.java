@@ -280,7 +280,61 @@ public class LectureDao {
         return lectureList; // 결과 반환
     }
     
-    
+    public List<Lecture> getLecturesSearch(String stuid, String searchParam) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, T.name AS teacherName, ic.name AS categoryName, ic.color ");
+        query.append("FROM Lecture L ");
+        query.append("JOIN Teacher T ON L.teacherId = T.Id "); // Teacher 테이블과 조인
+        query.append("JOIN InterestCategory ic ON L.category = ic.Id "); 
+        query.append("WHERE L.lectureId NOT IN (");
+        query.append("    SELECT lectureId ");
+        query.append("    FROM LectureEnrollment ");
+        query.append("    WHERE stuid = ? ");
+        query.append(")");
+
+        
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            query.append("AND (L.name LIKE ? OR ic.name LIKE ? OR T.name LIKE ?) ");
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(stuid);
+        
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            params.add("%" + searchParam + "%"); // S.name LIKE '%검색어%'
+            params.add("%" + searchParam + "%"); // ic.name LIKE '%검색어%'
+            params.add("%" + searchParam + "%"); // ic.name LIKE '%검색어%'
+        }
+
+
+        jdbcUtil.setSqlAndParameters(query.toString(), params.toArray()); // stuid와 searchName 파라미터 전달
+        List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 Lecture 객체에 매핑
+                Lecture lecture = new Lecture();
+                lecture.setLectureId(rs.getLong("lectureId"));
+                lecture.setName(rs.getString("name"));
+                lecture.setImg(rs.getString("img"));
+                lecture.setCategory(rs.getString("category"));
+                lecture.setCapacity(rs.getInt("capacity"));
+                lecture.setLevel(rs.getInt("lecturelevel"));
+                lecture.setTeacherName(rs.getString("teacherName"));
+                lecture.setCategoryColor(rs.getString("color"));
+
+                lectureList.add(lecture); // 리스트에 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return lectureList; // 결과 반환
+    }
     public List<Lecture> getMyLectureList(String stuid) {
         StringBuffer query = new StringBuffer();
         query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName, ic.color ");

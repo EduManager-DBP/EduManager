@@ -124,6 +124,8 @@ public class RequestMapping {
 
         // 강의,스터디 신청
         mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
+        mappings.put("/registration/search", new ExcludingLectureAndStudyGroupController());
+        
 
         // 내 스터디그룹 리스트 보기
         mappings.put("/study/list", new ViewMyStudyListController());

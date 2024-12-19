@@ -30,6 +30,11 @@ public class StudyGroupManager {
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) throws SQLException {
         return studyGroupDao.getStudyGroupsExcludingStudent(stuId);
     }
+    
+    public List<StudyGroup> getStudyGroupsSearch(String stuId, String searchParam) {
+        return studyGroupDao.getStudyGroupsSearch(stuId,searchParam);
+    }
+    
 
     public List<StudyGroup> StudyGroupListByLeader(String stuId) throws SQLException {
         return studyGroupDao.getStudyGroupListByLeader(stuId);
