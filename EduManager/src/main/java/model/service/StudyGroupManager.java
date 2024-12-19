@@ -94,10 +94,6 @@ public class StudyGroupManager {
         studyGroupDao.deleteApplication(applicationId);
         
     }
-    public StudyGroupApplication findApplicationById(Long applicationId) throws SQLException{
-        return studyGroupDao.findById(applicationId);  // DAO에서 findById 호출
-    }
-   
     
     
     //스터디 후기 작성

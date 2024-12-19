@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
+import controller.lecture.CreateLectureEnrollmentController;
 import controller.lecture.CreateLectureReviewController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
@@ -138,6 +139,8 @@ public class RequestMapping {
         
         mappings.put("/studyGroup/delete-request", new DeleteRequestController());
         
+        //강의 수강 신청
+        mappings.put("/lecture/join", new CreateLectureEnrollmentController());
         
         
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
