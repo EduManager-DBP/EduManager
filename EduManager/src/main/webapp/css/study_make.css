@@ -62,7 +62,9 @@ select {
 	font-family: 'Pretendard';
 	outline: none;
 }
-
+.schedule input[type='checkbox']{
+	height: auto;
+}
 .required {
 	color: #DB1D1D;
 }

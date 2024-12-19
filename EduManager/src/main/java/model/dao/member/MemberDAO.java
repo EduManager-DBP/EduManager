@@ -44,8 +44,8 @@ public class MemberDAO {
 	 * 기존의 사용자 정보를 수정. (이름, 전화번호)
 	 */
 	public int update(Member member) throws SQLException {
-		String sql = "UPDATE MEMBER " + "SET pwd=?, phone=? " + "WHERE id=?";
-		Object[] param = new Object[] { member.getPwd(), member.getPhone() };
+		String sql = "UPDATE MEMBER " + "SET pwd=?, email=?, phone=? " + "WHERE id=?";
+		Object[] param = new Object[] { member.getPwd(), member.getEmail(), member.getPhone(), member.getId() };
 		jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
 
 		try {

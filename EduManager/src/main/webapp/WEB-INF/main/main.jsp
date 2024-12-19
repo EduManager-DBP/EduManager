@@ -27,6 +27,44 @@ if (yearParam != null && monthParam != null) {
 calendar.set(currentYear, currentMonth, 1);
 int daysInMonth = calendar.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
+
+
+java.util.Calendar now = java.util.Calendar.getInstance(); // 현재 날짜 다시 가져오기
+int todayYear = now.get(java.util.Calendar.YEAR);
+int todayMonth = now.get(java.util.Calendar.MONTH);
+int todayDate = now.get(java.util.Calendar.DATE);
+
+int day = 1;
+boolean started = false;
+
+@SuppressWarnings("unchecked")
+List<Schedule> scheduleEntries = (List<Schedule>) request.getAttribute("scheduleEntries");
+@SuppressWarnings("unchecked")
+List<Notice> noticeEntries = (List<Notice>) request.getAttribute("noticeEntries");
+@SuppressWarnings("unchecked")
+List<Assignment> assignmentEntries = (List<Assignment>) request.getAttribute("assignmentEntries");
+
+// Map으로 날짜별 데이터 그룹화
+Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
+Map<Integer, List<Notice>> noticeMap = new HashMap<>();
+Map<Integer, List<Assignment>> assignmentMap = new HashMap<>();
+
+for (Schedule schedule : scheduleEntries) {
+	int dayday = schedule.getStartDate().getDayOfMonth();
+	scheduleMap.putIfAbsent(dayday, new ArrayList<>());
+	scheduleMap.get(dayday).add(schedule);
+}
+for (Notice notice : noticeEntries) {
+	int dayday = notice.getCreateat().getDayOfMonth();
+	noticeMap.putIfAbsent(dayday, new ArrayList<>());
+	noticeMap.get(dayday).add(notice);
+} 
+for (Assignment assignment : assignmentEntries) {
+	int dayday = assignment.getDueDate().getDayOfMonth();
+	assignmentMap.putIfAbsent(dayday, new ArrayList<>());
+	assignmentMap.get(dayday).add(assignment);
+}
+
 %>
 <html>
 <head>
@@ -101,39 +139,6 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 					</thead>
 					<tbody>
 						<%
-						java.util.Calendar now = java.util.Calendar.getInstance(); // 현재 날짜 다시 가져오기
-						int todayYear = now.get(java.util.Calendar.YEAR);
-						int todayMonth = now.get(java.util.Calendar.MONTH);
-						int todayDate = now.get(java.util.Calendar.DATE);
-
-						int day = 1;
-						boolean started = false;
-
-						List<Schedule> scheduleEntries = (List<Schedule>) request.getAttribute("scheduleEntries");
-						List<Notice> noticeEntries = (List<Notice>) request.getAttribute("noticeEntries");
-						List<Assignment> assignmentEntries = (List<Assignment>) request.getAttribute("assignmentEntries");
-
-						// Map으로 날짜별 데이터 그룹화
-						Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
-						Map<Integer, List<Notice>> noticeMap = new HashMap<>();
-						Map<Integer, List<Assignment>> assignmentMap = new HashMap<>();
-
-						for (Schedule schedule : scheduleEntries) {
-							int dayday = schedule.getStartDate().getDayOfMonth();
-							scheduleMap.putIfAbsent(dayday, new ArrayList<>());
-							scheduleMap.get(dayday).add(schedule);
-						}
-						for (Notice notice : noticeEntries) {
-							int dayday = notice.getCreateat().getDayOfMonth();
-							noticeMap.putIfAbsent(dayday, new ArrayList<>());
-							noticeMap.get(dayday).add(notice);
-						} 
-						for (Assignment assignment : assignmentEntries) {
-							int dayday = assignment.getDueDate().getDayOfMonth();
-							assignmentMap.putIfAbsent(dayday, new ArrayList<>());
-							assignmentMap.get(dayday).add(assignment);
-						}
-
 						for (int i = 0; i < 6; i++) { // 최대 6줄 (달력 한 페이지 기준)
 							out.println("<tr>");
 							for (int j = 1; j <= 7; j++) { // 한 주의 7일

@@ -8,6 +8,7 @@ import model.domain.member.Member;
 import model.service.member.MemberManager;
 import model.service.member.MemberNotFoundException;
 
+
 public class ViewUserController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

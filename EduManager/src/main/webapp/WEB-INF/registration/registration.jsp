@@ -50,14 +50,15 @@
 					<div>스터디</div>
 				</div>
 			</div>
-			<div id="makeStudyBtn-container">
-				<button id="makeStudyBtn" onclick="createStudy()">
-					<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
-					스터디 만들기
-				</button>
-			</div>
-		</div>
-
+	
+	</div>
+	<div id="makeStudyBtn-container">
+		<button id="makeStudyBtn" onclick="createStudy()" style="font-family:'Pretendard';">
+			<img src="<c:url value='/images/plus.svg' />" id="plusIcon" >
+			스터디 만들기
+		</button>
+	</div>
+</div>
 		<div class="hr-wrapper">
 			<hr id="registration_mainHr">
 			<hr id="registration_hr1">

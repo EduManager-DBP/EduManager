@@ -164,6 +164,7 @@ header>nav {
 	width: 180px;
 	height: 180px;
 	margin-top: 30px;
+	margin-bottom: 20px;
 	background: #ffffff;
 	border: 1px solid rgba(170, 170, 170, 0.02);
 	border-radius: 15px;
@@ -210,7 +211,7 @@ header>nav {
 .member-list {
 	display: block;
 	margin-left: -10%;
-	
+	margin-top: 0;
 }
 
 .member-item {
@@ -226,18 +227,22 @@ header>nav {
 	font-weight: 400;
 	line-height: 17px;
 }
+#teacher_name{
+	width: 150px; 
+	justify-self:center;
+		color: #633d22;
 
+}
 .study-location {
 	align-items: center;
 	color: #633d22;
 	font-size: 15px;
-	font-weight: 600;
 	line-height: 17.9px;
 }
 
 .study-location {
 	justify-self: center;
-	margin-top: 20px;
+
 }
 
 .study-time {
@@ -256,7 +261,7 @@ header>nav {
 	width: 20%;
 	height: 20px;
 	background:
-		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/b39ada70-ad1e-4198-8b17-bd117402c22e.png) no-repeat center;
+		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/b39ada70-ad1e-4198-8b17-bd117402c22e.png) no-repeat;
 }
 
 .location-inform {
@@ -268,7 +273,7 @@ header>nav {
 .time-icon {
 	top: 290px;
 	background:
-		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/128f9afb-93e3-4b33-b9bd-e3cbbf906bdc.png) no-repeat center;
+		url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2024-12-16/128f9afb-93e3-4b33-b9bd-e3cbbf906bdc.png) no-repeat;
 }
 
 input,
