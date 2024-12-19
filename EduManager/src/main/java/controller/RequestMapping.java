@@ -37,6 +37,7 @@ import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
+import controller.mypage.ViewMyPageController;
 import controller.study.CreateStudyAssignmentController;
 import controller.study.CreateStudyController;
 import controller.study.CreateStudyNoticeController;
@@ -149,8 +150,9 @@ public class RequestMapping {
         mappings.put("/lecture/join", new CreateLectureEnrollmentController());
         
         
-        mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
+        mappings.put("/mypage", new ViewMyPageController());
 
+        
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
