@@ -116,6 +116,10 @@ public class LectureManager {
 		return lectureDao.getMyLectureList(stuId);
 	}
 
+	 public List<Lecture> getMyLectureListByTeacher(String teacherId) {
+	     return lectureDao.getMyLectureListByTeacher(teacherId);
+	 }
+	 
 	public boolean isLikedByUser(String memberId, long lectureId) throws SQLException {
 		return lectureLikeDao.isLikedByUser(memberId, lectureId);
 	}
@@ -170,7 +174,6 @@ public class LectureManager {
 	public void deleteScheduleById(int scheduleId) {
 		scheduleDao.deleteScheduleById(scheduleId);
 	}
-	
 	
 	//수강 신청
 	
