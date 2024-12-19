@@ -22,8 +22,7 @@
 				<a class="complete-button"
 					href="<c:url value="/lecture/update">
 				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
-								</c:url>">강의
-					정보 수정하기</a>
+								</c:url>">강의 정보 수정하기</a>
 			</c:if>
 
 

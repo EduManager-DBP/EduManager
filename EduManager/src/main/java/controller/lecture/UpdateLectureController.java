@@ -32,9 +32,9 @@ public class UpdateLectureController implements Controller {
 		String teacherId = MemberSessionUtils.getLoginMemberId(request.getSession());
 		System.out.print("내 아이디 : 선생:" + teacherId);
 
-//		Long updateLectureId = Long.parseLong(request.getParameter("lectureId"));
+		Long updateLectureId = Long.parseLong(request.getParameter("lectureId"));
 		// 임시
-		Long updateLectureId = 19L;
+//		Long updateLectureId = 19L;
 
 		log.debug("UpdateForm Request : {}", updateLectureId);
 		if (request.getMethod().equals("GET")) {
@@ -97,7 +97,7 @@ public class UpdateLectureController implements Controller {
 				log.debug("startTime : {} endTime:{}", startTime, endTime);
 
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, updateLecture.getLectureId(),
-						"regular", null);
+						"regular", "정기수업");
 				
 				log.debug("Schedule{} : {}", i, schedule);
 
@@ -130,7 +130,7 @@ public class UpdateLectureController implements Controller {
 		    }
 			log.debug("updatedIds : {}", updatedIds);
 
-			return "redirect:/main/main";
+			return "redirect:/mylecture/view?lectureId=" + Long.parseLong(request.getParameter("lectureId"));
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);

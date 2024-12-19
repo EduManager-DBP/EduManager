@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.member.MemberSessionUtils;
 import model.domain.lecture.Lecture;
+import model.domain.member.Teacher;
 import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
+import model.service.member.TeacherManager;
 
 public class ExcludingLectureAndStudyGroupController implements Controller {
     
@@ -21,13 +23,15 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
         }
 
       String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
-        
+      
+      
+      TeacherManager teacherManager = TeacherManager.getInstance();
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
       
       List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);
       List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(stuId);
-
+      
 
       System.out.println("강의 목록:");
       for (Lecture lecture : lectureList) {
@@ -43,17 +47,12 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
                              ", 카테고리: " + studyGroup.getCategory());
       }
       
-
+      request.setAttribute("isTeacher", teacherManager.isTeacher(stuId)); 
       request.setAttribute("lectureList", lectureList);
       request.setAttribute("studyGroupList", studyGroupList);
 
       return "/registration/registration.jsp";
-        
-        
 
-        
-        
-       
     }
 
 }

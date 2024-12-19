@@ -88,13 +88,13 @@
 						<article class="schedule">
 							<span>요일</span> <select class="small"
 								name="schedule[${status.index}][day]" required>
-								<option value="월" ${schedule.dayOfWeek == '월' ? 'selected' : ''}>월</option>
-								<option value="화" ${schedule.dayOfWeek == '화' ? 'selected' : ''}>화</option>
-								<option value="수" ${schedule.dayOfWeek == '수' ? 'selected' : ''}>수</option>
-								<option value="목" ${schedule.dayOfWeek == '목' ? 'selected' : ''}>목</option>
-								<option value="금" ${schedule.dayOfWeek == '금' ? 'selected' : ''}>금</option>
-								<option value="토" ${schedule.dayOfWeek == '토' ? 'selected' : ''}>토</option>
-								<option value="일" ${schedule.dayOfWeek == '일' ? 'selected' : ''}>일</option>
+								<option value="MONDAY" ${schedule.dayOfWeek == 'MONDAY' ? 'selected' : ''}>월</option>
+								<option value="TUESDAY" ${schedule.dayOfWeek == 'TUESDAY' ? 'selected' : ''}>화</option>
+								<option value="WEDNESDAY" ${schedule.dayOfWeek == 'WEDNESDAY' ? 'selected' : ''}>수</option>
+								<option value="THURSDAY" ${schedule.dayOfWeek == 'THURSDAY' ? 'selected' : ''}>목</option>
+								<option value="FRIDAY" ${schedule.dayOfWeek == 'FRIDAY' ? 'selected' : ''}>금</option>
+								<option value="SATURDAY" ${schedule.dayOfWeek == 'SATURDAY' ? 'selected' : ''}>토</option>
+								<option value="SUNDAY" ${schedule.dayOfWeek == 'SUNDAY' ? 'selected' : ''}>일</option>
 							</select> <span>시간</span> <input type="time"
 								name="schedule[${status.index}][startTime]"
 								value="${schedule.startTime}" required/> ~ <input type="time"

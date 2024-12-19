@@ -75,7 +75,7 @@ public class CreateLectureController implements Controller {
 				log.debug("Create Schedule : {}", scheduleId);
 			}
 
-		 return "redirect:/main/main";
+		 return "redirect:/lecture/list";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
