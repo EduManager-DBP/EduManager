@@ -1,5 +1,6 @@
 package model.service;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
@@ -52,8 +53,8 @@ public class StudyManager {
     public int createSchedule (Schedule schedule)throws SQLException{
     	return scheduleDao.createSchedule(schedule);
     }
-    public List<Schedule> findScheduleById(long studyId) throws SQLException {
-    	return scheduleDao.findSchedulesByStudyId(studyId);
+    public List<Schedule> findScheduleById(long studyId, String type) throws SQLException {
+    	return scheduleDao.findSchedulesByStudyId(studyId, type);
     }
     public void updateSchedule (Schedule schedule)throws SQLException{
     	scheduleDao.updateSchedule(schedule);
@@ -79,4 +80,16 @@ public class StudyManager {
     	return scheduleDao.findSchedulesByFilters(studygroupid, startDate, type, dayOfWeek);
     }
 
+    //스터디 공지 추가
+    public void createNotice(Notice notice) {
+    	noticeDao.createNotice(notice.getStudyId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
+    }
+    public void createAssignment(Assignment ass) {
+    	assignmentDao.createAssignment(ass.getStudyId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
+    }
+    //스터디 멤버 조회
+    public List<String> findStudyMembers(int studyGruopId) throws SQLException {
+    	return studyDao.findStudyMembers(studyGruopId);
+    }
+    
 }

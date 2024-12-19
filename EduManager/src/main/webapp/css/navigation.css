@@ -52,7 +52,7 @@ header ul>li {
 }
 
 header ul>li>a {
-	width: 120px;
+	width:auto;
 	height: 30px;
 	cursor: pointer;
 	padding: 10px 10px;

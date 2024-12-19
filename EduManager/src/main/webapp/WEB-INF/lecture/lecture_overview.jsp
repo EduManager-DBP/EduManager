@@ -37,29 +37,62 @@
 				<div id="lectureOverviewTitle">${lectureName}</div>
 				<div id="lectureOverviewDescription">${description}</div>
 				<div class="section3">
-					<div class="likeButtonContainer">
-						<form action="<c:url value='/lecture/like' />" method="post"
-							id="likeForm">
+					<c:choose>
+						<c:when test="${existStudent}">
+							<div class="likeButtonContainer">
+								<form action="<c:url value='/lecture/like' />" method="post"
+									id="likeForm">
+									<input type="hidden" name="lectureId" value="${lectureId}" />
+									<input type="hidden" name="memberId" value="${userId}" /> 
+									<c:choose>
+										<c:when test="${isLiked}">
+											<img src="<c:url value='/images/likeButton.svg' />"
+												class="likeButton"
+												onclick="document.getElementById('likeForm').submit();"
+												style="cursor: pointer;" />
+										</c:when>
+										<c:otherwise>
+											<img src="<c:url value='/images/EmptylikeButton.svg' />"
+												class="emptyLikeButton"
+												onclick="document.getElementById('likeForm').submit();"
+												style="cursor: pointer;" />
+										</c:otherwise>
+									</c:choose>
+
+								</form>
+							</div>
+						</c:when>
+					</c:choose>
+					<div>
+
+						<form action="<c:url value='/lecture/join' />" method="post"
+							id="lectureRequestForm">
 							<input type="hidden" name="lectureId" value="${lectureId}" /> <input
 								type="hidden" name="memberId" value="${userId}" />
 							<c:choose>
-								<c:when test="${isLiked}">
-									<img src="<c:url value='/images/likeButton.svg' />"
-										class="likeButton"
-										onclick="document.getElementById('likeForm').submit();"
-										style="cursor: pointer;" />
+								<c:when test="${existStudent}">
+									<c:choose>
+										<c:when test="${!isInclude}">
+											<c:choose>
+												<c:when test="${!isConflict}">
+
+													<input type="button" class="applyButton" value="수강신청하기"
+														onclick="document.getElementById('lectureRequestForm').submit();">
+												</c:when>
+												<c:otherwise>
+													<input type="button" class="applyButton" value="수강신청하기"
+														onclick="alert('수강중인 강의와 강의 시간이 겹칩니다!')">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<input type="button" class="rejectButton" value="수강중"
+												disabled />
+										</c:otherwise>
+									</c:choose>
 								</c:when>
-								<c:otherwise>
-									<img src="<c:url value='/images/EmptylikeButton.svg' />"
-										class="emptyLikeButton"
-										onclick="document.getElementById('likeForm').submit();"
-										style="cursor: pointer;" />
-								</c:otherwise>
 							</c:choose>
 						</form>
-					</div>
-					<div>
-						<input type="button" class="applyButton" value="수강신청하기">
 					</div>
 				</div>
 			</div>

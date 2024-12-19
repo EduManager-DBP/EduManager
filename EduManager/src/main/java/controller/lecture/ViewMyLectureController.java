@@ -1,4 +1,4 @@
-package controller.study;
+package controller.lecture;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 import model.domain.Assignment;
 import model.domain.Notice;
 import model.domain.Schedule;
+import model.domain.lecture.Lecture;
 import model.domain.studyGroup.StudyGroup;
+import model.service.LectureManager;
 import model.service.StudyManager;
 
 import org.slf4j.LoggerFactory;
@@ -19,21 +21,21 @@ import controller.Controller;
 import controller.member.MemberSessionUtils;
 
 
-public class ViewMyStudyController implements Controller {
-	private static final Logger log = LoggerFactory.getLogger(ViewMyStudyController.class);
+public class ViewMyLectureController implements Controller {
+	private static final Logger log = LoggerFactory.getLogger(ViewMyLectureController.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (!MemberSessionUtils.hasLogined(request.getSession())) {
 			return "redirect:/member/login/form"; // login form 요청으로 redirect
 		}
-		StudyManager manager = StudyManager.getInstance();
+        LectureManager manager = LectureManager.getInstance();
 
 
 		
 		 // 클라이언트에서 보낸 날짜 받기
         String selectedDateStr = request.getParameter("selectedDate");
-        Integer studyId = Integer.parseInt(request.getParameter("groupId"));
+        Integer lectureId = Integer.parseInt(request.getParameter("lectureId"));
 //        Integer studyId = 10;
         LocalDate selectedDate;
         if (selectedDateStr != null && !selectedDateStr.isEmpty()) {
@@ -43,19 +45,19 @@ public class ViewMyStudyController implements Controller {
         }
             log.debug("선택된 날짜: " + selectedDate);
  
-            List<Assignment> assignmentList = manager.findAssignmentsByStudyIdAndDueDate(studyId, selectedDate);
+            List<Assignment> assignmentList = manager.findAssignmentsByLectureIdAndDueDate(lectureId, selectedDate);
             log.debug("과제목록: " + assignmentList);
 
-            List<Notice> noticeList = manager.findNoticesByStudyIdAndDueDate(studyId, selectedDate);
+            List<Notice> noticeList = manager.findNoticesByLectureIdAndDate(lectureId, selectedDate);
             log.debug("공지목록: " + noticeList);
             
 //            LocalDate today = LocalDate.now();
             String DayOfWeek = selectedDate.getDayOfWeek().toString(); // 오늘 요일 (예: "MONDAY")
-            List<Schedule> regularSchedules = manager.findSchedulesByFilters(studyId, selectedDate, "regular", DayOfWeek);
+            List<Schedule> regularSchedules = manager.findSchedulesByFilters(lectureId, selectedDate, "regular", DayOfWeek);
             log.debug("정기일정: " + regularSchedules);
             log.debug("요일 " + DayOfWeek);
             
-            List<Schedule> specialSchedules = manager.findSchedulesByFilters(studyId, selectedDate, "special", null);
+            List<Schedule> specialSchedules = manager.findSchedulesByFilters(lectureId, selectedDate, "special", null);
             log.debug("특수일정: " + specialSchedules);
             
             
@@ -66,20 +68,20 @@ public class ViewMyStudyController implements Controller {
             request.setAttribute("regularSchedules", regularSchedules);
             request.setAttribute("specialSchedules", specialSchedules);
 
-            StudyGroup studyInfo = manager.findStudyById(studyId);
-            log.debug("studyInfo: " + studyInfo);
+            Lecture lectureInfo = manager.findLectureById(lectureId);
+            log.debug("lectureInfo: " + lectureId);
 
-            List<String> members = manager.findStudyMembers(studyId);
+            List<String> members = manager.findLectureMembers(lectureId);
             log.debug("members: " + members);
 
-            String leaderId = MemberSessionUtils.getLoginMemberId(request.getSession());
-    		Boolean isLeader = (leaderId.equals(studyInfo.getLeaderId())) ? true : false;
+            String teacherId = MemberSessionUtils.getLoginMemberId(request.getSession());
+    		Boolean isTeacher= (teacherId.equals(lectureInfo.getTeacherId())) ? true : false;
             
-      //study 기본 정보
-            request.setAttribute("studyInfo", studyInfo);
-            request.setAttribute("isLeader", isLeader);
+    		//study 기본 정보
+            request.setAttribute("lectureInfo", lectureInfo);
+            request.setAttribute("isTeacher", isTeacher);
             request.setAttribute("members", members);
         // JSP 페이지로 포워딩 (예: 결과 표시)
-        return "/study/study_details.jsp"; // 뷰로 이동
+        return "/lecture/lecture_details.jsp"; // 뷰로 이동
 	}
 }

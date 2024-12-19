@@ -7,9 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
+import controller.lecture.CreateLectureEnrollmentController;
 import controller.lecture.CreateLectureReviewController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
+import controller.lecture.ViewMyLectureController;
 import controller.lecture.ViewMyLectureListController;
 import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
@@ -34,9 +36,15 @@ import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
 import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
+import controller.mypage.EditController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
+import controller.mypage.ViewMyPageController;
+import controller.mypage.EditMyInfoController;
+import controller.study.CreateStudyAssignmentController;
 import controller.study.CreateStudyController;
+import controller.study.CreateStudyNoticeController;
+import controller.study.CreateStudyScheduleController;
 import controller.study.UpdateStudyController;
 import controller.study.ViewMyStudyController;
 
@@ -78,18 +86,17 @@ public class RequestMapping {
         // 마이페이지 탈퇴하기
         mappings.put("/mypage/deleteConfirm", new ForwardController("/mypage/deleteConfirm.jsp"));
         mappings.put("/mypage/deleteAccount", new DeleteAccountController());
+        
+        //마이페이지 내 정보 수정하기
+        mappings.put("/mypage/editMyInfo", new EditController());
+        mappings.put("/mypage/edit", new EditMyInfoController());
 
         // 사용자 수정
         mappings.put("/member/update", new UpdateMemberController());
         mappings.put("/member/delete", new DeleteMemberController());
 
-        // study
-      //		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
-        mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
-        mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
-        mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
-        mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
-        mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
+
+        
 
         // 강의 등록 : get->page 띄우기 post:등록 요청
         mappings.put("/lecture/create", new CreateLectureController());
@@ -107,6 +114,18 @@ public class RequestMapping {
 //		mappings.put("/study/selectDate", new ViewMyStudyController());
 		mappings.put("/mystudy/view", new ViewMyStudyController());
       
+		//스터디 일정(특정),공지,과제 추가
+        mappings.put("/study/addSchedule", new CreateStudyScheduleController());
+        mappings.put("/study/addNotice", new CreateStudyNoticeController());
+        mappings.put("/study/addAssignment", new CreateStudyAssignmentController());
+
+        mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
+        mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
+
+        //내 강의 상세보기
+		mappings.put("/mylecture/view", new ViewMyLectureController());
+
+		
         // 강의 신청 페이지
         mappings.put("/lecture/over-view", new ViewLectureController());
         mappings.put("/lecture/like", new ToggleLectureLikeController());
@@ -139,14 +158,17 @@ public class RequestMapping {
         
         mappings.put("/studyGroup/delete-request", new DeleteRequestController());
         
-        
-        
-        mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
+        //강의 수강 신청
+        mappings.put("/lecture/join", new CreateLectureEnrollmentController());
+       
+       //마이페이지 
+        mappings.put("/mypage", new ViewMyPageController());
 
+        
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
-        mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+
         mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
 

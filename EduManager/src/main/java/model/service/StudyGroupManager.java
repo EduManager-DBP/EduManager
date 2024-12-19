@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.dao.studygroup.StudyGroupDao;
-import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
 import model.domain.studyGroup.StudyGroupReview;
@@ -94,10 +93,6 @@ public class StudyGroupManager {
         studyGroupDao.deleteApplication(applicationId);
         
     }
-    public StudyGroupApplication findApplicationById(Long applicationId) throws SQLException{
-        return studyGroupDao.findById(applicationId);  // DAO에서 findById 호출
-    }
-   
     
     
     //스터디 후기 작성
@@ -111,6 +106,5 @@ public class StudyGroupManager {
         return  studyGroupDao.getReviewsByGroupId(groupId);
     }
     
-   
-    
+  
 }
