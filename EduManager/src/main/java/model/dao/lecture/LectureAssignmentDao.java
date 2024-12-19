@@ -7,7 +7,6 @@ import java.util.List;
 import model.dao.JDBCUtil;
 import model.domain.Assignment;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 
@@ -64,7 +63,7 @@ public class LectureAssignmentDao {
     
     
     // 과제 생성
-    public void createAssignment(int lectureId, String title, String description, Date dueDate, String textFile) {
+    public void createAssignment(int lectureId, String title, String description, LocalDate dueDate, String textFile) {
         StringBuffer query = new StringBuffer();
         query.append("INSERT INTO lectureassignment (lectureassignmentid, lectureid, title, description, duedate, textfile, createat) ");
         query.append("VALUES (SEQ_LECTURE_ASSIGNMENT_ID.nextval, ?, ?, ?, ?, ?, SYSDATE)"); 
@@ -167,6 +166,43 @@ public class LectureAssignmentDao {
             jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
         }
         
+        return assignments;
+    }
+    
+ // 강의 아이디랑 마감날짜로 강의 과제 목록 조회
+    public List<Assignment> findAssignmentsByLectureIdAndDueDate(int lectureId, LocalDate dueDate) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT lectureassignmentid, duedate, title, description, createat, textfile, lectureid ");
+        query.append("FROM lectureassignment ");
+        query.append("WHERE lectureId = ? AND TRUNC(duedate) = ?");
+
+        java.sql.Date sqlDueDate = java.sql.Date.valueOf(dueDate);
+
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, sqlDueDate});
+        List<Assignment> assignments = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+            while (rs.next()) {
+            	Assignment ass = new Assignment();
+                ass.setId(rs.getInt("lectureassignmentid"));
+                ass.setTitle(rs.getString("title"));
+                ass.setDescription(rs.getString("description"));
+                ass.setTextFile(rs.getString("textfile"));
+                ass.setLectureId(rs.getInt("lectureid"));
+                if (sqlDueDate != null) {
+                    ass.setDueDate(rs.getDate("duedate").toLocalDate());
+                }
+                ass.setCreateat(rs.getDate("createat").toLocalDate());      
+                
+                assignments.add(ass); // 리스트에 과제 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+
         return assignments;
     }
 

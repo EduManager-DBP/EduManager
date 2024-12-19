@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import model.dao.lecture.LectureAssignmentDao;
 import model.dao.lecture.LectureDao;
@@ -184,5 +185,30 @@ public class LectureManager {
 	 public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
 	     return lectureDao.isEnrollmentExists(memberId, lectureId);
 	 }
+	 
+	    //스터디 과제 목록 조회(특정 날짜)
+	    public List<Assignment> findAssignmentsByLectureIdAndDueDate(int lectureId, LocalDate dueDate) {
+	    	return assignmentDao.findAssignmentsByLectureIdAndDueDate(lectureId, dueDate);
+	    }
+	    //스터디 공지 목록 조회(특정 날짜)
+	    public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt){
+	    	return noticeDao.findNoticesByLectureIdAndDate(lectureId, createdAt);
+	    }
+	    //스터디 일정 목록 조회
+	    public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type, String dayOfWeek) {
+	    	return scheduleDao.findSchedulesByFilters(lectureId, startDate, type, dayOfWeek);
+	    }
+
+	    //스터디 공지 추가
+	    public void createNotice(Notice notice) {
+	    	noticeDao.createNotice(notice.getLectureId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
+	    }
+	    public void createAssignment(Assignment ass) {
+	    	assignmentDao.createAssignment(ass.getLectureId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
+	    }
+	    //스터디 멤버 조회
+	    public List<String> findLectureMembers(int lectureId) throws SQLException {
+	    	return lectureDao.findLectureMembers(lectureId);
+	    }
 	        
 }

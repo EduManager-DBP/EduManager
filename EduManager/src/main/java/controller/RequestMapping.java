@@ -11,6 +11,7 @@ import controller.lecture.CreateLectureEnrollmentController;
 import controller.lecture.CreateLectureReviewController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
+import controller.lecture.ViewMyLectureController;
 import controller.lecture.ViewMyLectureListController;
 import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
@@ -111,6 +112,9 @@ public class RequestMapping {
 
         mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
         mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
+
+        //내 강의 상세보기
+		mappings.put("/mylecture/view", new ViewMyLectureController());
 
 		
         // 강의 신청 페이지
