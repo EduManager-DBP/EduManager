@@ -14,65 +14,69 @@ public class Lecture {
     private String teacherId;
     private String teacherName;
     private Integer lectureRoom;
-    //전화번호
+    private String categoryColor;
+    // 전화번호
     private String phone;
 
-	 public Lecture() {}
-	 
-	 
-	 //변수 다 있는 생성자 
-    public Lecture(long lectureId, String name, String img, String category, long capacity, int level,
-			String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom, String phone) {
-		super();
-		this.lectureId = lectureId;
-		this.name = name;
-		this.img = img;
-		this.category = category;
-		this.capacity = capacity;
-		this.level = level;
-		this.description = description;
-		this.createAt = createAt;
-		this.teacherId = teacherId;
-		this.setTeacherName(teacherName);
-		this.lectureRoom = lectureRoom;
-		this.phone = phone;
-	}
-    
-    //create,update에 사용
-	public Lecture(Long lectureId, String name, String img, String category, long capacity, int level, String description,
-			String teacherId, Integer lectureRoom) {
-		super();
-		this.lectureId = lectureId;
-		this.name = name;
-		this.img = img;
-		this.category = category;
-		this.capacity = capacity;
-		this.level = level;
-		this.description = description;
-		this.teacherId = teacherId;
-		this.lectureRoom = lectureRoom;
-	}
-	//위에거에서 phone 추가
-	public Lecture(Long lectureId, String name, String img, String category, long capacity, int level, String description,
-			String teacherId, Integer lectureRoom,String phone) {
-		super();
-		this.lectureId = lectureId;
-		this.name = name;
-		this.img = img;
-		this.category = category;
-		this.capacity = capacity;
-		this.level = level;
-		this.description = description;
-		this.teacherId = teacherId;
-		this.lectureRoom = lectureRoom;
-		this.phone = phone;
-	}
+    public Lecture() {
+    }
 
-	public long getLectureId() {
+    // 변수 다 있는 생성자
+    public Lecture(long lectureId, String name, String img, String category, long capacity, int level,
+            String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom,
+            String phone) {
+        super();
+        this.lectureId = lectureId;
+        this.name = name;
+        this.img = img;
+        this.category = category;
+        this.capacity = capacity;
+        this.level = level;
+        this.description = description;
+        this.createAt = createAt;
+        this.teacherId = teacherId;
+        this.setTeacherName(teacherName);
+        this.lectureRoom = lectureRoom;
+        this.phone = phone;
+        this.setCategoryColor(categoryColor);
+    }
+
+    // create,update에 사용
+    public Lecture(Long lectureId, String name, String img, String category, long capacity, int level,
+            String description, String teacherId, Integer lectureRoom) {
+        super();
+        this.lectureId = lectureId;
+        this.name = name;
+        this.img = img;
+        this.category = category;
+        this.capacity = capacity;
+        this.level = level;
+        this.description = description;
+        this.teacherId = teacherId;
+        this.lectureRoom = lectureRoom;
+    }
+
+    // 위에거에서 phone 추가
+    public Lecture(Long lectureId, String name, String img, String category, long capacity, int level,
+            String description, String teacherId, Integer lectureRoom, String phone) {
+        super();
+        this.lectureId = lectureId;
+        this.name = name;
+        this.img = img;
+        this.category = category;
+        this.capacity = capacity;
+        this.level = level;
+        this.description = description;
+        this.teacherId = teacherId;
+        this.lectureRoom = lectureRoom;
+        this.phone = phone;
+    }
+
+    public long getLectureId() {
         return lectureId;
     }
 
-	public void setLectureId(long lectureId) {
+    public void setLectureId(long lectureId) {
         this.lectureId = lectureId;
     }
 
@@ -124,58 +128,59 @@ public class Lecture {
         this.createAt = createAt;
     }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getLectureRoom() {
-		return lectureRoom;
-	}
+    public Integer getLectureRoom() {
+        return lectureRoom;
+    }
 
-	public void setLectureRoom(Integer lectureRoom) {
-		this.lectureRoom = lectureRoom;
-	}
+    public void setLectureRoom(Integer lectureRoom) {
+        this.lectureRoom = lectureRoom;
+    }
 
+    public String getTeacherId() {
+        return teacherId;
+    }
 
-	public String getTeacherId() {
-		return teacherId;
-	}
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
 
+    public String getTeacherName() {
+        return teacherName;
+    }
 
-	public void setTeacherId(String teacherId) {
-		this.teacherId = teacherId;
-	}
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
 
+    @Override
+    public String toString() {
+        return "Lecture [lectureId=" + lectureId + ", name=" + name + ", img=" + img + ", category=" + category
+                + ", capacity=" + capacity + ", level=" + level + ", description=" + description + ", createAt="
+                + createAt + ", teacherId=" + teacherId + ", teacherName=" + teacherName + ", lectureRoom="
+                + lectureRoom + "]";
+    }
 
-	public String getTeacherName() {
-		return teacherName;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
-	}
+    public String getCategoryColor() {
+        return categoryColor;
+    }
 
-
-	@Override
-	public String toString() {
-		return "Lecture [lectureId=" + lectureId + ", name=" + name + ", img=" + img + ", category=" + category
-				+ ", capacity=" + capacity + ", level=" + level + ", description=" + description + ", createAt="
-				+ createAt + ", teacherId=" + teacherId + ", teacherName=" + teacherName + ", lectureRoom="
-				+ lectureRoom + "]";
-	}
-
-
-	public String getPhone() {
-		return phone;
-	}
-
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setCategoryColor(String categoryColor) {
+        this.categoryColor = categoryColor;
+    }
 }
