@@ -6,8 +6,6 @@ import java.util.List;
 
 import model.dao.JDBCUtil;
 import model.domain.Notice;
-import model.domain.Schedule;
-
 import java.time.LocalDate;
 
 public class LectureNoticeDao {
@@ -20,7 +18,7 @@ public class LectureNoticeDao {
 	// 공지 조회 by 날짜 (년, 월)
 	public List<Notice> findNoticesByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("SELECT lecturenoticeid AS id, title, description, createat, lectureId ");
 		query.append("FROM lecturenotice ");
 		query.append("WHERE EXTRACT(YEAR FROM startDate) = ? AND EXTRACT(MONTH FROM startDate) = ? ");
 		query.append("ORDER BY startDate, startTime");
@@ -32,10 +30,12 @@ public class LectureNoticeDao {
 			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
 			while (rs.next()) {
 				Notice notice = new Notice();
-				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setId(rs.getInt("id"));
 				notice.setTitle(rs.getString("title"));
 				notice.setDescription(rs.getString("description"));
 				notice.setCreateat(rs.getDate("createat").toLocalDate());
+				notice.setLectureId(rs.getInt("lectureId"));
+
 //				Date sqlDate = rs.getDate("createat");
 //				LocalDate localDate = sqlDate.toLocalDate();
 //				notice.setCreateat(localDate);
