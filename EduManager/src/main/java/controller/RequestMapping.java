@@ -31,6 +31,7 @@ import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
 import controller.study.CreateStudyController;
+import controller.study.CreateStudyNoticeController;
 import controller.study.CreateStudyScheduleController;
 import controller.study.UpdateStudyController;
 import controller.study.ViewMyStudyController;
@@ -94,8 +95,8 @@ public class RequestMapping {
       
 		//스터디 일정(특정),공지,과제 추가
         mappings.put("/study/addSchedule", new CreateStudyScheduleController());
-       
-        mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
+        mappings.put("/study/addNotice", new CreateStudyNoticeController());
+
         mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
         mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
         mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));

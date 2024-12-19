@@ -615,6 +615,7 @@ overflow: auto; /* 자식 요소가 넘치면 스크롤 없이 보이도록 */
 .complete-button {
 	display: block;
 	height: 50px;
+	width: 180px;
 	color: #ffffff;
 	background-color: #163580;
 	justify-self: center;

@@ -79,4 +79,8 @@ public class StudyManager {
     	return scheduleDao.findSchedulesByFilters(studygroupid, startDate, type, dayOfWeek);
     }
 
+    //스터디 공지 추가
+    public void createNotice(Notice notice) {
+    	noticeDao.createNotice(notice.getStudyId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
+    }
 }
