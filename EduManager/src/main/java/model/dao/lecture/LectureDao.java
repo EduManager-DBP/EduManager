@@ -231,9 +231,10 @@ public class LectureDao {
     //수강하지 않고 있는 강의 목록 보여주기(수강 신청용)
     public List<Lecture> getLecturesExcludingStudent(String stuid) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT lectureId, name, img, category, capacity, lecturelevel, teacherId ");
-        query.append("FROM Lecture ");
-        query.append("WHERE lectureId NOT IN (");
+        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, T.name As teacherName ");
+        query.append("FROM Lecture L ");
+        query.append("JOIN Teacher T ON L.teacherId = T.Id "); // Teacher 테이블과 조인
+        query.append("WHERE L.lectureId NOT IN (");
         query.append("    SELECT lectureId ");
         query.append("    FROM LectureEnrollment ");
         query.append("    WHERE stuid = ? ");
@@ -254,7 +255,7 @@ public class LectureDao {
                 lecture.setCategory(rs.getString("category"));
                 lecture.setCapacity(rs.getInt("capacity"));
                 lecture.setLevel(rs.getInt("lecturelevel"));
-
+                lecture.setTeacherName(rs.getString("teacherName"));
                 // 로그 찍기: Lecture 객체의 각 필드 값 출력
                 System.out.println("Lecture ID: " + lecture.getLectureId());
                 System.out.println("Lecture Name: " + lecture.getName());
@@ -262,6 +263,7 @@ public class LectureDao {
                 System.out.println("Lecture Category: " + lecture.getCategory());
                 System.out.println("Lecture Capacity: " + lecture.getCapacity());
                 System.out.println("Lecture Level: " + lecture.getLevel());
+                System.out.println("Lecture teacherName: " + lecture.getTeacherName());
 
                 lectureList.add(lecture); // 리스트에 추가
             }
@@ -277,9 +279,10 @@ public class LectureDao {
     
     public List<Lecture> getMyLectureList(String stuid) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT l.lectureId, l.name, l.img, l.category, l.teacherId ");
+        query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName ");
         query.append("FROM Lecture l ");
         query.append("JOIN LectureEnrollment le ON l.lectureId = le.lectureId ");
+        query.append("JOIN Teacher t ON l.teacherId = t.Id "); // Teacher 테이블과 조인
         query.append("WHERE le.stuId = ?");
         
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuid }); // stuid 파라미터 전달
@@ -295,6 +298,7 @@ public class LectureDao {
                 lecture.setName(rs.getString("name"));
                 lecture.setImg(rs.getString("img"));
                 lecture.setCategory(rs.getString("category"));
+                lecture.setTeacherName(rs.getString("teacherName"));
  
                 lectureList.add(lecture); // 리스트에 추가
             }

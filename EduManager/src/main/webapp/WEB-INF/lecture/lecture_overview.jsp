@@ -73,8 +73,6 @@
 								<c:when test="${existStudent}">
 									<c:choose>
 										<c:when test="${!isInclude}">
-
-
 											<c:choose>
 												<c:when test="${!isConflict}">
 
@@ -95,8 +93,6 @@
 								</c:when>
 							</c:choose>
 						</form>
-
-
 					</div>
 				</div>
 			</div>
