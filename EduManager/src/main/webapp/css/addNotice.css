@@ -7,7 +7,10 @@
 
 
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
 	font-family: Pretendard, "var(--default-font-family)";
 	outline: 0;
 }
@@ -90,32 +93,33 @@ input, select, textarea, button {
 	border-radius: 6px;
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
 	font-size: 16px;
-	resize: vertical; /* 사용자가 세로 크기 조절 가능 */
+	resize: vertical;
+	/* 사용자가 세로 크기 조절 가능 */
 }
 
 /* 제출 버튼 */
 .button-container {
 	display: block;
-    width: 100%;
-    height: 50px;
-    justify-items: center;
-    margin-top: 55px;
+	width: 100%;
+	height: 50px;
+	justify-items: center;
+	margin-top: 55px;
 }
+
 .complete-button {
-    display: block;
-    width: 200px;
-    height: 50px;
-    background-color: #1E2A7C;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+	display: block;
+	width: 200px;
+	height: 50px;
+	background-color: #1E2A7C;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 .complete-button:hover {
-    background-color: #163580;
+	background-color: #163580;
 }
-

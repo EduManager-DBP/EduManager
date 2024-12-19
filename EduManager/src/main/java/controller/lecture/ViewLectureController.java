@@ -1,12 +1,16 @@
 package controller.lecture;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
 import model.domain.lecture.Lecture;
+import model.domain.lecture.LectureReview;
 import model.service.LectureManager;
+import model.service.member.StudentManager;
 
 
 public class ViewLectureController implements Controller {
@@ -22,22 +26,34 @@ public class ViewLectureController implements Controller {
         System.out.println("그룹 ID: "+ lectureId );
         String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
 
-        // LectureManager를 통해 강의 정보 조회
-        LectureManager manager = LectureManager.getInstance();
-        Lecture lecture = manager.findLectureById(lectureId);
-
-        boolean isLiked = manager.isLikedByUser(stuId, lectureId); // 인스턴스를 통해 호출
+       
+        LectureManager lectureManager = LectureManager.getInstance();
+        StudentManager studentManager = StudentManager.getInstance();
+        
+         // LectureManager를 통해 강의 정보 조회
+        Lecture lecture = lectureManager.findLectureById(lectureId);
+          
+        List<LectureReview> lectureReviewList = lectureManager.getReviewsByLectureId(lectureId);
+        
+        // 학생인지 강사인지 구분
+        boolean existStudent = studentManager.existingStudent(stuId);
+        request.setAttribute("existStudent", existStudent);
+        
+       
+        boolean isLiked = lectureManager.isLikedByUser(stuId, lectureId); // 인스턴스를 통해 호출
         System.out.println("좋아요 여부: "+ isLiked );
         request.setAttribute("isLiked", isLiked);
         
-        // 강의 상세 정보 출력 (디버깅용)
-        System.out.println("강의 ID: " + lecture.getLectureId() +
-                           ", 강의 이름: " + lecture.getName() +
-                           ", 카테고리: " + lecture.getCategory() +
-                           ", 강의실: " + lecture.getLectureRoom() +
-                           ", 강사 이름: " + lecture.getTeacherName() +
-                           ", 강사 번호: " + lecture.getPhone());
+        boolean isInclude = lectureManager.isEnrolledInLecture(stuId, lectureId); // 인스턴스를 통해 호출
+        System.out.println("수강 여부: "+ isInclude );
+        request.setAttribute("isInclude", isInclude);
+        
+        //강의 스케줄 중복 조회
 
+        boolean isConflict = lectureManager. isLectureConflict(stuId, lectureId); // 인스턴스를 통해 호출
+        request.setAttribute("isConflict", isConflict);
+       
+        
         // 로그인한 사용자 ID를 request에 저장
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("lectureId",  lectureId);
@@ -47,6 +63,7 @@ public class ViewLectureController implements Controller {
         request.setAttribute("lectureroom", lecture.getLectureRoom());
         request.setAttribute("description", lecture.getDescription());
         request.setAttribute("lectureroom", lecture.getLectureRoom());
+        request.setAttribute("reviewList", lectureReviewList);
         
         
         // 강의 상세 페이지로 이동

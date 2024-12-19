@@ -1,16 +1,17 @@
 /*강의/스터디 만들기 css*/
 #logo-link {
 	margin-left: 100px;
-	
+
 	margin-top: 30px;
 }
 
-header > nav {
-    width: 600px;
-    height: 100%;
-    margin-right: 100px;
-    
+header>nav {
+	width: 600px;
+	height: 100%;
+	margin-right: 100px;
+
 }
+
 .subTitle {
 	font-size: 24px;
 	color: #643E23;
@@ -36,7 +37,8 @@ header > nav {
 	font-weight: 600;
 }
 
-.study>input[type='text'], .study>input[type='number'] {
+.study>input[type='text'],
+.study>input[type='number'] {
 	width: 100%;
 	padding: 15px;
 	height: 32px;
@@ -124,7 +126,8 @@ select {
 	transition: color 0.2s, background-color 0.2s, border-radius 0.2s;
 }
 
-.category:hover,.category.selected {
+.category:hover,
+.category.selected {
 	color: #fff;
 	background-color: #1E2A7C;
 }

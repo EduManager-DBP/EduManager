@@ -5,10 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.JOptionPane;
+
 import model.dao.JDBCUtil;
+import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
-
+import model.domain.studyGroup.StudyGroupReview;
 
 public class StudyGroupDao {
    private JDBCUtil jdbcUtil = null;
@@ -103,6 +107,7 @@ public StudyGroup findGroupInfo(long groupId) {
     return null;
 }
 
+
 	// 특정 스터디그룹에 해당하는 정보 삭제
 	public int remove(String groupId) throws SQLException {
 		String sql = "DELETE FROM StudyGroup WHERE studyGroupId=?";
@@ -120,7 +125,7 @@ public StudyGroup findGroupInfo(long groupId) {
 		}
 		return 0;
 	}
-   
+
 
    // 스터디그룹 전체 보여주기
    public List<StudyGroup> getStudyGroupList() throws SQLException {
@@ -177,11 +182,7 @@ public StudyGroup findGroupInfo(long groupId) {
          jdbcUtil.commit();
          jdbcUtil.close();
       }
-   }
-
-
-
-    
+   }    
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
         StringBuffer query = new StringBuffer();
@@ -191,9 +192,9 @@ public StudyGroup findGroupInfo(long groupId) {
         query.append("    SELECT studyGroupId ");
         query.append("    FROM StudyGroupApplication ");
         query.append("    WHERE stuId = ? AND status ='수락' ");
-        query.append(")");
+        query.append(") AND leaderId != ?");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId }); // stuId 파라미터 전달
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId }); // stuId 파라미터 전달
         List<StudyGroup> studyGroupList = new ArrayList<>();
 
         try {
@@ -216,29 +217,34 @@ public StudyGroup findGroupInfo(long groupId) {
         return studyGroupList;
     }
     
-    public StudyGroupApplication createApplication(StudyGroupApplication application) throws SQLException { 
-        
+    public StudyGroupApplication createApplication(String memberId, long studyGroupId) throws SQLException { 
+        // 새로운 StudyGroupApplication 객체 생성
+        StudyGroupApplication application = new StudyGroupApplication();
         application.setStatus("진행중");
+        application.setMemberId(memberId);
+        application.setStudyGroupId(studyGroupId);
         
-        // 스터디 그룹 요청 생성
-        String sql = "INSERT INTO StudyGroupApplication (studyGroupApplicationId, status, createAt, memberId, studyGroupId) "
-                     + "VALUES (SEQ_STUDY_GROUP_APPLICATION_ID.nextval, ?, SYSDATE, ?, ?)";    
+        // 스터디 그룹 요청 생성 SQL
+        String sql = "INSERT INTO StudyGroupApplication (studyGroupApplicationId, status, createAt, stuId, studyGroupId) "
+                   + "VALUES (SEQ_STUDY_GROUP_APPLICATION_ID.nextval, ?, SYSDATE, ?, ?)";
+        
         Object[] param = new Object[] {
-                application.getStatus(),        
-                application.getMemberId(),       
-                application.getStudyGroupId()    
-            };         
-        jdbcUtil.setSqlAndParameters(sql, param);  // JDBCUtil에 insert문과 매개 변수 설정
-                        
-        String key[] = {"studyGroupApplicationId"};  
+            application.getStatus(),   
+            memberId,                 
+            studyGroupId               
+        };         
+        
+        jdbcUtil.setSqlAndParameters(sql, param); // SQL과 매개변수 설정
+                            
+        String key[] = {"studyGroupApplicationId"}; // 자동 생성된 키 반환 설정
         try {    
             jdbcUtil.executeUpdate(key);  
             ResultSet rs = jdbcUtil.getGeneratedKeys();
-            if(rs.next()) {
-                int generatedKey = rs.getInt(1);   
-                application.setStudyGroupApplicationId(generatedKey);  // id필드에 저장  
+            if (rs.next()) {
+                int generatedKey = rs.getInt(1);  // 자동 생성된 ID 가져오기
+                application.setStudyGroupApplicationId(generatedKey);  
             }
-            return application;
+            return application;  // 생성된 객체 반환
         } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();
@@ -249,10 +255,103 @@ public StudyGroup findGroupInfo(long groupId) {
         return null;            
     }
     
+    
+    //스터디 그룹 요청 상태 가져오기
+    public String getStatusByMemberIdAndGroupId(String memberId, long studyGroupId) throws SQLException {
+        String sql = "SELECT status " +
+                     "FROM StudyGroupApplication " +
+                     "WHERE stuId = ? AND studyGroupId = ?";
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, studyGroupId}); // SQL과 매개변수 설정
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+            if (rs.next()) {
+                return rs.getString("status"); // status 값 반환
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+        return null; // 조회된 값이 없으면 null 반환
+    }
+    
+    public List<StudyGroupApplication> getStudyRequestList(long groupId) throws SQLException {
+        List<StudyGroupApplication> groupList = new ArrayList<>();
+       
+        String sql = "SELECT sga.studygroupapplicationId, sga.status, sga.createat, sga.stuid, sga.studygroupid, m.name AS student_name " +
+                "FROM studygroupapplication sga " +
+                "JOIN member m ON sga.stuId = m.id " +
+                "WHERE sga.status = '진행중' AND sga.studygroupid = ?";
+
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{groupId}); // memberId를 두 번 파라미터로 설정
+        ResultSet rs = jdbcUtil.executeQuery();
+        
+        while (rs.next()) {
+            StudyGroupApplication group = new StudyGroupApplication();
+            group.setStudyGroupApplicationId(rs.getLong("studygroupapplicationId")); 
+            group.setStatus(rs.getString("status")); 
+            group.setCreateAt(rs.getDate("createat"));
+            group.setMemberId(rs.getString("stuId")); 
+            group.setStudyGroupId(rs.getLong("studygroupid")); 
+            group.setMemberName(rs.getString("student_name")); // 학생 이름
+
+            groupList.add(group);
+        }
+        
+        jdbcUtil.close();
+        return groupList;
+    }
+    
+    public StudyGroupApplication findById(Long applicationId) throws SQLException {
+        StudyGroupApplication application = null;
+        
+        String sql = "SELECT studygroupapplicationId, status, createat, stuId, studygroupid " +
+                "FROM studygroupapplication " +
+                "WHERE studygroupapplicationId = ?";
+        
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{applicationId});
+        ResultSet rs = jdbcUtil.executeQuery();
+
+        if (rs.next()) {
+            application = new StudyGroupApplication();
+            application.setStudyGroupApplicationId(rs.getLong("studygroupapplicationId"));
+            application.setStatus(rs.getString("status"));
+            application.setCreateAt(rs.getDate("createat"));
+            application.setMemberId(rs.getString("stuId"));
+            application.setStudyGroupId(rs.getLong("studygroupid"));
+            application.setMemberName(rs.getString("student_name"));
+        }
+        
+        jdbcUtil.close();
+        return application;
+    }
+    
+    
  // 요청 상태를 "수락"으로 변경
     public void acceptApplication(long applicationId) throws SQLException {
         
         String updateStatusSql = "UPDATE StudyGroupApplication SET status = '수락' WHERE studyGroupApplicationId = ?";
+        
+        try {
+            // 상태 변경 실행
+            jdbcUtil.setSqlAndParameters(updateStatusSql, new Object[]{applicationId});
+            jdbcUtil.executeUpdate();
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
+        }
+    }
+    
+  public void deleteApplication(long applicationId) throws SQLException {
+        
+        String updateStatusSql = "DELETE FROM StudyGroupApplication WHERE studyGroupApplicationId = ?";
         
         try {
             // 상태 변경 실행
@@ -392,40 +491,104 @@ public StudyGroup findGroupInfo(long groupId) {
     }
     
     //리뷰 작성을 위한 스터디 그룹 소속인지 아닌지 확인
-    private boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM StudyGroupApplication WHERE studyGroupId = ? AND memberId = ? AND status = '수락'";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGroupId, memberId});
+    public boolean isMemberOfStudyGroup(String memberId, long studyGroupId) throws SQLException {
+        String sql = "SELECT COUNT(*) " +
+                     "FROM StudyGroup sg " +
+                     "FULL OUTER JOIN StudyGroupApplication sga ON sga.studyGroupId = sg.studyGroupId " +
+                     "WHERE (sga.studyGroupId = ? AND sga.stuId = ? AND sga.status = '수락') " +
+                     "OR (sg.studyGroupId = ? AND sg.leaderId = ?)";
+
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGroupId, memberId, studyGroupId, memberId});
         
         ResultSet rs = jdbcUtil.executeQuery();
-        if (rs.next()) {
-            int count = rs.getInt(1);
-            return count > 0;  
+        
+        if (rs != null && rs.next()) {
+            int count = rs.getInt(1);  // COUNT(*) 결과
+            System.out.println("Is member of study group: " + count);  // 로그 출력
+
+            return count > 0;  // count가 0보다 크면 멤버
         }
-        return false;  
+        
+        System.out.println("No matching records found.");  // 로그 출력
+        return false;  // 결과가 없으면 false
     }
     
     // 스터디후기 생성
-    public void createReview(String memberId, long studyGroupId, String reviewText) throws SQLException {
+    public StudyGroupReview insertReview(StudyGroupReview review) throws SQLException {
         try {
-            if (isMemberOfStudyGroup(memberId, studyGroupId)) {
-              
-                String sql = "INSERT INTO StudyGroupReview (studyGroupReviewId, reviewText, createAt, studyGroupId, memberId) "
-                             + "VALUES (SEQ_STUDY_GROUP_REVIEW_ID.nextval, ?, SYSDATE, ?, ?)";
-                jdbcUtil.setSqlAndParameters(sql, new Object[]{reviewText, studyGroupId, memberId});
-                
-                jdbcUtil.executeUpdate(); 
-            } else {
-                System.out.println("해당 스터디 그룹에 소속되지 않았습니다. 리뷰를 작성할 수 없습니다.");
-            }
-        }catch (Exception ex) {
+            
+                StringBuffer query = new StringBuffer();
+                query.append(" INSERT INTO StudyGroupReview (studyGroupReviewId, reviewText, studyGroupId, stuId) ");
+                query.append(" VALUES (SEQ_STUDY_GROUP_REVIEW_ID.nextval, ?, ?, ?) ");
+
+                // memberId를 review의 stuId로 설정
+                Object[] param = new Object[] { review.getReviewText(),    // reviewText는 String 타입
+                        review.getStudyGroupId(),    // studyGroupId는 Long 타입
+                        review.getStuId()  };      // memberId는 String 타입
+
+                jdbcUtil.setSqlAndParameters(query.toString(), param); // JDBCUtil에 질의문과 파라미터 설정
+
+                // 삽입 실행
+                int result = jdbcUtil.executeUpdate();
+
+                if (result > 0) {
+                    jdbcUtil.commit();
+                    return review; // 삽입 성공 시 입력된 review 객체 반환
+                } else {
+                    throw new RuntimeException("Failed to insert StudyGroupReview.");
+                }
+
+           
+        } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();
-            throw new SQLException("예기치 않은 오류가 발생했습니다.", ex); 
+            throw new SQLException("오류가 발생했습니다.", ex);
         } finally {
-            jdbcUtil.commit(); 
-            jdbcUtil.close();  
+            jdbcUtil.close();  // 자원 해제
         }
     }
+  
+  //스터디 그룹 리뷰 
+    public List<StudyGroupReview> getReviewsByGroupId(long groupId) {
+        StringBuffer query = new StringBuffer();
+        query.append("""
+                SELECT
+                    sgr.studyGroupReviewId,
+                    sgr.reviewText,
+                    sgr.studyGroupId,
+                    sgr.stuId,
+                    m.name
+                FROM
+                    StudyGroupReview sgr
+                JOIN
+                    Member m
+                ON
+                    sgr.stuId = m.Id
+                WHERE
+                    sgr.studyGroupId = ?
+            """);
+
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { groupId });
+
+        List<StudyGroupReview> reviews = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            while (rs.next()) {
+                StudyGroupReview review = new StudyGroupReview();
+                review.setStudyGroupReviewId(rs.getLong("studyGroupReviewId"));
+                review.setReviewText(rs.getString("reviewText"));
+                review.setMemberName(rs.getString("name"));
+                // Lecture 및 StudentDTO 로드는 필요 시 추가 가능
+                reviews.add(review);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return reviews;
+    }
+
 
   //팀원으로 가입된 스터디 그룹 가져오기 
     public List<String> findStudyMembers(int studyGruopId) throws SQLException {

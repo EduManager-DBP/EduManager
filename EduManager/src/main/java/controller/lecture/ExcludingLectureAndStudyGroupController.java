@@ -25,7 +25,7 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
       
-      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);;
+      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);
       List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(stuId);
 
 

@@ -18,6 +18,50 @@ public class LectureAssignmentDao {
         jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
     }
 
+    // 강의 아이디로 강의 과제 목록 조회
+    public List<Assignment> findAssignmentsByDate(int year, int month) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT lectureassignmentid, duedate, title, description, createat, textfile, lectureid ");
+        query.append("FROM lectureassignment ");
+        query.append("WHERE EXTRACT(YEAR FROM startDate) = ? AND EXTRACT(MONTH FROM startDate) = ? ");
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
+        List<Assignment> assignments = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+            while (rs.next()) {
+                Assignment ass = new Assignment();
+                ass.setId(rs.getInt("lectureassignmentid"));
+                ass.setTitle(rs.getString("title"));
+                ass.setDescription(rs.getString("description"));
+                ass.setTextFile(rs.getString("textfile"));
+                ass.setLectureId(rs.getInt("lectureid"));
+                ass.setDueDate(rs.getDate("duedate").toLocalDate());
+                ass.setCreateat(rs.getDate("createat").toLocalDate());
+
+//                Date sqlDueDate = rs.getDate("duedate"); 
+//                if (sqlDueDate != null) {
+//                    ass.setDueDate(sqlDueDate.toLocalDate());
+//                }
+//
+//                Date sqlCreateAt = rs.getDate("createat"); 
+//                if (sqlCreateAt != null) {
+//                    ass.setCreateat(sqlCreateAt.toLocalDate());
+//                }
+                
+                assignments.add(ass); // 리스트에 과제 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+        
+        return assignments;
+    }
+    
+    
     
     // 과제 생성
     public void createAssignment(int lectureId, String title, String description, Date dueDate, String textFile) {

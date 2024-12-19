@@ -2,6 +2,7 @@ package model.dao.lecture;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 import model.dao.JDBCUtil;
 import model.domain.Notice;
 import model.domain.lecture.Lecture;
+import model.domain.lecture.LectureEnrollment;
+import model.domain.studyGroup.StudyGroupApplication;
 
 public class LectureDao {
     private JDBCUtil jdbcUtil = null; // JDBCUtil 필드 선언
@@ -304,5 +307,97 @@ public class LectureDao {
         return lectureList; // 결과 반환
     }
 
+    
+    //강의 수강신청 
+    public LectureEnrollment createLectureEnrollment(String memberId, long lectureId) throws SQLException { 
+        // 새로운 LectureEnrollment 객체 생성
+        LectureEnrollment enrollment = new LectureEnrollment();
+        enrollment.setMemberId(memberId);
+        enrollment.setLectureId(lectureId);
+        
+        String insertSql = "INSERT INTO LectureEnrollment (enrollmentId, LECTUREID, STUID) VALUES (SEQ_LECTURE_ENROLLMENT_ID.nextval, ?, ?)";
+        Object[] insertParams = new Object[] { lectureId, memberId };
+        String[] key = {"enrollmentId"}; // 자동 생성된 키 반환 설정
+        jdbcUtil.setSqlAndParameters(insertSql, insertParams); // 삽입 SQL 설정
+
+        try {
+            jdbcUtil.executeUpdate(key);
+            ResultSet rs = jdbcUtil.getGeneratedKeys();
+            if (rs.next()) {
+                int generatedKey = rs.getInt(1); // 자동 생성된 ID 가져오기
+                enrollment.setEnrollmentId(generatedKey);  // 객체에 ID 설정
+            }
+            return enrollment; 
+        } catch (Exception ex) {
+            jdbcUtil.rollback(); 
+            ex.printStackTrace(); // 로그를 남기기 위해 로깅 도입 필요
+        } finally {
+           jdbcUtil.commit();       
+           jdbcUtil.close(); 
+        }
+
+        return null; 
+    }
+    
+    //강의 스케줄 중복확인
+    public boolean isLectureConflict(String memberId, long lectureId) throws SQLException {
+        String sql = "WITH TargetLecture AS ( " +
+                     "  SELECT DAYOFWEEK, STARTTIME, ENDTIME " +
+                     "  FROM LectureSchedule " +
+                     "  WHERE LECTUREID = ? " +
+                     "    AND TYPE = 'regular' " +
+                     ") " +
+                     "SELECT 1 " +
+                     "FROM LectureEnrollment le " +
+                     "JOIN LectureSchedule ls ON le.LECTUREID = ls.LECTUREID " +
+                     "JOIN TargetLecture tl ON ls.DAYOFWEEK = tl.DAYOFWEEK " +
+                     "WHERE le.STUID = ? " +
+                     "  AND ls.TYPE = 'regular' " +
+                     "  AND ( " +
+                     "        tl.STARTTIME BETWEEN ls.STARTTIME AND ls.ENDTIME OR " +
+                     "        tl.ENDTIME BETWEEN ls.STARTTIME AND ls.ENDTIME OR " +
+                     "        ls.STARTTIME BETWEEN tl.STARTTIME AND tl.ENDTIME OR " +
+                     "        ls.ENDTIME BETWEEN tl.STARTTIME AND tl.ENDTIME " +
+                     "      )";
+
+        Object[] params = new Object[] { lectureId, memberId };
+        jdbcUtil.setSqlAndParameters(sql, params);
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            return rs.next(); // 결과가 있으면 중복 발생
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+    }
+    
+    
+   // stuId와 lectureId에 해당하는 레코드가 존재하는지 확인 
+    public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
+        
+        String sql = "SELECT COUNT(*) FROM LectureEnrollment WHERE STUID = ? AND LECTUREID = ?";
+        Object[] params = new Object[] { memberId, lectureId };
+
+        // 결과 확인
+        jdbcUtil.setSqlAndParameters(sql, params); // SQL과 파라미터 설정
+
+        try {
+            // 쿼리 실행
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1); // 레코드 수를 가져옴
+                return count > 0; // 레코드가 있으면 true, 없으면 false
+            }
+        } catch (Exception ex) {
+            jdbcUtil.rollback(); // 오류 발생 시 롤백
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return false; // 예외 발생 시 false 반환
+    }
+    
+    
 }
 

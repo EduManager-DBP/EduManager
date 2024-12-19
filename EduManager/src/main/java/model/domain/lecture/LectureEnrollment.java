@@ -4,8 +4,8 @@ import model.domain.member.Student;
 
 public class LectureEnrollment {
     private long enrollmentId;
-    private Lecture lectureId;
-    private Student memberId;
+    private long lectureId;
+    private String memberId;
 
     public long getEnrollmentId() {
         return enrollmentId;
@@ -15,19 +15,19 @@ public class LectureEnrollment {
         this.enrollmentId = enrollmentId;
     }
 
-    public Lecture getLectureId() {
+    public long getLectureId() {
         return lectureId;
     }
 
-    public void setLectureId(Lecture lectureId) {
+    public void setLectureId(long lectureId) {
         this.lectureId = lectureId;
     }
 
-    public Student getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Student memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
 

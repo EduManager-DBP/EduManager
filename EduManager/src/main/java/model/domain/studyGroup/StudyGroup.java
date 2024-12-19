@@ -117,4 +117,5 @@ public class StudyGroup {
 	public void setPlace(String place) {
 		this.place = place;
 	}
+
 }

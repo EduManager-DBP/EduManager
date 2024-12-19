@@ -1,11 +1,15 @@
 package controller.studyGroup;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
+import model.domain.studyGroup.StudyGroupReview;
 import model.service.StudyGroupManager;
 
 public class ViewStudyGroupController implements Controller {
@@ -30,8 +34,8 @@ public class ViewStudyGroupController implements Controller {
         StudyGroupManager manager = StudyGroupManager.getInstance();
         StudyGroup group = manager.findStudyGroupById(groupId);
 
-        // 강의 정보를 request에 저장
-     
+        List<StudyGroupReview> groupReviewList = manager.getReviewsByGroupId(groupId);
+        
 
         // 강의 상세 정보 출력 (디버깅용)
         System.out.println("그룹 ID: " + group.getStudyGroupId()+
@@ -45,10 +49,20 @@ public class ViewStudyGroupController implements Controller {
         request.setAttribute("groupId", groupId);
         request.setAttribute("groupName",  group.getName());
         request.setAttribute("description", group.getDescription());
+        request.setAttribute("reviewList", groupReviewList);
         
         boolean isLiked = studyGroupManager.isLikedByUser(stuId, groupId); // 인스턴스를 통해 호출
         System.out.println("좋아요 여부: "+ isLiked );
         request.setAttribute("isLiked", isLiked);
+        
+        boolean isInclude = studyGroupManager.isMemberOfStudyGroup(stuId, groupId); // 인스턴스를 통해 호출
+        System.out.println("소속 여부: "+ isInclude);
+        request.setAttribute("isInclude", isInclude);
+        
+        
+        String requestStatus = studyGroupManager.getStatusByMemberIdAndGroupId(stuId, groupId);
+        System.out.println("요청 상태: "+ requestStatus);
+        request.setAttribute("requestStatus", requestStatus);
    
         // 강의 상세 페이지로 이동
         return "/study/study_overview.jsp";

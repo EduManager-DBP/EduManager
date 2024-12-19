@@ -95,4 +95,10 @@ public class StudentManager {
 	public StudentDAO getStudentDAO() {
 		return this.studentDAO;
 	}
+	
+	
+	public boolean existingStudent(String studenId) throws SQLException {
+       
+        return studentDAO.existingStudent(studenId);
+    }
 }

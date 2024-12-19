@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.lecture.CreateLectureController;
+import controller.lecture.CreateLectureEnrollmentController;
+import controller.lecture.CreateLectureReviewController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
 import controller.lecture.ViewMyLectureListController;
@@ -14,6 +16,7 @@ import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
 import controller.main.MainController;
 import controller.member.DeleteMemberController;
+import controller.member.InterestCategoryController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.RegisterMemberController;
@@ -23,10 +26,14 @@ import controller.member.RegisterStudent3Controller;
 import controller.member.RegisterStudentController;
 import controller.member.RegisterTeacherController;
 import controller.member.UpdateMemberController;
+import controller.studyGroup.AcceptedRequestController;
+import controller.studyGroup.CreateStudyReviewController;
+import controller.studyGroup.DeleteRequestController;
+import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
-
+import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
@@ -41,6 +48,8 @@ import controller.study.ViewMyStudyController;
 //import controller.comm.*;
 
 public class RequestMapping {
+
+
 
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
@@ -59,12 +68,13 @@ public class RequestMapping {
         mappings.put("/main/main", new MainController());
 
         // 회원가입 요청
-        mappings.put("/member/register/form", new RegisterMemberController());
-        mappings.put("/teacher/register", new RegisterTeacherController());
-        mappings.put("/student/register1", new RegisterStudent1Controller());
-        mappings.put("/student/register2", new RegisterStudent2Controller());
-        mappings.put("/student/register3", new RegisterStudent3Controller());
-        mappings.put("/student/register", new RegisterStudentController());
+		  mappings.put("/member/register/form", new RegisterMemberController());
+		  mappings.put("/teacher/register", new RegisterTeacherController());
+		  mappings.put("/student/register1", new RegisterStudent1Controller());
+		  mappings.put("/student/register2", new RegisterStudent2Controller());
+		  mappings.put("/student/register3", new InterestCategoryController());
+		  mappings.put("/student/register4", new RegisterStudent3Controller());
+		  mappings.put("/student/register", new RegisterStudentController());
 
         // 마이페이지 내 정보 보기
         mappings.put("/mypage/myInfo", new ViewMyInfoController());
@@ -119,19 +129,39 @@ public class RequestMapping {
         mappings.put("/lecture/list", new ViewMyLectureListController());
         
         mappings.put("/mypage/like-list", new ViewLikeListController());
+        
+        //강의 리뷰 생성
+        mappings.put("/lecture/createReview", new CreateLectureReviewController());
+        mappings.put("/study/createReview", new CreateStudyReviewController());
+        
+        //스터디 그룹 가입 요청
+        mappings.put("/studyGroup/join-request", new StudyGroupJoinRequestController());
 
-        mappings.put("/study/requests", new ForwardController("/study/study_request.jsp"));
+        //스터디 그룹 가입 요청 리스트
+        mappings.put("/study/requests", new ViewStudyRequestListController());
+        
+        //스터디 그룹 가입 요청 수락
+        mappings.put("/studyGroup/accepted-request", new AcceptedRequestController());
+        
+        mappings.put("/studyGroup/delete-request", new DeleteRequestController());
+        
+        //강의 수강 신청
+        mappings.put("/lecture/join", new CreateLectureEnrollmentController());
+        
+        
         mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
 
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
         mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+        mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
 
     public Controller findController(String uri) {
         // 주어진 URI에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
+
 
 }

@@ -2,7 +2,6 @@
 	width: 100%;
 	margin: 0 auto;
 	font-family: 'Pretendard';
-
 }
 
 .title {
@@ -83,20 +82,19 @@
 	width: 200px;
 	height: 50px;
 	background-color: #E5E5EA;
-    color: #643E23;
-	
+  color: #643E23;
 	font-size: medium;
 	font-weight: 600;
 	text-align: center;
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
-		font-family: 'Pretendard';
-
+	font-family: 'Pretendard';
 }
 
 .complete-button:hover {
 	color: #ffffff;
 	background-color: #163580;
+
 
 }
