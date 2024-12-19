@@ -23,10 +23,10 @@ public class StudyGroupDao {
 
    public StudyGroup create(StudyGroup group) throws SQLException {
       try {
-         String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId) "
-               + "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";
+         String sql = "INSERT INTO StudyGroup (studyGroupId, name, img, description, capacity, category, createAt, leaderId, place) "
+               + "VALUES (SEQ_STUDY_GROUP_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?)";
          Object[] param = new Object[] { group.getName(), group.getImg(), group.getDescription(),
-               group.getCapacity(), group.getCategory(), group.getLeaderId() };
+               group.getCapacity(), group.getCategory(), group.getLeaderId(), group.getPlace() };
 
          jdbcUtil.setSqlAndParameters(sql, param);
 

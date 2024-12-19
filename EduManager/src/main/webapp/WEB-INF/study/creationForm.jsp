@@ -33,11 +33,15 @@
 				<section class="study">
 					<span>스터디 소개</span><br /> <input type="text" name="description" />
 				</section>
-				<section class="study" style="width: 15%;">
-					<span>모집인원</span><span class="required">*</span> <br /> <input
-						type="number" name="capacity" required min="1" max="99" />
-				</section>
-
+				<div style="display: flex;">
+					<section class="study" style="width: 20%;">
+						<span>스터디 장소</span><br /> <input type="text" name="place" />
+					</section>
+					<section class="study" style="width: 20%;">
+						<span>모집인원</span><span class="required">*</span> <br /> <input
+							type="number" name="capacity" required min="1" max="99" />
+					</section>
+				</div>
 
 
 				<section class="study">
@@ -56,26 +60,29 @@
 				</section>
 
 
-				<!-- 정기 수업 일정은 일단 요청 따로 처리 -->
+
+				<!-- 스타일은 추후에 만질예정-->
 				<section id="schedule" class="study" style="display: inline-block">
-					<span>정기 모임 일정</span><span class="required">*</span><br />
+					<span>정기 모임 요일</span><span class="required">*</span><br />
 					<article class="schedule">
-						<span>요일</span> <select class="small" name="schedule[0][day]" required>
-							<option value="MONDAY">월</option>
-							<option value="TUESDAY">화</option>
-							<option value="WEDNESDAY">수</option>
-							<option value="THURSDAY">목</option>
-							<option value="FRIDAY">금</option>
-							<option value="SATURDAY">토</option>
-							<option value="SUNDAY">일</option>
-						</select> <span>시간</span> <input type="time" name="schedule[0][startTime]"/> ~ <input type="time" name="schedule[0][endTime]"/>
-						<button type="button" class="delete_btn"
-							onClick="deleteSchedule(this)">삭제</button>
+							<label> <input type="checkbox" name="dayOfWeek"
+								value="MONDAY"> 월
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="TUESDAY"> 화
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="WEDNESDAY"> 수
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="THURSDAY"> 목
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="FRIDAY"> 금
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="SATURDAY"> 토
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="SUNDAY"> 일
+							</label>
+
 					</article>
-					<button type="button" id="plus_btn" onClick="addSchedule()">+</button>
 				</section>
-
-
 				<section>
 					<button id="submit">스터디 그룹 만들기</button>
 				</section>

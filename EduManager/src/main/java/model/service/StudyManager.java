@@ -53,8 +53,8 @@ public class StudyManager {
     public int createSchedule (Schedule schedule)throws SQLException{
     	return scheduleDao.createSchedule(schedule);
     }
-    public List<Schedule> findScheduleById(long studyId) throws SQLException {
-    	return scheduleDao.findSchedulesByStudyId(studyId);
+    public List<Schedule> findScheduleById(long studyId, String type) throws SQLException {
+    	return scheduleDao.findSchedulesByStudyId(studyId, type);
     }
     public void updateSchedule (Schedule schedule)throws SQLException{
     	scheduleDao.updateSchedule(schedule);
