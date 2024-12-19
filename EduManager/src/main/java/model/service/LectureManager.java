@@ -27,7 +27,6 @@ public class LectureManager {
 	private LectureLikeDao lectureLikeDao;
 	private LectureReviewDao lectureReviewDao;
 
-
 	private LectureManager() {
 		lectureDao = new LectureDao();
 		scheduleDao = new LectureScheduleDao();
@@ -49,7 +48,7 @@ public class LectureManager {
 	// 특정 연도와 월의 데이터를 캘린더에 띄우기
 	public List<Schedule> getScheduleCalendarList(int year, int month) {
 		// DTO List 생성
-//    	List<Schedule> calendarEntries = new ArrayList<>();
+//       List<Schedule> calendarEntries = new ArrayList<>();
 
 		// DAO 호출
 		List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
@@ -61,9 +60,10 @@ public class LectureManager {
 
 		return schedules;
 	}
+
 	public List<Notice> getNoticeCalendarList(int year, int month) {
 		// DTO List 생성
-//    	List<Schedule> calendarEntries = new ArrayList<>();
+//       List<Schedule> calendarEntries = new ArrayList<>();
 
 		// DAO 호출
 		List<Notice> notices = noticeDao.findNoticesByDate(year, month);
@@ -75,9 +75,10 @@ public class LectureManager {
 
 		return notices;
 	}
+
 	public List<Assignment> getAssignmentCalendarList(int year, int month) {
 		// DTO List 생성
-//    	List<Schedule> calendarEntries = new ArrayList<>();
+//       List<Schedule> calendarEntries = new ArrayList<>();
 
 		// DAO 호출
 		List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
@@ -131,6 +132,21 @@ public class LectureManager {
 
 	public List<Lecture> LectureLikeList(String stuId) throws SQLException {
 		return lectureLikeDao.getLikedLectures(stuId);
+	}
+
+	// 현재 수강중인 강의인지 확인
+	public boolean isEnrolledInLecture(String memberId, long lectureId) throws SQLException {
+		return lectureReviewDao.isEnrolledInLecture(memberId, lectureId);
+	}
+
+	// 강의 후기 작성
+	public LectureReview createLectureReview(LectureReview lectureReview) throws SQLException {
+		return lectureReviewDao.insertReview(lectureReview);
+	}
+
+	// 강의 후기 가져오기
+	public List<LectureReview> getReviewsByLectureId(Long lectureId) throws SQLException {
+		return lectureReviewDao.getReviewsByLectureId(lectureId);
 	}
 
 	// 정기 일정
