@@ -10,6 +10,7 @@ public class Assignment {
     private LocalDate createat;
     private String textFile;
     private int lectureId;
+    private int studyId;
 
     
     public Assignment(){}
@@ -102,6 +103,14 @@ public class Assignment {
         return "Assignment [id=" + id + ", title=" + title + ", description=" + description + ", dueDate=" + dueDate
                 + ", createat=" + createat + ", textFile=" + textFile + ", lectureId=" + lectureId + "]";
     }
+
+	public int getStudyId() {
+		return studyId;
+	}
+
+	public void setStudyId(int studyId) {
+		this.studyId = studyId;
+	}
     
 
 }

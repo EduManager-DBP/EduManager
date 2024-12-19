@@ -19,13 +19,13 @@ public class StudyNoticeDao {
     }
 
     // 공지 생성
-    public void createNotice(int studygroupid, String title, String description) {
+    public void createNotice(int studygroupid, String title, String description, LocalDate createdAt) {
         StringBuffer query = new StringBuffer();
         query.append("INSERT INTO studynotice (studynoticeid, studygroupid, title, description, createat) ");
-        query.append("VALUES (SEQ_STUDY_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
+        query.append("VALUES (SEQ_STUDY_NOTICE_ID.nextval, ?, ?, ?, ?)");
 
         // SQL 쿼리와 매개변수 설정
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studygroupid, title, description});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { studygroupid, title, description, createdAt});
 
         try {
             int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)

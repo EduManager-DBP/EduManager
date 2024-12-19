@@ -57,11 +57,11 @@ public class LectureScheduleDao {
 
 		query.append(
 				"INSERT INTO lectureschedule (lecturescheduleid, dayofweek, starttime, endtime, frequency, lectureid, startdate, type, title) ");
-		query.append("VALUES (SEQ_LECTURE_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?)");
+		query.append("VALUES (SEQ_LECTURE_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		jdbcUtil.setSqlAndParameters(query.toString(),
 				new Object[] { schedule.getDayOfWeek(), schedule.getStartTime(), schedule.getEndTime(),
-						schedule.getFrequency(), schedule.getLectureId(), schedule.getType(), schedule.getTitle() });
+						schedule.getFrequency(), schedule.getLectureId(), schedule.getStartDate(),schedule.getType(), schedule.getTitle() });
 
 		try {
 			int result = jdbcUtil.executeUpdate();
@@ -157,7 +157,6 @@ public class LectureScheduleDao {
 			ResultSet rs = jdbcUtil.executeQuery();
 			while (rs.next()) {
 				Schedule schedule = new Schedule();
-				schedule.setLectureId(lectureid);
 				schedule.setScheduleId(rs.getInt("lecturescheduleid"));
 				schedule.setDayOfWeek(rs.getString("dayofweek"));
 				schedule.setStartTime(rs.getTime("starttime").toLocalTime());

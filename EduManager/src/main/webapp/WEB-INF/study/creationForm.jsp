@@ -61,13 +61,13 @@
 					<span>정기 모임 일정</span><span class="required">*</span><br />
 					<article class="schedule">
 						<span>요일</span> <select class="small" name="schedule[0][day]" required>
-							<option value="월">월</option>
-							<option value="화">화</option>
-							<option value="수">수</option>
-							<option value="목">목</option>
-							<option value="금">금</option>
-							<option value="토">토</option>
-							<option value="일">일</option>
+							<option value="MONDAY">월</option>
+							<option value="TUESDAY">화</option>
+							<option value="WEDNESDAY">수</option>
+							<option value="THURSDAY">목</option>
+							<option value="FRIDAY">금</option>
+							<option value="SATURDAY">토</option>
+							<option value="SUNDAY">일</option>
 						</select> <span>시간</span> <input type="time" name="schedule[0][startTime]"/> ~ <input type="time" name="schedule[0][endTime]"/>
 						<button type="button" class="delete_btn"
 							onClick="deleteSchedule(this)">삭제</button>

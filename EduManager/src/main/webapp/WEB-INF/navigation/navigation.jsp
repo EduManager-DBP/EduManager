@@ -11,7 +11,7 @@
 <body>
 	<header>
 	  <a href="<c:url value='/main/main'/>" id="logo-link">
-   		 <img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" />
+   		 <img src="<c:url value='/images/eduLogo.png' />" alt="Edu Logo" style="height:50px"/>
 	  </a>
       <nav>
           <ul>
