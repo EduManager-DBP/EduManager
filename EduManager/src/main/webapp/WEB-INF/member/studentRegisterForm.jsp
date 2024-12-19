@@ -27,7 +27,7 @@
  	
  	function confirmId() {
  		if(document.form.id.value == ""){
- 			alter("ID를 입력하세요");
+ 			alert("ID를 입력하세요");
  			return;
  		}
  		url = "<c:url value='/confirmId' />?id=" + document.form.id.value;
