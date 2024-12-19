@@ -90,6 +90,7 @@ public class RequestMapping {
 		logger.info("Initialized Request Mapping!");
 
 		mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+		mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
 	}
 
 	public Controller findController(String uri) {
