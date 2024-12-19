@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -65,22 +66,29 @@ li {
 }
 
 .groupGallery {
-	width: 350px;
+	width: 100%;
+	/* 그리드에서 전체 너비를 채우도록 설정 */
 	height: 280px;
 	border-radius: 30px;
 	padding: 0px;
 	cursor: pointer;
 	overflow: hidden;
 	position: relative;
-	border: 1px solid white; /* 테두리를 제거 */
-	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1); /* 그림자 추가 */
+	border: 1px solid white;
+	/* 테두리를 제거 */
+	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1);
+	/* 그림자 추가 */
 }
 
 .groupGallery img {
-	width: 100%; /* 부모의 너비를 가득 채우도록 설정 */
-	height: 75%; /* 비율을 유지하면서 높이 설정 */
-	object-fit: cover; /* 이미지가 부모 안에 맞게 조정되도록 설정 */
-	display: block; /* 이미지 하단 여백 제거 */
+	width: 100%;
+	/* 부모의 너비를 가득 채우도록 설정 */
+	height: 75%;
+	/* 비율을 유지하면서 높이 설정 */
+	object-fit: cover;
+	/* 이미지가 부모 안에 맞게 조정되도록 설정 */
+	display: block;
+	/* 이미지 하단 여백 제거 */
 }
 
 .groupGalleryTitle {
@@ -101,10 +109,29 @@ li {
 }
 
 .class {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
+	display: grid;
 	padding: 42px;
+	grid-template-columns: repeat(3, 1fr);
+	/* 3열 그리드 */
+	gap: 40px;
+	/* 요소 간의 간격 */
+
+	justify-items: center;
+	/* 그리드 아이템들을 중앙 정렬 */
+}
+
+@media (max-width: 1024px) {
+	.class {
+		grid-template-columns: repeat(2, 1fr);
+		/* 화면 크기가 작아지면 2열로 변경 */
+	}
+}
+
+@media (max-width: 768px) {
+	.class {
+		grid-template-columns: 1fr;
+		/* 화면 크기가 더 작아지면 1열로 변경 */
+	}
 }
 
 .studyGroup {
@@ -112,8 +139,10 @@ li {
 }
 
 .hr-wrapper {
-	position: relative; /* 자식 요소인 hr의 기준점 설정 */
-	height: 5px; /* 적당한 높이 설정 */
+	position: relative;
+	/* 자식 요소인 hr의 기준점 설정 */
+	height: 5px;
+	/* 적당한 높이 설정 */
 }
 
 /* 첫 번째 hr 기본 스타일 */
@@ -125,7 +154,8 @@ li {
 	width: 100%;
 	border: none;
 	background-color: #DAD9D9;
-	z-index: 0; /* 첫 번째 hr을 위에 표시 */
+	z-index: 0;
+	/* 첫 번째 hr을 위에 표시 */
 }
 
 /* 두 번째 hr 겹쳐진 스타일 */
@@ -137,7 +167,8 @@ li {
 	width: 140px;
 	border: none;
 	background-color: black;
-	z-index: 1; /* 두 번째 hr을 아래에 표시 */
+	z-index: 1;
+	/* 두 번째 hr을 아래에 표시 */
 }
 
 #registration_hr2 {
@@ -149,7 +180,8 @@ li {
 	width: 145px;
 	border: none;
 	background-color: black;
-	z-index: 1; /* 두 번째 hr을 아래에 표시 */
+	z-index: 1;
+	/* 두 번째 hr을 아래에 표시 */
 	display: none;
 }
 
@@ -181,7 +213,8 @@ li {
 }
 
 #tabBtn-container {
-	width: 100%; display : flex;
+	width: 100%;
+	display: flex;
 	justify-content: space-between;
 	display: flex;
 }
@@ -198,8 +231,10 @@ li {
 	border-radius: 8px;
 	padding: 10px 12px;
 	font-size: 16px;
-	border: 1px solid white; /* 테두리를 제거 */
-	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1); /* 그림자 추가 */
+	border: 1px solid white;
+	/* 테두리를 제거 */
+	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1);
+	/* 그림자 추가 */
 }
 
 .search img {

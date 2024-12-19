@@ -12,8 +12,22 @@ public class StudyGroup {
 	private String category;
 	private Date createAt;
 	private String leaderId;
+	private String leaderName;
 
 	public StudyGroup() {
+	}
+
+	public StudyGroup(long studyGroupId, String name, String img, String description, long capacity, String category,
+			Date createAt, String leaderId) {
+		super();
+		this.studyGroupId = studyGroupId;
+		this.name = name;
+		this.img = img;
+		this.description = description;
+		this.capacity = capacity;
+		this.category = category;
+		this.createAt = createAt;
+		this.leaderId = leaderId;
 	}
 
 	public long getStudyGroupId() {
@@ -86,4 +100,13 @@ public class StudyGroup {
 				+ description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
 				+ ", leaderId=" + leaderId + "]";
 	}
+
+	public String getLeaderName() {
+		return leaderName;
+	}
+
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
+	}
+
 }

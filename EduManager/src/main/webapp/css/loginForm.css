@@ -1,22 +1,23 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Pretendard', sans-serif;
+body,
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: 'Pretendard', sans-serif;
 }
 
 ul {
-    list-style: none;
+	list-style: none;
 }
 
 a {
-    text-decoration: none;
-    outline: none;
+	text-decoration: none;
+	outline: none;
 }
 
 .page {
-    width: 1300px;
-    margin: 0 auto;
+	width: 1300px;
+	margin: 0 auto;
 }
 
 
@@ -31,144 +32,145 @@ a {
 
 
 #form-container {
-   padding-top: 130px; 
-    display: flex;
-    justify-content: center;
-    align-items:  flex-start;
-   
+	padding-top: 130px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+
 }
 
 #sign-up-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 600px;
+	background-color: white;
+	padding: 30px;
+	border-radius: 8px;
+	width: 100%;
+	max-width: 600px;
 }
 
 h3 {
-    font-size: 24px;
-    font-weight: 600;
-    color: black;
-    text-align: center;
-    margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: 600;
+	color: black;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 form label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #505154;
-    margin-bottom: 6px;
-    display: block;
+	font-size: 14px;
+	font-weight: 500;
+	color: #505154;
+	margin-bottom: 6px;
+	display: block;
 }
 
 a {
 	font-size: 14px;
-    font-weight: 500;
-    color: #505154;
-    margin-bottom: 6px;
-    display: block;
-    align: center;
+	font-weight: 500;
+	color: #505154;
+	margin-bottom: 6px;
+	display: block;
+	align: center;
 }
 
 form input {
-    height: 30px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+	height: 30px;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
 form input::placeholder {
-    color: #c1c1c1;
+	color: #c1c1c1;
 }
 
 #form-controls {
 	width: 100%;
-    display: flex;
-    margin-top: 40px;
-    align: center;
-    justify-content: space-evenly
+	display: flex;
+	margin-top: 40px;
+	align: center;
+	justify-content: space-evenly
 }
 
 
-#nextBt{
+#nextBt {
 	justify-content: space-evenly;
 	display: flex;
 	text-align: center;
 	align: center;
-    background-color: #1e2a7c;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 30%;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: #1e2a7c;
+	color: white;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	width: 30%;
+	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background-color: #4a54a1;
+	background-color: #4a54a1;
 }
 
 .section3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1e2a7c;
-    padding: 20px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #1e2a7c;
+	padding: 20px 0;
 }
 
 .section3 p {
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    text-align: center;
-    margin: 0;
+	font-size: 14px;
+	font-weight: 500;
+	color: white;
+	text-align: center;
+	margin: 0;
 }
+
 .input-group {
-    position: relative;           
+	position: relative;
 }
 
 
 .input-group button {
-    position: absolute;           
-    right: 1px;               
-    top: 50%;            
-    transform: translateY(-50%); 
-    background-color: #c0c0c0;  
-    color: white;               
-   padding: 8px;
-    border: none;                
-    border-radius: 8px;          
-    cursor: pointer;                  
-    font-size: 14px;
+	position: absolute;
+	right: 1px;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: #c0c0c0;
+	color: white;
+	padding: 8px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
 }
 
 .input-group button:hover {
-    background-color: #4a54a1;   
+	background-color: #4a54a1;
 }
+
 .page-indicator {
-    display: flex;
-    justify-content: center; 
-    gap: 15px; 
-    margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin-top: 50px;
 }
 
 .circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%; 
-    background-color: #c1c1c1; 
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #c1c1c1;
 }
 
 .circle.active {
-    background-color: #000; 
+	background-color: #000;
 }
-

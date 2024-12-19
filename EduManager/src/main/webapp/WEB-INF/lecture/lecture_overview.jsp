@@ -13,7 +13,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">강의 소개</div>
+		<div class="subTitle">강의 수강 신청</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
@@ -21,27 +21,42 @@
 						id="lectureOverviewImg">
 				</div>
 				<div class="overViewInfo">
-					<div class="overViewInfoText" id="lectureTeacherName">000 강사님</div>
+					<div class="overViewInfoText" id="lectureTeacherName">
+						${teacherName} 강사님</div>
 					<div class="overViewInfoText" id="lectureTeacherPhone">
 						<img src="<c:url value='/images/phoneIcon.svg"' />"
-							class="infoIcon" />000-0000-0000
+							class="infoIcon" />${teacherPhone}
 					</div>
 					<div class="overViewInfoText" id="lectureTeacherRoom">
 						<img src="<c:url value='/images/roomIcon.svg"' />"
-							class="infoIcon" />000호
+							class="infoIcon" />${lectureroom}호
 					</div>
 				</div>
 			</div>
 			<div class="section2">
-				<div id="lectureOverviewTitle">강의명</div>
-				<div id="lectureOverviewDescription">강의소개</div>
-
+				<div id="lectureOverviewTitle">${lectureName}</div>
+				<div id="lectureOverviewDescription">${description}</div>
 				<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg"' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg"' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/lecture/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="lectureId" value="${lectureId}" /> <input
+								type="hidden" name="memberId" value="${userId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
 						<input type="button" class="applyButton" value="수강신청하기">
@@ -56,19 +71,45 @@
 					class="reviewIcon" />
 				<div class="reviewIconText">수강 후기</div>
 			</div>
-			<div class="reviewListContainer">
-				<div class="reviewContainer">
-					<img src="<c:url value='/images/profileImg.svg"' />"
-						class="reviewProfileImg" />
-					<div class="reviewTextContainer">
-						<div class="reviewUserName">OOO학생</div>
-						<div class="reviewText">수강 후기</div>
-					</div>
-				</div>
+			<div class="writeReviewContainer">
+				<form action="<c:url value='/lecture/createReview' />" method="post"
+					id="reviewForm">
+					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					<input type="hidden" name="lectureId" value="${lectureId}" /> <input
+						type="hidden" name="memberId" value="${userId}" />
 
+					<!-- 리뷰 내용을 작성할 textarea -->
+					<textarea class="reviewTextArea" name="reviewText"
+						placeholder="후기를 작성해주세요"></textarea>
+
+					<!-- 리뷰 제출 버튼 -->
+					<c:choose>
+						<c:when test="${isInclude}">
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="document.getElementById('reviewForm').submit();" />
+						</c:when>
+						<c:otherwise>
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="alert('수강생만 후기를 작성할 수 있어요!')" />
+						</c:otherwise>
+					</c:choose>
+				</form>
+			</div>
+			<div class="reviewListContainer">
+				<c:forEach var="group" items="${reviewList}">
+					<div class="reviewContainer">
+
+						<img src="<c:url value='/images/profileImg.svg"' />"
+							class="reviewProfileImg" />
+						<div class="reviewTextContainer">
+							<div class="reviewUserName">${group.memberName}</div>
+							<div class="reviewText">${group.reviewText}</div>
+						</div>
+
+					</div>
+				</c:forEach>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

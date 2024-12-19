@@ -6,153 +6,187 @@ import java.util.List;
 
 import model.dao.JDBCUtil;
 import model.domain.Notice;
+import model.domain.Schedule;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class LectureNoticeDao {
-    private JDBCUtil jdbcUtil = null; // JDBCUtil 필드 선언
+	private JDBCUtil jdbcUtil = null; // JDBCUtil 필드 선언
 
-    public LectureNoticeDao() { // 생성자
-        jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
-    }
+	public LectureNoticeDao() { // 생성자
+		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
+	}
 
-    // 공지 생성
-    public void createNotice(int lectureId, String title, String description) {
-        StringBuffer query = new StringBuffer();
-        query.append("INSERT INTO lecturenotice (lecturenoticeid, lectureid, title, description, createat) ");
-        query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
+	// 공지 조회 by 날짜 (년, 월)
+	public List<Notice> findNoticesByDate(int year, int month) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("FROM lecturenotice ");
+		query.append("WHERE EXTRACT(YEAR FROM startDate) = ? AND EXTRACT(MONTH FROM startDate) = ? ");
+		query.append("ORDER BY startDate, startTime");
 
-        // SQL 쿼리와 매개변수 설정
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description});
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
+		List<Notice> notices = new ArrayList<>();
 
-        try {
-            int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
-            if (rs > 0) {
-                System.out.println("공지사항이 성공적으로 생성되었습니다.");
-            } else {
-                System.out.println("공지 생성에 실패했습니다.");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close(); // 연결 자원 해제
-        }
-    }
+		try {
+			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+			while (rs.next()) {
+				Notice notice = new Notice();
+				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setTitle(rs.getString("title"));
+				notice.setDescription(rs.getString("description"));
+				notice.setCreateat(rs.getDate("createat").toLocalDate());
+//				Date sqlDate = rs.getDate("createat");
+//				LocalDate localDate = sqlDate.toLocalDate();
+//				notice.setCreateat(localDate);
 
-    // 공지 상세 조회
-    public Notice findNoticeById(int noticeId) {
-        StringBuffer query = new StringBuffer();
-        query.append("SELECT lecturenoticeid, lectureid, title, description, createat ");
-        query.append("FROM lecturenotice ");
-        query.append("WHERE lecturenoticeid = ? ");
+				notices.add(notice); // 리스트에 공지 추가
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+		}
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
+		return notices;
+	}
 
-        try {
-            Notice notice = null;
-            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
-            if (rs.next()) {
-                notice = new Notice();
-                notice.setId(noticeId);
-                notice.setTitle(rs.getString("title"));
-                notice.setDescription(rs.getString("description"));
-                notice.setLectureId(rs.getInt("lectureid"));
-                
-                Date sqlDate = rs.getDate("createat");
-                LocalDate localDate = sqlDate.toLocalDate();
-                notice.setCreateat(localDate);
-            }
-            return notice;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
-        }
-        return null;
-    }
+	// 공지 생성
+	public void createNotice(int lectureId, String title, String description) {
+		StringBuffer query = new StringBuffer();
+		query.append("INSERT INTO lecturenotice (lecturenoticeid, lectureid, title, description, createat) ");
+		query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
 
-    // 강의 아이디로 강의 공지 목록 조회
-    public List<Notice> findNoticesByLectureId(int lectureId) {
-        StringBuffer query = new StringBuffer();
-        query.append("SELECT lecturenoticeid, title, description, createat ");
-        query.append("FROM lecturenotice ");
-        query.append("WHERE lectureid = ? ");
+		// SQL 쿼리와 매개변수 설정
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description });
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId });
-        List<Notice> notices = new ArrayList<>();
+		try {
+			int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
+			if (rs > 0) {
+				System.out.println("공지사항이 성공적으로 생성되었습니다.");
+			} else {
+				System.out.println("공지 생성에 실패했습니다.");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close(); // 연결 자원 해제
+		}
+	}
 
-        try {
-            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
-            while (rs.next()) {
-                Notice notice = new Notice();
-                notice.setId(rs.getInt("lecturenoticeid"));
-                notice.setTitle(rs.getString("title"));
-                notice.setDescription(rs.getString("description"));
-                notice.setLectureId(lectureId);
-                
-                Date sqlDate = rs.getDate("createat");
-                LocalDate localDate = sqlDate.toLocalDate();
-                notice.setCreateat(localDate);
+	// 공지 상세 조회
+	public Notice findNoticeById(int noticeId) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT lecturenoticeid, lectureid, title, description, createat ");
+		query.append("FROM lecturenotice ");
+		query.append("WHERE lecturenoticeid = ? ");
 
-                notices.add(notice); // 리스트에 공지 추가
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
-        }
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
 
-        return notices;
-    }
+		try {
+			Notice notice = null;
+			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+			if (rs.next()) {
+				notice = new Notice();
+				notice.setId(noticeId);
+				notice.setTitle(rs.getString("title"));
+				notice.setDescription(rs.getString("description"));
+				notice.setLectureId(rs.getInt("lectureid"));
 
-    // 공지 삭제
-    public void deleteNoticeById(int noticeId) {
-        StringBuffer query = new StringBuffer();
-        query.append("DELETE FROM lecturenotice ");
-        query.append("WHERE lecturenoticeid = ?");
+				Date sqlDate = rs.getDate("createat");
+				LocalDate localDate = sqlDate.toLocalDate();
+				notice.setCreateat(localDate);
+			}
+			return notice;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+		}
+		return null;
+	}
 
-        // SQL 쿼리와 매개변수 설정
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
+	// 강의 아이디로 강의 공지 목록 조회
+	public List<Notice> findNoticesByLectureId(int lectureId) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("FROM lecturenotice ");
+		query.append("WHERE lectureid = ? ");
 
-        try {
-            int rs = jdbcUtil.executeUpdate(); // DELETE 문은 executeUpdate로 실행
-            if (rs > 0) {
-                System.out.println("공지사항이 성공적으로 삭제되었습니다.");
-            } else {
-                System.out.println("공지 삭제에 실패했습니다. 해당 ID의 공지가 존재하지 않습니다.");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close(); // 연결 자원 해제
-        }
-    }
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId });
+		List<Notice> notices = new ArrayList<>();
 
-    // 공지 수정
-    public void updateNotice(int noticeId, String title, String description) {
-        StringBuffer query = new StringBuffer();
-        query.append("UPDATE lecturenotice ");
-        query.append("SET title = ?, description = ? ");
-        query.append("WHERE lecturenoticeid = ?");
+		try {
+			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+			while (rs.next()) {
+				Notice notice = new Notice();
+				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setTitle(rs.getString("title"));
+				notice.setDescription(rs.getString("description"));
+				notice.setLectureId(lectureId);
 
-        // SQL 쿼리와 매개변수 설정
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { title, description, noticeId });
+				Date sqlDate = rs.getDate("createat");
+				LocalDate localDate = sqlDate.toLocalDate();
+				notice.setCreateat(localDate);
 
-        try {
-            int rs = jdbcUtil.executeUpdate(); // UPDATE 문은 executeUpdate로 실행
-            if (rs > 0) {
-                System.out.println("공지사항이 성공적으로 업데이트되었습니다.");
-            } else {
-                System.out.println("공지 업데이트에 실패했습니다. 해당 ID의 공지가 존재하지 않습니다.");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.commit();
-            jdbcUtil.close(); // 연결 자원 해제
-        }
-    }
+				notices.add(notice); // 리스트에 공지 추가
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+		}
+
+		return notices;
+	}
+
+	// 공지 삭제
+	public void deleteNoticeById(int noticeId) {
+		StringBuffer query = new StringBuffer();
+		query.append("DELETE FROM lecturenotice ");
+		query.append("WHERE lecturenoticeid = ?");
+
+		// SQL 쿼리와 매개변수 설정
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { noticeId });
+
+		try {
+			int rs = jdbcUtil.executeUpdate(); // DELETE 문은 executeUpdate로 실행
+			if (rs > 0) {
+				System.out.println("공지사항이 성공적으로 삭제되었습니다.");
+			} else {
+				System.out.println("공지 삭제에 실패했습니다. 해당 ID의 공지가 존재하지 않습니다.");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close(); // 연결 자원 해제
+		}
+	}
+
+	// 공지 수정
+	public void updateNotice(int noticeId, String title, String description) {
+		StringBuffer query = new StringBuffer();
+		query.append("UPDATE lecturenotice ");
+		query.append("SET title = ?, description = ? ");
+		query.append("WHERE lecturenoticeid = ?");
+
+		// SQL 쿼리와 매개변수 설정
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { title, description, noticeId });
+
+		try {
+			int rs = jdbcUtil.executeUpdate(); // UPDATE 문은 executeUpdate로 실행
+			if (rs > 0) {
+				System.out.println("공지사항이 성공적으로 업데이트되었습니다.");
+			} else {
+				System.out.println("공지 업데이트에 실패했습니다. 해당 ID의 공지가 존재하지 않습니다.");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close(); // 연결 자원 해제
+		}
+	}
 }

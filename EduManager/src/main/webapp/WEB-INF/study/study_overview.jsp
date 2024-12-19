@@ -13,7 +13,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">스터디 그룹 소개</div>
+		<div class="subTitle">스터디 그룹 가입</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
@@ -22,8 +22,7 @@
 				</div>
 				<div class="overViewInfo">
 					<div class="overViewInfoText" id="studyGroupPlace">
-						<img src="<c:url value='/images/roomIcon.svg' />"
-							class="infoIcon" />000호
+						<img src="<c:url value='/images/roomIcon.svg' />" class="infoIcon" />000호
 					</div>
 					<div class="overViewInfoText" id="studyGroupTime">
 						<img src="<c:url value='/images/overViewTime.svg' />"
@@ -32,18 +31,51 @@
 				</div>
 			</div>
 			<div class="section2">
-				<div id="groupOverviewTitle">스터디그룹 명</div>
-				<div id="groupOverviewDescription">스터디 그룹 소개</div>
+				<div id="groupOverviewTitle">${groupName}</div>
+				<div id="groupOverviewDescription">${description}</div>
 
 				<div class="section3">
 					<div class="likeButtonContainer">
-						<img src="<c:url value='/images/likeButton.svg' />"
-							class="likeButton" /> <img
-							src="<c:url value='/images/EmptylikeButton.svg' />"
-							class="emptyLikeButton" />
+						<form action="<c:url value='/studyGroup/like' />" method="post"
+							id="likeForm">
+							<input type="hidden" name="groupId" value="${groupId}" /> <input
+								type="hidden" name="memberId" value="${userId}" />
+							<c:choose>
+								<c:when test="${isLiked}">
+									<img src="<c:url value='/images/likeButton.svg' />"
+										class="likeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value='/images/EmptylikeButton.svg' />"
+										class="emptyLikeButton"
+										onclick="document.getElementById('likeForm').submit();"
+										style="cursor: pointer;" />
+								</c:otherwise>
+							</c:choose>
+						</form>
 					</div>
 					<div>
-						<input type="button" class="applyButton" value="가입 요청 보내기">
+						<form action="<c:url value='/studyGroup/join-request' />"
+							method="post" id="requestForm">
+							<input type="hidden" name="groupId" value="${groupId}" /> <input
+								type="hidden" name="memberId" value="${userId}" />
+
+							<c:choose>
+								<c:when test="${requestStatus == '진행중'}">
+									<input type="button" class="statusInProgress" value="가입 요청중" disabled/>
+								</c:when>
+								<c:when test="${requestStatus == '수락'}">
+									<input type="button" class="statusAccepted" value="가입 완료" disabled/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="applyButton" value="가입 요청하기"
+										onclick="document.getElementById('requestForm').submit();" />
+								</c:otherwise>
+							</c:choose>
+						</form>
+
 					</div>
 				</div>
 			</div>
@@ -51,24 +83,51 @@
 		</div>
 		<div class="section4">
 			<div class="reviewIconContainer">
-				<img src="<c:url value='/images/reviewIcon.svg' />"
+				<img src="<c:url value='/images/reviewIcon.svg"' />"
 					class="reviewIcon" />
 				<div class="reviewIconText">스터디 후기</div>
 			</div>
-			<div class="reviewListContainer">
-				<div class="reviewContainer">
-					<img src="<c:url value='/images/profileImg.svg' />"
-						class="reviewProfileImg" />
-					<div class="reviewTextContainer">
-						<div class="reviewUserName">OOO학생</div>
-						<div class="reviewText">스터디 참여 후기</div>
-					</div>
-				</div>
+			<div class="writeReviewContainer">
+				<form action="<c:url value='/study/createReview' />" method="post"
+					id="studyReviewForm">
+					<!-- 숨겨진 필드로 lectureId와 memberId를 전달 -->
+					<input type="hidden" name="groupId" value="${groupId}" /> <input
+						type="hidden" name="memberId" value="${userId}" />
 
+					<!-- 리뷰 내용을 작성할 textarea -->
+					<textarea class="reviewTextArea" name="reviewText"
+						placeholder="후기를 작성해주세요"></textarea>
+					<!-- 리뷰 제출 버튼 -->
+					<c:choose>
+						<c:when test="${isInclude}">
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="document.getElementById('studyReviewForm').submit();" />
+						</c:when>
+						<c:otherwise>
+							<input type="button" class="reviewSubmit" value="작성"
+								onclick="alert('스터디원만 후기를 작성할 수 있어요!')" />
+						</c:otherwise>
+					</c:choose>
+				</form>
+			</div>
+			<div class="reviewListContainer">
+				<c:forEach var="group" items="${reviewList}">
+					<div class="reviewContainer">
+
+						<img src="<c:url value='/images/profileImg.svg"' />"
+							class="reviewProfileImg" />
+						<div class="reviewTextContainer">
+							<div class="reviewUserName">${group.memberName}</div>
+							<div class="reviewText">${group.reviewText}</div>
+						</div>
+
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 
 
 	</div>
+
 </body>
 </html>

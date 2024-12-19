@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import model.domain.member.Member;
 import model.domain.member.Teacher;
-import model.service.ExistingMemberException;
-import model.service.MemberManager;
-import model.service.TeacherManager;
+import model.service.member.ExistingMemberException;
+import model.service.member.MemberManager;
+import model.service.member.TeacherManager;
 
 public class RegisterTeacherController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(RegisterTeacherController.class);
