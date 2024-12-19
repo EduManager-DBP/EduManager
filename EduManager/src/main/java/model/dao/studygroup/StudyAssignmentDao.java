@@ -17,7 +17,7 @@ public class StudyAssignmentDao {
     }
 
     // 과제 생성
-    public void createAssignment(int studyId, String title, String description, Date dueDate, String textFile) {
+    public void createAssignment(int studyId, String title, String description, LocalDate dueDate, String textFile) {
         StringBuffer query = new StringBuffer();
         query.append("INSERT INTO studyassignment (studyassignmentid, studygroupid, title, description, duedate, textfile, createat) ");
         query.append("VALUES (SEQ_STUDY_ASSIGNMENT_ID.nextval, ?, ?, ?, ?, ?, SYSDATE)");

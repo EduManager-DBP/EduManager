@@ -170,7 +170,6 @@ public class LectureManager {
 		scheduleDao.deleteScheduleById(scheduleId);
 	}
 	
-	
 	//수강 신청
 	
 	public LectureEnrollment createLectureEnrollment(String memberId, long lectureId) throws SQLException {

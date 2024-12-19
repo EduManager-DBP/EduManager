@@ -20,14 +20,18 @@
 			<div class="class">
 				<c:forEach var="group" items="${lectureList}">
 					<div class="groupGallery">
-						<a
-							href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
-			 	 </c:url>">
-							<img src="<c:url value='/images/white.png' />" alt="Group Image">
-							<div class="groupGalleryTitle">${group.name}</div>
-							<div class="groupGalleryCategory">${group.category}</div>
-						</a>
-					</div>
+							<a
+								href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
+         </c:url>">
+								<img src="<c:url value='/images/white.png' />" alt="Group Image">
+								<span class="groupGalleryTitle">${group.name}</span>
+								<div
+									style="display: flex; justify-content: space-between; width: 100%;">
+									<span class="groupGalleryCategory" style=" background-color: ${group.categoryColor};">${group.category}</span> <span
+										class="groupGalleryTeacherName">${group.teacherName}</span>
+								</div>
+							</a>
+						</div>
 				</c:forEach>
 			</div>
 		</div>

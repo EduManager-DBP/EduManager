@@ -75,7 +75,7 @@ public class StudyGroupDao {
 public StudyGroup findGroupInfo(long groupId) {
     try {
         StudyGroup group = new StudyGroup();
-        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.leaderId, " +
+        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.place, sg.leaderId, " +
                        "m.name AS leaderName " +
                        "FROM StudyGroup sg " +
                        "JOIN Member m ON sg.leaderId = m.id " +
@@ -91,6 +91,7 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setDescription(rs.getString("description"));
             group.setCapacity(rs.getInt("capacity"));
             group.setCategory(rs.getString("category"));
+            group.setPlace(rs.getString("place"));
             group.setLeaderId(rs.getString("leaderId"));
             group.setLeaderName(rs.getString("leaderName")); // 리더 이름 설정
         } else {
@@ -589,5 +590,24 @@ public StudyGroup findGroupInfo(long groupId) {
     }
 
 
+  //팀원으로 가입된 스터디 그룹 가져오기 
+    public List<String> findStudyMembers(int studyGruopId) throws SQLException {
+    	List<String> members = new ArrayList<>();
+       
+        String sql = "SELECT s.name " +
+                     "FROM Student s " +
+                     "JOIN StudyGroupApplication sga ON s.id = sga.stuId " +
+                     "WHERE sga.studyGroupId = ? AND sga.status = '수락'";
+
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{studyGruopId}); // memberId를 두 번 파라미터로 설정
+        ResultSet rs = jdbcUtil.executeQuery();
+        
+        while (rs.next()) {
+        	members.add(rs.getString("name"));
+        }
+        
+        jdbcUtil.close();
+        return members;
+    }
 }
 

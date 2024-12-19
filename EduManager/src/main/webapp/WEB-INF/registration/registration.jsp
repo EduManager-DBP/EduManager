@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<div id="makeStudyBtn-container">
-		<button id="makeStudyBtn" onclick="">
+		<button id="makeStudyBtn" onclick="createStudy()">
 			<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
 			스터디 만들기
 		</button>
@@ -53,20 +53,25 @@
 
 <div class="tab_wrap">
 	<!-- Tab 1 -->
-	<div id="Tab1" class="tab on">
-    <div class="class"> 
-        <c:forEach var="group" items="${lectureList}">
-            <div class="groupGallery">
-            <a href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
-			 	 </c:url>">
-                <img src="<c:url value='/images/white.png' />" alt="Group Image">
-                <div class="groupGalleryTitle">${group.name}</div>
-                <div class="groupGalleryCategory">${group.category}</div>
-              </a>
-            </div>
-        </c:forEach>
-    </div>
-</div>
+			<div id="Tab1" class="tab on">
+				<div class="class">
+					<c:forEach var="group" items="${lectureList}">
+						<div class="groupGallery">
+							<a
+								href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
+         </c:url>">
+								<img src="<c:url value='/images/white.png' />" alt="Group Image">
+								<span class="groupGalleryTitle">${group.name}</span>
+								<div
+									style="display: flex; justify-content: space-between; width: 100%;">
+									<span class="groupGalleryCategory"  style=" background-color: ${group.categoryColor};" >${group.category}</span> <span
+										class="groupGalleryTeacherName">${group.teacherName}</span>
+								</div>
+							</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 
 	<!-- Tab 2 -->
 	<div id="Tab2" class="tab">
@@ -85,5 +90,10 @@
 </div>
 </div>
 </div>
+<script>
+    function createStudy() {
+        window.location.href = '<c:url value="/study/create" />';
+    }
+</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 body {
 	min-width: 900px;
-	height: 100%;
 	font-family: 'Pretendard', sans-serif;
 }
 
@@ -10,6 +9,13 @@ nav {
 	margin-top: 40px;
 }
 
+#logo-link {
+      justify-self: center;
+}
+#logo-link img{
+   width: 250px;
+   
+}
 .page {
 	width: 1300px;
 	margin: 0 auto;

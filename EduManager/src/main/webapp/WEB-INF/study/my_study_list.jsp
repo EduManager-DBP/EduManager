@@ -36,12 +36,13 @@
 		</div>
 		<div class="tab_wrap">
 			<div id="Tab1" class="tab on">
-				<div class="class">
-					<c:forEach var="studyGroup" items="${studyGroupListByLeader}">
-						<div class="leaderRoom">
-							<div class="groupGallery">
-								<a
-									href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+
+			<div class="class">
+				   <c:forEach var="studyGroup" items="${studyGroupListByLeader}">
+				   <div class="leaderRoom">
+            <div class="groupGallery">
+            <a href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+
 			 	 </c:url>">
 									<img src="<c:url value='/images/white.png' />">
 									<div class="groupGalleryTitle">${studyGroup.name}</div>
@@ -57,12 +58,13 @@
 			</div>
 
 			<div id="Tab2" class="tab">
-				<div class="class">
-					<c:forEach var="studyGroup" items="${studyGroupListByMember}">
-						<div class="studyRoom">
-							<div class="groupGallery">
-								<a
-									href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+
+			<div class="class">
+				   <c:forEach var="studyGroup" items="${studyGroupListByMember}">
+				<div class="studyRoom">
+					<div class="groupGallery">
+            <a href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+
 			 	 </c:url>">
 									<img src="<c:url value='/images/white.png' />">
 									<div class="groupGalleryTitle">${studyGroup.name}</div>
