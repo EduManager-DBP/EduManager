@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<div id="makeStudyBtn-container">
-		<button id="makeStudyBtn" onclick="">
+		<button id="makeStudyBtn" onclick="createStudy()">
 			<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
 			스터디 만들기
 		</button>
@@ -85,5 +85,10 @@
 </div>
 </div>
 </div>
+<script>
+    function createStudy() {
+        window.location.href = '<c:url value="/study/create" />';
+    }
+</script>
 </body>
 </html>

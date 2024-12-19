@@ -67,6 +67,8 @@ public class CreateLectureController implements Controller {
 				
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, lecture.getLectureId(), "regular",
 						null);
+				schedule.setStartDate(LocalDate.now());
+
 				log.debug("Schedule{} : {}", i, schedule);
 
 				int scheduleId = manager.createSchedule(schedule);

@@ -36,7 +36,7 @@ public class RegisterStudentController implements Controller {
 		String ageRange = (String) session.getAttribute("age");
 
 
-		log.debug("Create Student : {}", id, pwd, name, email, phone, ageRange, interestArray, interestCategory);
+		log.debug("Create Student : {}", id, pwd, name, email, phone, ageRange);
 
 		// 학생 객체 생성
 		Student student = new Student(id, pwd, name, email, phone, ageRange);

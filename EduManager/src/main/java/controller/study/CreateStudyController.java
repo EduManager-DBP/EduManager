@@ -1,5 +1,6 @@
 package controller.study;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +56,8 @@ public class CreateStudyController implements Controller {
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, 0L, "regular",
 						null);
 				schedule.setStudyGroupId(study.getStudyGroupId());
+				schedule.setStartDate(LocalDate.now());
+	         
 				log.debug("Schedule{} : {}", i, schedule);
 
 				int scheduleId = manager.createSchedule(schedule);

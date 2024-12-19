@@ -40,7 +40,7 @@
 				   <c:forEach var="studyGroup" items="${studyGroupListByLeader}">
 				   <div class="leaderRoom">
             <div class="groupGallery">
-            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+            <a href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
                 <img src="<c:url value='/images/white.png' />">
                 <div class="groupGalleryTitle">${studyGroup.name}</div>
@@ -58,7 +58,7 @@
 				   <c:forEach var="studyGroup" items="${studyGroupListByMember}">
 				<div class="studyRoom">
 					<div class="groupGallery">
-            <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
+            <a href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
                 <img src="<c:url value='/images/white.png' />">
                 <div class="groupGalleryTitle">${studyGroup.name}</div>

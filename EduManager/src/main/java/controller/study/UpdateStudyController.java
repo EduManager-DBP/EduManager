@@ -34,9 +34,9 @@ public class UpdateStudyController implements Controller {
 		String leaderId = MemberSessionUtils.getLoginMemberId(request.getSession());
 		System.out.print("내 아이디 : 스터디 리더:" + leaderId);
 
-//		Long updateLectureId = Long.parseLong(request.getParameter("lectureId"));
+		Long updateStudyId = Long.parseLong(request.getParameter("studyId"));
 		// 임시
-		Long updateStudyId = 10L;
+//		Long updateStudyId = 10L;
 
 		log.debug("UpdateForm Request : {}", updateStudyId);
 		if (request.getMethod().equals("GET")) {
