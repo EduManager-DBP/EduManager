@@ -82,13 +82,13 @@
 														onclick="document.getElementById('lectureRequestForm').submit();">
 												</c:when>
 												<c:otherwise>
-													<input type="button" class="statusInProgress" value="수강 못함"
-														disabled />
+													<input type="button" class="applyButton" value="수강신청하기"
+														onclick="alert('수강중인 강의와 강의 시간이 겹칩니다!')">
 												</c:otherwise>
 											</c:choose>
 										</c:when>
 										<c:otherwise>
-											<input type="button" class="statusInProgress" value="수강중"
+											<input type="button" class="rejectButton" value="수강중"
 												disabled />
 										</c:otherwise>
 									</c:choose>
