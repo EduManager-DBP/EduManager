@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -31,27 +32,30 @@
 			<table class="study-location">
 				<tr class="icon">
 					<td class="location-icon"></td>
-					<td class="location-inform">301호</td>
+					<td class="location-inform">${studyInfo.place}호</td>
 				</tr>
 				<tr class="icon">
 					<td class="time-icon"></td>
-					<td class="location-inform">수요일 6시 반</td>
+					<td class="location-inform">진행중...</td>
 				</tr>
 			</table>
 			<div class="team-members-box">
 				<div class="team-header">
-					<div class="team-icon"></div>
-					<span class="team-count">팀원들 (6/10)</span>
+					<img src="<c:url value='/images/members.png' />" alt="members" 
+					style="height: 10px; margin-right: 5px"/>
+					<span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
 				</div>
 				<ul class="member-list">
 					<li class="member-item">
-						<div class="member-icon"></div> <span class="member-name">${studyInfo.leaderName}</span>
+						<span class="member-name">${studyInfo.leaderName}</span>
+						<img src="<c:url value='/images/mdi_crown.png' />" alt="leader" 
+					style="height: 15px; margin-left: 5px"/> 
 					</li>
-					<%-- 		<c:forEach var="member" items="${memberList}">
+					<c:forEach var="member" items="${members}">
 						<li class="member-item">
-							<div class="member-icon"></div> <span class="member-name">${member.name}</span>
+							<span class="member-name">${member}</span>
 						</li>
-					</c:forEach> --%>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

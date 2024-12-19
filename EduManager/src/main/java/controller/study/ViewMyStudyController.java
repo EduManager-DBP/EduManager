@@ -58,6 +58,7 @@ public class ViewMyStudyController implements Controller {
             List<Schedule> specialSchedules = manager.findSchedulesByFilters(studyId, selectedDate, "special", null);
             log.debug("특수일정: " + specialSchedules);
             
+            
             // 필요한 비즈니스 로직 수행 (예: DB 조회)
             request.setAttribute("selectedDate", selectedDate);
             request.setAttribute("assignmentList", assignmentList);
@@ -68,14 +69,16 @@ public class ViewMyStudyController implements Controller {
             StudyGroup studyInfo = manager.findStudyById(studyId);
             log.debug("studyInfo: " + studyInfo);
 
+            List<String> members = manager.findStudyMembers(studyId);
+            log.debug("members: " + members);
+
             String leaderId = MemberSessionUtils.getLoginMemberId(request.getSession());
-    		System.out.print("내 아이디 : " + leaderId);
     		Boolean isLeader = (leaderId.equals(studyInfo.getLeaderId())) ? true : false;
             
       //study 기본 정보
             request.setAttribute("studyInfo", studyInfo);
             request.setAttribute("isLeader", isLeader);
-
+            request.setAttribute("members", members);
         // JSP 페이지로 포워딩 (예: 결과 표시)
         return "/study/study_details.jsp"; // 뷰로 이동
 	}

@@ -87,6 +87,9 @@ public class StudyManager {
     public void createAssignment(Assignment ass) {
     	assignmentDao.createAssignment(ass.getStudyId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
     }
-    
+    //스터디 멤버 조회
+    public List<String> findStudyMembers(int studyGruopId) throws SQLException {
+    	return studyDao.findStudyMembers(studyGruopId);
+    }
     
 }

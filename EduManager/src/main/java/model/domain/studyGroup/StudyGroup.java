@@ -13,7 +13,8 @@ public class StudyGroup {
 	private Date createAt;
 	private String leaderId;
 	private String leaderName;
-
+	private String place;
+	
 	public StudyGroup() {
 	}
 
@@ -107,5 +108,13 @@ public class StudyGroup {
 
 	public void setLeaderName(String leaderName) {
 		this.leaderName = leaderName;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 }
