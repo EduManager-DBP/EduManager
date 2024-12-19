@@ -84,7 +84,7 @@ public class StudentDAO {
 	 * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 Member 도메인 클래스에 저장하여 반환.
 	 */
 	public Student findStudent(String id) throws SQLException {
-		String sql = "SELECT pwd, name, email, phone, ageRange, interestCategory " + "FROM STUDENT " + "WHERE id = ? ";
+		String sql = "SELECT pwd, name, email, phone, ageRange " + "FROM STUDENT " + "WHERE id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { id }); // JDBCUtil에 query문과 매개 변수 설정
 
 		try {
