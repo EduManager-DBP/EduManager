@@ -13,6 +13,7 @@ import model.domain.Notice;
 import model.domain.Assignment;
 import model.domain.calendar.CalendarDTO;
 import model.domain.lecture.Lecture;
+import model.domain.lecture.LectureEnrollment;
 import model.domain.lecture.LectureReview;
 
 import java.util.ArrayList;
@@ -132,6 +133,21 @@ public class LectureManager {
 	public List<Lecture> LectureLikeList(String stuId) throws SQLException {
 		return lectureLikeDao.getLikedLectures(stuId);
 	}
+	
+	  //현재 수강중인 강의인지 확인
+    public boolean isEnrolledInLecture(String memberId, long lectureId) throws SQLException {
+        return lectureReviewDao.isEnrolledInLecture(memberId, lectureId);
+    }
+    
+    //강의 후기 작성
+    public LectureReview createLectureReview(LectureReview lectureReview) throws SQLException {
+        return lectureReviewDao.insertReview(lectureReview);       
+    }
+   
+    //강의 후기 가져오기
+    public List<LectureReview> getReviewsByLectureId(Long lectureId) throws SQLException {
+        return lectureReviewDao.getReviewsByLectureId(lectureId);
+    }
 
 	// 정기 일정
 	public int createSchedule(Schedule schedule) throws SQLException {
@@ -153,5 +169,20 @@ public class LectureManager {
 	public void deleteScheduleById(int scheduleId) {
 		scheduleDao.deleteScheduleById(scheduleId);
 	}
+	
+	
+	//수강 신청
+	
+	public LectureEnrollment createLectureEnrollment(String memberId, long lectureId) throws SQLException {
+	    return lectureDao.createLectureEnrollment(memberId, lectureId);
+	}
 
+	 public boolean isLectureConflict(String memberId, long lectureId) throws SQLException {
+	     return lectureDao.isLectureConflict(memberId,lectureId);
+	 }
+	 
+	 public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
+	     return lectureDao.isEnrollmentExists(memberId, lectureId);
+	 }
+	        
 }
