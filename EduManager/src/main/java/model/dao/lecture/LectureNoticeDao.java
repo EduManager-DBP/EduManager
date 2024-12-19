@@ -52,13 +52,13 @@ public class LectureNoticeDao {
 	}
 
 	// 공지 생성
-	public void createNotice(int lectureId, String title, String description) {
+	public void createNotice(int lectureId, String title, String description, LocalDate date) {
 		StringBuffer query = new StringBuffer();
 		query.append("INSERT INTO lecturenotice (lecturenoticeid, lectureid, title, description, createat) ");
-		query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
+		query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, ?)");
 
 		// SQL 쿼리와 매개변수 설정
-		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description });
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description, date});
 
 		try {
 			int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
@@ -106,6 +106,42 @@ public class LectureNoticeDao {
 		}
 		return null;
 	}
+	
+	// 강의 아이디& 공지일로 공지목록 조회
+    public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("FROM lecturenotice ");
+		query.append("WHERE lectureid = ? AND TRUNC(createat) = ?");
+
+        java.sql.Date sqlDueDate = java.sql.Date.valueOf(createdAt);
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, sqlDueDate });
+        List<Notice> notices = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+            while (rs.next()) {
+            	Notice notice = new Notice();
+				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setTitle(rs.getString("title"));
+				notice.setDescription(rs.getString("description"));
+				notice.setLectureId(lectureId);
+
+				Date sqlDate = rs.getDate("createat");
+				LocalDate localDate = sqlDate.toLocalDate();
+				notice.setCreateat(localDate);
+
+				notices.add(notice); // 리스트에 공지 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+
+        return notices;
+    }
 
 	// 강의 아이디로 강의 공지 목록 조회
 	public List<Notice> findNoticesByLectureId(int lectureId) {

@@ -444,6 +444,25 @@ public class LectureDao {
         return false; // 예외 발생 시 false 반환
     }
     
+  //수강생 조회
+    public List<String> findLectureMembers(int lectureId) throws SQLException {
+    	List<String> members = new ArrayList<>();
+       
+        String sql = "SELECT s.name " +
+                     "FROM Student s " +
+                     "JOIN LectureEnrollment le ON s.id = le.stuId " +
+                     "WHERE le.lectureId = ? ";
+
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{lectureId}); // memberId를 두 번 파라미터로 설정
+        ResultSet rs = jdbcUtil.executeQuery();
+        
+        while (rs.next()) {
+        	members.add(rs.getString("name"));
+        }
+        
+        jdbcUtil.close();
+        return members;
+    }
     
 }
 
