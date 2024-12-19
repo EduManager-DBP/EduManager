@@ -9,6 +9,8 @@ public class Student {
 	private String phone;
 	private String ageRange; // 10대: 1, 20대: 2, 30대:3, 그 이상: 4
 
+	public Student() {
+	}
 	public Student(String id, String pwd, String name, String email, String phone, String ageRange) {
 		super();
 		this.id = id;

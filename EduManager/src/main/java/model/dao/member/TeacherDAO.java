@@ -44,8 +44,9 @@ public class TeacherDAO {
 	 * 기존의 사용자 정보를 수정. (이름, 전화번호)
 	 */
 	public int update(Teacher teacher) throws SQLException {
-		String sql = "UPDATE TEACHER " + "SET pwd=?, phone=? " + "WHERE id=?";
-		Object[] param = new Object[] { teacher.getPwd(), teacher.getPhone() };
+		String sql = "UPDATE TEACHER " + "SET pwd=?, email=?, phone=? " + "WHERE id=?";
+		Object[] param = new Object[] { teacher.getPwd(), teacher.getEmail(), teacher.getPhone(), teacher.getId() };
+
 		jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
 
 		try {
