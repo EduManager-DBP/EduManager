@@ -64,7 +64,7 @@
 								<span class="groupGalleryTitle">${group.name}</span>
 								<div
 									style="display: flex; justify-content: space-between; width: 100%;">
-									<span class="groupGalleryCategory">${group.category}</span> <span
+									<span class="groupGalleryCategory"  style=" background-color: ${group.categoryColor};" >${group.category}</span> <span
 										class="groupGalleryTeacherName">${group.teacherName}</span>
 								</div>
 							</a>
