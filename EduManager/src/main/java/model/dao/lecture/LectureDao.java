@@ -318,6 +318,42 @@ public class LectureDao {
     }
 
     
+    public List<Lecture> getMyLectureListByTeacher(String teacherId) {
+        StringBuffer query = new StringBuffer();
+        query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName, ic.color ");
+        query.append("FROM Lecture l ");
+        query.append("JOIN Teacher t ON l.teacherId = t.Id "); 
+        query.append("JOIN InterestCategory ic ON l.category = ic.Id "); 
+        query.append("WHERE l.teacherId = ?");
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { teacherId }); // stuid 파라미터 전달
+        List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 Lecture 객체에 매핑
+                Lecture lecture = new Lecture();
+                lecture.setLectureId(rs.getLong("lectureId"));
+                lecture.setName(rs.getString("name"));
+                lecture.setImg(rs.getString("img"));
+                lecture.setCategory(rs.getString("category"));
+                lecture.setTeacherName(rs.getString("teacherName"));
+                lecture.setCategoryColor(rs.getString("color"));
+ 
+                lectureList.add(lecture); // 리스트에 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return lectureList; // 결과 반환
+    }
+
+    
     //강의 수강신청 
     public LectureEnrollment createLectureEnrollment(String memberId, long lectureId) throws SQLException { 
         // 새로운 LectureEnrollment 객체 생성
