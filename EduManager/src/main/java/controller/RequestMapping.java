@@ -46,6 +46,7 @@ import controller.study.ViewMyStudyController;
 public class RequestMapping {
 
 
+
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
     // 각 요청 URI에 대한 controller 객체를 저장할 HashMap 생성
@@ -146,11 +147,13 @@ public class RequestMapping {
         logger.info("Initialized Request Mapping!");
 
         mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+        mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
 
     public Controller findController(String uri) {
         // 주어진 URI에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
+
 
 }
