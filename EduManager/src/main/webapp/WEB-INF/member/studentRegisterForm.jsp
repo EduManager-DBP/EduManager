@@ -8,6 +8,24 @@
 	type="text/css">
 <title>EduManager registerForm</title>
 </head>
+ <script>
+ 	function check() {
+ 		if(!document.form.id.value){
+ 			alert("ID를 입력하세요.");
+ 			return false;
+ 		}
+ 		if(!document.form.pwd.value){
+ 			alert("비밀번호를 입력하세요.");
+ 			return false;
+ 		}
+ 		  if (document.form.pwd.value !== document.form['password-confirm'].value) {
+ 		        alert("비밀번호가 일치하지 않습니다.");
+ 		        return false;
+ 		    }
+ 		return true;
+ 	}
+ 	
+ </script>
 <body>
 	<div class="page">
 		<header>
@@ -20,7 +38,7 @@
           <div id="form-container">
               <div id="sign-up-container">
                   <h3>학생 회원가입</h3>
-                  <form name="form" method="POST" action="<c:url value='/student/register1' />">
+                  <form name="form" method="POST" onSubmit="return check()" action="<c:url value='/student/register1' />">
                       <div class="input-group">
                       	<label for="id">아이디</label>
                 			<input type="text" name="id" id="id" placeholder="id">

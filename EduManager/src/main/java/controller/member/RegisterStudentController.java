@@ -33,6 +33,7 @@ public class RegisterStudentController implements Controller {
         String email = (String) session.getAttribute("email");
         String phone = (String) session.getAttribute("phone");
         String ageRange = (String) session.getAttribute("age");
+        
         int[] interestCategoryIds = (int[]) session.getAttribute("interest");
 
       
