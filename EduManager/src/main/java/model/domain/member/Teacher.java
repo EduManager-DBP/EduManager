@@ -7,6 +7,9 @@ public class Teacher {
 	private String email;
 	private String phone;
 
+	public Teacher() {
+		
+	}
 	public Teacher(String id, String pwd, String name, String email, String phone) {
 		super();
 		this.id = id;

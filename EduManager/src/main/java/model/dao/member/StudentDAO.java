@@ -7,6 +7,7 @@ import java.util.List;
 
 import model.dao.JDBCUtil;
 import model.domain.member.Student;
+import model.domain.member.Teacher;
 
 public class StudentDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -41,8 +42,9 @@ public class StudentDAO {
 	 * 기존의 사용자 정보를 수정. (이름, 전화번호)
 	 */
 	public int update(Student student) throws SQLException {
-		String sql = "UPDATE STUDENT " + "SET pwd=?, phone=? " + "WHERE id=?";
-		Object[] param = new Object[] { student.getPwd(), student.getPhone() };
+		String sql = "UPDATE STUDENT " + "SET pwd=?, email=?, phone=? " + "WHERE id=?";
+		Object[] param = new Object[] { student.getPwd(), student.getEmail(), student.getPhone(), student.getId() };
+
 		jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil에 update문과 매개 변수 설정
 
 		try {

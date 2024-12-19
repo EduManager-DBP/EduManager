@@ -35,8 +35,10 @@ import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
 import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
+import controller.mypage.EditController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
+import controller.mypage.EditMyInfoController;
 import controller.study.CreateStudyController;
 import controller.study.UpdateStudyController;
 import controller.study.ViewMyStudyController;
@@ -79,6 +81,10 @@ public class RequestMapping {
         // 마이페이지 탈퇴하기
         mappings.put("/mypage/deleteConfirm", new ForwardController("/mypage/deleteConfirm.jsp"));
         mappings.put("/mypage/deleteAccount", new DeleteAccountController());
+        
+        //마이페이지 내 정보 수정하기
+        mappings.put("/mypage/editMyInfo", new EditController());
+        mappings.put("/mypage/edit", new EditMyInfoController());
 
         // 사용자 수정
         mappings.put("/member/update", new UpdateMemberController());
@@ -86,7 +92,7 @@ public class RequestMapping {
 
         // study
       //		mappings.put("/study/details", new ForwardController("/study/study_details.jsp"));
-        mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
+        //mappings.put("/study/addSchedule", new ForwardController("/study/addSchedule.jsp"));
         mappings.put("/study/addNotice", new ForwardController("/study/addNotice.jsp"));
         mappings.put("/study/addAssignment", new ForwardController("/study/addAssignment.jsp"));
         mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
@@ -149,7 +155,7 @@ public class RequestMapping {
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
-        mappings.put("/editMyInfo", new ForwardController("/mypage/editMyInfo.jsp"));
+
         mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
 
