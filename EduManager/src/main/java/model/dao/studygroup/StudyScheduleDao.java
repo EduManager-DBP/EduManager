@@ -19,11 +19,11 @@ public class StudyScheduleDao {
     public int createSchedule(Schedule schedule) {
         StringBuffer query = new StringBuffer();
         query.append("INSERT INTO studyschedule (studyscheduleid, dayofweek, starttime, endtime, frequency, studygroupid, startdate, type,title) ");
-        query.append("VALUES (SEQ_STUDY_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?,?)");
+        query.append("VALUES (SEQ_STUDY_SCHEDULE_ID.nextval, ?, ?, ?, ?, ?, ?, ?,?)");
 
         jdbcUtil.setSqlAndParameters(query.toString(), 
             new Object[] { schedule.getDayOfWeek(), schedule.getStartTime(), schedule.getEndTime(),
-					schedule.getFrequency(), schedule.getStudyGroupId(), schedule.getType(), schedule.getTitle()});
+					schedule.getFrequency(), schedule.getStudyGroupId(), schedule.getStartDate(),schedule.getType(), schedule.getTitle()});
 
 		// StudyGroup에 id setting
 		String key[] = { "studyScheduleId"};  // PK 컬럼(들)의 이름 배열       

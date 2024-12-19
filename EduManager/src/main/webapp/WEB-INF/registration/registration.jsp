@@ -37,14 +37,14 @@
 					<div>스터디</div>
 				</div>
 			</div>
-			<div id="makeStudyBtn-container">
-				<button id="makeStudyBtn" onclick="">
-					<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
-					스터디 만들기
-				</button>
-			</div>
-		</div>
-
+	</div>
+	<div id="makeStudyBtn-container">
+		<button id="makeStudyBtn" onclick="createStudy()">
+			<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
+			스터디 만들기
+		</button>
+	</div>
+</div>
 		<div class="hr-wrapper">
 			<hr id="registration_mainHr">
 			<hr id="registration_hr1">
@@ -81,15 +81,22 @@
 							<a
 								href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
-								<img src="<c:url value='/images/white.png' />">
-								<div class="groupGalleryTitle">${studyGroup.name}</div>
-								<div class="groupGalleryCategory">${studyGroup.category}</div>
-							</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
+
+                <img src="<c:url value='/images/white.png' />">
+                <div class="groupGalleryTitle">${studyGroup.name}</div>
+                <div class="groupGalleryCategory">${studyGroup.category}</div>
+              </a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    function createStudy() {
+        window.location.href = '<c:url value="/study/create" />';
+    }
+</script>
+
 </body>
 </html>
