@@ -13,10 +13,14 @@
     <div class="page">
         <jsp:include page="/WEB-INF/navigation/navigation.jsp" />
         <div id="form-container">
-            <form action="<c:url value='/mypage/edit' />" method="post">
+            <form action="<c:url value='/mypage/edit' />" method="post" enctype="multipart/form-data">
                 <div id="info-container">
                     <div id="info-title">내 정보 수정</div>
 
+						<div id="profile_img_container">
+    						<img id="profile_img" src="<c:url value='${member.img}' />" >
+						    <input type="file" id="profile_img_upload" name="profileImg" accept="image/*">
+						</div>
                     <!-- 아이디 -->
                     <div>
                         <label class="info-label" for="id">아이디</label>

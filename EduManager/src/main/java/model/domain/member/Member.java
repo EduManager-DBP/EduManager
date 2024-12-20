@@ -6,6 +6,7 @@ public class Member { // 수정은 pw, phone
     private String name;
     private String email;
     private String phone;
+    private String img;
 
     public Member() {
     }
@@ -16,9 +17,19 @@ public class Member { // 수정은 pw, phone
         this.name = name;
         this.email = email;
         this.phone = phone;
+
+    }
+    public Member(String id, String pwd, String name, String email, String phone, String img) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.img = img;
     }
 
-    public String getId() {
+
+	public String getId() {
         return id;
     }
 
@@ -56,6 +67,13 @@ public class Member { // 수정은 pw, phone
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     /* 비밀번호 검사 */

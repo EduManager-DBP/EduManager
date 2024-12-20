@@ -1,7 +1,12 @@
 package controller.mypage;
 
+import java.io.File;
+
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import controller.Controller;
 import model.domain.member.Member;
@@ -14,7 +19,9 @@ import controller.member.MemberSessionUtils;
 
 
 
+
 public class EditMyInfoController implements Controller {
+    private static final String UPLOAD_DIR = "images";
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    String memberId = (String) request.getSession().getAttribute("id");
@@ -22,6 +29,18 @@ public class EditMyInfoController implements Controller {
 	    if (memberId == null) {
 	        return "redirect:/member/login/form";
 	    }
+	    
+	    
+	    String uploadPath = request.getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        Part filePart = request.getPart("profileImg");
+        String fileName = extractFileName(filePart);
+        String newFileName = System.currentTimeMillis() + "_" + fileName;
+        String filePath = uploadPath + File.separator + newFileName;
 
 	    try {
 	        MemberDAO memberDAO = new MemberDAO();
@@ -33,10 +52,13 @@ public class EditMyInfoController implements Controller {
 
 	        if (member != null) {
 
+	        	 filePart.write(filePath); // 파일 저장
+	             String dbFilePath = "/images/" + newFileName; // DB에 저장할 경로 설정
 	            // 수정된 사용자 정보를 폼 데이터에서 가져오기
 	            String newPwd = request.getParameter("password");
 	            String newEmail = request.getParameter("email");
 	            String newPhone = request.getParameter("phone");
+
 
 	            if (studentDAO.existingStudent(memberId)) {
 	                // 기존 정보 조회
@@ -54,6 +76,9 @@ public class EditMyInfoController implements Controller {
 	                if (newPhone != null && !newPhone.isEmpty()) {
 	                    student.setPhone(newPhone);
 	                    member.setPhone(newPhone);
+	                }
+	                if (dbFilePath != null && !dbFilePath.isEmpty()) {
+	                    member.setImg(dbFilePath);
 	                }
 
 	                // 학생 정보 업데이트
@@ -75,6 +100,9 @@ public class EditMyInfoController implements Controller {
 	                    teacher.setPhone(newPhone);
 	                    member.setPhone(newPhone);
 	                }
+	                if (dbFilePath != null && !dbFilePath.isEmpty()) {
+	                    member.setImg(dbFilePath);
+	                }
 
 	                teacherDAO.update(teacher);
 	                memberDAO.update(member);
@@ -91,6 +119,15 @@ public class EditMyInfoController implements Controller {
 	        request.setAttribute("error", "내 정보를 불러오는 도중 오류가 발생했습니다.");
 	        return "/main/main.jsp"; // 에러 발생 시 메인 페이지로 이동
 	    }
+	}
+	private String extractFileName(Part part) {
+	    String contentDisp = part.getHeader("content-disposition");
+	    for (String content : contentDisp.split(";")) {
+	        if (content.trim().startsWith("filename")) {
+	            return content.substring(content.indexOf("=") + 2, content.length() - 1);
+	        }
+	    }
+	    return null;
 	}
 }
 
