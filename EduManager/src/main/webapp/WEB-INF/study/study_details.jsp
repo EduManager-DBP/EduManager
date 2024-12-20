@@ -28,7 +28,9 @@
          </c:if>
       
       
-         <div class="study-info-box"></div>
+		<div class="study-info-box">
+		   <img id="studyGroupOverviewImg" src="<c:url value='${studyInfo.img}' />" alt="Study Group Image">
+		</div>
          <table class="study-location">
             <tr class="icon">
                <td class="location-icon"></td>
