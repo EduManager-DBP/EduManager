@@ -16,6 +16,7 @@ public class StudyGroup {
     private String place;
     private String categoryName;
     private String categoryColor;
+    private String dayOfWeek;
 
     public StudyGroup() {
     }
@@ -136,6 +137,15 @@ public class StudyGroup {
     
     public void setCategoryColor(String categoryColor) {
         this.categoryColor = categoryColor;
+    }
+    
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
 }

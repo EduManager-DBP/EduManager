@@ -20,10 +20,10 @@
 			<div id="mypage_name">
 				<c:choose>
 					<c:when test="${existStudent}">
-						<p>${curUserId}학생</p>
+						<p>${curUserId} 학생</p>
 					</c:when>
 					<c:otherwise>
-						<p>${curUserId}강사</p>
+						<p>${curUserId} 강사님</p>
 					</c:otherwise>
 				</c:choose>
 			</div>

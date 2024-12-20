@@ -76,10 +76,11 @@ public class StudyGroupDao {
 public StudyGroup findGroupInfo(long groupId) {
     try {
         StudyGroup group = new StudyGroup();
-        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.place, sg.leaderId, " +
+        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.place, sg.leaderId, ss.dayOfWeek, " +
                        "m.name AS leaderName " +
                        "FROM StudyGroup sg " +
                        "JOIN Member m ON sg.leaderId = m.id " +
+                       "JOIN Studyschedule ss ON sg.studyGroupId = ss.studyGroupId " +
                        "WHERE sg.studyGroupId = ?";
         jdbcUtil.setSqlAndParameters(query, new Object[] { groupId });
 
@@ -95,6 +96,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setPlace(rs.getString("place"));
             group.setLeaderId(rs.getString("leaderId"));
             group.setLeaderName(rs.getString("leaderName")); // 리더 이름 설정
+            group.setDayOfWeek(rs.getString("dayOfWeek"));
+            
         } else {
             System.out.println("스터디그룹 정보를 찾을 수 없습니다.  " + groupId);
         }
