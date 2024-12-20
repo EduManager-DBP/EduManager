@@ -51,11 +51,12 @@ a {
 }
 
 .mypageBtn {
+		font-family: 'Pretendard';
 	width: 370px;
 	height: 60px;
 	border-radius: 15px;
 	display: flex;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 600;
 	align-items: center;
 	justify-content: center;
@@ -63,7 +64,7 @@ a {
 	border: 1px solid #643E23;
 	cursor: pointer;
 	color: #643E23;
-	transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
+	transition: color 0.2s, background-color 0.2s, border-radius 0.2s;
 }
 
 .mypageBtn:hover {

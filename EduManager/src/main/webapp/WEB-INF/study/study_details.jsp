@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=utf-8"%>
+<%@page import="java.util.HashMap, java.util.Map" %>
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -12,7 +13,19 @@
 <script src="<c:url value='/js/study_calendar.js' />"></script>
 <title>스터디 상세보기</title>
 </head>
+<%
+    Map<String, String> dayMap = new HashMap<>();
+    dayMap.put("MONDAY", "월");
+    dayMap.put("TUESDAY", "화");
+    dayMap.put("WEDNESDAY", "수");
+    dayMap.put("THURSDAY", "목");
+    dayMap.put("FRIDAY", "금");
+    dayMap.put("SATURDAY", "토");
+    dayMap.put("SUNDAY", "일");
+    request.setAttribute("dayMap", dayMap);
+%>
 <body>
+
    <jsp:include page="../navigation/navigation.jsp" />
 
    <div class="study-container">
@@ -26,19 +39,29 @@
             <c:param name="studyId" value="${studyInfo.studyGroupId}" />
                         </c:url>">스터디 정보 수정하기</a>
          </c:if>
-      
-      
-         <div class="study-info-box"></div>
-         <table class="study-location">
+
+			<a class="complete-button"
+			style="margin-top:20px"
+				href="<c:url value="/lecture/over-view">
+				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
+								</c:url>">스터디 후기 작성하기</a>
+
+
+			<div class="study-info-box"></div>
+ <%--         <table class="study-location">
             <tr class="icon">
                <td class="location-icon"></td>
                <td class="location-inform">${studyInfo.place}호</td>
             </tr>
             <tr class="icon">
-               <td class="time-icon"></td>
-               <td class="location-inform">진행중...</td>
-            </tr>
-         </table>
+       	<td class="time-icon"></td>
+
+					<c:forEach var="schedule" items="${regularSchedules}">
+						<td class="location-inform">  ${dayMap[schedule.dayOfWeek]}요일 ${schedule.startTime}
+							</td>
+					</c:forEach>
+				</tr>
+         </table> --%>
          <div class="team-members-box">
             <div class="team-header">
                <img src="<c:url value='/images/members.png' />" alt="members" 
