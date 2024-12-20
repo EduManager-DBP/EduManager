@@ -38,6 +38,7 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
           
           List<StudyGroup> studyGroupSearchList = studyGroupManager.getStudyGroupsSearch(memberId, searchParam);
           
+          request.setAttribute("isTeacher", teacherManager.isTeacher(memberId)); 
           request.setAttribute("studyGroupList", studyGroupSearchList);
           
           request.setAttribute("searchParam",  searchParam);
