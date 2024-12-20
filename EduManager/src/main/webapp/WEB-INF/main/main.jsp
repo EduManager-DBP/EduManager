@@ -86,7 +86,7 @@ for (Schedule studySchedule : studyScheduleEntries) {
 for (Notice studyNotice : studyNoticeEntries) {
 	int dayday = studyNotice.getCreateat().getDayOfMonth();
 	studyNoticeMap.putIfAbsent(dayday, new ArrayList<>());
-	lectureNoticeMap.get(dayday).add(studyNotice);
+	studyNoticeMap.get(dayday).add(studyNotice);
 }
 for (Assignment studyAssignment : studyAssignmentEntries) {
 	int dayday = studyAssignment.getDueDate().getDayOfMonth();
@@ -239,42 +239,42 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스케줄 출력
 							if (lectureScheduleMap.containsKey(day)) {
-								for (Schedule lectureSchedule : lectureScheduleMap.get(day)) {
+								/* for (Schedule lectureSchedule : lectureScheduleMap.get(day)) {
 									out.print("<div class='schedule'>[강의]스케줄: " + lectureSchedule.getTitle() + "</div>");
-								}
+								} */
 							}
 
 							// 공지 출력
 							if (lectureNoticeMap.containsKey(day)) {
-								for (Notice lectureNotice : lectureNoticeMap.get(day)) {
+								/* for (Notice lectureNotice : lectureNoticeMap.get(day)) {
 									out.print("<div class='notice'>[강의]공지: " + lectureNotice.getTitle() + "</div>");
-								}
+								} */
 							}
 							// 과제 출력
 							if (lectureAssignmentMap.containsKey(day)) {
-								for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
+								/* for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
 									out.print("<div class='assignment'>[강의]과제: " + lectureAssignment.getTitle() + "</div>");
-								}
+								} */
 							}
 							
 							// 스케줄 출력
 							if (studyScheduleMap.containsKey(day)) {
-								for (Schedule studySchedule : studyScheduleMap.get(day)) {
+								/* for (Schedule studySchedule : studyScheduleMap.get(day)) {
 									out.print("<div class='schedule'>[스터디]스케줄: " + studySchedule.getTitle() + "</div>");
-								}
+								} */
 							}
 
 							// 공지 출력
 							if (studyNoticeMap.containsKey(day)) {
-								for (Notice studyNotice : studyNoticeMap.get(day)) {
+								/* for (Notice studyNotice : studyNoticeMap.get(day)) {
 									out.print("<div class='notice'>[스터디]공지: " + studyNotice.getTitle() + "</div>");
-								}
+								} */
 							}
 							// 과제 출력
 							if (studyAssignmentMap.containsKey(day)) {
-								for (Assignment studyAssignment : studyAssignmentMap.get(day)) {
+								/* for (Assignment studyAssignment : studyAssignmentMap.get(day)) {
 									out.print("<div class='assignment'>[스터디]과제: " + studyAssignment.getTitle() + "</div>");
-								}
+								} */
 							}
 
 							day++;
