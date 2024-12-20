@@ -13,7 +13,7 @@
     <div class="page">
         <jsp:include page="/WEB-INF/navigation/navigation.jsp" />
         <div id="form-container">
-            <form action="<c:url value='/mypage/edit' />" method="post">
+            <form action="<c:url value='/mypage/edit' />" method="post" enctype="multipart/form-data">
                 <div id="info-container">
                     <div id="info-title">내 정보 수정</div>
 
