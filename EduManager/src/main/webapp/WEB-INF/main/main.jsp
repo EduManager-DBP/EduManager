@@ -92,7 +92,7 @@ for (Assignment assignment : assignmentEntries) {
 		    }
 
 		    // Log updated values for debugging
-		    console.log('Updated Year: ${newYear}, Updated Month: ${newMonth + 1}');
+		   	console.log(`Updated Year: ${newYear}, Updated Month: ${newMonth + 1}`);
 
 		    // Update form values and submit
 		    document.getElementById("year").value = newYear;
@@ -103,12 +103,8 @@ for (Assignment assignment : assignmentEntries) {
 
 	// 날짜 클릭 시 서버로 전달
 	function selectDate(day) {
-		const currentYear = parseInt(document.getElementById("year").value);
-		const currentMonth = parseInt(document.getElementById("month").value);
-
+		console.log(`Updated Year: ${currentYear}, Updated Month: ${currentMonth + 1}`);
 		// 폼 데이터 설정
-		document.getElementById("year").value = newYear;
-		document.getElementById("month").value = newMonth + 1;
 		document.getElementById("selectedDay").value = day;
 		document.getElementById("calendarForm").submit();
 	}
@@ -123,7 +119,6 @@ for (Assignment assignment : assignmentEntries) {
 				<div id="todaySchedule">
 					<div class="ScheduleText today">Today Schedule</div>
 					<ul class="todaySchedule-list">
-						<%= request.getAttribute("selectedDay") %>
 						<%
 						for (Schedule schedule : scheduleEntries) {
 							if (schedule.getStartDate().getYear() == currentYear
