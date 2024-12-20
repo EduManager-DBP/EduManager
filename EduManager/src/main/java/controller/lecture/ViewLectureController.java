@@ -66,6 +66,7 @@ public class ViewLectureController implements Controller {
         request.setAttribute("description", lecture.getDescription());
         request.setAttribute("lectureroom", lecture.getLectureRoom());
         request.setAttribute("reviewList", lectureReviewList);
+        request.setAttribute("img",  lecture.getImg());
         
         
         // 강의 상세 페이지로 이동

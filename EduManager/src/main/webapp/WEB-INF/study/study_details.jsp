@@ -15,6 +15,7 @@
 <body>
 	<jsp:include page="../navigation/navigation.jsp" />
 
+
 	<div class="study-container">
 		<div class="study-detail">
 			<h2 class="study-title">스터디 상세보기</h2>
@@ -51,7 +52,6 @@
 					<c:forEach var="member" items="${members}">
 						<li class="member-item">
 							<span class="member-name">${member}</span>
-
 						</li>
 					</c:forEach>
 				</ul>
