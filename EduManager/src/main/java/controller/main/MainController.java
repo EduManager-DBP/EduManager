@@ -35,13 +35,13 @@ public class MainController implements Controller {
 		String yearParam = request.getParameter("year");
 		String monthParam = request.getParameter("month");
 		String selectedDayParam = request.getParameter("selectedDay");
-		int selectedDay = (selectedDayParam != null && !selectedDayParam.isEmpty()) ? Integer.parseInt(selectedDayParam)
-				: currentDate.getDayOfMonth();
 
 		// 파라미터가 없으면 현재 연도와 월을 기본값으로 설정
 		int year = (yearParam != null && !yearParam.isEmpty()) ? Integer.parseInt(yearParam) : currentDate.getYear();
 		int month = (monthParam != null && !monthParam.isEmpty()) ? Integer.parseInt(monthParam)
 				: currentDate.getMonthValue();
+		int selectedDay = (selectedDayParam != null && !selectedDayParam.isEmpty()) ? Integer.parseInt(selectedDayParam)
+				: currentDate.getDayOfMonth();
 
 		// LectureManager를 통해 데이터 가져오기
 		LectureManager manager = LectureManager.getInstance();
