@@ -238,11 +238,9 @@ public class LectureManager {
         return noticeDao.searchNotices(lectureId, searchParam);
     }
     
-    //월 단위 일정 유무 확인.
- 
-    
     public List<Assignment> findAssignmentsByLectureId(int lectureId) {
         return assignmentDao.findAssignmentsByLectureId(lectureId);
     }
 
 }
+
