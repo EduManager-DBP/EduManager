@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.dao.member.InterestCategoryDAO;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.domain.studyGroup.StudyGroup;
@@ -56,6 +58,14 @@ public class UpdateStudyController implements Controller {
 				request.setAttribute("scheduleList", scheduleList);
 				request.setAttribute("scheduleCount", scheduleList.size()); // 길이를 추가
 
+				
+				InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
+
+				// DB에서 관심 분야 목록을 가져옴
+				List<Map<String, Object>> categories = interestCategoryDAO.getCategories();
+				
+				request.setAttribute("categories", categories);
+				
 				request.setAttribute("study", study);
 				return "/study/updateForm.jsp"; // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송
 			}
