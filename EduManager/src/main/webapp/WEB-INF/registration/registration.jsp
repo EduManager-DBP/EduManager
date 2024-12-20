@@ -17,8 +17,21 @@
 		<div class="subTitle">강의/스터디 신청하기</div>
 		<div>
 			<div class="search">
-				<input type="text" placeholder="검색어 입력"> <img
-					src="<c:url value='/images/searchIcon.svg' />">
+				<form action="<c:url value='/registration/search' />"
+					method="post" id="searchForm">
+					<c:choose>
+						<c:when test="${searchParam == null}">
+							<input type="text" name="searchParam" placeholder="검색어를 입력하세요">
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="searchParam" placeholder="${searchParam}">
+						</c:otherwise>
+					</c:choose>
+					
+					<img src="<c:url value='/images/searchIcon.svg' />"
+						onclick="document.getElementById('searchForm').submit();">
+				</form>
+
 			</div>
 		</div>
 
@@ -79,7 +92,7 @@
 								<div
 									style="display: flex; justify-content: space-between; width: 100%;">
 									<span class="groupGalleryCategory"
-										style="background-color: ${group.categoryColor};">${group.category}</span>
+										style="background-color: ${group.categoryColor};">${group.categoryName}</span>
 									<span class="groupGalleryTeacherName">${group.teacherName}</span>
 								</div>
 							</a>
@@ -97,8 +110,9 @@
 							<a
 								href="<c:url value='/study/over-view'><c:param name='groupId' value='${studyGroup.studyGroupId}'/></c:url>">
 								<img src="<c:url value='/images/white.png' />">
-								<div class="groupGalleryTitle">${studyGroup.name}</div>
-								<div class="groupGalleryCategory">${studyGroup.category}</div>
+								<span class="groupGalleryTitle">${studyGroup.name}</span>
+								<span class="groupGalleryCategory"
+										style="background-color: ${studyGroup.categoryColor};">${studyGroup.categoryName}</span>
 							</a>
 						</div>
 					</c:forEach>
@@ -116,4 +130,3 @@
 	</script>
 </body>
 </html>
-

@@ -187,7 +187,8 @@ public StudyGroup findGroupInfo(long groupId) {
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ic.name AS categoryName, ic.color ");
+        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ");
+        query.append("ic.name AS categoryName, ic.color ");
         query.append("FROM StudyGroup S ");
         query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
         query.append("WHERE S.studyGroupId NOT IN ( ");
@@ -196,7 +197,16 @@ public StudyGroup findGroupInfo(long groupId) {
         query.append("    WHERE stuId = ? AND status = '수락' ");
         query.append(") ");
         query.append("AND S.leaderId != ? ");
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId }); // stuId 파라미터 전달
+        query.append("ORDER BY ");
+        query.append("    CASE ");
+        query.append("        WHEN S.category IN (");
+        query.append("            SELECT INTERESTID ");
+        query.append("            FROM studentInterestCategory ");
+        query.append("            WHERE stuId = ? ");
+        query.append("        ) THEN 1 ");
+        query.append("        ELSE 2 ");
+        query.append("    END");
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId, stuId }); 
         List<StudyGroup> studyGroupList = new ArrayList<>();
 
         try {

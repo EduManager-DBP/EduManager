@@ -231,17 +231,28 @@ public class LectureDao {
     //수강하지 않고 있는 강의 목록 보여주기(수강 신청용)
     public List<Lecture> getLecturesExcludingStudent(String stuid) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, T.name As teacherName, ic.name AS categoryName, ic.color  ");
+        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, ");
+        query.append("T.name AS teacherName, ic.name AS categoryName, ic.color ");
         query.append("FROM Lecture L ");
         query.append("JOIN Teacher T ON L.teacherId = T.Id "); // Teacher 테이블과 조인
         query.append("JOIN InterestCategory ic ON L.category = ic.Id "); 
-        query.append("WHERE L.lectureId NOT IN (");
-        query.append("    SELECT lectureId ");
+        query.append("WHERE NOT EXISTS (");
+        query.append("    SELECT 1 ");
         query.append("    FROM LectureEnrollment ");
-        query.append("    WHERE stuid = ? ");
-        query.append(")");
+        query.append("    WHERE LectureEnrollment.lectureId = L.lectureId ");
+        query.append("    AND LectureEnrollment.stuid = ? ");
+        query.append(") ");
+        query.append("ORDER BY ");
+        query.append("    CASE ");
+        query.append("        WHEN L.category IN (");
+        query.append("            SELECT INTERESTID ");
+        query.append("            FROM studentInterestCategory ");
+        query.append("            WHERE stuid = ? ");
+        query.append("        ) THEN 1 ");
+        query.append("        ELSE 2 ");
+        query.append("    END");
 
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuid }); // stuid 파라미터 전달
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuid, stuid }); // stuid 파라미터 전달
         List<Lecture> lectureList = new ArrayList<>(); // 결과를 담을 리스트
 
         try {
@@ -285,15 +296,18 @@ public class LectureDao {
     
     public List<Lecture> getLecturesSearch(String stuid, String searchParam) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, T.name AS teacherName, ic.name AS categoryName, ic.color ");
+        query.append("SELECT L.lectureId, L.name, L.img, L.category, L.capacity, L.lecturelevel, ");
+        query.append("T.name AS teacherName, ic.name AS categoryName, ic.color ");
         query.append("FROM Lecture L ");
         query.append("JOIN Teacher T ON L.teacherId = T.Id "); // Teacher 테이블과 조인
         query.append("JOIN InterestCategory ic ON L.category = ic.Id "); 
-        query.append("WHERE L.lectureId NOT IN (");
-        query.append("    SELECT lectureId ");
+        query.append("WHERE NOT EXISTS (");
+        query.append("    SELECT 1 ");
         query.append("    FROM LectureEnrollment ");
-        query.append("    WHERE stuid = ? ");
+        query.append("    WHERE LectureEnrollment.lectureId = L.lectureId ");
+        query.append("    AND LectureEnrollment.stuid = ? ");
         query.append(")");
+
 
         
         if (searchParam != null && !searchParam.trim().isEmpty()) {
@@ -343,7 +357,7 @@ public class LectureDao {
     }
     public List<Lecture> getMyLectureList(String stuid) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName, ic.name AS categoryName, ic.color ");
+        query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName,  ic.name AS categoryName, ic.color ");
         query.append("FROM Lecture l ");
         query.append("JOIN LectureEnrollment le ON l.lectureId = le.lectureId ");
         query.append("JOIN Teacher t ON l.teacherId = t.Id "); 
