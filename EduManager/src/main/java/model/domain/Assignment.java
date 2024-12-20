@@ -1,6 +1,7 @@
 package model.domain;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Assignment {
 	private int id;
@@ -119,5 +120,14 @@ public class Assignment {
 	public void setStudyId(int studyId) {
 		this.studyId = studyId;
 	}
+	
+	public String getFormattedDueDate() {
+	    if (dueDate != null) {
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        return dueDate.format(formatter);
+	    }
+	    return "N/A";  // 또는 빈 문자열("")
+	}
+    
 
 }
