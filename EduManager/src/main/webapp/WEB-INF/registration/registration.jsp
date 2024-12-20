@@ -109,7 +109,7 @@
                   <div class="groupGallery">
                      <a
                         href="<c:url value='/study/over-view'><c:param name='groupId' value='${studyGroup.studyGroupId}'/></c:url>">
-                        <img src="<c:url value='/images/white.png' />">
+                        <img src="<c:url value='${studyGroup.img}' />"> 
                         <span class="groupGalleryTitle">${studyGroup.name}</span>
                         <span class="groupGalleryCategory"
                               style="background-color: ${studyGroup.categoryColor};">${studyGroup.categoryName}</span>
