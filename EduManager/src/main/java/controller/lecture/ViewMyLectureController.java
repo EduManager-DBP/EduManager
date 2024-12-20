@@ -1,7 +1,11 @@
 package controller.lecture;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,7 +81,49 @@ public class ViewMyLectureController implements Controller {
             String teacherId = MemberSessionUtils.getLoginMemberId(request.getSession());
     		Boolean isTeacher= (teacherId.equals(lectureInfo.getTeacherId())) ? true : false;
             
+    		
+    		
+    	    List<LocalDate> events = manager.findMonthSchedule(lectureId, selectedDate.getMonthValue(), selectedDate.getYear());
+        log.debug("events: " + events);
+
+    	     List<Schedule> regularEvents = manager.findSchedulesByFilters(lectureId, selectedDate.withDayOfMonth(selectedDate.lengthOfMonth()), "regular", null);
+          log.debug("regularEvents: " + regularEvents);
+//
+////          log.debug("uniqueDates: " + uniqueDates);
+//
+//
+//         // selectedDate의 해당 월 시작과 끝 날짜
+            LocalDate startOfMonth = selectedDate.withDayOfMonth(1);
+            LocalDate endOfMonth = selectedDate.withDayOfMonth(selectedDate.lengthOfMonth());
+
+            List<LocalDate> repeatingDatesInMonth = new ArrayList<>();
+
+            // 각 regularEvent를 확인
+            for (Schedule event : regularEvents) {
+                LocalDate startDate = event.getStartDate();  // 일정 시작 날짜
+                String dayOfWeek = event.getDayOfWeek();  // 반복되는 요일
+
+                if (startDate.isBefore(selectedDate)) {
+                    // 해당 월에 반복되는 일정들을 찾기 위한 로직
+                    LocalDate currentDate = startDate;
+
+                    // 반복되는 일정이 해당 달에 포함되는지 확인
+                    while (!currentDate.isAfter(endOfMonth)) {
+                        if (currentDate.isAfter(startOfMonth) && currentDate.getDayOfWeek().toString() == dayOfWeek) {
+                        	repeatingDatesInMonth.add(currentDate);
+                            break;
+                        }
+                        // 다음 주로 이동
+                        currentDate = currentDate.plusWeeks(1);
+                    }
+                }
+            }
+            events.addAll(repeatingDatesInMonth);
+          log.debug("events: " + events);
+          log.debug("repeatingDatesInMonth: " + repeatingDatesInMonth);
+//    		
     		//study 기본 정보
+//            request.setAttribute("events", events);
             request.setAttribute("lectureInfo", lectureInfo);
             request.setAttribute("isTeacher", isTeacher);
             request.setAttribute("members", members);
