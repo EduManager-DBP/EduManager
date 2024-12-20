@@ -696,27 +696,5 @@ public StudyGroup findGroupInfo(long groupId) {
         jdbcUtil.close();
         return members;
     }
-    
-    public int getAvailableSeatsByStudyGroupId(long studyGroupId) {
-        String sql = "SELECT (sg.capacity - COUNT(sga.studygroupapplicationid)) AS available_seats " +
-                "FROM studygroup sg " +
-                "LEFT JOIN studygroupapplication sga " +
-                "ON sg.studygroupid = sga.studygroupid AND sga.status = '수락' " +
-                "WHERE sg.studygroupid = ? " +
-                "GROUP BY sg.capacity";
-        jdbcUtil.setSqlAndParameters(sql, new Object[] { studyGroupId }); // SQL과 파라미터 설정
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
-            if (rs.next()) {
-                return rs.getInt("available_seats"); // 잔여 좌석 수 반환
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.close(); // 자원 해제
-        }
-        return -1; // 스터디 그룹이 없거나 에러 발생 시 -1 반환
-    }
 }
 

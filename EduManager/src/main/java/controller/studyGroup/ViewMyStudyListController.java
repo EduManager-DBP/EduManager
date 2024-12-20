@@ -38,8 +38,7 @@ public class ViewMyStudyListController implements Controller{
       for (StudyGroup studyGroup : studyGroupListByMember) {
           System.out.println("강의 ID: " + studyGroup.getStudyGroupId() +
                              ", 강의 이름: " + studyGroup.getName() +
-                             ", 카테고리: " + studyGroup.getCategory() +
-          ", 이미지: " + studyGroup.getImg());
+                             ", 카테고리: " + studyGroup.getCategory());
       }
       
       // 스터디 목록을 request 객체에 저장

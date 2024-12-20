@@ -17,7 +17,7 @@
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
-					<img src="<c:url value='${groupImg}' />"
+					<img src="<c:url value='/images/white.png' />"
 						id="studyGroupOverviewImg">
 				</div>
 				<div class="overViewInfo">
@@ -64,26 +64,14 @@
 
 							<c:choose>
 								<c:when test="${requestStatus == '진행중'}">
-									<input type="button" class="statusInProgress" value="가입 요청중"
-										disabled />
+									<input type="button" class="statusInProgress" value="가입 요청중" disabled/>
 								</c:when>
 								<c:when test="${requestStatus == '수락'}">
-									<input type="button" class="statusAccepted" value="가입 완료"
-										disabled />
+									<input type="button" class="statusAccepted" value="가입 완료" disabled/>
 								</c:when>
 								<c:otherwise>
-
-									<c:choose>
-										<c:when test="${studyAvailableSeats > 0}">
-											<input type="button" class="applyButton" value="가입 요청하기"
-												onclick="document.getElementById('requestForm').submit();" />
-										</c:when>
-										<c:otherwise>
-											<input type="button" class="applyButton" value="가입 요청하기"
-												onclick="alert('정원을 초과했습니다!');" />
-										</c:otherwise>
-									</c:choose>
-
+									<input type="button" class="applyButton" value="가입 요청하기"
+										onclick="document.getElementById('requestForm').submit();" />
 								</c:otherwise>
 							</c:choose>
 						</form>

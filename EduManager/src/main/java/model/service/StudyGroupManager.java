@@ -113,9 +113,6 @@ public class StudyGroupManager {
     }
     
     
-    public int getAvailableSeatsByStudyGroupId(long studyGroupId) {
-      return studyGroupDao.getAvailableSeatsByStudyGroupId(studyGroupId);
-    }
    
   
 }

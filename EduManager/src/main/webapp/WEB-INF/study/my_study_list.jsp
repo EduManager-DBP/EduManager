@@ -45,7 +45,7 @@
 									href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 
 			 	 </c:url>">
-									<img src="<c:url value='${studyGroup.img}' />"> <span
+									<img src="<c:url value='/images/white.png' />"> <span
 									class="groupGalleryTitle">${studyGroup.name}</span> <span
 									class="groupGalleryCategory"
 									style=" background-color: ${studyGroup.categoryColor};">${studyGroup.categoryName}</span>
@@ -69,7 +69,7 @@
 									href="<c:url value='/mystudy/view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 
 			 	 </c:url>">
-									<img src="<c:url value='${studyGroup.img}' />"> <span
+									<img src="<c:url value='/images/white.png' />"> <span
 									class="groupGalleryTitle">${studyGroup.name}</span> <span
 									class="groupGalleryCategory"
 									style=" background-color: ${studyGroup.categoryColor};">${studyGroup.categoryName}</span>

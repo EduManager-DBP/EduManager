@@ -26,8 +26,7 @@
 						<%-- <a
 							href="<c:url value='/lecture/over-view'> <c:param name='lectureId' value='${group.lectureId}'/>
 			 	 </c:url>"> --%>
-			 	 
-							<img id=img src="<c:url value='${group.img}' />" alt="Group Image">
+							<img src="<c:url value='/images/white.png' />" alt="Group Image">
 								<span class="groupGalleryTitle">${group.name}</span>
 								<div
 									style="display: flex; justify-content: space-between; width: 100%;">

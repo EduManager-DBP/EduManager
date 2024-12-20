@@ -13,7 +13,6 @@ import controller.lecture.CreateLectureNoticeController;
 import controller.lecture.CreateLectureReviewController;
 import controller.lecture.CreateLectureScheduleController;
 import controller.lecture.UpdateLectureController;
-import controller.lecture.ViewLectureAssignmentsController;
 import controller.lecture.ViewLectureController;
 import controller.lecture.ViewLectureNoticeListController;
 import controller.lecture.ViewMyLectureController;
@@ -38,7 +37,6 @@ import controller.studyGroup.DeleteRequestController;
 import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
-import controller.studyGroup.ViewStudyAssignmentsController;
 import controller.studyGroup.ViewStudyGroupController;
 import controller.studyGroup.ViewStudyNoticeListController;
 import controller.studyGroup.ViewStudyRequestListController;
@@ -189,8 +187,7 @@ public class RequestMapping {
         mappings.put("/lecture/searchListNotice", new ViewLectureNoticeListController());
         
         
-        mappings.put("/lecture/listAssignment", new ViewLectureAssignmentsController());
-        mappings.put("/study/listAssignment", new ViewStudyAssignmentsController());
+        mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
 
         mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }
