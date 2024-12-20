@@ -100,4 +100,8 @@ public class StudyManager {
     	return studyDao.findStudyMembers(studyGruopId);
     }
     
+    public List<Assignment> findAssignmentsByStudyId(int studyId) {
+        return assignmentDao.findAssignmentsByStudyId(studyId);
+    }
+    
 }
