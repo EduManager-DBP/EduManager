@@ -85,14 +85,14 @@ public class MemberDAO {
 	 * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
 	 */
 	public Member findMember(String id) throws SQLException {
-		String sql = "SELECT pwd, name, email, phone " + "FROM MEMBER " + "WHERE id = ? ";
+		String sql = "SELECT pwd, name, email, phone, img " + "FROM MEMBER " + "WHERE id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { id }); // JDBCUtil에 query문과 매개 변수 설정
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery(); // query 실행
 			if (rs.next()) { // 학생 정보 발견
 				Member member = new Member( // User 객체를 생성하여 학생 정보를 저장
-						id, rs.getString("pwd"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));
+						id, rs.getString("pwd"), rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("img"));
 				return member;
 			}
 		} catch (Exception ex) {
@@ -136,7 +136,7 @@ public class MemberDAO {
 			List<Member> memberList = new ArrayList<Member>(); // User들의 리스트 생성
 			while (rs.next()) {
 				Member member = new Member( // User 객체를 생성하여 현재 행의 정보를 저장
-						rs.getString("id"), null, rs.getString("name"), rs.getString("email"), rs.getString("phone"));
+						rs.getString("id"), null, rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("img"));
 				memberList.add(member); // List에 User 객체 저장
 			}
 			return memberList;
@@ -166,7 +166,7 @@ public class MemberDAO {
 				do {
 					Member member = new Member( // User 객체를 생성하여 현재 행의 정보를 저장
 							rs.getString("id"), null, rs.getString("name"), rs.getString("email"),
-							rs.getString("phone"));
+							rs.getString("phone"), rs.getString("img"));
 					memberList.add(member); // 리스트에 User 객체 저장
 				} while ((rs.next()) && (--countPerPage > 0));
 				return memberList;
