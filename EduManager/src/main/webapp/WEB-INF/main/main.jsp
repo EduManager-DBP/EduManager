@@ -12,9 +12,9 @@
 
 // 현재 연도와 월 가져오기
 java.util.Calendar calendar = java.util.Calendar.getInstance();
-int currentYear = (int)request.getAttribute("year");
-int currentMonth = (int)request.getAttribute("month"); // 0부터 시작 (0 = 1월)
-int selectedDay = (int)request.getAttribute("selectedDay");
+int currentYear = (int) request.getAttribute("year");
+int currentMonth = (int) request.getAttribute("month"); // 0부터 시작 (0 = 1월)
+int selectedDay = (int) request.getAttribute("selectedDay");
 
 System.out.println("DEBUG: Year = " + currentYear + ", Month = " + currentMonth + ", Selected Day = " + selectedDay);
 
@@ -27,7 +27,7 @@ if (yearParam != null && monthParam != null) {
 } */
 
 // 해당 월의 총 일수와 시작 요일 계산
-calendar.set(currentYear, currentMonth, 1);
+calendar.set(currentYear, currentMonth - 1, 1);
 int daysInMonth = calendar.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 
@@ -37,7 +37,6 @@ int todayMonth = now.get(java.util.Calendar.MONTH) + 1;
 int todayDate = now.get(java.util.Calendar.DATE);
 
 System.out.println("DEBUG: todayYear = " + todayYear + ", todayMonth = " + todayMonth + ", todayDate = " + todayDate);
-
 
 int day = 1;
 boolean started = false;
@@ -102,32 +101,33 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 <script>
 	// 이전/다음 달 이동 함수
 	function changeMonth(offset) {
-		    const currentYear = parseInt(document.getElementById("year").value);
-		    const currentMonth = parseInt(document.getElementById("month").value) - 1; // Convert to 0-based index for JavaScript
-		    let newYear = currentYear;
-		    let newMonth = currentMonth + offset;
+		const currentYear = parseInt(document.getElementById("year").value);
+		const currentMonth = parseInt(document.getElementById("month").value) - 1; // Convert to 0-based index for JavaScript
+		let newYear = currentYear;
+		let newMonth = currentMonth + offset;
 
-		    if (newMonth < 0) { // Move to the previous year
-		        newMonth = 11;
-		        newYear--;
-		    } else if (newMonth > 11) { // Move to the next year
-		        newMonth = 0;
-		        newYear++;
-		    }
+		if (newMonth < 0) { // Move to the previous year
+			newMonth = 11;
+			newYear--;
+		} else if (newMonth > 11) { // Move to the next year
+			newMonth = 0;
+			newYear++;
+		}
 
-		    // Log updated values for debugging
-		   	console.log(`Updated Year: ${newYear}, Updated Month: ${newMonth + 1}`);
+		// Log updated values for debugging
+		console.log(`Updated Year: ${newYear}, Updated Month: ${newMonth + 1}`);
 
-		    // Update form values and submit
-		    document.getElementById("year").value = newYear;
-		    document.getElementById("month").value = newMonth + 1; // Convert back to 1-based index for server
-		    document.getElementById("calendarForm").submit();
-		
+		// Update form values and submit
+		document.getElementById("year").value = newYear;
+		document.getElementById("month").value = newMonth + 1; // Convert back to 1-based index for server
+		document.getElementById("calendarForm").submit();
+
 	}
 
 	// 날짜 클릭 시 서버로 전달
 	function selectDate(day) {
-		console.log(`Updated Year: ${currentYear}, Updated Month: ${currentMonth + 1}`);
+		console
+				.log(`Updated Year: ${currentYear}, Updated Month: ${currentMonth + 1}`);
 		// 폼 데이터 설정
 		document.getElementById("selectedDay").value = day;
 		document.getElementById("calendarForm").submit();
@@ -150,17 +150,21 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 							&& lectureSchedule.getStartDate().getDayOfMonth() == selectedDay) {
 						%>
 						<li class="todaySchedules list1">[강의]<%=lectureSchedule.getLectureName()%>
-							- <%=lectureSchedule.getTitle()%> (<%=lectureSchedule.getStartTime()%> ~ <%=lectureSchedule.getEndTime()%>)</li>
+							- <%=lectureSchedule.getTitle()%> (<%=lectureSchedule.getStartTime()%>
+							~ <%=lectureSchedule.getEndTime()%>)
+						</li>
 						<%
 						}
 						}
 						for (Schedule studySchedule : studyScheduleEntries) {
-							if (studySchedule.getStartDate().getYear() == currentYear
-							&& studySchedule.getStartDate().getMonthValue() == (currentMonth)
-							&& studySchedule.getStartDate().getDayOfMonth() == selectedDay) {
+						if (studySchedule.getStartDate().getYear() == currentYear
+								&& studySchedule.getStartDate().getMonthValue() == (currentMonth)
+								&& studySchedule.getStartDate().getDayOfMonth() == selectedDay) {
 						%>
 						<li class="todaySchedules list2">[스터디]<%=studySchedule.getLectureName()%>
-							- <%=studySchedule.getTitle()%> (<%=studySchedule.getStartTime()%> ~ <%=studySchedule.getEndTime()%>)</li>
+							- <%=studySchedule.getTitle()%> (<%=studySchedule.getStartTime()%>
+							~ <%=studySchedule.getEndTime()%>)
+						</li>
 						<%
 						}
 						}
@@ -183,16 +187,15 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 						}
 						}
 						for (Assignment studyAssignment : studyAssignmentEntries) {
-							if (studyAssignment.getDueDate().getYear() == currentYear
-							&& studyAssignment.getDueDate().getMonthValue() == (currentMonth)
-							&& studyAssignment.getDueDate().getDayOfMonth() == selectedDay) {
+						if (studyAssignment.getDueDate().getYear() == currentYear
+								&& studyAssignment.getDueDate().getMonthValue() == (currentMonth)
+								&& studyAssignment.getDueDate().getDayOfMonth() == selectedDay) {
 						%>
 						<li class="assignments list2">[강의][<%=studyAssignment.getLectureName()%>]
 							<%=studyAssignment.getTitle()%></li>
 						<%
 						}
 						}
-						
 						%>
 					</ul>
 				</div>
@@ -239,41 +242,49 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스케줄 출력
 							if (lectureScheduleMap.containsKey(day)) {
+								out.println("<div class='dot red'></div>"); // 빨간색 점
 								/* for (Schedule lectureSchedule : lectureScheduleMap.get(day)) {
-									out.print("<div class='schedule'>[강의]스케줄: " + lectureSchedule.getTitle() + "</div>");
+								    out.print("<div class='schedule'>[강의]스케줄: " + lectureSchedule.getTitle() + "</div>");
 								} */
 							}
 
 							// 공지 출력
 							if (lectureNoticeMap.containsKey(day)) {
+								out.println("<div class='dot orange'></div>"); // 주황색 점
 								/* for (Notice lectureNotice : lectureNoticeMap.get(day)) {
-									out.print("<div class='notice'>[강의]공지: " + lectureNotice.getTitle() + "</div>");
-								} */
-							}
-							// 과제 출력
-							if (lectureAssignmentMap.containsKey(day)) {
-								/* for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
-									out.print("<div class='assignment'>[강의]과제: " + lectureAssignment.getTitle() + "</div>");
-								} */
-							}
-							
-							// 스케줄 출력
-							if (studyScheduleMap.containsKey(day)) {
-								/* for (Schedule studySchedule : studyScheduleMap.get(day)) {
-									out.print("<div class='schedule'>[스터디]스케줄: " + studySchedule.getTitle() + "</div>");
+								    out.print("<div class='notice'>[강의]공지: " + lectureNotice.getTitle() + "</div>");
 								} */
 							}
 
-							// 공지 출력
-							if (studyNoticeMap.containsKey(day)) {
-								/* for (Notice studyNotice : studyNoticeMap.get(day)) {
-									out.print("<div class='notice'>[스터디]공지: " + studyNotice.getTitle() + "</div>");
+							// 과제 출력
+							if (lectureAssignmentMap.containsKey(day)) {
+								out.println("<div class='dot yellow'></div>"); // 노란색 점
+								/* for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
+								    out.print("<div class='assignment'>[강의]과제: " + lectureAssignment.getTitle() + "</div>");
 								} */
 							}
-							// 과제 출력
+
+							// 스터디 스케줄 출력
+							if (studyScheduleMap.containsKey(day)) {
+								out.println("<div class='dot green'></div>"); // 초록색 점
+								/* for (Schedule studySchedule : studyScheduleMap.get(day)) {
+								    out.print("<div class='schedule'>[스터디]스케줄: " + studySchedule.getTitle() + "</div>");
+								} */
+							}
+
+							// 스터디 공지 출력
+							if (studyNoticeMap.containsKey(day)) {
+								out.println("<div class='dot blue'></div>"); // 파란색 점
+								/* for (Notice studyNotice : studyNoticeMap.get(day)) {
+								    out.print("<div class='notice'>[스터디]공지: " + studyNotice.getTitle() + "</div>");
+								} */
+							}
+
+							// 스터디 과제 출력
 							if (studyAssignmentMap.containsKey(day)) {
+								out.println("<div class='dot violet'></div>"); // 보라색 점
 								/* for (Assignment studyAssignment : studyAssignmentMap.get(day)) {
-									out.print("<div class='assignment'>[스터디]과제: " + studyAssignment.getTitle() + "</div>");
+								    out.print("<div class='assignment'>[스터디]과제: " + studyAssignment.getTitle() + "</div>");
 								} */
 							}
 

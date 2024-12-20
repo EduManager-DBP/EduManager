@@ -1,5 +1,4 @@
-body,
-html {
+body, html {
 	height: 100%;
 	width: 100%;
 	margin: 0;
@@ -34,7 +33,6 @@ a {
 	font-size: 18px;
 }
 
-
 table {
 	margin-top: 30px;
 	border-collapse: collapse;
@@ -43,8 +41,7 @@ table {
 	/* Shadow effect */
 }
 
-th,
-td {
+th, td {
 	border: 1px solid #DADADA;
 	border-collapse: collapse;
 }
@@ -106,7 +103,6 @@ td {
 	width: 12px;
 	margin-right: 20px;
 	cursor: pointer;
-
 }
 
 #nextMonthIcon {
@@ -125,23 +121,18 @@ td {
 	border-radius: 30px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 	/* Shadow effect */
-
 }
 
 #body {
-
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-
 }
 
 .ScheduleText {
 	font-size: 25px;
 	font-weight: 600;
 	margin-bottom: 15px;
-
-
 }
 
 #schedule {
@@ -163,7 +154,6 @@ td {
 #assignment {
 	margin: auto 0;
 	/* 수직 중앙 정렬 */
-
 }
 
 .assignment-list {
@@ -181,7 +171,6 @@ td {
 	/* li 요소의 기본 padding 제거 */
 	margin-bottom: 10px;
 	font-size: 18px;
-
 }
 
 .todaySchedule-list {
@@ -199,14 +188,46 @@ td {
 	/* li 요소의 기본 padding 제거 */
 	margin-bottom: 10px;
 	font-size: 18px;
-
 }
 
+.dot {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
 
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.indigo {
+    background-color: indigo;
+}
+
+.violet {
+    background-color: violet;
+}
 .list1 {
 	background-color: #FFFAC8;
 	border-radius: 10px;
-
 }
 
 .list2 {
