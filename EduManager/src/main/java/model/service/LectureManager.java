@@ -241,6 +241,10 @@ public class LectureManager {
     public List<Assignment> findAssignmentsByLectureId(int lectureId) {
         return assignmentDao.findAssignmentsByLectureId(lectureId);
     }
+    
+    public int getAvailableSeatsByLectureId(long lectureId) {
+        return lectureDao.getAvailableSeatsByLectureId(lectureId);
+    }
 
 }
 
