@@ -3,106 +3,114 @@ package model.domain;
 import java.time.LocalDate;
 
 public class Assignment {
-    private int id;
-    private String title;
-    private String description;
-    private LocalDate dueDate;
-    private LocalDate createat;
-    private String textFile;
-    private int lectureId;
-    private int studyId;
+	private int id;
+	private String title;
+	private String description;
+	private LocalDate dueDate;
+	private LocalDate createat;
+	private String textFile;
+	private int lectureId;
+	private int studyId;
+	private String lectureName;
 
-    
-    public Assignment(){}
+	public String getLectureName() {
+		return lectureName;
+	}
 
-    public Assignment(int id, String title, String description, LocalDate dueDate, LocalDate createat, String textFile,
-            int lectureId) {
-        super();
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.createat = createat;
-        this.textFile = textFile;
-        this.lectureId = lectureId;
-    }
+	public void setLectureName(String lectureName) {
+		this.lectureName = lectureName;
+	}
 
+	public Assignment() {
+	}
 
-    public int getId() {
-        return id;
-    }
+	public Assignment(int id, String title, String description, LocalDate dueDate, LocalDate createat, String textFile,
+			int lectureId) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.createat = createat;
+		this.textFile = textFile;
+		this.lectureId = lectureId;
+	}
 
+	public Assignment(int id, String title, String description, LocalDate dueDate, LocalDate createat, String textFile,
+			int lectureId, int studyId, String lectureName) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.createat = createat;
+		this.textFile = textFile;
+		this.lectureId = lectureId;
+		this.studyId = studyId;
+		this.lectureName = lectureName;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getDescription() {
+		return description;
+	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
 
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public LocalDate getCreateat() {
+		return createat;
+	}
 
+	public void setCreateat(LocalDate createat) {
+		this.createat = createat;
+	}
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+	public String getTextFile() {
+		return textFile;
+	}
 
+	public void setTextFile(String textFile) {
+		this.textFile = textFile;
+	}
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
+	public int getLectureId() {
+		return lectureId;
+	}
 
+	public void setLectureId(int lectureId) {
+		this.lectureId = lectureId;
+	}
 
-    public LocalDate getCreateat() {
-        return createat;
-    }
-
-
-    public void setCreateat(LocalDate createat) {
-        this.createat = createat;
-    }
-
-
-    public String getTextFile() {
-        return textFile;
-    }
-
-
-    public void setTextFile(String textFile) {
-        this.textFile = textFile;
-    }
-
-
-    public int getLectureId() {
-        return lectureId;
-    }
-
-
-    public void setLectureId(int lectureId) {
-        this.lectureId = lectureId;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Assignment [id=" + id + ", title=" + title + ", description=" + description + ", dueDate=" + dueDate
-                + ", createat=" + createat + ", textFile=" + textFile + ", lectureId=" + lectureId + "]";
-    }
+	@Override
+	public String toString() {
+		return "Assignment [id=" + id + ", title=" + title + ", description=" + description + ", dueDate=" + dueDate
+				+ ", createat=" + createat + ", textFile=" + textFile + ", lectureId=" + lectureId + "]";
+	}
 
 	public int getStudyId() {
 		return studyId;
@@ -111,6 +119,5 @@ public class Assignment {
 	public void setStudyId(int studyId) {
 		this.studyId = studyId;
 	}
-    
 
 }
