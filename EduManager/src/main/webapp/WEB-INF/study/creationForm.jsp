@@ -57,22 +57,24 @@
 				<!-- 스타일은 추후에 만질예정-->
 				<section id="schedule" class="study" style="display: inline-block">
 					<span>정기 모임 요일</span><span class="required">*</span><br />
-							<label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="MONDAY" onclick="updateDayStyle(this)"> 월
-							</label > <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="TUESDAY" onclick="updateDayStyle(this)"> 화
-							</label> <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="WEDNESDAY" onclick="updateDayStyle(this)"> 수
-							</label> <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="THURSDAY" onclick="updateDayStyle(this)"> 목
-							</label> <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="FRIDAY" onclick="updateDayStyle(this)"> 금
-							</label> <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="SATURDAY" onclick="updateDayStyle(this)"> 토
-							</label> <label class="category"> <input type="checkbox" name="dayOfWeek"
-								value="SUNDAY" onclick="updateDayStyle(this)"> 일
+					<article class="schedule">
+							<label> <input type="checkbox" name="dayOfWeek"
+								value="MONDAY"> 월
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="TUESDAY"> 화
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="WEDNESDAY"> 수
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="THURSDAY"> 목
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="FRIDAY"> 금
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="SATURDAY"> 토
+							</label> <label> <input type="checkbox" name="dayOfWeek"
+								value="SUNDAY"> 일
 							</label>
 
+					</article>
 				</section>
 				<section>
 					<button id="submit">스터디 그룹 만들기</button>
@@ -84,30 +86,15 @@
 	</div>
 </body>
 <script>
-function updateCategoryStyle(selectedInput) {
-    // '카테고리' 라벨 그룹 내에서만 선택된 클래스 제거
-    const categorySection = selectedInput.closest('.study');
-    const labels = categorySection.querySelectorAll('.category');
+function updateCategoryStyle(selectedLabel) {
+    // 모든 라벨에서 선택된 클래스 제거
+    const labels = document.querySelectorAll('.category');
     labels.forEach(label => {
         label.classList.remove('selected-category');
     });
 
     // 선택된 라벨에만 클래스 추가
-    const label = selectedInput.closest('label');
-    label.classList.add('selected-category');
+    selectedLabel.classList.add('selected-category');
 }
-
-
-function updateDayStyle(selectedInput) {
-    const label = selectedInput.closest('label');
-
-    // 체크박스가 선택된 상태라면 클래스 추가, 아니면 제거
-    if (selectedInput.checked) {
-        label.classList.add('selected-category');
-    } else {
-        label.classList.remove('selected-category');
-    }
-}
-
 </script>
 </html>

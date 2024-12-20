@@ -168,11 +168,11 @@ select {
     justify-content: center; /* 수평 중앙 정렬 */
     align-items: center; /* 수직 중앙 정렬 */
 	padding: 0 10px;
-	min-width: 30px;
+	min-width: fit-content;
 }
 
 /* 선택된 라벨 스타일 */
-.category.selected-category , .categoy.selected-day{
+.category.selected-category {
 	color: #fff;
 	background-color: #1E2A7C;
 }

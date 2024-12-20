@@ -15,6 +15,45 @@ public class StudyScheduleDao {
 		jdbcUtil = new JDBCUtil();
 	}
 
+	// 스케줄 조회 by 날짜 (년, 월)
+	public List<Schedule> findSchedulesByDate(int year, int month) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT ls.studyscheduleid AS scheduleId, ");
+		query.append("ls.startTime, ls.endTime, ls.STUDYGROUPID, ls.startDate, ");
+		query.append("ls.type, ls.title, l.name AS lectureName ");
+		query.append("FROM studyschedule ls ");
+		query.append("LEFT JOIN studygroup l ON ls.STUDYGROUPID = l.STUDYGROUPID ");
+		query.append("WHERE EXTRACT(YEAR FROM ls.startDate) = ? ");
+		query.append("AND EXTRACT(MONTH FROM ls.startDate) = ? ");
+		query.append("ORDER BY ls.startDate, ls.startTime");
+
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
+		List<Schedule> schedules = new ArrayList<>();
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while (rs.next()) {
+				Schedule schedule = new Schedule();
+				schedule.setScheduleId(rs.getInt("scheduleId"));
+				schedule.setStartTime(rs.getTime("startTime").toLocalTime());
+				schedule.setEndTime(rs.getTime("endTime").toLocalTime());
+				schedule.setLectureId(rs.getLong("STUDYGROUPID"));
+				schedule.setStartDate(rs.getDate("startDate").toLocalDate());
+				schedule.setType(rs.getString("type"));
+				schedule.setTitle(rs.getString("title"));
+				schedule.setLectureName(rs.getString("lectureName")); // Lecture Name 추가
+
+				schedules.add(schedule);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+
+		return schedules;
+	}
+
 	// 스케줄 생성
 	public int createSchedule(Schedule schedule) {
 		StringBuffer query = new StringBuffer();
@@ -67,9 +106,9 @@ public class StudyScheduleDao {
 				schedule = new Schedule();
 				schedule.setScheduleId(rs.getInt("studyscheduleid"));
 				schedule.setDayOfWeek(rs.getString("dayofweek"));
-	             // starttime과 endtime에 대한 null 체크
-                schedule.setStartTime(rs.getTime("starttime") != null ? rs.getTime("starttime").toLocalTime() : null);
-                schedule.setEndTime(rs.getTime("endtime") != null ? rs.getTime("endtime").toLocalTime() : null);
+				// starttime과 endtime에 대한 null 체크
+				schedule.setStartTime(rs.getTime("starttime") != null ? rs.getTime("starttime").toLocalTime() : null);
+				schedule.setEndTime(rs.getTime("endtime") != null ? rs.getTime("endtime").toLocalTime() : null);
 
 				schedule.setFrequency(rs.getString("frequency"));
 				schedule.setStudyGroupId(rs.getInt("studygroupid"));

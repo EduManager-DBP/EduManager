@@ -1,56 +1,64 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
-	type="text/css">
+   type="text/css">
 <script src="<c:url value='/js/study_calendar.js' />"></script>
 <title>스터디 상세보기</title>
 </head>
 <body>
-	<jsp:include page="../navigation/navigation.jsp" />
+   <jsp:include page="../navigation/navigation.jsp" />
 
-	<div class="study-container">
-		<div class="study-detail">
-			<h2 class="study-title">스터디 상세보기</h2>
-			
-			<c:if test="${isLeader}">
-				<a class="complete-button" href="<c:url value="/study/update">
-				<c:param name="studyId" value="${studyInfo.studyGroupId}" />
-								</c:url>">스터디 정보 수정하기</a>
-			</c:if>
-		
-			<div class="study-info-box"></div>
-			<table class="study-location">
-				<tr class="icon">
-					<td class="location-icon"></td>
-					<td class="location-inform">${studyInfo.place}호</td>
-				</tr>
-				<tr class="icon">
-					<td class="time-icon"></td>
-					<td class="location-inform">진행중...</td>
-				</tr>
-			</table>
-			<div class="team-members-box">
-				<div class="team-header">
-					<img src="<c:url value='/images/members.png' />" alt="members" 
-					style="height: 10px; margin-right: 5px"/>
-					<span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
-				</div>
-				<ul class="member-list">
-					<li class="member-item">
-						<span class="member-name">${studyInfo.leaderName}</span>
-						<img src="<c:url value='/images/mdi_crown.png' />" alt="leader" 
-					style="height: 15px; margin-left: 5px"/> 
-					</li>
-					<c:forEach var="member" items="${members}">
-						<li class="member-item">
-							<span class="member-name">${member}</span>
+   <div class="study-container">
+      <div class="study-detail">
+         <h2 class="study-title">스터디 상세보기</h2>
+         
+            
+         
+         <c:if test="${isLeader}">
+            <a class="complete-button" href="<c:url value="/study/update">
+            <c:param name="studyId" value="${studyInfo.studyGroupId}" />
+                        </c:url>">스터디 정보 수정하기</a>
+         </c:if>
+      
+      
+         <div class="study-info-box"></div>
+         <table class="study-location">
+            <tr class="icon">
+               <td class="location-icon"></td>
+               <td class="location-inform">${studyInfo.place}호</td>
+            </tr>
+            <tr class="icon">
+               <td class="time-icon"></td>
+               <td class="location-inform">진행중...</td>
+            </tr>
+         </table>
+         <div class="team-members-box">
+            <div class="team-header">
+               <img src="<c:url value='/images/members.png' />" alt="members" 
+               style="height: 10px; margin-right: 5px"/>
+               <span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
+            </div>
+            <ul class="member-list">
+               <li class="member-item">
+                  <span class="member-name">${studyInfo.leaderName}</span>
+                  <img src="<c:url value='/images/mdi_crown.png' />" alt="leader" 
+               style="height: 15px; margin-left: 5px"/> 
+               </li>
+               <c:forEach var="member" items="${members}">
+                  <li class="member-item">
+                     <span class="member-name">${member}</span>
+                  </li>
+               </c:forEach>
+            </ul>
+         </div>
+      </div>
 
 						</li>
 					</c:forEach>
