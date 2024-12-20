@@ -13,7 +13,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">강의 수강 신청</div>
+		<div class="subTitle">강의 수강신청</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
@@ -43,7 +43,7 @@
 								<form action="<c:url value='/lecture/like' />" method="post"
 									id="likeForm">
 									<input type="hidden" name="lectureId" value="${lectureId}" />
-									<input type="hidden" name="memberId" value="${userId}" /> 
+									<input type="hidden" name="memberId" value="${userId}" />
 									<c:choose>
 										<c:when test="${isLiked}">
 											<img src="<c:url value='/images/likeButton.svg' />"
@@ -64,7 +64,6 @@
 						</c:when>
 					</c:choose>
 					<div>
-
 						<form action="<c:url value='/lecture/join' />" method="post"
 							id="lectureRequestForm">
 							<input type="hidden" name="lectureId" value="${lectureId}" /> <input
@@ -75,13 +74,20 @@
 										<c:when test="${!isInclude}">
 											<c:choose>
 												<c:when test="${!isConflict}">
-
-													<input type="button" class="applyButton" value="수강신청하기"
-														onclick="document.getElementById('lectureRequestForm').submit();">
+													<c:choose>
+														<c:when test="${availableSeats > 0}">
+															<input type="button" class="applyButton" value="수강신청하기"
+																onclick="document.getElementById('lectureRequestForm').submit();" />
+														</c:when>
+														<c:otherwise>
+															<input type="button" class="applyButton" value="수강신청하기"
+																onclick="alert('정원을 초과했습니다!');" />
+														</c:otherwise>
+													</c:choose>
 												</c:when>
 												<c:otherwise>
 													<input type="button" class="applyButton" value="수강신청하기"
-														onclick="alert('수강중인 강의와 강의 시간이 겹칩니다!')">
+														onclick="alert('수강중인 강의와 강의 시간이 겹칩니다!');" />
 												</c:otherwise>
 											</c:choose>
 										</c:when>
@@ -92,6 +98,7 @@
 									</c:choose>
 								</c:when>
 							</c:choose>
+
 						</form>
 					</div>
 				</div>
