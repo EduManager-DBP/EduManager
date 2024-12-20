@@ -75,6 +75,14 @@ public class StudyManager {
     public List<Notice> findNoticesByStudyIdAndDueDate(int studyId, LocalDate createdAt) {
     	return noticeDao.findNoticesByStudyIdAndDueDate(studyId, createdAt);
     }
+    
+    public List<Notice> findNoticesBystudygroupid(int studygroupid) {
+        return noticeDao.findNoticesBystudygroupid(studygroupid);
+    }
+    
+    public List<Notice> searchNotices(int studygroupid, String searchParam) {
+        return noticeDao.searchNotices(studygroupid, searchParam);
+    }
     //스터디 일정 목록 조회
     public List<Schedule> findSchedulesByFilters(long studygroupid, LocalDate startDate, String type, String dayOfWeek) {
     	return scheduleDao.findSchedulesByFilters(studygroupid, startDate, type, dayOfWeek);
@@ -90,6 +98,10 @@ public class StudyManager {
     //스터디 멤버 조회
     public List<String> findStudyMembers(int studyGruopId) throws SQLException {
     	return studyDao.findStudyMembers(studyGruopId);
+    }
+    
+    public List<Assignment> findAssignmentsByStudyId(int studyId) {
+        return assignmentDao.findAssignmentsByStudyId(studyId);
     }
     
 }

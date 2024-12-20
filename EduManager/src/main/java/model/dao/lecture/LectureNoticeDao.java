@@ -177,6 +177,52 @@ public class LectureNoticeDao {
 		return notices;
 	}
 
+	public List<Notice> searchNotices(int lectureId, String searchParam) {
+	    StringBuffer query = new StringBuffer();
+	    query.append("SELECT lecturenoticeid, title, description, createat ");
+	    query.append("FROM lecturenotice ");
+	    query.append("WHERE lectureid = ? ");
+
+	    List<Object> params = new ArrayList<>();
+	    params.add(lectureId);
+
+	    if (searchParam != null && !searchParam.trim().isEmpty()) {
+	        query.append("AND (title LIKE ? OR description LIKE ?) ");
+	        params.add("%" + searchParam + "%"); // 제목 검색 조건
+	        params.add("%" + searchParam + "%"); // 내용 검색 조건
+	    }
+
+	    jdbcUtil.setSqlAndParameters(query.toString(), params.toArray()); // 매개변수 전달
+
+	    List<Notice> notices = new ArrayList<>();
+	    try {
+	        ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+	        while (rs.next()) {
+	            Notice notice = new Notice();
+	            notice.setId(rs.getInt("lecturenoticeid"));
+	            notice.setTitle(rs.getString("title"));
+	            notice.setDescription(rs.getString("description"));
+	            notice.setLectureId(lectureId);
+
+	            Date sqlDate = rs.getDate("createat");
+	            if (sqlDate != null) {
+	                LocalDate localDate = sqlDate.toLocalDate();
+	                notice.setCreateat(localDate);
+	            }
+
+	            notices.add(notice); // 리스트에 공지 추가
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+	    }
+
+	    return notices;
+	}
+
+	  
+	
 	// 공지 삭제
 	public void deleteNoticeById(int noticeId) {
 		StringBuffer query = new StringBuffer();

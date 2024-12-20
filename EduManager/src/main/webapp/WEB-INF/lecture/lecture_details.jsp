@@ -22,14 +22,15 @@
 				<a class="complete-button"
 					href="<c:url value="/lecture/update">
 				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
-								</c:url>">강의 정보 수정하기</a>
+								</c:url>">강의
+					정보 수정하기</a>
 			</c:if>
 
 
 			<div class="study-info-box"></div>
 
-			<div id="teacher_name">${lectureInfo.teacherName} 강사님</div>
-	
+			<div id="teacher_name">${lectureInfo.teacherName}강사님</div>
+
 			<table class="study-location">
 				<tr class="icon">
 					<td><img src="<c:url value='/images/phoneIcon.svg"' />"
@@ -163,7 +164,9 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">공지사항</div>
-						<a href="<c:url value='/lecture/listNotice' />" class="more-link">더보기</a>
+						<a
+							href="<c:url value='/lecture/listNotice'/>?groupId=${lectureInfo.lectureId}"
+							class="more-link"> 더보기 </a>
 					</div>
 					<div class="important-notice">
 						<li>아주아주아주아주아주아주 중요한 공지</li>
@@ -177,8 +180,9 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">과제</div>
-						<a href="<c:url value='/lecture/listAssignment' />"
-							class="more-link">더보기</a>
+						<a
+							href="<c:url value='/lecture/listAssignment'/>?groupId=${lectureInfo.lectureId}"
+							class="more-link"> 더보기 </a>
 					</div>
 					<div class="important-notice">
 						<li>토익 필수 영문법 23~36p</li>

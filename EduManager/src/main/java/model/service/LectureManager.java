@@ -206,6 +206,7 @@ public class LectureManager {
     public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt){
     	return noticeDao.findNoticesByLectureIdAndDate(lectureId, createdAt);
     }
+    
     //스터디 일정 목록 조회
     public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type, String dayOfWeek) {
     	return scheduleDao.findSchedulesByFilters(lectureId, startDate, type, dayOfWeek);
@@ -227,6 +228,24 @@ public class LectureManager {
     public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
     	return lectureDao.findMonthSchedule(lectureId, month, year);
 
+    }
+
+    public List<Notice> findNoticesByLectureId(int lectureId) {
+        return  noticeDao.findNoticesByLectureId(lectureId);
+    }
+    
+    public List<Notice> searchNotices(int lectureId, String searchParam) {
+        return noticeDao.searchNotices(lectureId, searchParam);
+    }
+    
+    //월 단위 일정 유무 확인.
+    public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
+    	return lectureDao.findMonthSchedule(lectureId, month, year);
+
+    }
+    
+    public List<Assignment> findAssignmentsByLectureId(int lectureId) {
+        return assignmentDao.findAssignmentsByLectureId(lectureId);
     }
 
 }
