@@ -16,13 +16,15 @@ int currentYear = (int)request.getAttribute("year");
 int currentMonth = (int)request.getAttribute("month"); // 0부터 시작 (0 = 1월)
 int selectedDay = (int)request.getAttribute("selectedDay");
 
-// 이전/다음 달 이동 시 파라미터 처리
+System.out.println("DEBUG: Year = " + currentYear + ", Month = " + currentMonth + ", Selected Day = " + selectedDay);
+
+/* // 이전/다음 달 이동 시 파라미터 처리
 String yearParam = request.getParameter("year");
 String monthParam = request.getParameter("month");
 if (yearParam != null && monthParam != null) {
 	currentYear = Integer.parseInt(yearParam);
 	currentMonth = Integer.parseInt(monthParam) - 1; // 0부터 시작하는 월로 변환
-}
+} */
 
 // 해당 월의 총 일수와 시작 요일 계산
 calendar.set(currentYear, currentMonth, 1);
@@ -31,9 +33,10 @@ int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 
 java.util.Calendar now = java.util.Calendar.getInstance(); // 현재 날짜 다시 가져오기
 int todayYear = now.get(java.util.Calendar.YEAR);
-int todayMonth = now.get(java.util.Calendar.MONTH);
+int todayMonth = now.get(java.util.Calendar.MONTH) + 1;
 int todayDate = now.get(java.util.Calendar.DATE);
 
+System.out.println("DEBUG: todayYear = " + todayYear + ", todayMonth = " + todayMonth + ", todayDate = " + todayDate);
 
 
 int day = 1;
@@ -75,23 +78,27 @@ for (Assignment assignment : assignmentEntries) {
 <script>
 	// 이전/다음 달 이동 함수
 	function changeMonth(offset) {
-		const currentYear = parseInt(document.getElementById("year").value);
-		const currentMonth = parseInt(document.getElementById("month").value);
-		let newYear = currentYear;
-		let newMonth = currentMonth + offset;
+		    const currentYear = parseInt(document.getElementById("year").value);
+		    const currentMonth = parseInt(document.getElementById("month").value) - 1; // Convert to 0-based index for JavaScript
+		    let newYear = currentYear;
+		    let newMonth = currentMonth + offset;
 
-		if (newMonth < 0) { // 이전 연도로 이동
-			newMonth = 11;
-			newYear--;
-		} else if (newMonth > 11) { // 다음 연도로 이동
-			newMonth = 0;
-			newYear++;
-		}
+		    if (newMonth < 0) { // Move to the previous year
+		        newMonth = 11;
+		        newYear--;
+		    } else if (newMonth > 11) { // Move to the next year
+		        newMonth = 0;
+		        newYear++;
+		    }
 
-		// 폼 데이터 설정
-		document.getElementById("year").value = newYear;
-		document.getElementById("month").value = newMonth + 1;
-		document.getElementById("calendarForm").submit();
+		    // Log updated values for debugging
+		    console.log('Updated Year: ${newYear}, Updated Month: ${newMonth + 1}');
+
+		    // Update form values and submit
+		    document.getElementById("year").value = newYear;
+		    document.getElementById("month").value = newMonth + 1; // Convert back to 1-based index for server
+		    document.getElementById("calendarForm").submit();
+		
 	}
 
 	// 날짜 클릭 시 서버로 전달
@@ -120,7 +127,7 @@ for (Assignment assignment : assignmentEntries) {
 						<%
 						for (Schedule schedule : scheduleEntries) {
 							if (schedule.getStartDate().getYear() == currentYear
-							&& schedule.getStartDate().getMonthValue() == (currentMonth + 1)
+							&& schedule.getStartDate().getMonthValue() == (currentMonth)
 							&& schedule.getStartDate().getDayOfMonth() == selectedDay) {
 						%>
 						<li class="todaySchedules list1"><%=schedule.getLectureName()%>
@@ -138,7 +145,7 @@ for (Assignment assignment : assignmentEntries) {
 						<%
 						for (Assignment assignment : assignmentEntries) {
 							if (assignment.getDueDate().getYear() == currentYear
-							&& assignment.getDueDate().getMonthValue() == (currentMonth + 1)
+							&& assignment.getDueDate().getMonthValue() == (currentMonth)
 							&& assignment.getDueDate().getDayOfMonth() == selectedDay) {
 						%>
 						<li class="assignments list2">[<%=assignment.getLectureName()%>]
@@ -155,7 +162,7 @@ for (Assignment assignment : assignmentEntries) {
 					<!-- 현재 연도와 월을 숨겨서 JavaScript에서 사용 -->
 					<img src="<c:url value='/images/previousMonth.svg' />"
 						id="previousMonthIcon" onclick="changeMonth(-1)" /> <span
-						class="month"><%=currentMonth + 1%>월</span> <img
+						class="month"><%=currentMonth%>월</span> <img
 						src="<c:url value='/images/nextMonth.svg' />" id="nextMonthIcon"
 						onclick="changeMonth(1)" /> <span class="year"><%=currentYear%>년</span>
 				</div>

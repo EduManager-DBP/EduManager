@@ -43,6 +43,8 @@ public class MainController implements Controller {
 		int selectedDay = (selectedDayParam != null && !selectedDayParam.isEmpty()) ? Integer.parseInt(selectedDayParam)
 				: currentDate.getDayOfMonth();
 
+		System.out.println("DEBUG: Year = " + year + ", Month = " + month + ", Selected Day = " + selectedDay);
+
 		// LectureManager를 통해 데이터 가져오기
 		LectureManager manager = LectureManager.getInstance();
 		List<Schedule> scheduleEntries = manager.getScheduleCalendarList(year, month);// LectureManager를 통해 데이터 가져오기
