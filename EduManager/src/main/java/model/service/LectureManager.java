@@ -229,4 +229,12 @@ public class LectureManager {
 
     }
 
+    //공지 목록조회
+	public List<Notice> findNoticesByLectureId(int lectureId) {
+		return noticeDao.findNoticesByLectureId(lectureId);
+	}
+    //과제 목록조회
+	public List<Assignment> findAssignmentsByLectureId(int lectureId) {
+		return assignmentDao.findAssignmentsByLectureId(lectureId);
+	}
 }

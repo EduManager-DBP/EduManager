@@ -16,7 +16,7 @@ public class LectureAssignmentDao {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
-	// 강의 아이디로 강의 과제 목록 조회
+	
 	public List<Assignment> findAssignmentsByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT lectureassignmentid, duedate, title, description, createat, textfile, lectureid ");
