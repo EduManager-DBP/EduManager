@@ -17,8 +17,8 @@
 		<!-- 검색창 -->
 		 
          <div class="search">
-            <form action="<c:url value='/study/searchListNotice' />"
-               method="post" id="searchStudyNoticeForm">
+            <form action="<c:url value='/lecture/searchListNotice' />"
+               method="post" id="searchLectureNoticeForm">
                <input type="hidden" name="groupId" value="${groupId}" />
                <c:choose>
                   <c:when test="${searchParam == null}">
@@ -30,7 +30,7 @@
                </c:choose>
                
                <img src="<c:url value='/images/searchIcon.svg' />"
-                  onclick="document.getElementById('searchStudyNoticeForm').submit();">
+                  onclick="document.getElementById('searchLectureNoticeForm').submit();">
             </form>
 
          </div>
@@ -47,7 +47,7 @@
 			</thead>
 			<tbody>
 				<!-- JSTL 반복문으로 리스트 출력 -->
-				<c:forEach var="notice" items="${studyGroupNoticeList}">
+				<c:forEach var="notice" items="${lectureNoticeList}">
 					<tr class="notice-row">
 						<td class="title">${notice.title}</td>
 						<td class="description">${notice.description}</td>
