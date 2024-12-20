@@ -36,7 +36,6 @@ public class ViewStudyGroupController implements Controller {
 
         List<StudyGroupReview> groupReviewList = manager.getReviewsByGroupId(groupId);
         
-
         // 강의 상세 정보 출력 (디버깅용)
         System.out.println("그룹 ID: " + group.getStudyGroupId()+
                            ", 그룹 이름: " + group.getName() +
@@ -67,6 +66,9 @@ public class ViewStudyGroupController implements Controller {
         System.out.println("요청 상태: "+ requestStatus);
         request.setAttribute("requestStatus", requestStatus);
    
+        int studyAvailableSeats = manager.getAvailableSeatsByStudyGroupId(groupId);
+        request.setAttribute("studyAvailableSeats",studyAvailableSeats);
+        
         // 강의 상세 페이지로 이동
         return "/study/study_overview.jsp";
     }
