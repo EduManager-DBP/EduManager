@@ -1,5 +1,6 @@
 package controller.lecture;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,17 +55,27 @@ public class CreateLectureController implements Controller {
 				Integer.parseInt(request.getParameter("level")), request.getParameter("description"), teacherId, // String
 				Integer.parseInt(request.getParameter("lectureRoom"))// String -> Integer 변환
 		);
-
+		
 		try {
 			LectureManager manager = LectureManager.getInstance();
+
+			int scheduleCount = Integer.parseInt(request.getParameter("scheduleCount"));//처음에 value를 안정해줌. jsp에서 오류계속 났었음.
+			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
+
+				LocalTime startTime = LocalTime.parse(request.getParameter("schedule[" + i + "][startTime]"));
+				LocalTime endTime = LocalTime.parse(request.getParameter("schedule[" + i + "][endTime]"));
+				
+				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
+				Boolean isLectureConflict = manager.isLectureConflict(teacherId, dayOfWeek, startTime, endTime);
+						
+				if (isLectureConflict) {
+				    throw new Exception("The lecture schedule conflicts with an existing lecture schedule.");
+				}	
+			}
 			lecture = manager.createLecture(lecture);
 			log.debug("Create Lecture : {}", lecture.getLectureId());
-//
-			int scheduleCount = Integer.parseInt(request.getParameter("scheduleCount"));//처음에 value를 안정해줌. jsp에서 오류계속 났었음.
-//			// 일정의 개수
-//			log.debug("scheduleCount : {}", scheduleCount);
 			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
-				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
+				
 //				log.debug("dayOfWeek : {}", dayOfWeek);
 
 				LocalTime startTime = LocalTime.parse(request.getParameter("schedule[" + i + "][startTime]"));
@@ -74,6 +86,9 @@ public class CreateLectureController implements Controller {
 //				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, 19L, "regular",
 //						null);
 //				log.debug("Schedule{} : {}", i, schedule);
+				
+				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
+				
 				
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, lecture.getLectureId(), "regular",
 						null);
@@ -87,12 +102,19 @@ public class CreateLectureController implements Controller {
 
 		 return "redirect:/lecture/list";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
-			request.setAttribute("creationFailed", true);
+			
+			request.getSession().setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
 			System.out.print(e);
-
-			request.setAttribute("lecture", lecture);
-			return "redirect:/member/login/form";
+			/*
+			 * MemberManager memberManager = MemberManager.getInstance(); String teacherName
+			 * = memberManager.findName(teacherId);
+			 * 
+			 * request.setAttribute("teacherName", teacherName);
+			 * 
+			 * request.setAttribute("teacherId", teacherId);
+			 */
+			return "redirect:/lecture/create";
 		}
 	}
 }
