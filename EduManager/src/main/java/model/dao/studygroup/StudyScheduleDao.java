@@ -124,7 +124,6 @@ public class StudyScheduleDao {
 		}
 		return null;
 	}
-
 	// 스케줄 목록 조회 by StudyGroup ID
 	public List<Schedule> findSchedulesByStudyId(long studygroupid, String type) {
 		StringBuffer query = new StringBuffer();

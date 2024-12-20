@@ -2,6 +2,7 @@ package model.dao.studygroup;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -695,6 +696,43 @@ public StudyGroup findGroupInfo(long groupId) {
         
         jdbcUtil.close();
         return members;
+    }
+
+
+
+  //스터디 생성 중복확인
+    public boolean isStudyConflict(String stuId, String newDayOfWeek) throws SQLException {
+    	 // SQL 쿼리
+        String sql = """
+            SELECT 
+                CASE 
+                    WHEN EXISTS (
+                        SELECT 1
+                        FROM STUDYGROUPAPPLICATION sga
+                        JOIN STUDYSCHEDULE ss ON sga.STUDYGROUPID = ss.STUDYGROUPID
+                        WHERE sga.STUID = ?
+                          AND sga.STATUS = '수락'
+                          AND ss.DAYOFWEEK = ?
+                          AND ss.TYPE = 'regular'
+                    ) THEN 'true'
+                    ELSE 'false'
+                END AS is_overlap
+            FROM DUAL
+        """;
+
+        Object[] params = new Object[] { stuId, newDayOfWeek};
+        jdbcUtil.setSqlAndParameters(sql, params);
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                String isOverlap = rs.getString("is_overlap");
+                return "true".equals(isOverlap); // 'true'와 비교하여 boolean 값으로 반환
+            }
+            return false; // 결과가 없으면 false 반환
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
     }
 }
 
