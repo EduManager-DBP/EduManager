@@ -14,26 +14,27 @@
 java.util.Calendar calendar = java.util.Calendar.getInstance();
 int currentYear = (int)request.getAttribute("year");
 int currentMonth = (int)request.getAttribute("month"); // 0부터 시작 (0 = 1월)
-int selectedDay = (int)request.getAttribute("selectDay");
+int selectedDay = (int)request.getAttribute("selectedDay");
 
-/* // 이전/다음 달 이동 시 파라미터 처리
+// 이전/다음 달 이동 시 파라미터 처리
 String yearParam = request.getParameter("year");
 String monthParam = request.getParameter("month");
 if (yearParam != null && monthParam != null) {
 	currentYear = Integer.parseInt(yearParam);
 	currentMonth = Integer.parseInt(monthParam) - 1; // 0부터 시작하는 월로 변환
-} */
+}
 
 // 해당 월의 총 일수와 시작 요일 계산
 calendar.set(currentYear, currentMonth, 1);
 int daysInMonth = calendar.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 int firstDayOfWeek = calendar.get(java.util.Calendar.DAY_OF_WEEK);
 
-
 java.util.Calendar now = java.util.Calendar.getInstance(); // 현재 날짜 다시 가져오기
 int todayYear = now.get(java.util.Calendar.YEAR);
 int todayMonth = now.get(java.util.Calendar.MONTH);
 int todayDate = now.get(java.util.Calendar.DATE);
+
+
 
 int day = 1;
 boolean started = false;
@@ -59,13 +60,12 @@ for (Notice notice : noticeEntries) {
 	int dayday = notice.getCreateat().getDayOfMonth();
 	noticeMap.putIfAbsent(dayday, new ArrayList<>());
 	noticeMap.get(dayday).add(notice);
-} 
+}
 for (Assignment assignment : assignmentEntries) {
 	int dayday = assignment.getDueDate().getDayOfMonth();
 	assignmentMap.putIfAbsent(dayday, new ArrayList<>());
 	assignmentMap.get(dayday).add(assignment);
 }
-
 %>
 <html>
 <head>
@@ -93,9 +93,17 @@ for (Assignment assignment : assignmentEntries) {
 		document.getElementById("month").value = newMonth + 1;
 		document.getElementById("calendarForm").submit();
 	}
-	
+
+	// 날짜 클릭 시 서버로 전달
 	function selectDate(day) {
-		
+		const currentYear = parseInt(document.getElementById("year").value);
+		const currentMonth = parseInt(document.getElementById("month").value);
+
+		// 폼 데이터 설정
+		document.getElementById("year").value = newYear;
+		document.getElementById("month").value = newMonth + 1;
+		document.getElementById("selectedDay").value = day;
+		document.getElementById("calendarForm").submit();
 	}
 </script>
 <title>EduManager</title>
@@ -108,16 +116,37 @@ for (Assignment assignment : assignmentEntries) {
 				<div id="todaySchedule">
 					<div class="ScheduleText today">Today Schedule</div>
 					<ul class="todaySchedule-list">
-						<li class="todaySchedules list1">강의명 14:00 ~ 16:00</li>
-						<li class="todaySchedules list2">강의 명 18:00 ~ 20:00</li>
+						<%= request.getAttribute("selectedDay") %>
+						<%
+						for (Schedule schedule : scheduleEntries) {
+							if (schedule.getStartDate().getYear() == currentYear
+							&& schedule.getStartDate().getMonthValue() == (currentMonth + 1)
+							&& schedule.getStartDate().getDayOfMonth() == selectedDay) {
+						%>
+						<li class="todaySchedules list1"><%=schedule.getLectureName()%>
+							- <%=schedule.getTitle()%> (<%=schedule.getStartTime()%> ~ <%=schedule.getEndTime()%>)</li>
+						<%
+						}
+						}
+						%>
 					</ul>
 				</div>
 				<div id="assignment">
 					<div class="ScheduleText assignment">Assignment</div>
 
 					<ul class="assignment-list">
-						<li class="assignments list1">영단어 암기 Day20~23</li>
-						<li class="assignments list2">SQL 30강 문제풀기</li>
+						<%
+						for (Assignment assignment : assignmentEntries) {
+							if (assignment.getDueDate().getYear() == currentYear
+							&& assignment.getDueDate().getMonthValue() == (currentMonth + 1)
+							&& assignment.getDueDate().getDayOfMonth() == selectedDay) {
+						%>
+						<li class="assignments list2">[<%=assignment.getLectureName()%>]
+							<%=assignment.getTitle()%></li>
+						<%
+						}
+						}
+						%>
 					</ul>
 				</div>
 			</div>
@@ -147,7 +176,7 @@ for (Assignment assignment : assignmentEntries) {
 						for (int i = 0; i < 6; i++) { // 최대 6줄 (달력 한 페이지 기준)
 							out.println("<tr>");
 							for (int j = 1; j <= 7; j++) { // 한 주의 7일
-								out.print("<td onclick='selectDay(day)'>");
+								out.print("<td onclick='selectDate(" + day + ")'>");
 								if (!started && j == firstDayOfWeek) {
 							started = true; // 달의 첫 시작점
 								}
@@ -162,24 +191,24 @@ for (Assignment assignment : assignmentEntries) {
 							}
 
 							// 스케줄 출력
-                            if (scheduleMap.containsKey(day)) {
-                                for (Schedule schedule : scheduleMap.get(day)) {
-                                    out.print("<div class='schedule'>스케줄: " + schedule.getTitle() + "</div>");
-                                }
-                            }
-							
-                            // 공지 출력
-                            if (noticeMap.containsKey(day)) {
-                                for (Notice notice : noticeMap.get(day)) {
-                                    out.print("<div class='notice'>공지: " + notice.getTitle() + "</div>");
-                                }
-                            } 
-                            // 과제 출력
-                            if (assignmentMap.containsKey(day)) {
-                                for (Assignment assignment : assignmentMap.get(day)) {
-                                    out.print("<div class='assignment'>과제: " + assignment.getTitle() + "</div>");
-                                }
-                            }
+							if (scheduleMap.containsKey(day)) {
+								for (Schedule schedule : scheduleMap.get(day)) {
+									out.print("<div class='schedule'>스케줄: " + schedule.getTitle() + "</div>");
+								}
+							}
+
+							// 공지 출력
+							if (noticeMap.containsKey(day)) {
+								for (Notice notice : noticeMap.get(day)) {
+									out.print("<div class='notice'>공지: " + notice.getTitle() + "</div>");
+								}
+							}
+							// 과제 출력
+							if (assignmentMap.containsKey(day)) {
+								for (Assignment assignment : assignmentMap.get(day)) {
+									out.print("<div class='assignment'>과제: " + assignment.getTitle() + "</div>");
+								}
+							}
 
 							day++;
 								}
@@ -193,12 +222,13 @@ for (Assignment assignment : assignmentEntries) {
 					</tbody>
 				</table>
 			</div>
+
 			<form id="calendarForm" method="get"
 				action="<c:url value='/main/main' />">
 				<input type="hidden" id="year" name="year" value="<%=currentYear%>" />
-				<input type="hidden" id="month" name="month" value="<%=currentMonth%>" />
-				<input type="hidden" id="selectedDate" name="selectedDate" value-"<%=selectedDay%>"/>
-					
+				<input type="hidden" id="month" name="month"
+					value="<%=currentMonth%>" /> <input type="hidden" id="selectedDay"
+					name="selectedDay" value="<%=selectedDay%>" />
 			</form>
 
 		</div>
