@@ -239,10 +239,7 @@ public class LectureManager {
     }
     
     //월 단위 일정 유무 확인.
-    public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
-    	return lectureDao.findMonthSchedule(lectureId, month, year);
-
-    }
+ 
     
     public List<Assignment> findAssignmentsByLectureId(int lectureId) {
         return assignmentDao.findAssignmentsByLectureId(lectureId);
