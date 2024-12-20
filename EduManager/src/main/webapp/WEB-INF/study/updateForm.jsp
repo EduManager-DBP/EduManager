@@ -1,6 +1,8 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="model.domain.Schedule" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.util.stream.Collectors" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -37,60 +39,79 @@
 					<span>스터디 소개</span><br /> <input type="text" name="description"
 						value="${study.description}" />
 				</section>
-				<section class="study" style="width: 15%;">
-					<span>모집인원</span><span class="required">*</span> <br /> <input
-						type="number" name="capacity" required min="1" max="99" value="${study.capacity}"/>
-				</section>
-
-
+				<div style="display: flex;">
+					<section class="study" style="width: 20%;">
+						<span>스터디 장소</span><br /> <input type="text" name="place" value="${study.place }"/>
+					</section>
+					<section class="study" style="width: 20%;">
+						<span>모집인원</span><span class="required">*</span> <br /> <input
+							type="number" name="capacity" required min="1" max="99" value="${study.capacity}"/>
+					</section>
+				</div>
 				<section class="study">
 					<span>카테고리</span><br />
-					<button type="button" class="category" data-index="1">영어</button>
-					<button type="button" class="category" data-index="2">수학</button>
-					<button type="button" class="category" data-index="3">과학</button>
-					<button type="button" class="category" data-index="4">역사</button>
-					<button type="button" class="category" data-index="5">프로그래밍</button>
-					<button type="button" class="category" data-index="6">영어</button>
-					<button type="button" class="category" data-index="7">수학</button>
-					<button type="button" class="category" data-index="8">과학</button>
-					<button type="button" class="category" data-index="9">역사</button>
-					<button type="button" class="category" data-index="10">프로그래밍</button>
-					<input type="hidden" name="category" id="categories" value="" />
-				</section>
-
-
-				<!-- 정기 수업 일정은 일단 요청 따로 처리 -->
-				<section id="schedule" class="study" style="display: inline-block">
-					<span>정기 모임 일정</span><span class="required">*</span><br />
-					<c:forEach var="schedule" items="${scheduleList}"
-						varStatus="status">
-						<article class="schedule">
-							<span>요일</span> <select class="small"
-								name="schedule[${status.index}][day]" required>
-								<option value="월" ${schedule.dayOfWeek == '월' ? 'selected' : ''}>월</option>
-								<option value="화" ${schedule.dayOfWeek == '화' ? 'selected' : ''}>화</option>
-								<option value="수" ${schedule.dayOfWeek == '수' ? 'selected' : ''}>수</option>
-								<option value="목" ${schedule.dayOfWeek == '목' ? 'selected' : ''}>목</option>
-								<option value="금" ${schedule.dayOfWeek == '금' ? 'selected' : ''}>금</option>
-								<option value="토" ${schedule.dayOfWeek == '토' ? 'selected' : ''}>토</option>
-								<option value="일" ${schedule.dayOfWeek == '일' ? 'selected' : ''}>일</option>
-							</select> <span>시간</span> <input type="time"
-								name="schedule[${status.index}][startTime]"
-								value="${schedule.startTime}" required/> ~ <input type="time"
-								name="schedule[${status.index}][endTime]"
-								value="${schedule.endTime}" required />
-							<button type="button" class="delete_btn"
-								onClick="deleteSchedule(this)">삭제</button>
-							<input id="scheduleId"  type="hidden"
-								value="${schedule.scheduleId}" name="schedule[${status.index}][scheduleId]">
-						</article>
+					<c:forEach var="category" items="${categories}">
+						<label
+							class="category ${category.id == study.category ? 'selected-category' : ''}"
+							onclick="updateCategoryStyle(this)"> <input type="radio"
+							name="category" value="${category.id}"
+							<c:if test="${category.id == study.category}">checked</c:if> />
+							${category.name}
+						</label>
 					</c:forEach>
-					<button type="button" id="plus_btn" onClick="addSchedule()">+</button>
+
 				</section>
+
+				<!-- 스타일은 추후에 만질예정-->
+
+				<section id="schedule" class="study" style="display: inline-block">
+               <span>정기 모임 요일</span><span class="required">*</span><br />
+               <article class="schedule">
+                  <%
+                  // 서버에서 전달된 scheduleList 가져오기
+                  List<Schedule> scheduleList = (List<Schedule>) request.getAttribute("scheduleList");
+                  if (scheduleList == null) {
+                     scheduleList = new ArrayList<>();
+                  }
+
+                  // 요일 리스트 추출
+                  Set<String> selectedDays = scheduleList.stream().map(Schedule::getDayOfWeek) // Schedule 객체의 dayOfWeek 필드 추출
+                        .collect(Collectors.toSet());
+                  %>
+
+                  <label> <input type="checkbox" name="dayOfWeek"
+                     value="MONDAY"
+                     <%= selectedDays.contains("MONDAY") ? "checked" : "" %>>
+                     월
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="TUESDAY"
+                     <%= selectedDays.contains("TUESDAY") ? "checked" : "" %>>
+                     화
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="WEDNESDAY"
+                     <%= selectedDays.contains("WEDNESDAY") ? "checked" : "" %>>
+                     수
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="THURSDAY"
+                     <%= selectedDays.contains("THURSDAY") ? "checked" : "" %>>
+                     목
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="FRIDAY"
+                     <%= selectedDays.contains("FRIDAY") ? "checked" : "" %>>
+                     금
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="SATURDAY"
+                     <%= selectedDays.contains("SATURDAY") ? "checked" : "" %>>
+                     토
+                  </label> <label> <input type="checkbox" name="dayOfWeek"
+                     value="SUNDAY"
+                     <%= selectedDays.contains("SUNDAY") ? "checked" : "" %>>
+                     일
+                  </label>
+               </article>
+            </section>
 
 				<section>
-					<input id="scheduleCountInput" type="hidden"
-						value="${scheduleCount}" name="scheduleCount">
 
 					<button id="submit">스터디 그룹 정보 수정하기</button>
 				</section>
@@ -98,4 +119,16 @@
 		</div>
 	</div>
 </body>
+<script>
+function updateCategoryStyle(selectedLabel) {
+    // 모든 라벨에서 선택된 클래스 제거
+    const labels = document.querySelectorAll('.category');
+    labels.forEach(label => {
+        label.classList.remove('selected-category');
+    });
+
+    // 선택된 라벨에만 클래스 추가
+    selectedLabel.classList.add('selected-category');
+}
+</script>
 </html>

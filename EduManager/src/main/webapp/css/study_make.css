@@ -62,7 +62,9 @@ select {
 	font-family: 'Pretendard';
 	outline: none;
 }
-
+.schedule input[type='checkbox']{
+	height: auto;
+}
 .required {
 	color: #DB1D1D;
 }
@@ -157,4 +159,23 @@ select {
 #submit:hover {
 	color: #fff;
 	background-color: #1E2A7C;
+}
+
+
+/* 기본 스타일 */
+.category {
+  display: inline-flex; /* inline-block 대신 flex 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+	padding: 0 10px;
+	min-width: fit-content;
+}
+
+/* 선택된 라벨 스타일 */
+.category.selected-category {
+	color: #fff;
+	background-color: #1E2A7C;
+}
+.category input{
+	display: none;
 }

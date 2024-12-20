@@ -2,6 +2,8 @@ package controller.study;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.dao.member.InterestCategoryDAO;
 import model.domain.Schedule;
 import model.domain.studyGroup.StudyGroup;
 import model.service.StudyManager;
@@ -29,32 +32,30 @@ public class CreateStudyController implements Controller {
 
 		// GET요청
 		if (request.getMethod().equals("GET")) {
+			InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
+
+			// DB에서 관심 분야 목록을 가져옴
+			List<Map<String, Object>> categories = interestCategoryDAO.getCategories();
+			
+			request.setAttribute("categories", categories);
 			return "/study/creationForm.jsp";
 		}
 
 		// POST요청
 		StudyGroup study = new StudyGroup(0L, request.getParameter("name"), request.getParameter("img"),request.getParameter("description"), Long.parseLong(request.getParameter("capacity")),
 				request.getParameter("category"), null, leaderId);
-	
-
+		study.setPlace(request.getParameter("place"));
+		
 		try {
 			StudyManager manager = StudyManager.getInstance();
 			study = manager.createStudy(study);
 			log.debug("Create Lecture : {}", study.getStudyGroupId());
+			
+			String[] dayOfWeek = request.getParameterValues("dayOfWeek");
 
-			int scheduleCount = Integer.parseInt(request.getParameter("scheduleCount"));//처음에 value를 안정해줌. jsp에서 오류계속 났었음.
-//			// 일정의 개수
-//			log.debug("scheduleCount : {}", scheduleCount);
-			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
-				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
-//				log.debug("dayOfWeek : {}", dayOfWeek);
-
-				LocalTime startTime = LocalTime.parse(request.getParameter("schedule[" + i + "][startTime]"));
-				LocalTime endTime = LocalTime.parse(request.getParameter("schedule[" + i + "][endTime]"));
-//				log.debug("startTime : {} endTime:{}", startTime, endTime);
-				
-				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, 0L, "regular",
-						null);
+			for (int i = 0; i < dayOfWeek.length; i++) { // 각 일정 항목의 값들을 받아오기 String
+				Schedule schedule = new Schedule(dayOfWeek[i], null, null, null, 0L, "regular",
+						"정기모임");
 				schedule.setStudyGroupId(study.getStudyGroupId());
 				schedule.setStartDate(LocalDate.now());
 	         
@@ -64,7 +65,7 @@ public class CreateStudyController implements Controller {
 				log.debug("Create Schedule : {}", scheduleId);
 			}
 
-			return "redirect:/main/main";
+			return "redirect:/study/list";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);

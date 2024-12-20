@@ -6,11 +6,15 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.lecture.CreateLectureAssignmentController;
 import controller.lecture.CreateLectureController;
 import controller.lecture.CreateLectureEnrollmentController;
+import controller.lecture.CreateLectureNoticeController;
 import controller.lecture.CreateLectureReviewController;
+import controller.lecture.CreateLectureScheduleController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
+import controller.lecture.ViewMyLectureController;
 import controller.lecture.ViewMyLectureListController;
 import controller.lecture.ExcludingLectureAndStudyGroupController;
 import controller.lecture.ToggleLectureLikeController;
@@ -38,10 +42,9 @@ import controller.mypage.DeleteAccountController;
 import controller.mypage.EditController;
 import controller.mypage.ViewLikeListController;
 import controller.mypage.ViewMyInfoController;
-
+import controller.mypage.ViewMyPageController;
 import controller.mypage.EditMyInfoController;
 import controller.study.CreateStudyAssignmentController;
-
 import controller.study.CreateStudyController;
 import controller.study.CreateStudyNoticeController;
 import controller.study.CreateStudyScheduleController;
@@ -122,6 +125,14 @@ public class RequestMapping {
         mappings.put("/study/listNotice", new ForwardController("/study/listNotice.jsp"));
         mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
 
+        //내 강의 상세보기
+		mappings.put("/mylecture/view", new ViewMyLectureController());
+
+		//스터디 일정(특정),공지,과제 추가
+        mappings.put("/lecture/addSchedule", new CreateLectureScheduleController());
+        mappings.put("/lecture/addNotice", new CreateLectureNoticeController());
+        mappings.put("/lecture/addAssignment", new CreateLectureAssignmentController());
+		
 		
         // 강의 신청 페이지
         mappings.put("/lecture/over-view", new ViewLectureController());
@@ -133,6 +144,8 @@ public class RequestMapping {
 
         // 강의,스터디 신청
         mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
+        mappings.put("/registration/search", new ExcludingLectureAndStudyGroupController());
+        
 
         // 내 스터디그룹 리스트 보기
         mappings.put("/study/list", new ViewMyStudyListController());
@@ -157,10 +170,11 @@ public class RequestMapping {
         
         //강의 수강 신청
         mappings.put("/lecture/join", new CreateLectureEnrollmentController());
-        
-        
-        mappings.put("/student-mypage", new ForwardController("/mypage/student_mypage.jsp"));
+       
+       //마이페이지 
+        mappings.put("/mypage", new ViewMyPageController());
 
+        
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 

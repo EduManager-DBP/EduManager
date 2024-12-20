@@ -65,7 +65,7 @@
 			<div id="calendarHeader">
 				<span class="year">2024</span> <span class="month"> <img
 					src="<c:url value='/images/previousMonth.svg' />"
-					id="previousMonthIcon" alt="" /> <span>11</span> <img
+					id="previousMonthIcon" alt="" /> <span>11</span>월<img
 					src="<c:url value='/images/nextMonth.svg'  />" id="nextMonthIcon"
 					alt="" />
 				</span>

@@ -6,8 +6,6 @@ import java.util.List;
 
 import model.dao.JDBCUtil;
 import model.domain.Notice;
-import model.domain.Schedule;
-
 import java.time.LocalDate;
 
 public class LectureNoticeDao {
@@ -20,10 +18,10 @@ public class LectureNoticeDao {
 	// 공지 조회 by 날짜 (년, 월)
 	public List<Notice> findNoticesByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("SELECT lecturenoticeid AS id, title, description, createat, lectureId ");
 		query.append("FROM lecturenotice ");
-		query.append("WHERE EXTRACT(YEAR FROM startDate) = ? AND EXTRACT(MONTH FROM startDate) = ? ");
-		query.append("ORDER BY startDate, startTime");
+		query.append("WHERE EXTRACT(YEAR FROM createat) = ? AND EXTRACT(MONTH FROM createat) = ? ");
+		query.append("ORDER BY createat");
 
 		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
 		List<Notice> notices = new ArrayList<>();
@@ -32,10 +30,12 @@ public class LectureNoticeDao {
 			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
 			while (rs.next()) {
 				Notice notice = new Notice();
-				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setId(rs.getInt("id"));
 				notice.setTitle(rs.getString("title"));
 				notice.setDescription(rs.getString("description"));
 				notice.setCreateat(rs.getDate("createat").toLocalDate());
+				notice.setLectureId(rs.getInt("lectureId"));
+
 //				Date sqlDate = rs.getDate("createat");
 //				LocalDate localDate = sqlDate.toLocalDate();
 //				notice.setCreateat(localDate);
@@ -52,13 +52,13 @@ public class LectureNoticeDao {
 	}
 
 	// 공지 생성
-	public void createNotice(int lectureId, String title, String description) {
+	public void createNotice(int lectureId, String title, String description, LocalDate date) {
 		StringBuffer query = new StringBuffer();
 		query.append("INSERT INTO lecturenotice (lecturenoticeid, lectureid, title, description, createat) ");
-		query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, SYSDATE)");
+		query.append("VALUES (SEQ_LECTURE_NOTICE_ID.nextval, ?, ?, ?, ?)");
 
 		// SQL 쿼리와 매개변수 설정
-		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description });
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, title, description, date });
 
 		try {
 			int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
@@ -105,6 +105,42 @@ public class LectureNoticeDao {
 			jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
 		}
 		return null;
+	}
+
+	// 강의 아이디& 공지일로 공지목록 조회
+	public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT lecturenoticeid, title, description, createat ");
+		query.append("FROM lecturenotice ");
+		query.append("WHERE lectureid = ? AND TRUNC(createat) = ?");
+
+		java.sql.Date sqlDueDate = java.sql.Date.valueOf(createdAt);
+
+		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { lectureId, sqlDueDate });
+		List<Notice> notices = new ArrayList<>();
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
+			while (rs.next()) {
+				Notice notice = new Notice();
+				notice.setId(rs.getInt("lecturenoticeid"));
+				notice.setTitle(rs.getString("title"));
+				notice.setDescription(rs.getString("description"));
+				notice.setLectureId(lectureId);
+
+				Date sqlDate = rs.getDate("createat");
+				LocalDate localDate = sqlDate.toLocalDate();
+				notice.setCreateat(localDate);
+
+				notices.add(notice); // 리스트에 공지 추가
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+		}
+
+		return notices;
 	}
 
 	// 강의 아이디로 강의 공지 목록 조회
