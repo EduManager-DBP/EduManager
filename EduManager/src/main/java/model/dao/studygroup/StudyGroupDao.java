@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.swing.JOptionPane;
 
 import model.dao.JDBCUtil;
+import model.domain.lecture.Lecture;
 import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
@@ -215,6 +216,62 @@ public StudyGroup findGroupInfo(long groupId) {
         }
 
         return studyGroupList;
+    }
+    
+    
+    public List<StudyGroup> getStudyGroupsSearch(String stuid, String searchParam) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ic.name AS categoryName, ic.color ");
+        query.append("FROM StudyGroup S ");
+        query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
+        query.append("WHERE S.studyGroupId NOT IN ( ");
+        query.append("    SELECT studyGroupId ");
+        query.append("    FROM StudyGroupApplication ");
+        query.append("    WHERE stuId = ? AND status = '수락' ");
+        query.append(") ");
+        query.append("AND S.leaderId != ? ");
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            query.append("AND (S.name LIKE ? OR ic.name LIKE ?) ");
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(stuid); // 학생 ID
+        params.add(stuid); // 리더 ID (예: ? 자리에 들어갈 값)
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            params.add("%" + searchParam + "%"); // S.name LIKE '%검색어%'
+            params.add("%" + searchParam + "%"); // ic.name LIKE '%검색어%'
+        }
+
+        jdbcUtil.setSqlAndParameters(query.toString(), params.toArray()); // stuid와 searchName 파라미터 전달
+        List<StudyGroup> studyGroupList = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 StudyGroup 객체에 매핑
+                StudyGroup studyGroup = new StudyGroup();
+                studyGroup.setStudyGroupId(rs.getLong("studyGroupId"));
+                studyGroup.setName(rs.getString("name"));
+                studyGroup.setCategory(rs.getString("category"));
+                studyGroup.setCapacity(rs.getInt("capacity"));
+                studyGroup.setImg(rs.getString("img"));
+                studyGroup.setDescription(rs.getString("description"));
+                studyGroup.setCreateAt(rs.getDate("createAt"));
+                studyGroup.setPlace(rs.getString("place"));
+               
+
+                studyGroupList.add(studyGroup);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return studyGroupList; // 결과 반환
     }
     
     public StudyGroupApplication createApplication(String memberId, long studyGroupId) throws SQLException { 
