@@ -18,18 +18,13 @@
 	<div class="study-container">
 		<div class="study-detail">
 			<h2 class="study-title">스터디 상세보기</h2>
-
-
-
+			
 			<c:if test="${isLeader}">
-				<a class="complete-button"
-					href="<c:url value="/study/update">
-            <c:param name="studyId" value="${studyInfo.studyGroupId}" />
-                        </c:url>">스터디
-					정보 수정하기</a>
+				<a class="complete-button" href="<c:url value="/study/update">
+				<c:param name="studyId" value="${studyInfo.studyGroupId}" />
+								</c:url>">스터디 정보 수정하기</a>
 			</c:if>
-
-
+		
 			<div class="study-info-box"></div>
 			<table class="study-location">
 				<tr class="icon">
@@ -43,16 +38,20 @@
 			</table>
 			<div class="team-members-box">
 				<div class="team-header">
-					<img src="<c:url value='/images/members.png' />" alt="members"
-						style="height: 10px; margin-right: 5px" /> <span
-						class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
+					<img src="<c:url value='/images/members.png' />" alt="members" 
+					style="height: 10px; margin-right: 5px"/>
+					<span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
 				</div>
 				<ul class="member-list">
-					<li class="member-item"><span class="member-name">${studyInfo.leaderName}</span>
-						<img src="<c:url value='/images/mdi_crown.png' />" alt="leader"
-						style="height: 15px; margin-left: 5px" /></li>
+					<li class="member-item">
+						<span class="member-name">${studyInfo.leaderName}</span>
+						<img src="<c:url value='/images/mdi_crown.png' />" alt="leader" 
+					style="height: 15px; margin-left: 5px"/> 
+					</li>
 					<c:forEach var="member" items="${members}">
-						<li class="member-item"><span class="member-name">${member}</span>
+						<li class="member-item">
+							<span class="member-name">${member}</span>
+
 						</li>
 					</c:forEach>
 				</ul>
@@ -87,34 +86,33 @@
 			<form id="dateForm" action="<c:url value='/mystudy/view' />"
 				method="post">
 				<input type="hidden" name="selectedDate" id="selectedDate"
-					value="${selectedDate}"> <input type="hidden"
-					name="groupId" id="groupId" value="${studyInfo.studyGroupId}">
+					value="${selectedDate}">
+					<input type="hidden" name="groupId" id="groupId"
+					value="${studyInfo.studyGroupId}">
+
 			</form>
 			<div class="main-container">
 				<div class="rectangle-1">
 					<div class="schedule">
 						<div class="schedule_title">일정</div>
 						<div class="schedule_content">
-							<ul>
-								<c:forEach var="schedule" items="${regularSchedules}">
-									<li class="schedule-item">${schedule.title}<%-- ${schedule.startTime}~ ${schedule.endTime}  --%>
-										<!-- 다른 schedule 속성들도 필요에 따라 추가 -->
-									</li>
-								</c:forEach>
-								<c:forEach var="schedule" items="${specialSchedules}">
-									<li class="schedule-item">${schedule.title}<%-- ${schedule.startTime}~ ${schedule.endTime}  --%>
-										<!-- 다른 schedule 속성들도 필요에 따라 추가 -->
-									</li>
-								</c:forEach>
-							</ul>
-
-							<a class="plus_button"
-								href="<c:url value="/study/addSchedule">
-                           <c:param name="groupId" value="${studyInfo.studyGroupId}" />
-                           <c:param name="selectedDate" value="${selectedDate}" />
-                        </c:url>">
-								+ </a>
-
+						<ul>
+							<c:forEach var="schedule" items="${regularSchedules}">
+								<li class="schedule-item">${schedule.title}
+									<%-- ${schedule.startTime}~ ${schedule.endTime}  --%><!-- 다른 schedule 속성들도 필요에 따라 추가 -->
+								</li>
+							</c:forEach>
+							<c:forEach var="schedule" items="${specialSchedules}">
+								<li class="schedule-item">${schedule.title}
+									<%-- ${schedule.startTime}~ ${schedule.endTime}  --%><!-- 다른 schedule 속성들도 필요에 따라 추가 -->
+								</li>
+							</c:forEach>
+						</ul>
+							
+								<a class="plus_button" href="<c:url value="/study/addSchedule">
+									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
+									<c:param name="selectedDate" value="${selectedDate}" />
+								</c:url>"> + </a>
 
 						</div>
 					</div>
@@ -125,14 +123,11 @@
 								<c:forEach var="notice" items="${noticeList}">
 									<li class="notice-item">${notice.title}</li>
 								</c:forEach>
-							</ul>
-
-							<a class="plus_button"
-								href="<c:url value="/study/addNotice">
-                           <c:param name="groupId" value="${studyInfo.studyGroupId}" />
-                           <c:param name="selectedDate" value="${selectedDate}" />
-                        </c:url>">
-								+ </a>
+							</ul>	
+								<a class="plus_button" href="<c:url value="/study/addNotice">
+									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
+									<c:param name="selectedDate" value="${selectedDate}" />
+								</c:url>"> + </a>
 
 						</div>
 					</div>
@@ -144,14 +139,11 @@
 									<li class="assignment-item">${assignment.title}</li>
 								</c:forEach>
 							</ul>
-
-							<a class="plus_button"
-								href="<c:url value="/study/addAssignment">
-                              <c:param name="groupId" value="${studyInfo.studyGroupId}" />
-                              <c:param name="selectedDate" value="${selectedDate}" />
-                           </c:url>">
-								+ </a>
-
+							
+								<a class="plus_button" href="<c:url value="/study/addAssignment">
+										<c:param name="groupId" value="${studyInfo.studyGroupId}" />
+										<c:param name="selectedDate" value="${selectedDate}" />
+									</c:url>"> + </a>
 						</div>
 					</div>
 				</div>
@@ -170,6 +162,7 @@
 								<li class="assignment-item">${notice.title}</li>
 							</c:forEach>
 						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -186,6 +179,7 @@
 								<li class="assignment-item">${assignment.title}</li>
 							</c:forEach>
 						</ul>
+
 					</div>
 				</div>
 			</div>

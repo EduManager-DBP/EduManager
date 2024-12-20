@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.dao.studygroup.StudyGroupDao;
+import model.domain.Notice;
 import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
 import model.domain.studyGroup.StudyGroupReview;
@@ -111,5 +112,7 @@ public class StudyGroupManager {
         return  studyGroupDao.getReviewsByGroupId(groupId);
     }
     
+    
+   
   
 }

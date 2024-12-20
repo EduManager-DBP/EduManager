@@ -14,7 +14,6 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 		<div class="subTitle">과제함</div>
  
-		<!-- 공지사항 리스트 -->
 		<table class="table">
 			<thead>
 				<tr>
@@ -25,7 +24,7 @@
 			</thead>
 			<tbody>
 				<!-- JSTL 반복문으로 리스트 출력 -->
-				<c:forEach var="assignment" items="${studyGroupAssignmentList}">
+				<c:forEach var="assignment" items="${lectureAssignmentList}">
 					<tr class="notice-row">
 						<td class="title">${assignment.title}</td>
 						<td class="description">${assignment.description}</td>
