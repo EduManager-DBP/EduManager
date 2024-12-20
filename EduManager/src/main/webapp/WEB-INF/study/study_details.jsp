@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -19,14 +19,11 @@
 		<div class="study-detail">
 			<h2 class="study-title">스터디 상세보기</h2>
 			
-				
-			
 			<c:if test="${isLeader}">
 				<a class="complete-button" href="<c:url value="/study/update">
 				<c:param name="studyId" value="${studyInfo.studyGroupId}" />
 								</c:url>">스터디 정보 수정하기</a>
 			</c:if>
-		
 		
 			<div class="study-info-box"></div>
 			<table class="study-location">
@@ -54,6 +51,7 @@
 					<c:forEach var="member" items="${members}">
 						<li class="member-item">
 							<span class="member-name">${member}</span>
+
 						</li>
 					</c:forEach>
 				</ul>
@@ -91,6 +89,7 @@
 					value="${selectedDate}">
 					<input type="hidden" name="groupId" id="groupId"
 					value="${studyInfo.studyGroupId}">
+
 			</form>
 			<div class="main-container">
 				<div class="rectangle-1">
@@ -114,8 +113,7 @@
 									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 									<c:param name="selectedDate" value="${selectedDate}" />
 								</c:url>"> + </a>
-							
-							
+
 						</div>
 					</div>
 					<div class="notice">
@@ -125,13 +123,12 @@
 								<c:forEach var="notice" items="${noticeList}">
 									<li class="notice-item">${notice.title}</li>
 								</c:forEach>
-							</ul>
-							
+							</ul>	
 								<a class="plus_button" href="<c:url value="/study/addNotice">
 									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 									<c:param name="selectedDate" value="${selectedDate}" />
 								</c:url>"> + </a>
-							
+
 						</div>
 					</div>
 					<div class="assignment">
@@ -147,7 +144,6 @@
 										<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 										<c:param name="selectedDate" value="${selectedDate}" />
 									</c:url>"> + </a>
-							
 						</div>
 					</div>
 				</div>
@@ -156,15 +152,17 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">공지사항</div>
-						<a href="<c:url value='/study/listNotice'/>?groupId=${studyInfo.studyGroupId}" class="more-link">
-    더보기
-</a>
+						<a
+							href="<c:url value='/study/listNotice'/>?groupId=${studyInfo.studyGroupId}"
+							class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
-						<li>아주아주아주아주아주아주 중요한 공지</li>
-					</div>
-					<div class="important-notice">
-						<li>아주아주아주아주아주아주 중요한 공지</li>
+						<ul>
+							<c:forEach var="notice" items="${noticeList}">
+								<li class="assignment-item">${notice.title}</li>
+							</c:forEach>
+						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -172,15 +170,16 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">과제</div>
-					<a href="<c:url value='/study/listAssignment'/>?groupId=${studyInfo.studyGroupId}" class="more-link">
-    더보기
-</a>
+						<a href="<c:url value='/study/listAssignment' />"
+							class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
-						<li>토익 필수 영문법 23~36p</li>
-					</div>
-					<div class="important-notice">
-						<li>토익 필수 영문법 23~36p</li>
+						<ul>
+							<c:forEach var="assignment" items="${assignmentList}">
+								<li class="assignment-item">${assignment.title}</li>
+							</c:forEach>
+						</ul>
+
 					</div>
 				</div>
 			</div>

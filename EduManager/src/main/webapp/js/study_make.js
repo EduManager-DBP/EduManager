@@ -12,32 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
-// 단일 선택을 처리하는 함수
-function selectLectureCategory(button) {
-	const hiddenInput = document.getElementById('categories');
-	const selectedButton = document.querySelector('.category.selected');
 
-	// 이전 선택 해제
-	if (selectedButton) {
-		selectedButton.classList.remove('selected');
-	}
-
-	// 선택한 버튼 스타일 추가
-	button.classList.add('selected');
-
-	// 숨겨진 input 값 업데이트
-	hiddenInput.value = button.getAttribute('data-index');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-	const categoryButtons = document.querySelectorAll('.category');
-
-	categoryButtons.forEach(button => {
-		button.addEventListener('click', () => {
-			selectLectureCategory(button);
-		});
-	});
-});
 let scheduleCount;
 
 function addSchedule() {
