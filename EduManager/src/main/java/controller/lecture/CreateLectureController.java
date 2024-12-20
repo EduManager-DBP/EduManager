@@ -1,5 +1,6 @@
 package controller.lecture;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ public class CreateLectureController implements Controller {
 			MemberManager memberManager = MemberManager.getInstance();
 			String teacherName = memberManager.findName(teacherId);
 
+			
 			InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
 
 			// DB에서 관심 분야 목록을 가져옴
@@ -73,8 +75,17 @@ public class CreateLectureController implements Controller {
 			lecture = manager.createLecture(lecture);
 			log.debug("Create Lecture : {}", lecture.getLectureId());
 			for (int i = 0; i < scheduleCount; i++) { // 각 일정 항목의 값들을 받아오기 String
+				
+//				log.debug("dayOfWeek : {}", dayOfWeek);
+
 				LocalTime startTime = LocalTime.parse(request.getParameter("schedule[" + i + "][startTime]"));
 				LocalTime endTime = LocalTime.parse(request.getParameter("schedule[" + i + "][endTime]"));
+//				log.debug("startTime : {} endTime:{}", startTime, endTime);
+
+
+//				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, 19L, "regular",
+//						null);
+//				log.debug("Schedule{} : {}", i, schedule);
 				
 				String dayOfWeek = request.getParameter("schedule[" + i + "][day]");
 				
@@ -91,10 +102,18 @@ public class CreateLectureController implements Controller {
 
 		 return "redirect:/lecture/list";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
+			
 			request.getSession().setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
 			System.out.print(e);
-
+			/*
+			 * MemberManager memberManager = MemberManager.getInstance(); String teacherName
+			 * = memberManager.findName(teacherId);
+			 * 
+			 * request.setAttribute("teacherName", teacherName);
+			 * 
+			 * request.setAttribute("teacherId", teacherId);
+			 */
 			return "redirect:/lecture/create";
 		}
 	}

@@ -26,12 +26,6 @@
 								</c:url>">강의
 					정보 수정하기</a>
 			</c:if>
-			<c:if test="${!isTeacher}">
-				<a class="complete-button"
-					href="<c:url value="/lecture/over-view">
-				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
-								</c:url>">강의 후기 작성하기</a>
-			</c:if>
 
 
 			<div class="study-info-box"></div>
@@ -189,9 +183,8 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">과제</div>
-						<a
-							href="<c:url value='/lecture/listAssignment'/>?groupId=${lectureInfo.lectureId}"
-							class="more-link"> 더보기 </a>
+						<a href="<c:url value='/lecture/listAssignment' />"
+							class="more-link">더보기</a>
 					</div>
 					<div class="important-notice">
 						<ul>

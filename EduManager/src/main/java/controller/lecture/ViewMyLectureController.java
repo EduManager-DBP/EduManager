@@ -64,9 +64,8 @@ public class ViewMyLectureController implements Controller {
             List<Schedule> specialSchedules = manager.findSchedulesByFilters(lectureId, selectedDate, "special", null);
             log.debug("특수일정: " + specialSchedules);
             
-            List<Notice> notices = manager.findNoticesByLectureId(lectureId);
-            log.debug("공지: " + notices);
             
+
             List<Assignment> assignments = manager.findAssignmentsByLectureId(lectureId);
             log.debug("과제: " + assignments);
 
@@ -76,8 +75,6 @@ public class ViewMyLectureController implements Controller {
             request.setAttribute("noticeList", noticeList);
             request.setAttribute("regularSchedules", regularSchedules);
             request.setAttribute("specialSchedules", specialSchedules);
-            request.setAttribute("noticeList", notices);
-            request.setAttribute("assignmentList", assignments);
 
             Lecture lectureInfo = manager.findLectureById(lectureId);
             log.debug("lectureInfo: " + lectureId);
