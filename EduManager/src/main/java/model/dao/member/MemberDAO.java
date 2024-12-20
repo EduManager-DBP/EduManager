@@ -22,9 +22,9 @@ public class MemberDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int create(Member member) throws SQLException {
-		String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { member.getId(), member.getPwd(), member.getName(), member.getEmail(),
-				member.getPhone() };
+				member.getPhone(), "/images/profileImg.svg" };
 		jdbcUtil.setSqlAndParameters(sql, param); // JDBCUtil 에 insert문과 매개 변수 설정
 
 		try {
