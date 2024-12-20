@@ -1,6 +1,8 @@
+
 package model.service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import model.dao.lecture.LectureAssignmentDao;
 import model.dao.lecture.LectureDao;
@@ -11,109 +13,107 @@ import model.dao.lecture.LectureScheduleDao;
 import model.domain.Schedule;
 import model.domain.Notice;
 import model.domain.Assignment;
-import model.domain.calendar.CalendarDTO;
 import model.domain.lecture.Lecture;
 import model.domain.lecture.LectureEnrollment;
 import model.domain.lecture.LectureReview;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
 public class LectureManager {
-	private static LectureManager instance = new LectureManager();
-	private LectureDao lectureDao;
-	private LectureScheduleDao scheduleDao;
-	private LectureNoticeDao noticeDao;
-	private LectureAssignmentDao assignmentDao;
-	private LectureLikeDao lectureLikeDao;
-	private LectureReviewDao lectureReviewDao;
+    private static LectureManager instance = new LectureManager();
+    private LectureDao lectureDao;
+    private LectureScheduleDao scheduleDao;
+    private LectureNoticeDao noticeDao;
+    private LectureAssignmentDao assignmentDao;
+    private LectureLikeDao lectureLikeDao;
+    private LectureReviewDao lectureReviewDao;
 
-	private LectureManager() {
-		lectureDao = new LectureDao();
-		scheduleDao = new LectureScheduleDao();
-		noticeDao = new LectureNoticeDao();
-		assignmentDao = new LectureAssignmentDao();
-		lectureLikeDao = new LectureLikeDao();
-		lectureReviewDao = new LectureReviewDao();
+    private LectureManager() {
+        lectureDao = new LectureDao();
+        scheduleDao = new LectureScheduleDao();
+        noticeDao = new LectureNoticeDao();
+        assignmentDao = new LectureAssignmentDao();
+        lectureLikeDao = new LectureLikeDao();
+        lectureReviewDao = new LectureReviewDao();
 
-	}
+    }
 
-	public static LectureManager getInstance() {
-		return instance;
-	}
+    public static LectureManager getInstance() {
+        return instance;
+    }
 
-	/*
-	 * public List<Lecture> findLectureList() throws SQLException{ return
-	 * lectureDao.getAllLectures(); }
-	 */
-	// 특정 연도와 월의 데이터를 캘린더에 띄우기
-	public List<Schedule> getScheduleCalendarList(int year, int month) {
-		// DTO List 생성
+    /*
+     * public List<Lecture> findLectureList() throws SQLException{ return
+     * lectureDao.getAllLectures(); }
+     */
+    // 특정 연도와 월의 데이터를 캘린더에 띄우기
+    public List<Schedule> getScheduleCalendarList(int year, int month) {
+        // DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
-		List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
+        // DAO 호출
+        List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
 
-		// 데이터 통합
+        // 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-		return schedules;
-	}
+        return schedules;
+    }
 
-	public List<Notice> getNoticeCalendarList(int year, int month) {
-		// DTO List 생성
+    public List<Notice> getNoticeCalendarList(int year, int month) {
+        // DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
-		List<Notice> notices = noticeDao.findNoticesByDate(year, month);
+        // DAO 호출
+        List<Notice> notices = noticeDao.findNoticesByDate(year, month);
 
-		// 데이터 통합
+        // 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-		return notices;
-	}
+        return notices;
+    }
 
-	public List<Assignment> getAssignmentCalendarList(int year, int month) {
-		// DTO List 생성
+    public List<Assignment> getAssignmentCalendarList(int year, int month) {
+        // DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
-		List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
+        // DAO 호출
+        List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
 
-		// 데이터 통합
+        // 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-		return assignments;
-	}
+        return assignments;
+    }
 
-	public Lecture findLectureById(long lectureId) throws SQLException {
-		return lectureDao.findLectureById(lectureId);
-	}
+    public Lecture findLectureById(long lectureId) throws SQLException {
+        return lectureDao.findLectureById(lectureId);
+    }
 
-	public Lecture createLecture(Lecture lecture) throws SQLException {
-		return lectureDao.createLecture(lecture);
-	}
+    public Lecture createLecture(Lecture lecture) throws SQLException {
+        return lectureDao.createLecture(lecture);
+    }
 
-	public int updateLecture(Lecture lecture) throws SQLException {// , LectureNotFoundException {
-		return lectureDao.updateLecture(lecture);
-	}
+    public int updateLecture(Lecture lecture) throws SQLException {// , LectureNotFoundException {
+        return lectureDao.updateLecture(lecture);
+    }
 
-	public Lecture getLectureById(long lectureId) throws SQLException {
-		return lectureDao.getLectureById(lectureId);
-	}
+    public Lecture getLectureById(long lectureId) throws SQLException {
+        return lectureDao.getLectureById(lectureId);
+    }
 
-	public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
-		return lectureDao.getLecturesExcludingStudent(stuId);
-	}
-	
-	public List<Lecture> getLecturesSearch(String stuId, String searchName) throws SQLException {
+    public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
+        return lectureDao.getLecturesExcludingStudent(stuId);
+    }
+    
+    public List<Lecture> getLecturesSearch(String stuId, String searchName) throws SQLException {
         return lectureDao.getLecturesSearch(stuId, searchName);
     }
 
@@ -216,6 +216,7 @@ public class LectureManager {
     //스터디 멤버 조회
     public List<String> findLectureMembers(int lectureId) throws SQLException {
     	return lectureDao.findLectureMembers(lectureId);
+
     }
 
 }
