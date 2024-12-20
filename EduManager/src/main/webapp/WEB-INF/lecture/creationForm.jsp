@@ -10,6 +10,21 @@
 <script src="${pageContext.request.contextPath}/js/study_make.js"></script>
 <!-- 수정해야하는 부분 -->
 </head>
+<% 
+    // 세션에서 creationFailed와 exception 값을 가져옵니다.
+    Boolean creationFailed = (Boolean) session.getAttribute("creationFailed");
+    if (creationFailed != null && creationFailed) {
+%>
+    <script type="text/javascript">
+        alert("다른 강의 일정이 존재합니다.");
+    </script>
+<% 
+        // 세션에서 값 삭제 (한 번만 표시하기 위해)
+        session.removeAttribute("creationFailed");
+        session.removeAttribute("exception");
+    }
+%>
+
 <body>
 	<div class="page">
 		<jsp:include page="../navigation/navigation.jsp" />

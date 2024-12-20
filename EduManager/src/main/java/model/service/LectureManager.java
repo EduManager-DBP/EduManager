@@ -3,6 +3,7 @@ package model.service;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import model.dao.lecture.LectureAssignmentDao;
 import model.dao.lecture.LectureDao;
@@ -190,6 +191,10 @@ public class LectureManager {
 		return lectureDao.isLectureConflict(memberId, lectureId);
 	}
 
+    public boolean isLectureConflict(String teacherId, String newDayOfWeek, LocalTime newStartTime, LocalTime newEndTime) throws SQLException {
+		return lectureDao.isLectureConflict(teacherId, newDayOfWeek, newStartTime, newEndTime);
+    }
+	
 	public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
 		return lectureDao.isEnrollmentExists(memberId, lectureId);
 	}
@@ -219,13 +224,18 @@ public class LectureManager {
     	return lectureDao.findLectureMembers(lectureId);
 
     }
-    
+
     public List<Notice> findNoticesByLectureId(int lectureId) {
         return  noticeDao.findNoticesByLectureId(lectureId);
     }
     
     public List<Notice> searchNotices(int lectureId, String searchParam) {
         return noticeDao.searchNotices(lectureId, searchParam);
+
+    //월 단위 일정 유무 확인.
+    public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
+    	return lectureDao.findMonthSchedule(lectureId, month, year);
+
     }
 
 }
