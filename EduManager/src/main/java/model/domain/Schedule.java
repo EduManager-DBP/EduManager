@@ -4,134 +4,144 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Schedule {
-    private int scheduleId;
-    private String dayOfWeek;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private String frequency;
-    private long studyGroupId;
-    private long lectureId;
-    private LocalDate startDate;
-    private String type;//special:특수 , regular: 정규
-    private String title;
-    // 생성자
-    public Schedule() {}
+	private int scheduleId;
+	private String dayOfWeek;
+	private LocalTime startTime;
+	private LocalTime endTime;
+	private String frequency;
+	private long studyGroupId;
+	private long lectureId;
+	private LocalDate startDate;
+	private String type;// special:특수 , regular: 정규
+	private String title;
 
-    public Schedule(int scheduleId, String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency,
-    		long studyGroupId, long lectureId, LocalDate startDate, String type, String title) {
-        super();
-        this.scheduleId = scheduleId;
-        this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.frequency = frequency;
-        this.studyGroupId = studyGroupId;
-        this.lectureId = lectureId;
-        this.startDate = startDate;
-        this.title = title;
-        this.type = type;
-    }
-    public Schedule(String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency,
-    		long lectureId, String type, String title) {
-        super();
-        this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.frequency = frequency;
-        this.lectureId = lectureId;
-        this.title = title;
-        this.type = type;
-    }
+	private String lectureName;
 
-    
-    public int getScheduleId() {
-        return scheduleId;
-    }
+	public String getLectureName() {
+		return lectureName;
+	}
 
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
-    }
+	public void setLectureName(String lectureName) {
+		this.lectureName = lectureName;
+	}
 
-    public String getDayOfWeek() {
-        return dayOfWeek;
-    }
+	// 생성자
+	public Schedule() {
+	}
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
+	public Schedule(int scheduleId, String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency,
+			long studyGroupId, long lectureId, LocalDate startDate, String type, String title, String lectureName) {
+		super();
+		this.scheduleId = scheduleId;
+		this.dayOfWeek = dayOfWeek;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.frequency = frequency;
+		this.studyGroupId = studyGroupId;
+		this.lectureId = lectureId;
+		this.startDate = startDate;
+		this.title = title;
+		this.type = type;
+		this.lectureName = lectureName;
+	}
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
+	public Schedule(String dayOfWeek, LocalTime startTime, LocalTime endTime, String frequency, long lectureId,
+			String type, String title) {
+		super();
+		this.dayOfWeek = dayOfWeek;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.frequency = frequency;
+		this.lectureId = lectureId;
+		this.title = title;
+		this.type = type;
+	}
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
+	public int getScheduleId() {
+		return scheduleId;
+	}
 
-    public LocalTime getEndTime() {
-        return endTime;
-    }
+	public void setScheduleId(int scheduleId) {
+		this.scheduleId = scheduleId;
+	}
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
+	public String getDayOfWeek() {
+		return dayOfWeek;
+	}
 
-    public String getFrequency() {
-        return frequency;
-    }
+	public void setDayOfWeek(String dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
 
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
-    }
+	public LocalTime getStartTime() {
+		return startTime;
+	}
 
-    public long getStudyGroupId() {
-        return studyGroupId;
-    }
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
 
-    public void setStudyGroupId(long studyGroupId) {
-        this.studyGroupId = studyGroupId;
-    }
+	public LocalTime getEndTime() {
+		return endTime;
+	}
 
-    public long getLectureId() {
-        return lectureId;
-    }
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
 
-    public void setLectureId(long lectureId) {
-        this.lectureId = lectureId;
-    }
+	public String getFrequency() {
+		return frequency;
+	}
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
+	}
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+	public long getStudyGroupId() {
+		return studyGroupId;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setStudyGroupId(long studyGroupId) {
+		this.studyGroupId = studyGroupId;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public long getLectureId() {
+		return lectureId;
+	}
 
+	public void setLectureId(long lectureId) {
+		this.lectureId = lectureId;
+	}
 
-    @Override
-    public String toString() {
-        return "Schedule [scheduleId=" + scheduleId + ", dayOfWeek=" + dayOfWeek + ", startTime=" + startTime
-                + ", endTime=" + endTime + ", frequency=" + frequency + ", studyGroupId=" + studyGroupId
-                + ", lectureId=" + lectureId + ", startDate=" + startDate + ", type=" + type + ", title=" + title + "]";
-    }
+	public LocalDate getStartDate() {
+		return startDate;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getType() {
+		return type;
+	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
 
+	@Override
+	public String toString() {
+		return "Schedule [scheduleId=" + scheduleId + ", dayOfWeek=" + dayOfWeek + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", frequency=" + frequency + ", studyGroupId=" + studyGroupId
+				+ ", lectureId=" + lectureId + ", startDate=" + startDate + ", type=" + type + ", title=" + title + "]";
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 }

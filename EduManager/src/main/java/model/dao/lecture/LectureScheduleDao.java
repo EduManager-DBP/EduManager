@@ -19,11 +19,14 @@ public class LectureScheduleDao {
 	// 스케줄 조회 by 날짜 (년, 월)
 	public List<Schedule> findSchedulesByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
-	    query.append("SELECT lecturescheduleid AS scheduleId, startTime, endTime, ");
-	    query.append("lectureId, startDate, type, title ");
-	    query.append("FROM lectureschedule ");
-	    query.append("WHERE EXTRACT(YEAR FROM startDate) = ? AND EXTRACT(MONTH FROM startDate) = ? ");
-	    query.append("ORDER BY startDate, startTime");
+		query.append("SELECT ls.lecturescheduleid AS scheduleId, ");
+		query.append("ls.startTime, ls.endTime, ls.lectureId, ls.startDate, ");
+		query.append("ls.type, ls.title, l.name AS lectureName ");
+		query.append("FROM lectureschedule ls ");
+		query.append("LEFT JOIN lecture l ON ls.lectureId = l.lectureId ");
+		query.append("WHERE EXTRACT(YEAR FROM ls.startDate) = ? ");
+		query.append("AND EXTRACT(MONTH FROM ls.startDate) = ? ");
+		query.append("ORDER BY ls.startDate, ls.startTime");
 
 		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
 		List<Schedule> schedules = new ArrayList<>();
@@ -32,14 +35,15 @@ public class LectureScheduleDao {
 			ResultSet rs = jdbcUtil.executeQuery();
 			while (rs.next()) {
 				Schedule schedule = new Schedule();
-	            schedule.setScheduleId(rs.getInt("scheduleId"));
-	            schedule.setStartTime(rs.getTime("startTime").toLocalTime());
-	            schedule.setEndTime(rs.getTime("endTime").toLocalTime());
-	            schedule.setLectureId(rs.getLong("lectureId"));
-	            schedule.setStartDate(rs.getDate("startDate").toLocalDate());
-	            schedule.setType(rs.getString("type"));
-	            schedule.setTitle(rs.getString("title"));
-	            
+				schedule.setScheduleId(rs.getInt("scheduleId"));
+				schedule.setStartTime(rs.getTime("startTime").toLocalTime());
+				schedule.setEndTime(rs.getTime("endTime").toLocalTime());
+				schedule.setLectureId(rs.getLong("lectureId"));
+				schedule.setStartDate(rs.getDate("startDate").toLocalDate());
+				schedule.setType(rs.getString("type"));
+				schedule.setTitle(rs.getString("title"));
+				schedule.setLectureName(rs.getString("lectureName")); // Lecture Name 추가
+
 				schedules.add(schedule);
 			}
 		} catch (Exception ex) {
@@ -50,7 +54,7 @@ public class LectureScheduleDao {
 
 		return schedules;
 	}
-	
+
 	// 스케줄 생성
 	public int createSchedule(Schedule schedule) {
 		StringBuffer query = new StringBuffer();
@@ -62,7 +66,8 @@ public class LectureScheduleDao {
 
 		jdbcUtil.setSqlAndParameters(query.toString(),
 				new Object[] { schedule.getDayOfWeek(), schedule.getStartTime(), schedule.getEndTime(),
-						schedule.getFrequency(), schedule.getLectureId(), schedule.getStartDate(),schedule.getType(), schedule.getTitle() });
+						schedule.getFrequency(), schedule.getLectureId(), schedule.getStartDate(), schedule.getType(),
+						schedule.getTitle() });
 
 		try {
 			int result = jdbcUtil.executeUpdate();
@@ -177,66 +182,63 @@ public class LectureScheduleDao {
 
 		return schedules;
 	}
+
 	// 스케줄 목록 조회 by StudyGroup ID, Type, StartDate, DayOfWeek
-		public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type,
-				String dayOfWeek) {
-			StringBuffer query = new StringBuffer();
-			
-			query.append("SELECT * ");
-			query.append("FROM lectureschedule ");
-			query.append("WHERE lectureid = ? ");
-			query.append("AND type = ? ");
+	public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type, String dayOfWeek) {
+		StringBuffer query = new StringBuffer();
 
-			List<Object> params = new ArrayList<>();
-			params.add(lectureId);
-			params.add(type);
+		query.append("SELECT * ");
+		query.append("FROM lectureschedule ");
+		query.append("WHERE lectureid = ? ");
+		query.append("AND type = ? ");
 
-			// startdate 조건 추가
-			if (type.equals("regular")) {
-				query.append("AND startdate <= ? "); // 필터: startdate가 오늘 이전
-			} else {
-				query.append("AND TRUNC(startdate) = ? "); // 필터: startdate가 오늘
-			}
-			params.add(java.sql.Date.valueOf(startDate)); // startDate를 SQL Date로 변환
+		List<Object> params = new ArrayList<>();
+		params.add(lectureId);
+		params.add(type);
 
-			// dayOfWeek 조건 추가
-			if (dayOfWeek != null && !dayOfWeek.isEmpty()) {
-				query.append("AND dayofweek = ? ");
-				params.add(dayOfWeek);
-			}
-
-			// 매개변수 설정
-			jdbcUtil.setSqlAndParameters(query.toString(), params.toArray());
-
-			List<Schedule> schedules = new ArrayList<>();
-
-			try {
-				ResultSet rs = jdbcUtil.executeQuery();
-				while (rs.next()) {
-					Schedule schedule = new Schedule();
-					schedule.setScheduleId(rs.getInt("lecturescheduleid"));
-					schedule.setDayOfWeek(rs.getString("dayofweek"));
-					schedule.setStartTime(
-						    rs.getTime("starttime") != null ? rs.getTime("starttime").toLocalTime() : null
-						);
-						schedule.setEndTime(
-						    rs.getTime("endtime") != null ? rs.getTime("endtime").toLocalTime() : null
-						);
-					schedule.setFrequency(rs.getString("frequency"));
-					schedule.setLectureId(lectureId);
-					schedule.setStartDate(rs.getDate("startdate").toLocalDate());
-					schedule.setType(rs.getString("type"));
-					schedule.setTitle(rs.getString("title"));
-					schedules.add(schedule);
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.close();
-			}
-
-			return schedules;
+		// startdate 조건 추가
+		if (type.equals("regular")) {
+			query.append("AND startdate <= ? "); // 필터: startdate가 오늘 이전
+		} else {
+			query.append("AND TRUNC(startdate) = ? "); // 필터: startdate가 오늘
 		}
+		params.add(java.sql.Date.valueOf(startDate)); // startDate를 SQL Date로 변환
+
+		// dayOfWeek 조건 추가
+		if (dayOfWeek != null && !dayOfWeek.isEmpty()) {
+			query.append("AND dayofweek = ? ");
+			params.add(dayOfWeek);
+		}
+
+		// 매개변수 설정
+		jdbcUtil.setSqlAndParameters(query.toString(), params.toArray());
+
+		List<Schedule> schedules = new ArrayList<>();
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			while (rs.next()) {
+				Schedule schedule = new Schedule();
+				schedule.setScheduleId(rs.getInt("lecturescheduleid"));
+				schedule.setDayOfWeek(rs.getString("dayofweek"));
+				schedule.setStartTime(rs.getTime("starttime") != null ? rs.getTime("starttime").toLocalTime() : null);
+				schedule.setEndTime(rs.getTime("endtime") != null ? rs.getTime("endtime").toLocalTime() : null);
+				schedule.setFrequency(rs.getString("frequency"));
+				schedule.setLectureId(lectureId);
+				schedule.setStartDate(rs.getDate("startdate").toLocalDate());
+				schedule.setType(rs.getString("type"));
+				schedule.setTitle(rs.getString("title"));
+				schedules.add(schedule);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+
+		return schedules;
+	}
+
 	// 스케줄 목록 id 조회 by lecture ID
 	public List<Integer> findScheduleIdsBylectureId(long lectureid) {
 		StringBuffer query = new StringBuffer();
@@ -260,7 +262,7 @@ public class LectureScheduleDao {
 
 		return scheduleIds;
 	}
-	
+
 	// 스케줄 삭제
 	public void deleteScheduleById(int scheduleId) {
 		StringBuffer query = new StringBuffer();

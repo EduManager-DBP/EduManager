@@ -12,16 +12,17 @@
 
 // 현재 연도와 월 가져오기
 java.util.Calendar calendar = java.util.Calendar.getInstance();
-int currentYear = calendar.get(java.util.Calendar.YEAR);
-int currentMonth = calendar.get(java.util.Calendar.MONTH); // 0부터 시작 (0 = 1월)
+int currentYear = (int)request.getAttribute("year");
+int currentMonth = (int)request.getAttribute("month"); // 0부터 시작 (0 = 1월)
+int selectedDay = (int)request.getAttribute("selectDay");
 
-// 이전/다음 달 이동 시 파라미터 처리
+/* // 이전/다음 달 이동 시 파라미터 처리
 String yearParam = request.getParameter("year");
 String monthParam = request.getParameter("month");
 if (yearParam != null && monthParam != null) {
 	currentYear = Integer.parseInt(yearParam);
 	currentMonth = Integer.parseInt(monthParam) - 1; // 0부터 시작하는 월로 변환
-}
+} */
 
 // 해당 월의 총 일수와 시작 요일 계산
 calendar.set(currentYear, currentMonth, 1);
@@ -92,6 +93,10 @@ for (Assignment assignment : assignmentEntries) {
 		document.getElementById("month").value = newMonth + 1;
 		document.getElementById("calendarForm").submit();
 	}
+	
+	function selectDate(day) {
+		
+	}
 </script>
 <title>EduManager</title>
 </head>
@@ -142,7 +147,7 @@ for (Assignment assignment : assignmentEntries) {
 						for (int i = 0; i < 6; i++) { // 최대 6줄 (달력 한 페이지 기준)
 							out.println("<tr>");
 							for (int j = 1; j <= 7; j++) { // 한 주의 7일
-								out.print("<td>");
+								out.print("<td onclick='selectDay(day)'>");
 								if (!started && j == firstDayOfWeek) {
 							started = true; // 달의 첫 시작점
 								}
@@ -191,8 +196,9 @@ for (Assignment assignment : assignmentEntries) {
 			<form id="calendarForm" method="get"
 				action="<c:url value='/main/main' />">
 				<input type="hidden" id="year" name="year" value="<%=currentYear%>" />
-				<input type="hidden" id="month" name="month"
-					value="<%=currentMonth%>" />
+				<input type="hidden" id="month" name="month" value="<%=currentMonth%>" />
+				<input type="hidden" id="selectedDate" name="selectedDate" value-"<%=selectedDay%>"/>
+					
 			</form>
 
 		</div>

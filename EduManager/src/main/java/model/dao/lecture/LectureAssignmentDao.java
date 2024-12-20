@@ -16,12 +16,15 @@ public class LectureAssignmentDao {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
-	// 강의 아이디로 강의 과제 목록 조회
+	// 날짜로 강의 과제 목록 조회
 	public List<Assignment> findAssignmentsByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT lectureassignmentid, duedate, title, description, createat, textfile, lectureid ");
-		query.append("FROM lectureassignment ");
-		query.append("WHERE EXTRACT(YEAR FROM duedate) = ? AND EXTRACT(MONTH FROM duedate) = ? ");
+		query.append("SELECT la.lectureassignmentid AS id, la.duedate, la.title, la.description, ");
+		query.append("la.lectureid, l.name AS lectureName ");
+		query.append("FROM lectureassignment la ");
+		query.append("JOIN lecture l ON la.lectureid = l.lectureid ");
+		query.append("WHERE EXTRACT(YEAR FROM la.duedate) = ? AND EXTRACT(MONTH FROM la.duedate) = ? ");
+		query.append("ORDER BY la.duedate");
 
 		jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { year, month });
 		List<Assignment> assignments = new ArrayList<>();
@@ -30,23 +33,12 @@ public class LectureAssignmentDao {
 			ResultSet rs = jdbcUtil.executeQuery(); // 질의 실행
 			while (rs.next()) {
 				Assignment ass = new Assignment();
-				ass.setId(rs.getInt("lectureassignmentid"));
+				ass.setId(rs.getInt("id"));
 				ass.setTitle(rs.getString("title"));
 				ass.setDescription(rs.getString("description"));
-				ass.setTextFile(rs.getString("textfile"));
 				ass.setLectureId(rs.getInt("lectureid"));
 				ass.setDueDate(rs.getDate("duedate").toLocalDate());
-				ass.setCreateat(rs.getDate("createat").toLocalDate());
-
-//                Date sqlDueDate = rs.getDate("duedate"); 
-//                if (sqlDueDate != null) {
-//                    ass.setDueDate(sqlDueDate.toLocalDate());
-//                }
-//
-//                Date sqlCreateAt = rs.getDate("createat"); 
-//                if (sqlCreateAt != null) {
-//                    ass.setCreateat(sqlCreateAt.toLocalDate());
-//                }
+				ass.setLectureName(rs.getString("lectureName")); // 강의 이름 설정
 
 				assignments.add(ass); // 리스트에 과제 추가
 			}
@@ -57,32 +49,6 @@ public class LectureAssignmentDao {
 		}
 
 		return assignments;
-	}
-
-	// 과제 생성
-	public void createAssignment(int lectureId, String title, String description, LocalDate dueDate, String textFile) {
-		StringBuffer query = new StringBuffer();
-		query.append(
-				"INSERT INTO lectureassignment (lectureassignmentid, lectureid, title, description, duedate, textfile, createat) ");
-		query.append("VALUES (SEQ_LECTURE_ASSIGNMENT_ID.nextval, ?, ?, ?, ?, ?, SYSDATE)");
-
-		// SQL 쿼리와 매개변수 설정
-		jdbcUtil.setSqlAndParameters(query.toString(),
-				new Object[] { lectureId, title, description, dueDate, textFile });
-
-		try {
-			int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
-			if (rs > 0) {
-				System.out.println("과제가 성공적으로 생성되었습니다.");
-			} else {
-				System.out.println("과제 생성에 실패했습니다.");
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.commit();
-			jdbcUtil.close(); // 연결 자원 해제
-		}
 	}
 
 	// 과제 상세 조회
