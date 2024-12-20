@@ -48,7 +48,7 @@ public class CreateLectureAssignmentController implements Controller {
 			assignment.setLectureId(Integer.parseInt(request.getParameter("lectureId")));
 
 			LectureManager manager = LectureManager.getInstance();
-			// manager.createAssignment(assignment);
+			 manager.createAssignment(assignment);
 
 			return "redirect:/mylecture/view?lectureId=" + Long.parseLong(request.getParameter("lectureId"))
 					+ "&selectedDate=" + LocalDate.parse(request.getParameter("startDate"));

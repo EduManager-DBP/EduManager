@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=utf-8"%>
+<%@page import="java.util.HashMap, java.util.Map" %>
+<%@page contentType="text/html; charset=utf-8"%>
 <%-- <%@page import="java.util.*, model.domain.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -12,6 +14,17 @@
 <script src="<c:url value='/js/study_calendar.js' />"></script>
 <title>강의 상세보기</title>
 </head>
+<%
+    Map<String, String> dayMap = new HashMap<>();
+    dayMap.put("MONDAY", "월");
+    dayMap.put("TUESDAY", "화");
+    dayMap.put("WEDNESDAY", "수");
+    dayMap.put("THURSDAY", "목");
+    dayMap.put("FRIDAY", "금");
+    dayMap.put("SATURDAY", "토");
+    dayMap.put("SUNDAY", "일");
+    request.setAttribute("dayMap", dayMap);
+%>
 <body>
 	<jsp:include page="../navigation/navigation.jsp" />
 <input type="hidden" id="eventsData" value='${events}'/>
@@ -26,11 +39,16 @@
 								</c:url>">강의
 					정보 수정하기</a>
 			</c:if>
-
+<c:if test="${!isTeacher}">
+				<a class="complete-button"
+					href="<c:url value="/lecture/over-view">
+				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
+								</c:url>">강의 후기 작성하기</a>
+			</c:if>
 
 			<div class="study-info-box"></div>
 
-			<div id="teacher_name">${lectureInfo.teacherName}강사님</div>
+			<div id="teacher_name">${lectureInfo.teacherName} 강사님</div>
 
 			<table class="study-location">
 				<tr class="icon">
@@ -44,7 +62,12 @@
 				</tr>
 				<tr class="icon">
 					<td class="time-icon"></td>
-					<td class="location-inform">진행중...</td>
+
+					<c:forEach var="schedule" items="${regularSchedules}">
+						<td class="location-inform">  ${dayMap[schedule.dayOfWeek]}요일 ${schedule.startTime}
+							</td>
+					</c:forEach>
+
 				</tr>
 			</table>
 			<div class="team-members-box">
