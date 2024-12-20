@@ -112,15 +112,17 @@
 	</div>
 </body>
 <script>
-function updateCategoryStyle(selectedLabel) {
-    // 모든 라벨에서 선택된 클래스 제거
-    const labels = document.querySelectorAll('.category');
+function updateCategoryStyle(selectedInput) {
+    // '카테고리' 라벨 그룹 내에서만 선택된 클래스 제거
+    const categorySection = selectedInput.closest('.study');
+    const labels = categorySection.querySelectorAll('.category');
     labels.forEach(label => {
         label.classList.remove('selected-category');
     });
 
     // 선택된 라벨에만 클래스 추가
-    selectedLabel.classList.add('selected-category');
+    const label = selectedInput.closest('label');
+    label.classList.add('selected-category');
 }
 </script>
 </html>
