@@ -53,6 +53,7 @@ public class EditMyInfoController implements Controller {
 	        if (member != null) {
 
 	        	 filePart.write(filePath); // 파일 저장
+	        	 System.out.print(filePath);
 	             String dbFilePath = "/images/" + newFileName; // DB에 저장할 경로 설정
 	            // 수정된 사용자 정보를 폼 데이터에서 가져오기
 	            String newPwd = request.getParameter("password");
