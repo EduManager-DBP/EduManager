@@ -28,6 +28,7 @@ public class EditMyInfoController implements Controller {
         }
 
         String uploadPath = request.getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+       System.out.print(uploadPath);
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -43,6 +44,7 @@ public class EditMyInfoController implements Controller {
             newFileName = System.currentTimeMillis() + "_" + fileName;
             String filePath = uploadPath + File.separator + newFileName;
             filePart.write(filePath); // 파일 저장
+            System.out.println("-------------------------------------------------------"+filePath);
             dbFilePath = "/images/" + newFileName; // DB에 저장할 경로 설정
         }
 
