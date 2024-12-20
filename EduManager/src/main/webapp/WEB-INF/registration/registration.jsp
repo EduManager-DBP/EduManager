@@ -110,8 +110,9 @@
                      <a
                         href="<c:url value='/study/over-view'><c:param name='groupId' value='${studyGroup.studyGroupId}'/></c:url>">
                         <img src="<c:url value='/images/white.png' />">
-                        <div class="groupGalleryTitle">${studyGroup.name}</div>
-                        <div class="groupGalleryCategory">${studyGroup.category}</div>
+                        <span class="groupGalleryTitle">${studyGroup.name}</span>
+                        <span class="groupGalleryCategory"
+                              style="background-color: ${studyGroup.categoryColor};">${studyGroup.categoryName}</span>
                      </a>
                   </div>
                </c:forEach>
