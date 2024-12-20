@@ -1,5 +1,6 @@
 package controller.study;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -48,17 +49,28 @@ public class CreateStudyController implements Controller {
 		
 		try {
 			StudyManager manager = StudyManager.getInstance();
+
+			String[] dayOfWeek = request.getParameterValues("dayOfWeek");
+			log.debug("dayOfWeek{}",dayOfWeek);
+
+			for (int i = 0; i < dayOfWeek.length; i++) { // 각 일정 항목의 값들을 받아오기 String
+				Boolean isStudyConflict = manager.isStudyConflict(leaderId,dayOfWeek[i]);
+				log.debug("isStudyConflict : {}",isStudyConflict);
+
+				if (isStudyConflict) {
+				    throw new Exception("The lecture schedule conflicts with an existing lecture schedule.");
+				}	
+			}
+			
 			study = manager.createStudy(study);
 			log.debug("Create Lecture : {}", study.getStudyGroupId());
 			
-			String[] dayOfWeek = request.getParameterValues("dayOfWeek");
-
 			for (int i = 0; i < dayOfWeek.length; i++) { // 각 일정 항목의 값들을 받아오기 String
 				Schedule schedule = new Schedule(dayOfWeek[i], null, null, null, 0L, "regular",
 						"정기모임");
 				schedule.setStudyGroupId(study.getStudyGroupId());
 				schedule.setStartDate(LocalDate.now());
-	         
+
 				log.debug("Schedule{} : {}", i, schedule);
 
 				int scheduleId = manager.createSchedule(schedule);

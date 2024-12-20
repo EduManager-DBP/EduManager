@@ -16,7 +16,30 @@ public class LectureAssignmentDao {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
-	
+	public void createAssignment(int lectureId, String title, String description, LocalDate dueDate, String textFile) {
+	      StringBuffer query = new StringBuffer();
+	      query.append(
+	            "INSERT INTO lectureassignment (lectureassignmentid, lectureid, title, description, duedate, textfile, createat) ");
+	      query.append("VALUES (SEQ_LECTURE_ASSIGNMENT_ID.nextval, ?, ?, ?, ?, ?, SYSDATE)");
+
+	      // SQL 쿼리와 매개변수 설정
+	      jdbcUtil.setSqlAndParameters(query.toString(),
+	            new Object[] { lectureId, title, description, dueDate, textFile });
+
+	      try {
+	         int rs = jdbcUtil.executeUpdate(); // 질의 실행 (INSERT문은 executeUpdate로 실행)
+	         if (rs > 0) {
+	            System.out.println("과제가 성공적으로 생성되었습니다.");
+	         } else {
+	            System.out.println("과제 생성에 실패했습니다.");
+	         }
+	      } catch (Exception ex) {
+	         ex.printStackTrace();
+	      } finally {
+	         jdbcUtil.commit();
+	         jdbcUtil.close(); // 연결 자원 해제
+	      }
+	   }
 	public List<Assignment> findAssignmentsByDate(int year, int month) {
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT la.lectureassignmentid AS id, la.duedate, la.title, la.description, ");

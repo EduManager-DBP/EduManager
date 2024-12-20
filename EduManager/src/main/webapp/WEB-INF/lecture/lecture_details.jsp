@@ -14,6 +14,7 @@
 </head>
 <body>
 	<jsp:include page="../navigation/navigation.jsp" />
+<input type="hidden" id="eventsData" value='${events}'/>
 
 	<div class="study-container">
 		<div class="study-detail">
@@ -175,10 +176,12 @@
 							class="more-link"> 더보기 </a>
 					</div>
 					<div class="important-notice">
-						<li>아주아주아주아주아주아주 중요한 공지</li>
-					</div>
-					<div class="important-notice">
-						<li>아주아주아주아주아주아주 중요한 공지</li>
+						<ul>
+							<c:forEach var="notice" items="${noticeList}">
+								<li class="assignment-item">${notice.title}</li>
+							</c:forEach>
+						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -191,10 +194,12 @@
 							class="more-link"> 더보기 </a>
 					</div>
 					<div class="important-notice">
-						<li>토익 필수 영문법 23~36p</li>
-					</div>
-					<div class="important-notice">
-						<li>토익 필수 영문법 23~36p</li>
+						<ul>
+							<c:forEach var="assignment" items="${assignmentList}">
+								<li class="assignment-item">${assignment.title}</li>
+							</c:forEach>
+						</ul>
+
 					</div>
 				</div>
 			</div>

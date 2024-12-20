@@ -580,8 +580,7 @@ public class LectureDao {
         String sql = 
                 "SELECT DISTINCT TRUNC(startDate) AS eventDate " +
                 "FROM lectureSchedule " +
-                "WHERE type = 'special' " +
-                "AND EXTRACT(MONTH FROM startDate) = ? " +
+                "WHERE EXTRACT(MONTH FROM startDate) = ? " +
                 "AND EXTRACT(YEAR FROM startDate) = ? " +
                 "AND lectureId = ? " +
 

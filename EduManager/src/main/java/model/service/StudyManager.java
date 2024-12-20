@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import model.dao.studygroup.StudyAssignmentDao;
 import model.dao.studygroup.StudyGroupDao;
@@ -102,6 +103,10 @@ public class StudyManager {
     
     public List<Assignment> findAssignmentsByStudyId(int studyId) {
         return assignmentDao.findAssignmentsByStudyId(studyId);
+    }
+    
+    public boolean isStudyConflict(String stuId, String newDayOfWeek) throws SQLException {
+		return studyDao.isStudyConflict(stuId, newDayOfWeek);
     }
     
 }

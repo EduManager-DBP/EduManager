@@ -58,6 +58,12 @@ public class ViewMyStudyController implements Controller {
             List<Schedule> specialSchedules = manager.findSchedulesByFilters(studyId, selectedDate, "special", null);
             log.debug("특수일정: " + specialSchedules);
             
+            List<Notice> notices = manager.findNoticesBystudygroupid(studyId);
+            log.debug("공지: " + notices);
+            
+            List<Assignment> assignments = manager.findAssignmentsByStudyId(studyId);
+            log.debug("과제: " + assignments);
+
             
             // 필요한 비즈니스 로직 수행 (예: DB 조회)
             request.setAttribute("selectedDate", selectedDate);
@@ -65,6 +71,8 @@ public class ViewMyStudyController implements Controller {
             request.setAttribute("noticeList", noticeList);
             request.setAttribute("regularSchedules", regularSchedules);
             request.setAttribute("specialSchedules", specialSchedules);
+            request.setAttribute("noticeList", notices);
+            request.setAttribute("assignmentList", assignments);
 
             StudyGroup studyInfo = manager.findStudyById(studyId);
             log.debug("studyInfo: " + studyInfo);

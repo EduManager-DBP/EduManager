@@ -90,6 +90,7 @@ form input::placeholder {
   margin-top: 40px;
   align: center;
   justify-content: space-evenly;
+
 }
 
 #nextBt {
@@ -107,6 +108,8 @@ form input::placeholder {
   cursor: pointer;
   width: 30%;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+     font-family: 'Pretendard', sans-serif;
+
 }
 
 button:hover {
