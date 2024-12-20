@@ -50,12 +50,27 @@
 			<div>스터디</div>
 		</div>
 	</div>
-	<div id="makeStudyBtn-container">
-		<button id="makeStudyBtn" onclick="createStudy()" style="font-family:'Pretendard';">
-			<img src="<c:url value='/images/plus.svg' />" id="plusIcon" >
-			스터디 만들기
-		</button>
-	</div>
+	<c:if test="${!isTeacher}">
+				<div id="makeStudyBtn-container">
+
+					<button id="makeStudyBtn" onclick="createStudy()"
+						style="font-family: 'Pretendard';">
+						<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
+						스터디 만들기
+					</button>
+				</div>
+			</c:if>
+
+
+			<c:if test="${isTeacher}">
+				<div id="makeLectureBtn-container">
+					<button id="makeStudyBtn" onclick="createLecture()"
+						style="font-family: 'Pretendard';">
+						<img src="<c:url value='/images/plus.svg' />" id="plusIcon">
+						강의 만들기
+					</button>
+				</div>
+			</c:if>
 </div>
 
 <div class="hr-wrapper">
