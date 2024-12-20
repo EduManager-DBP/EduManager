@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -496,6 +497,36 @@ public class LectureDao {
         }
     }
     
+    //강사 강의 중복확인
+    public boolean isLectureConflict(String teacherId, String newDayOfWeek, LocalTime newStartTime, LocalTime newEndTime) throws SQLException {
+        String sql = "WITH TeacherLectures AS ( " +
+                     "  SELECT LECTUREID " +
+                     "  FROM LECTURE " +
+                     "  WHERE TEACHERID = ? " +  // 강사의 lectureId를 가져오는 부분
+                     ") " +
+                     "SELECT 1 " +
+                     "FROM LECTURESCHEDULE ls " +
+                     "JOIN TeacherLectures tl ON ls.LECTUREID = tl.LECTUREID " +
+                     "WHERE ls.TYPE = 'regular' " +  // 정기 일정만 확인
+                     "  AND ls.DAYOFWEEK = ? " +  // 새로 추가하려는 강의의 요일
+                     "  AND ( " +
+                     "        (? BETWEEN ls.STARTTIME AND ls.ENDTIME) OR " +  // 새 강의 시작 시간이 기존 강의 시간대에 포함되는지 확인
+                     "        (? BETWEEN ls.STARTTIME AND ls.ENDTIME) OR " +  // 새 강의 종료 시간이 기존 강의 시간대에 포함되는지 확인
+                     "        (ls.STARTTIME BETWEEN ? AND ?) OR " +  // 기존 강의 시작 시간이 새 강의 시간대에 포함되는지 확인
+                     "        (ls.ENDTIME BETWEEN ? AND ?) " +  // 기존 강의 종료 시간이 새 강의 시간대에 포함되는지 확인
+                     "      )";
+
+        Object[] params = new Object[] { teacherId, newDayOfWeek, newStartTime, newEndTime, newStartTime, newEndTime, newStartTime, newEndTime };
+        jdbcUtil.setSqlAndParameters(sql, params);
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            return rs.next(); // 결과가 있으면 일정이 겹친다는 의미
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+    }
+
     
    // stuId와 lectureId에 해당하는 레코드가 존재하는지 확인 
     public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
@@ -542,6 +573,59 @@ public class LectureDao {
         jdbcUtil.close();
         return members;
     }
+
+	public List<LocalDate> findMonthSchedule(int lectureId, int month, int year) {
+        List<LocalDate> eventDates = new ArrayList<>();
+        
+        String sql = 
+                "SELECT DISTINCT TRUNC(startDate) AS eventDate " +
+                "FROM lectureSchedule " +
+                "WHERE type = 'special' " +
+                "AND EXTRACT(MONTH FROM startDate) = ? " +
+                "AND EXTRACT(YEAR FROM startDate) = ? " +
+                "AND lectureId = ? " +
+
+                "UNION " +
+
+                "SELECT DISTINCT TRUNC(createAt) AS eventDate " +
+                "FROM lectureNotice " +
+                "WHERE EXTRACT(MONTH FROM createAt) = ? " +
+                "AND EXTRACT(YEAR FROM createAt) = ? " +
+                "AND lectureId = ? " +
+
+                "UNION " +
+
+                "SELECT DISTINCT TRUNC(dueDate) AS eventDate " +
+                "FROM lectureAssignment " +
+                "WHERE EXTRACT(MONTH FROM dueDate) = ? " +
+                "AND EXTRACT(YEAR FROM dueDate) = ? " +
+                "AND lectureId = ? " +
+
+                "ORDER BY eventDate";
+        
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{month, year, lectureId,month, year, lectureId,month, year, lectureId}); // memberId를 두 번 파라미터로 설정
+        
+        try {
+        	ResultSet rs = jdbcUtil.executeQuery();
+            
+            while (rs.next()) {
+            	 Date eventDate = rs.getDate("eventDate");
+                 // java.sql.Date를 LocalDate로 변환
+                 if (eventDate != null) {
+                     eventDates.add(eventDate.toLocalDate());
+                 }
+            }
+            return eventDates;
+        } catch (Exception ex) {
+            jdbcUtil.rollback(); // 오류 발생 시 롤백
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+        
+        
+		return null;
+	}
     
 }
 

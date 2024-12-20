@@ -28,7 +28,7 @@ public class EditMyInfoController implements Controller {
         }
 
         String uploadPath = request.getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-       System.out.print(uploadPath);
+        System.out.println(uploadPath);
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -44,7 +44,7 @@ public class EditMyInfoController implements Controller {
             newFileName = System.currentTimeMillis() + "_" + fileName;
             String filePath = uploadPath + File.separator + newFileName;
             filePart.write(filePath); // 파일 저장
-            System.out.println("-------------------------------------------------------"+filePath);
+            System.out.println("Uploaded file path: " + filePath);
             dbFilePath = "/images/" + newFileName; // DB에 저장할 경로 설정
         }
 
@@ -57,18 +57,13 @@ public class EditMyInfoController implements Controller {
             Member member = memberDAO.findMember(memberId);
 
             if (member != null) {
-                // 업로드된 이미지가 있을 경우에만 이미지 경로를 업데이트
-                if (dbFilePath != null) {
-                    member.setImg(dbFilePath);
-                }
-
                 // 수정된 사용자 정보를 폼 데이터에서 가져오기
                 String newPwd = request.getParameter("password");
                 String newEmail = request.getParameter("email");
                 String newPhone = request.getParameter("phone");
 
-                // 학생 정보 업데이트
                 if (studentDAO.existingStudent(memberId)) {
+                    // 기존 정보 조회
                     Student student = studentDAO.findStudent(memberId);
 
                     // 수정된 폼 데이터만 반영
@@ -83,6 +78,9 @@ public class EditMyInfoController implements Controller {
                     if (newPhone != null && !newPhone.isEmpty()) {
                         student.setPhone(newPhone);
                         member.setPhone(newPhone);
+                    }
+                    if (dbFilePath != null && !dbFilePath.isEmpty()) {
+                        member.setImg(dbFilePath);
                     }
 
                     // 학생 정보 업데이트
@@ -104,8 +102,10 @@ public class EditMyInfoController implements Controller {
                         teacher.setPhone(newPhone);
                         member.setPhone(newPhone);
                     }
+                    if (dbFilePath != null && !dbFilePath.isEmpty()) {
+                        member.setImg(dbFilePath);
+                    }
 
-                    // 교사 정보 업데이트
                     teacherDAO.update(teacher);
                     memberDAO.update(member);
                 }
