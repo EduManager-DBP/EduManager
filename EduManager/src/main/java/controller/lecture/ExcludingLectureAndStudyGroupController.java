@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.member.MemberSessionUtils;
 import model.domain.lecture.Lecture;
+import model.domain.member.Teacher;
 import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
+import model.service.member.TeacherManager;
 
 public class ExcludingLectureAndStudyGroupController implements Controller {
     
@@ -20,12 +22,14 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
             return "redirect:/member/login/form"; // login form 요청으로 redirect
         }
 
+
       String memberId = MemberSessionUtils.getLoginMemberId(request.getSession());
       String searchParam = request.getParameter("searchParam");
       
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
-      
+      TeacherManager teacherManager = TeacherManager.getInstance();
+
       
       if (searchParam != null && !searchParam.trim().isEmpty()) {
          
@@ -44,13 +48,14 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
           List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(memberId);
           List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(memberId);
 
+          request.setAttribute("isTeacher", teacherManager.isTeacher(memberId)); 
           request.setAttribute("lectureList", lectureList);
           request.setAttribute("studyGroupList", studyGroupList);
       }
     
 
       return "/registration/registration.jsp";
-           
+
     }
 
 }
