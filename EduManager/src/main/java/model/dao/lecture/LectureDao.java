@@ -227,7 +227,7 @@ public class LectureDao {
 
         return lecture; // 결과 반환
     }
-    
+
     //수강하지 않고 있는 강의 목록 보여주기(수강 신청용)
     public List<Lecture> getLecturesExcludingStudent(String stuid) {
         StringBuffer query = new StringBuffer();
@@ -355,6 +355,7 @@ public class LectureDao {
 
         return lectureList; // 결과 반환
     }
+
     public List<Lecture> getMyLectureList(String stuid) {
         StringBuffer query = new StringBuffer();
         query.append("SELECT l.lectureId, l.name, l.img, l.category, t.name AS teacherName,  ic.name AS categoryName, ic.color ");
