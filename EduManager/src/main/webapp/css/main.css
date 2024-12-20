@@ -162,10 +162,13 @@ td {
 	margin: 0;
 	/* ul 요소의 기본 margin 제거 */
 	padding: 0;
-	list-style: inside
+	max-height: 270px; /* Set maximum height to 30% of the parent container */
+	overflow-y: auto;
 }
 
 .assignment-list li {
+	width: 90%;
+	height: 40px;
 	/* li 요소의 기본 margin 제거 */
 	padding: 10px;
 	/* li 요소의 기본 padding 제거 */
@@ -179,10 +182,13 @@ td {
 	margin: 0;
 	/* ul 요소의 기본 margin 제거 */
 	padding: 0;
-	list-style: inside
+	max-height: 260px; /* Set maximum height to 30% of the parent container */
+	overflow-y: auto;
 }
 
 .todaySchedule-list li {
+	width: 90%;
+	height: 40px;
 	/* li 요소의 기본 margin 제거 */
 	padding: 10px;
 	/* li 요소의 기본 padding 제거 */
@@ -190,47 +196,86 @@ td {
 	font-size: 18px;
 }
 
-.dot {
-    height: 100px;
+
+
+.dotred {
+	height: 100px;
     width: 100px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
-}
-
-.red {
     background-color: red;
 }
 
-.orange {
+.dotorange {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: orange;
 }
 
-.yellow {
+.dotyellow {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: yellow;
 }
 
-.green {
+.dotgreen {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: green;
 }
 
-.blue {
+.dotblue {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: blue;
 }
 
-.indigo {
+.dotindigo {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: indigo;
 }
 
-.violet {
+.dotviolet {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
     background-color: violet;
 }
 .list1 {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
 	background-color: #FFFAC8;
 	border-radius: 10px;
 }
 
 .list2 {
+	height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
 	background-color: #CBDEFF;
 	border-radius: 10px;
 }

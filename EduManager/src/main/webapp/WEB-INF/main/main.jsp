@@ -199,6 +199,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 						%>
 					</ul>
 				</div>
+				
 			</div>
 			<div id="calendar">
 				<div id="calendarHeader">
@@ -242,7 +243,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스케줄 출력
 							if (lectureScheduleMap.containsKey(day)) {
-								out.println("<div class='dot red'></div>"); // 빨간색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: red; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Schedule lectureSchedule : lectureScheduleMap.get(day)) {
 								    out.print("<div class='schedule'>[강의]스케줄: " + lectureSchedule.getTitle() + "</div>");
 								} */
@@ -250,7 +251,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 공지 출력
 							if (lectureNoticeMap.containsKey(day)) {
-								out.println("<div class='dot orange'></div>"); // 주황색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: orange; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Notice lectureNotice : lectureNoticeMap.get(day)) {
 								    out.print("<div class='notice'>[강의]공지: " + lectureNotice.getTitle() + "</div>");
 								} */
@@ -258,7 +259,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 과제 출력
 							if (lectureAssignmentMap.containsKey(day)) {
-								out.println("<div class='dot yellow'></div>"); // 노란색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: yellow; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
 								    out.print("<div class='assignment'>[강의]과제: " + lectureAssignment.getTitle() + "</div>");
 								} */
@@ -266,7 +267,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스터디 스케줄 출력
 							if (studyScheduleMap.containsKey(day)) {
-								out.println("<div class='dot green'></div>"); // 초록색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: green; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Schedule studySchedule : studyScheduleMap.get(day)) {
 								    out.print("<div class='schedule'>[스터디]스케줄: " + studySchedule.getTitle() + "</div>");
 								} */
@@ -274,7 +275,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스터디 공지 출력
 							if (studyNoticeMap.containsKey(day)) {
-								out.println("<div class='dot blue'></div>"); // 파란색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: indigo; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Notice studyNotice : studyNoticeMap.get(day)) {
 								    out.print("<div class='notice'>[스터디]공지: " + studyNotice.getTitle() + "</div>");
 								} */
@@ -282,7 +283,7 @@ for (Assignment studyAssignment : studyAssignmentEntries) {
 
 							// 스터디 과제 출력
 							if (studyAssignmentMap.containsKey(day)) {
-								out.println("<div class='dot violet'></div>"); // 보라색 점
+								out.println("<div style='height: 10px; width: 10px; border-radius: 50%; background-color: violet; display: inline-block;'></div>"); // 빨간색 점
 								/* for (Assignment studyAssignment : studyAssignmentMap.get(day)) {
 								    out.print("<div class='assignment'>[스터디]과제: " + studyAssignment.getTitle() + "</div>");
 								} */
