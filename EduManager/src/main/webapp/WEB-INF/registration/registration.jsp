@@ -77,7 +77,7 @@
 								<span class="groupGalleryTitle">${group.name}</span>
 								<div
 									style="display: flex; justify-content: space-between; width: 100%;">
-									<span class="groupGalleryCategory"  style=" background-color: ${group.categoryColor};" >${group.category}</span> <span
+									<span class="groupGalleryCategory"  style=" background-color: ${group.categoryColor};" >${group.categoryName}</span> <span
 										class="groupGalleryTeacherName">${group.teacherName}</span>
 								</div>
 							</a>
@@ -93,9 +93,10 @@
             <div class="groupGallery">
             <a href="<c:url value='/study/over-view'> <c:param name='groupId' value='${studyGroup.studyGroupId}'/>
 			 	 </c:url>">
-                <img src="<c:url value='/images/white.png' />">
-                <div class="groupGalleryTitle">${studyGroup.name}</div>
-                <div class="groupGalleryCategory">${studyGroup.category}</div>
+             	<img src="<c:url value='/images/white.png' />" alt="Group Image">
+								<span class="groupGalleryTitle">${studyGroup.name}</span>
+								<span class="groupGalleryCategory"  style=" background-color: ${studyGroup.categoryColor};" >${studyGroup.categoryName}</span> 
+								
               </a>
             </div>
         </c:forEach>

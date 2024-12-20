@@ -187,14 +187,15 @@ public StudyGroup findGroupInfo(long groupId) {
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT studyGroupId, name, img, description, capacity, category ");
-        query.append("FROM StudyGroup ");
-        query.append("WHERE studyGroupId NOT IN (");
+        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ic.name AS categoryName, ic.color ");
+        query.append("FROM StudyGroup S ");
+        query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
+        query.append("WHERE S.studyGroupId NOT IN ( ");
         query.append("    SELECT studyGroupId ");
         query.append("    FROM StudyGroupApplication ");
-        query.append("    WHERE stuId = ? AND status ='수락' ");
-        query.append(") AND leaderId != ?");
-
+        query.append("    WHERE stuId = ? AND status = '수락' ");
+        query.append(") ");
+        query.append("AND S.leaderId != ? ");
         jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId }); // stuId 파라미터 전달
         List<StudyGroup> studyGroupList = new ArrayList<>();
 
@@ -207,6 +208,12 @@ public StudyGroup findGroupInfo(long groupId) {
                 studyGroup.setName(rs.getString("name"));
                 studyGroup.setCategory(rs.getString("category"));
                 studyGroup.setCapacity(rs.getInt("capacity"));
+                studyGroup.setImg(rs.getString("img"));
+                studyGroup.setDescription(rs.getString("description"));
+                studyGroup.setCreateAt(rs.getDate("createAt"));
+                studyGroup.setPlace(rs.getString("place"));
+                studyGroup.setCategoryColor(rs.getString("color"));
+                studyGroup.setCategoryName(rs.getString("categoryName"));
                 studyGroupList.add(studyGroup);
             }
         } catch (Exception ex) {
@@ -261,7 +268,8 @@ public StudyGroup findGroupInfo(long groupId) {
                 studyGroup.setDescription(rs.getString("description"));
                 studyGroup.setCreateAt(rs.getDate("createAt"));
                 studyGroup.setPlace(rs.getString("place"));
-               
+                studyGroup.setCategoryColor(rs.getString("color"));
+                studyGroup.setCategoryName(rs.getString("categoryName"));
 
                 studyGroupList.add(studyGroup);
             }
@@ -427,9 +435,10 @@ public StudyGroup findGroupInfo(long groupId) {
     public List<StudyGroup> getStudyGroupListByMember(String memberId) throws SQLException {
         List<StudyGroup> groupList = new ArrayList<>();
        
-        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category " +
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, ic.name AS categoryName, ic.color " +
                      "FROM StudyGroup sg " +
                      "JOIN StudyGroupApplication sga ON sg.studyGroupId = sga.studyGroupId " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
                      "WHERE sga.stuId = ? AND sga.status = '수락' AND sg.leaderId != ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, memberId}); // memberId를 두 번 파라미터로 설정
@@ -443,6 +452,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setDescription(rs.getString("description"));
             group.setCapacity(rs.getInt("capacity"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             groupList.add(group);
         }
         
@@ -455,9 +466,10 @@ public StudyGroup findGroupInfo(long groupId) {
         List<StudyGroup> groupList = new ArrayList<>();
         
         
-        String sql = "SELECT studyGroupId, name, img, description, capacity, category " +
-                     "FROM StudyGroup " +
-                     "WHERE leaderId = ?";
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, ic.name AS categoryName, ic.color "+ 
+                     "FROM StudyGroup sg " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
+                     "WHERE sg.leaderId = ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId}); 
         ResultSet rs = jdbcUtil.executeQuery();
@@ -470,6 +482,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setDescription(rs.getString("description"));
             group.setCapacity(rs.getInt("capacity"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             groupList.add(group);
         }
         

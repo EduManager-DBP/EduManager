@@ -4,118 +4,138 @@ import java.sql.Date;
 
 public class StudyGroup {
 
-	private long studyGroupId;
-	private String name;
-	private String img;
-	private String description;
-	private long capacity;
-	private String category;
-	private Date createAt;
-	private String leaderId;
-	private String leaderName;
-	private String place;
-	
-	public StudyGroup() {
-	}
+    private long studyGroupId;
+    private String name;
+    private String img;
+    private String description;
+    private long capacity;
+    private String category;
+    private Date createAt;
+    private String leaderId;
+    private String leaderName;
+    private String place;
+    private String categoryName;
+    private String categoryColor;
 
-	public StudyGroup(long studyGroupId, String name, String img, String description, long capacity, String category,
-			Date createAt, String leaderId) {
-		super();
-		this.studyGroupId = studyGroupId;
-		this.name = name;
-		this.img = img;
-		this.description = description;
-		this.capacity = capacity;
-		this.category = category;
-		this.createAt = createAt;
-		this.leaderId = leaderId;
-	}
+    public StudyGroup() {
+    }
 
-	public long getStudyGroupId() {
-		return studyGroupId;
-	}
+    public StudyGroup(long studyGroupId, String name, String img, String description, long capacity, String category,
+            Date createAt, String leaderId) {
+        super();
+        this.studyGroupId = studyGroupId;
+        this.name = name;
+        this.img = img;
+        this.description = description;
+        this.capacity = capacity;
+        this.category = category;
+        this.createAt = createAt;
+        this.leaderId = leaderId;
+    }
 
-	public void setStudyGroupId(long studyGroupId) {
-		this.studyGroupId = studyGroupId;
-	}
+    public long getStudyGroupId() {
+        return studyGroupId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setStudyGroupId(long studyGroupId) {
+        this.studyGroupId = studyGroupId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getImg() {
-		return img;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setImg(String img) {
-		this.img = img;
-	}
+    public String getImg() {
+        return img;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setImg(String img) {
+        this.img = img;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public long getCapacity() {
-		return capacity;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setCapacity(long capacity) {
-		this.capacity = capacity;
-	}
+    public long getCapacity() {
+        return capacity;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public void setCapacity(long capacity) {
+        this.capacity = capacity;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public String getCategory() {
+        return category;
+    }
 
-	public Date getCreateAt() {
-		return createAt;
-	}
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
+    public Date getCreateAt() {
+        return createAt;
+    }
 
-	public String getLeaderId() {
-		return leaderId;
-	}
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
-	public void setLeaderId(String leaderId) {
-		this.leaderId = leaderId;
-	}
+    public String getLeaderId() {
+        return leaderId;
+    }
 
-	@Override
-	public String toString() {
-		return "StudyGroup [studyGroupId=" + studyGroupId + ", name=" + name + ", img=" + img + ", description="
-				+ description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
-				+ ", leaderId=" + leaderId + "]";
-	}
+    public void setLeaderId(String leaderId) {
+        this.leaderId = leaderId;
+    }
 
-	public String getLeaderName() {
-		return leaderName;
-	}
+    @Override
+    public String toString() {
+        return "StudyGroup [studyGroupId=" + studyGroupId + ", name=" + name + ", img=" + img + ", description="
+                + description + ", capacity=" + capacity + ", category=" + category + ", createAt=" + createAt
+                + ", leaderId=" + leaderId + "]";
+    }
 
-	public void setLeaderName(String leaderName) {
-		this.leaderName = leaderName;
-	}
+    public String getLeaderName() {
+        return leaderName;
+    }
 
-	public String getPlace() {
-		return place;
-	}
+    public void setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
+    }
 
-	public void setPlace(String place) {
-		this.place = place;
-	}
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+    
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+    
+    public String getCategoryColor() {
+        return categoryColor;
+    }
+
+    
+    public void setCategoryColor(String categoryColor) {
+        this.categoryColor = categoryColor;
+    }
 
 }
