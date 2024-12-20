@@ -48,26 +48,50 @@ List<Schedule> lectureScheduleEntries = (List<Schedule>) request.getAttribute("l
 List<Notice> lectureNoticeEntries = (List<Notice>) request.getAttribute("lectureNoticeEntries");
 @SuppressWarnings("unchecked")
 List<Assignment> lectureAssignmentEntries = (List<Assignment>) request.getAttribute("lectureAssignmentEntries");
+@SuppressWarnings("unchecked")
+List<Schedule> studyScheduleEntries = (List<Schedule>) request.getAttribute("studyScheduleEntries");
+@SuppressWarnings("unchecked")
+List<Notice> studyNoticeEntries = (List<Notice>) request.getAttribute("studyNoticeEntries");
+@SuppressWarnings("unchecked")
+List<Assignment> studyAssignmentEntries = (List<Assignment>) request.getAttribute("studyAssignmentEntries");
 
 // Map으로 날짜별 데이터 그룹화
-Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
-Map<Integer, List<Notice>> noticeMap = new HashMap<>();
-Map<Integer, List<Assignment>> assignmentMap = new HashMap<>();
+Map<Integer, List<Schedule>> lectureScheduleMap = new HashMap<>();
+Map<Integer, List<Notice>> lectureNoticeMap = new HashMap<>();
+Map<Integer, List<Assignment>> lectureAssignmentMap = new HashMap<>();
+Map<Integer, List<Schedule>> studyScheduleMap = new HashMap<>();
+Map<Integer, List<Notice>> studyNoticeMap = new HashMap<>();
+Map<Integer, List<Assignment>> studyAssignmentMap = new HashMap<>();
 
 for (Schedule lectureSchedule : lectureScheduleEntries) {
 	int dayday = lectureSchedule.getStartDate().getDayOfMonth();
-	scheduleMap.putIfAbsent(dayday, new ArrayList<>());
-	scheduleMap.get(dayday).add(lectureSchedule);
+	lectureScheduleMap.putIfAbsent(dayday, new ArrayList<>());
+	lectureScheduleMap.get(dayday).add(lectureSchedule);
 }
 for (Notice lectureNotice : lectureNoticeEntries) {
 	int dayday = lectureNotice.getCreateat().getDayOfMonth();
-	noticeMap.putIfAbsent(dayday, new ArrayList<>());
-	noticeMap.get(dayday).add(lectureNotice);
+	lectureNoticeMap.putIfAbsent(dayday, new ArrayList<>());
+	lectureNoticeMap.get(dayday).add(lectureNotice);
 }
 for (Assignment lectureAssignment : lectureAssignmentEntries) {
 	int dayday = lectureAssignment.getDueDate().getDayOfMonth();
-	assignmentMap.putIfAbsent(dayday, new ArrayList<>());
-	assignmentMap.get(dayday).add(lectureAssignment);
+	lectureAssignmentMap.putIfAbsent(dayday, new ArrayList<>());
+	lectureAssignmentMap.get(dayday).add(lectureAssignment);
+}
+for (Schedule studySchedule : studyScheduleEntries) {
+	int dayday = studySchedule.getStartDate().getDayOfMonth();
+	studyScheduleMap.putIfAbsent(dayday, new ArrayList<>());
+	studyScheduleMap.get(dayday).add(studySchedule);
+}
+for (Notice studyNotice : studyNoticeEntries) {
+	int dayday = studyNotice.getCreateat().getDayOfMonth();
+	studyNoticeMap.putIfAbsent(dayday, new ArrayList<>());
+	lectureNoticeMap.get(dayday).add(studyNotice);
+}
+for (Assignment studyAssignment : studyAssignmentEntries) {
+	int dayday = studyAssignment.getDueDate().getDayOfMonth();
+	studyAssignmentMap.putIfAbsent(dayday, new ArrayList<>());
+	studyAssignmentMap.get(dayday).add(studyAssignment);
 }
 %>
 <html>
@@ -130,6 +154,16 @@ for (Assignment lectureAssignment : lectureAssignmentEntries) {
 						<%
 						}
 						}
+						for (Schedule studySchedule : studyScheduleEntries) {
+							if (studySchedule.getStartDate().getYear() == currentYear
+							&& studySchedule.getStartDate().getMonthValue() == (currentMonth)
+							&& studySchedule.getStartDate().getDayOfMonth() == selectedDay) {
+						%>
+						<li class="todaySchedules list2">[스터디]<%=studySchedule.getLectureName()%>
+							- <%=studySchedule.getTitle()%> (<%=studySchedule.getStartTime()%> ~ <%=studySchedule.getEndTime()%>)</li>
+						<%
+						}
+						}
 						%>
 					</ul>
 				</div>
@@ -143,11 +177,22 @@ for (Assignment lectureAssignment : lectureAssignmentEntries) {
 							&& lectureAssignment.getDueDate().getMonthValue() == (currentMonth)
 							&& lectureAssignment.getDueDate().getDayOfMonth() == selectedDay) {
 						%>
-						<li class="assignments list2">[강의][<%=lectureAssignment.getLectureName()%>]
+						<li class="assignments list1">[강의][<%=lectureAssignment.getLectureName()%>]
 							<%=lectureAssignment.getTitle()%></li>
 						<%
 						}
 						}
+						for (Assignment studyAssignment : studyAssignmentEntries) {
+							if (studyAssignment.getDueDate().getYear() == currentYear
+							&& studyAssignment.getDueDate().getMonthValue() == (currentMonth)
+							&& studyAssignment.getDueDate().getDayOfMonth() == selectedDay) {
+						%>
+						<li class="assignments list2">[강의][<%=studyAssignment.getLectureName()%>]
+							<%=studyAssignment.getTitle()%></li>
+						<%
+						}
+						}
+						
 						%>
 					</ul>
 				</div>
@@ -193,22 +238,42 @@ for (Assignment lectureAssignment : lectureAssignmentEntries) {
 							}
 
 							// 스케줄 출력
-							if (scheduleMap.containsKey(day)) {
-								for (Schedule lectureSchedule : scheduleMap.get(day)) {
+							if (lectureScheduleMap.containsKey(day)) {
+								for (Schedule lectureSchedule : lectureScheduleMap.get(day)) {
 									out.print("<div class='schedule'>[강의]스케줄: " + lectureSchedule.getTitle() + "</div>");
 								}
 							}
 
 							// 공지 출력
-							if (noticeMap.containsKey(day)) {
-								for (Notice lectureNotice : noticeMap.get(day)) {
+							if (lectureNoticeMap.containsKey(day)) {
+								for (Notice lectureNotice : lectureNoticeMap.get(day)) {
 									out.print("<div class='notice'>[강의]공지: " + lectureNotice.getTitle() + "</div>");
 								}
 							}
 							// 과제 출력
-							if (assignmentMap.containsKey(day)) {
-								for (Assignment lectureAssignment : assignmentMap.get(day)) {
+							if (lectureAssignmentMap.containsKey(day)) {
+								for (Assignment lectureAssignment : lectureAssignmentMap.get(day)) {
 									out.print("<div class='assignment'>[강의]과제: " + lectureAssignment.getTitle() + "</div>");
+								}
+							}
+							
+							// 스케줄 출력
+							if (studyScheduleMap.containsKey(day)) {
+								for (Schedule studySchedule : studyScheduleMap.get(day)) {
+									out.print("<div class='schedule'>[스터디]스케줄: " + studySchedule.getTitle() + "</div>");
+								}
+							}
+
+							// 공지 출력
+							if (studyNoticeMap.containsKey(day)) {
+								for (Notice studyNotice : studyNoticeMap.get(day)) {
+									out.print("<div class='notice'>[스터디]공지: " + studyNotice.getTitle() + "</div>");
+								}
+							}
+							// 과제 출력
+							if (studyAssignmentMap.containsKey(day)) {
+								for (Assignment studyAssignment : studyAssignmentMap.get(day)) {
+									out.print("<div class='assignment'>[스터디]과제: " + studyAssignment.getTitle() + "</div>");
 								}
 							}
 

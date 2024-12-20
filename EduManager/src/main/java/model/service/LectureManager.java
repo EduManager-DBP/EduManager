@@ -50,46 +50,22 @@ public class LectureManager {
 	 */
 	// 특정 연도와 월의 데이터를 캘린더에 띄우기
 	public List<Schedule> getScheduleCalendarList(int year, int month) {
-		// DTO List 생성
-//       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
 		List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
-
-		// 데이터 통합
-//        calendarEntries.addAll(schedules);
-//        calendarEntries.addAll(assignments);
-//        calendarEntries.addAll(notices);
 
 		return schedules;
 	}
 
 	public List<Notice> getNoticeCalendarList(int year, int month) {
-		// DTO List 생성
-//       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
 		List<Notice> notices = noticeDao.findNoticesByDate(year, month);
-
-		// 데이터 통합
-//        calendarEntries.addAll(schedules);
-//        calendarEntries.addAll(assignments);
-//        calendarEntries.addAll(notices);
 
 		return notices;
 	}
 
 	public List<Assignment> getAssignmentCalendarList(int year, int month) {
-		// DTO List 생성
-//       List<Schedule> calendarEntries = new ArrayList<>();
 
-		// DAO 호출
 		List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
-
-		// 데이터 통합
-//        calendarEntries.addAll(schedules);
-//        calendarEntries.addAll(assignments);
-//        calendarEntries.addAll(notices);
 
 		return assignments;
 	}
