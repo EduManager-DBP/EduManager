@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.swing.JOptionPane;
 
 import model.dao.JDBCUtil;
+import model.domain.lecture.Lecture;
 import model.domain.lecture.LectureReview;
 import model.domain.studyGroup.StudyGroup;
 import model.domain.studyGroup.StudyGroupApplication;
@@ -75,10 +76,11 @@ public class StudyGroupDao {
 public StudyGroup findGroupInfo(long groupId) {
     try {
         StudyGroup group = new StudyGroup();
-        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.place, sg.leaderId, " +
+        String query = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, sg.place, sg.leaderId, ss.dayOfWeek, " +
                        "m.name AS leaderName " +
                        "FROM StudyGroup sg " +
                        "JOIN Member m ON sg.leaderId = m.id " +
+                       "JOIN Studyschedule ss ON sg.studyGroupId = ss.studyGroupId " +
                        "WHERE sg.studyGroupId = ?";
         jdbcUtil.setSqlAndParameters(query, new Object[] { groupId });
 
@@ -94,6 +96,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setPlace(rs.getString("place"));
             group.setLeaderId(rs.getString("leaderId"));
             group.setLeaderName(rs.getString("leaderName")); // 리더 이름 설정
+            group.setDayOfWeek(rs.getString("dayOfWeek"));
+            
         } else {
             System.out.println("스터디그룹 정보를 찾을 수 없습니다.  " + groupId);
         }
@@ -186,15 +190,26 @@ public StudyGroup findGroupInfo(long groupId) {
     
     public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
         StringBuffer query = new StringBuffer();
-        query.append("SELECT studyGroupId, name, img, description, capacity, category ");
-        query.append("FROM StudyGroup ");
-        query.append("WHERE studyGroupId NOT IN (");
+        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ");
+        query.append("ic.name AS categoryName, ic.color ");
+        query.append("FROM StudyGroup S ");
+        query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
+        query.append("WHERE S.studyGroupId NOT IN ( ");
         query.append("    SELECT studyGroupId ");
         query.append("    FROM StudyGroupApplication ");
-        query.append("    WHERE stuId = ? AND status ='수락' ");
-        query.append(") AND leaderId != ?");
-
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId }); // stuId 파라미터 전달
+        query.append("    WHERE stuId = ? AND status = '수락' ");
+        query.append(") ");
+        query.append("AND S.leaderId != ? ");
+        query.append("ORDER BY ");
+        query.append("    CASE ");
+        query.append("        WHEN S.category IN (");
+        query.append("            SELECT INTERESTID ");
+        query.append("            FROM studentInterestCategory ");
+        query.append("            WHERE stuId = ? ");
+        query.append("        ) THEN 1 ");
+        query.append("        ELSE 2 ");
+        query.append("    END");
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId, stuId }); 
         List<StudyGroup> studyGroupList = new ArrayList<>();
 
         try {
@@ -206,6 +221,12 @@ public StudyGroup findGroupInfo(long groupId) {
                 studyGroup.setName(rs.getString("name"));
                 studyGroup.setCategory(rs.getString("category"));
                 studyGroup.setCapacity(rs.getInt("capacity"));
+                studyGroup.setImg(rs.getString("img"));
+                studyGroup.setDescription(rs.getString("description"));
+                studyGroup.setCreateAt(rs.getDate("createAt"));
+                studyGroup.setPlace(rs.getString("place"));
+                studyGroup.setCategoryColor(rs.getString("color"));
+                studyGroup.setCategoryName(rs.getString("categoryName"));
                 studyGroupList.add(studyGroup);
             }
         } catch (Exception ex) {
@@ -215,6 +236,63 @@ public StudyGroup findGroupInfo(long groupId) {
         }
 
         return studyGroupList;
+    }
+    
+    
+    public List<StudyGroup> getStudyGroupsSearch(String stuid, String searchParam) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ic.name AS categoryName, ic.color ");
+        query.append("FROM StudyGroup S ");
+        query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
+        query.append("WHERE S.studyGroupId NOT IN ( ");
+        query.append("    SELECT studyGroupId ");
+        query.append("    FROM StudyGroupApplication ");
+        query.append("    WHERE stuId = ? AND status = '수락' ");
+        query.append(") ");
+        query.append("AND S.leaderId != ? ");
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            query.append("AND (S.name LIKE ? OR ic.name LIKE ?) ");
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(stuid); // 학생 ID
+        params.add(stuid); // 리더 ID (예: ? 자리에 들어갈 값)
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            params.add("%" + searchParam + "%"); // S.name LIKE '%검색어%'
+            params.add("%" + searchParam + "%"); // ic.name LIKE '%검색어%'
+        }
+
+        jdbcUtil.setSqlAndParameters(query.toString(), params.toArray()); // stuid와 searchName 파라미터 전달
+        List<StudyGroup> studyGroupList = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+
+            while (rs.next()) {
+                // 각 열의 값을 StudyGroup 객체에 매핑
+                StudyGroup studyGroup = new StudyGroup();
+                studyGroup.setStudyGroupId(rs.getLong("studyGroupId"));
+                studyGroup.setName(rs.getString("name"));
+                studyGroup.setCategory(rs.getString("category"));
+                studyGroup.setCapacity(rs.getInt("capacity"));
+                studyGroup.setImg(rs.getString("img"));
+                studyGroup.setDescription(rs.getString("description"));
+                studyGroup.setCreateAt(rs.getDate("createAt"));
+                studyGroup.setPlace(rs.getString("place"));
+                studyGroup.setCategoryColor(rs.getString("color"));
+                studyGroup.setCategoryName(rs.getString("categoryName"));
+
+                studyGroupList.add(studyGroup);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // 리소스 해제
+        }
+
+        return studyGroupList; // 결과 반환
     }
     
     public StudyGroupApplication createApplication(String memberId, long studyGroupId) throws SQLException { 
@@ -370,9 +448,10 @@ public StudyGroup findGroupInfo(long groupId) {
     public List<StudyGroup> getStudyGroupListByMember(String memberId) throws SQLException {
         List<StudyGroup> groupList = new ArrayList<>();
        
-        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category " +
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, ic.name AS categoryName, ic.color " +
                      "FROM StudyGroup sg " +
                      "JOIN StudyGroupApplication sga ON sg.studyGroupId = sga.studyGroupId " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
                      "WHERE sga.stuId = ? AND sga.status = '수락' AND sg.leaderId != ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId, memberId}); // memberId를 두 번 파라미터로 설정
@@ -386,6 +465,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setDescription(rs.getString("description"));
             group.setCapacity(rs.getInt("capacity"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             groupList.add(group);
         }
         
@@ -398,9 +479,10 @@ public StudyGroup findGroupInfo(long groupId) {
         List<StudyGroup> groupList = new ArrayList<>();
         
         
-        String sql = "SELECT studyGroupId, name, img, description, capacity, category " +
-                     "FROM StudyGroup " +
-                     "WHERE leaderId = ?";
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.description, sg.capacity, sg.category, ic.name AS categoryName, ic.color "+ 
+                     "FROM StudyGroup sg " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
+                     "WHERE sg.leaderId = ?";
 
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId}); 
         ResultSet rs = jdbcUtil.executeQuery();
@@ -413,6 +495,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setDescription(rs.getString("description"));
             group.setCapacity(rs.getInt("capacity"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             groupList.add(group);
         }
         
@@ -462,14 +546,15 @@ public StudyGroup findGroupInfo(long groupId) {
             jdbcUtil.close(); // resource 반환
         }
     }
-    
+
     //좋아요 누른 스터디 그룹들 가지고 오기
     public List<StudyGroup> getLikedStudyGroups(String memberId) throws SQLException {
         List<StudyGroup> groupList = new ArrayList<>();
         
-        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.category " +
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.category, ic.name AS categoryName, ic.color " +
                      "FROM StudyGroupLike sgLike " +
                      "JOIN StudyGroup sg ON sgLike.studyGroupId = sg.studyGroupId " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
                      "WHERE sgLike.stuId = ?";
                      
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId});
@@ -482,6 +567,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setName(rs.getString("name"));
             group.setImg(rs.getString("img"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             
             groupList.add(group);
         }

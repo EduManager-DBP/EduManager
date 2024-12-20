@@ -58,8 +58,6 @@ public class ViewMyLectureListController  implements Controller {
       }
       
       
-      
-      
       return "/lecture/my_lecture_list.jsp";
         
     }

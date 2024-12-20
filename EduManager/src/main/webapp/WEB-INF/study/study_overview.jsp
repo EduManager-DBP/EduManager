@@ -22,11 +22,11 @@
 				</div>
 				<div class="overViewInfo">
 					<div class="overViewInfoText" id="studyGroupPlace">
-						<img src="<c:url value='/images/roomIcon.svg' />" class="infoIcon" />000호
+						<img src="<c:url value='/images/roomIcon.svg' />" class="infoIcon" />${place}
 					</div>
 					<div class="overViewInfoText" id="studyGroupTime">
 						<img src="<c:url value='/images/overViewTime.svg' />"
-							class="infoIcon" />매주 수요일 6시
+							class="infoIcon" />매주 ${dayOfWeek}요일
 					</div>
 				</div>
 			</div>

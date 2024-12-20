@@ -156,7 +156,9 @@ public class LectureAssignmentDao {
 				if (sqlDueDate != null) {
 					ass.setDueDate(rs.getDate("duedate").toLocalDate());
 				}
-				ass.setCreateat(rs.getDate("createat").toLocalDate());
+				if(rs.getDate("createat") != null) {
+					ass.setCreateat(rs.getDate("createat").toLocalDate());
+				}
 
 				assignments.add(ass); // 리스트에 과제 추가
 			}

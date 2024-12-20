@@ -56,35 +56,29 @@
 					</section>
 				</div>
 
-
 				<section class="study">
 					<span>카테고리</span><br />
-					<button type="button" class="category" data-index="1">영어</button>
-					<button type="button" class="category" data-index="2">수학</button>
-					<button type="button" class="category" data-index="3">과학</button>
-					<button type="button" class="category" data-index="4">역사</button>
-					<button type="button" class="category" data-index="5">프로그래밍</button>
-					<button type="button" class="category" data-index="6">영어</button>
-					<button type="button" class="category" data-index="7">수학</button>
-					<button type="button" class="category" data-index="8">과학</button>
-					<button type="button" class="category" data-index="9">역사</button>
-					<button type="button" class="category" data-index="10">프로그래밍</button>
-					<input type="hidden" name="category" id="categories" value="" />
+					<c:forEach var="category" items="${categories}">
+						<label class="category"> <input type="radio" name="category"
+							value="${category.id}" onclick="updateCategoryStyle(this)" />
+							${category.name}
+						</label>
+					</c:forEach>
+				
 				</section>
-
 
 				<!-- 정기 수업 일정은 일단 요청 따로 처리 -->
 				<section id="schedule" class="study" style="display: inline-block">
 					<span>정기 수업 일정</span><span class="required">*</span><br />
 					<article class="schedule">
 						<span>요일</span> <select class="small" name="schedule[0][day]" required>
-							<option value="월">월</option>
-							<option value="화">화</option>
-							<option value="수">수</option>
-							<option value="목">목</option>
-							<option value="금">금</option>
-							<option value="토">토</option>
-							<option value="일">일</option>
+							<option value="MONDAY">월</option>
+							<option value="TUESDAY">화</option>
+							<option value="WEDNESDAY">수</option>
+							<option value="THURSDAY">목</option>
+							<option value="FRIDAY">금</option>
+							<option value="SATURDAY">토</option>
+							<option value="SUNDAY">일</option>
 						</select> <span>시간</span> <input type="time" name="schedule[0][startTime]"/> ~ <input type="time" name="schedule[0][endTime]"/>
 						<button type="button" class="delete_btn"
 							onClick="deleteSchedule(this)">삭제</button>
@@ -102,4 +96,16 @@
 		</div>
 	</div>
 </body>
+<script>
+function updateCategoryStyle(selectedLabel) {
+    // 모든 라벨에서 선택된 클래스 제거
+    const labels = document.querySelectorAll('.category');
+    labels.forEach(label => {
+        label.classList.remove('selected-category');
+    });
+
+    // 선택된 라벨에만 클래스 추가
+    selectedLabel.classList.add('selected-category');
+}
+</script>
 </html>

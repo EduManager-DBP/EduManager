@@ -14,6 +14,7 @@ public class Lecture {
     private String teacherId;
     private String teacherName;
     private Integer lectureRoom;
+    private String categoryName;
     private String categoryColor;
     // 전화번호
     private String phone;
@@ -24,7 +25,7 @@ public class Lecture {
     // 변수 다 있는 생성자
     public Lecture(long lectureId, String name, String img, String category, long capacity, int level,
             String description, Date createAt, String teacherId, String teacherName, Integer lectureRoom,
-            String phone) {
+            String phone, String categoryName,String categoryColor) {
         super();
         this.lectureId = lectureId;
         this.name = name;
@@ -38,7 +39,9 @@ public class Lecture {
         this.setTeacherName(teacherName);
         this.lectureRoom = lectureRoom;
         this.phone = phone;
+        this.setCategoryName(categoryName);
         this.setCategoryColor(categoryColor);
+       
     }
 
     // create,update에 사용
@@ -176,10 +179,20 @@ public class Lecture {
         this.phone = phone;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+    
     public String getCategoryColor() {
         return categoryColor;
     }
 
+    
     public void setCategoryColor(String categoryColor) {
         this.categoryColor = categoryColor;
     }

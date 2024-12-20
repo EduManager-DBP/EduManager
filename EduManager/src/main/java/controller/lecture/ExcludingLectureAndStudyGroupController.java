@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.member.MemberSessionUtils;
 import model.domain.lecture.Lecture;
+import model.domain.member.Teacher;
 import model.domain.studyGroup.StudyGroup;
 import model.service.LectureManager;
 import model.service.StudyGroupManager;
+import model.service.member.TeacherManager;
 
 public class ExcludingLectureAndStudyGroupController implements Controller {
     
@@ -20,40 +22,41 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
             return "redirect:/member/login/form"; // login form 요청으로 redirect
         }
 
-      String stuId = MemberSessionUtils.getLoginMemberId(request.getSession());
-        
+
+      String memberId = MemberSessionUtils.getLoginMemberId(request.getSession());
+      String searchParam = request.getParameter("searchParam");
+      
       LectureManager lectureManager = LectureManager.getInstance();
       StudyGroupManager studyGroupManager = StudyGroupManager.getInstance();
+      TeacherManager teacherManager = TeacherManager.getInstance();
+
       
-      List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(stuId);
-      List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(stuId);
+      if (searchParam != null && !searchParam.trim().isEmpty()) {
+         
+          List<Lecture> lectureSearchList = lectureManager.getLecturesSearch(memberId, searchParam);
+          request.setAttribute("lectureList", lectureSearchList);
+          
+          List<StudyGroup> studyGroupSearchList = studyGroupManager.getStudyGroupsSearch(memberId, searchParam);
+          
+          request.setAttribute("isTeacher", teacherManager.isTeacher(memberId)); 
+          request.setAttribute("studyGroupList", studyGroupSearchList);
+          
+          request.setAttribute("searchParam",  searchParam);
+        
+        
+      } else {
+        
+          List<Lecture> lectureList = lectureManager.getLecturesExcludingStudent(memberId);
+          List<StudyGroup> studyGroupList = studyGroupManager.getStudyGroupsExcludingStudent(memberId);
 
-
-      System.out.println("강의 목록:");
-      for (Lecture lecture : lectureList) {
-          System.out.println("강의 ID: " + lecture.getLectureId() +
-                             ", 강의 이름: " + lecture.getName() +
-                             ", 카테고리: " + lecture.getCategory());
+          request.setAttribute("isTeacher", teacherManager.isTeacher(memberId)); 
+          request.setAttribute("lectureList", lectureList);
+          request.setAttribute("studyGroupList", studyGroupList);
       }
-      
-      System.out.println("강의 목록:");
-      for (StudyGroup studyGroup : studyGroupList) {
-          System.out.println("강의 ID: " + studyGroup.getStudyGroupId() +
-                             ", 강의 이름: " + studyGroup.getName() +
-                             ", 카테고리: " + studyGroup.getCategory());
-      }
-      
-
-      request.setAttribute("lectureList", lectureList);
-      request.setAttribute("studyGroupList", studyGroupList);
+    
 
       return "/registration/registration.jsp";
-        
-        
 
-        
-        
-       
     }
 
 }

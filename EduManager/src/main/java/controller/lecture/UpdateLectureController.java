@@ -3,6 +3,7 @@ package controller.lecture;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.dao.member.InterestCategoryDAO;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.service.LectureManager;
@@ -32,9 +34,9 @@ public class UpdateLectureController implements Controller {
 		String teacherId = MemberSessionUtils.getLoginMemberId(request.getSession());
 		System.out.print("내 아이디 : 선생:" + teacherId);
 
-//		Long updateLectureId = Long.parseLong(request.getParameter("lectureId"));
+		Long updateLectureId = Long.parseLong(request.getParameter("lectureId"));
 		// 임시
-		Long updateLectureId = 19L;
+//		Long updateLectureId = 19L;
 
 		log.debug("UpdateForm Request : {}", updateLectureId);
 		if (request.getMethod().equals("GET")) {
@@ -60,6 +62,14 @@ public class UpdateLectureController implements Controller {
 				lecture.setTeacherName(teacherName);
 
 				request.setAttribute("lecture", lecture);
+				
+				InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
+
+				// DB에서 관심 분야 목록을 가져옴
+				List<Map<String, Object>> categories = interestCategoryDAO.getCategories();
+				
+				request.setAttribute("categories", categories);
+				
 				return "/lecture/updateForm.jsp"; // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송
 			}
 		}
@@ -97,7 +107,7 @@ public class UpdateLectureController implements Controller {
 				log.debug("startTime : {} endTime:{}", startTime, endTime);
 
 				Schedule schedule = new Schedule(dayOfWeek, startTime, endTime, null, updateLecture.getLectureId(),
-						"regular", null);
+						"regular", "정기수업");
 				
 				log.debug("Schedule{} : {}", i, schedule);
 
@@ -130,7 +140,7 @@ public class UpdateLectureController implements Controller {
 		    }
 			log.debug("updatedIds : {}", updatedIds);
 
-			return "redirect:/main/main";
+			return "redirect:/mylecture/view?lectureId=" + Long.parseLong(request.getParameter("lectureId"));
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);

@@ -54,15 +54,16 @@ public class LectureLikeDao {
         }
     }
     
-    
     //좋아요 누른 lecture들 가지고 오기
 public List<Lecture> getLikedLectures(String memberId) throws SQLException {
     List<Lecture> lectureList = new ArrayList<>();
     
     // lectureLike 테이블과 lecture 테이블을 조인하여 필요한 정보를 가져오는 쿼리
-    String sql = "SELECT l.lectureId, l.name, l.category, l.img " +
+    String sql = "SELECT l.lectureId, l.name, l.category, l.img, t.name AS teacherName,  ic.name AS categoryName, ic.color " +
                  "FROM lectureLike ll " +
                  "JOIN lecture l ON ll.lectureId = l.lectureId " +
+                 "JOIN Teacher t ON l.teacherId = t.Id  " +
+                 "JOIN InterestCategory ic ON l.category = ic.Id  " +
                  "WHERE ll.stuId = ?";
                  
     jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId});
@@ -75,6 +76,9 @@ public List<Lecture> getLikedLectures(String memberId) throws SQLException {
         lecture.setName(rs.getString("name"));
         lecture.setCategory(rs.getString("category"));
         lecture.setImg(rs.getString("img"));
+        lecture.setTeacherName(rs.getString("teacherName"));
+        lecture.setCategoryColor(rs.getString("color"));
+        lecture.setCategoryName(rs.getString("categoryName"));
         
         lectureList.add(lecture);
     }

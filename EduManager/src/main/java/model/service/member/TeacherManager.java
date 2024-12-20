@@ -71,6 +71,14 @@ public class TeacherManager {
 		}
 		return teacher;
 	}
+	public Boolean isTeacher(String id) throws SQLException, MemberNotFoundException {
+		Teacher teacher = teacherDAO.findTeacher(id);
+
+		if (teacher == null) {
+			return false;
+		}
+		return true;
+	}
 
 	public List<Teacher> findTeacherList() throws SQLException {
 		return teacherDAO.findTeacherList();

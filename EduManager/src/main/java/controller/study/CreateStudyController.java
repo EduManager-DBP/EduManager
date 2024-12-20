@@ -2,6 +2,8 @@ package controller.study;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.dao.member.InterestCategoryDAO;
 import model.domain.Schedule;
 import model.domain.studyGroup.StudyGroup;
 import model.service.StudyManager;
@@ -29,6 +32,12 @@ public class CreateStudyController implements Controller {
 
 		// GET요청
 		if (request.getMethod().equals("GET")) {
+			InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
+
+			// DB에서 관심 분야 목록을 가져옴
+			List<Map<String, Object>> categories = interestCategoryDAO.getCategories();
+			
+			request.setAttribute("categories", categories);
 			return "/study/creationForm.jsp";
 		}
 

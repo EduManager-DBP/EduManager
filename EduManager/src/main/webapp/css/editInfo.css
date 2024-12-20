@@ -87,7 +87,7 @@ header ul>li>a:hover {
 	padding: 30px;
 	border-radius: 8px;
 	width: 600px;
-	max-width: 1000px;
+	max-width: 600px;
 
 }
 
@@ -146,6 +146,35 @@ header ul>li>a:hover {
 	padding: 10px 20px;
 	position: absolute;
 	transition: color 0.3s;
+}
+
+
+
+#profile_img_container {
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 20px; /* 이미지와 버튼 간 간격 */
+    margin-bottom: 20px;
+}
+
+#profile_img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#profile_img_upload {
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    border: none;
+}
+
+#profile_img_upload:hover {
+    background-color: #e6e6e6;
 }
 
 #deleteAccount {

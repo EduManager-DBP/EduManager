@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="<c:url value='/css/study_details.css' />"
 	type="text/css">
 <script src="<c:url value='/js/study_calendar.js' />"></script>
-<title>스터디 상세보기</title>
+<title>강의 상세보기</title>
 </head>
 <body>
 	<jsp:include page="../navigation/navigation.jsp" />
@@ -22,8 +22,7 @@
 				<a class="complete-button"
 					href="<c:url value="/lecture/update">
 				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
-								</c:url>">강의
-					정보 수정하기</a>
+								</c:url>">강의 정보 수정하기</a>
 			</c:if>
 
 

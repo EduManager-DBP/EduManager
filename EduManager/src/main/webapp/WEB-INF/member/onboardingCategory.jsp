@@ -20,8 +20,7 @@
 	</header>
 	<div class="container">
 		<!-- 분야 선택 -->
-		<!-- 분야는 db에서 받아와야 할 것 같긴 함.-->
-		<!-- action 링크 임시로 해놨습니다 -->
+
 		<form id="category" id="categoryForm" method="POST"
 			action="<c:url value='/student/register4'/>">
 			<div style="text-align: center; height: 100px">

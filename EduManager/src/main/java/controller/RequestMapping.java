@@ -6,9 +6,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.lecture.CreateLectureAssignmentController;
 import controller.lecture.CreateLectureController;
 import controller.lecture.CreateLectureEnrollmentController;
+import controller.lecture.CreateLectureNoticeController;
 import controller.lecture.CreateLectureReviewController;
+import controller.lecture.CreateLectureScheduleController;
 import controller.lecture.UpdateLectureController;
 import controller.lecture.ViewLectureController;
 import controller.lecture.ViewMyLectureController;
@@ -125,6 +128,11 @@ public class RequestMapping {
         //내 강의 상세보기
 		mappings.put("/mylecture/view", new ViewMyLectureController());
 
+		//스터디 일정(특정),공지,과제 추가
+        mappings.put("/lecture/addSchedule", new CreateLectureScheduleController());
+        mappings.put("/lecture/addNotice", new CreateLectureNoticeController());
+        mappings.put("/lecture/addAssignment", new CreateLectureAssignmentController());
+		
 		
         // 강의 신청 페이지
         mappings.put("/lecture/over-view", new ViewLectureController());
@@ -136,6 +144,8 @@ public class RequestMapping {
 
         // 강의,스터디 신청
         mappings.put("/registration", new ExcludingLectureAndStudyGroupController());
+        mappings.put("/registration/search", new ExcludingLectureAndStudyGroupController());
+        
 
         // 내 스터디그룹 리스트 보기
         mappings.put("/study/list", new ViewMyStudyListController());

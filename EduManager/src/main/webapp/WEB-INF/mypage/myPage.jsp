@@ -15,15 +15,15 @@
 		<div class="subTitle">마이 페이지</div>
 		<div id="mypage_container">
 			<div id="profile_img_container">
-				<img id="profile_img" src="<c:url value='/images/profileImg.svg' />">
+			<img id="profile_img" src="<c:url value='${member.img}' />" >
 			</div>
 			<div id="mypage_name">
 				<c:choose>
 					<c:when test="${existStudent}">
-						<p>${curUserId}학생</p>
+						<p>${curUserId} 학생</p>
 					</c:when>
 					<c:otherwise>
-						<p>${curUserId}강사</p>
+						<p>${curUserId} 강사님</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
