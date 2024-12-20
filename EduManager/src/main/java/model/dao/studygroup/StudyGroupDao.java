@@ -543,14 +543,15 @@ public StudyGroup findGroupInfo(long groupId) {
             jdbcUtil.close(); // resource 반환
         }
     }
-    
+
     //좋아요 누른 스터디 그룹들 가지고 오기
     public List<StudyGroup> getLikedStudyGroups(String memberId) throws SQLException {
         List<StudyGroup> groupList = new ArrayList<>();
         
-        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.category " +
+        String sql = "SELECT sg.studyGroupId, sg.name, sg.img, sg.category, ic.name AS categoryName, ic.color " +
                      "FROM StudyGroupLike sgLike " +
                      "JOIN StudyGroup sg ON sgLike.studyGroupId = sg.studyGroupId " +
+                     "JOIN InterestCategory ic ON sg.category = ic.Id "+
                      "WHERE sgLike.stuId = ?";
                      
         jdbcUtil.setSqlAndParameters(sql, new Object[]{memberId});
@@ -563,6 +564,8 @@ public StudyGroup findGroupInfo(long groupId) {
             group.setName(rs.getString("name"));
             group.setImg(rs.getString("img"));
             group.setCategory(rs.getString("category"));
+            group.setCategoryColor(rs.getString("color"));
+            group.setCategoryName(rs.getString("categoryName"));
             
             groupList.add(group);
         }
