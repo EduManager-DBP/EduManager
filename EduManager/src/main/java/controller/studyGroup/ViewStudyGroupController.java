@@ -48,7 +48,10 @@ public class ViewStudyGroupController implements Controller {
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("groupId", groupId);
         request.setAttribute("groupName",  group.getName());
+        request.setAttribute("groupName",  group.getName());
         request.setAttribute("description", group.getDescription());
+        request.setAttribute("dayOfWeek", group.getDayOfWeek());
+        request.setAttribute("place", group.getPlace());
         request.setAttribute("reviewList", groupReviewList);
         
         boolean isLiked = studyGroupManager.isLikedByUser(stuId, groupId); // 인스턴스를 통해 호출
