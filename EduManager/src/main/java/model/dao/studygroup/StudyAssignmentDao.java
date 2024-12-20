@@ -98,11 +98,7 @@ public class StudyAssignmentDao {
                 ass.setDescription(rs.getString("description"));
                 ass.setTextFile(rs.getString("textfile"));
                 ass.setLectureId(rs.getInt("studygroupid"));
-
-                Date sqlDueDate = rs.getDate("duedate"); 
-                if (sqlDueDate != null) {
-                    ass.setDueDate(sqlDueDate.toLocalDate());
-                }
+                ass.setDueDate(rs.getDate("duedate").toLocalDate());
 
                 Date sqlCreateAt = rs.getDate("createat"); 
                 if (sqlCreateAt != null) {

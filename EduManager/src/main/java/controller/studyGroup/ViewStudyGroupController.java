@@ -48,7 +48,7 @@ public class ViewStudyGroupController implements Controller {
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("groupId", groupId);
         request.setAttribute("groupName",  group.getName());
-        request.setAttribute("groupName",  group.getName());
+        request.setAttribute("groupImg",  group.getImg());
         request.setAttribute("description", group.getDescription());
         request.setAttribute("dayOfWeek", group.getDayOfWeek());
         request.setAttribute("place", group.getPlace());

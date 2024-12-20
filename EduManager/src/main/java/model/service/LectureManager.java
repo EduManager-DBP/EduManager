@@ -22,101 +22,101 @@ import java.util.List;
 import java.time.LocalDate;
 
 public class LectureManager {
-    private static LectureManager instance = new LectureManager();
-    private LectureDao lectureDao;
-    private LectureScheduleDao scheduleDao;
-    private LectureNoticeDao noticeDao;
-    private LectureAssignmentDao assignmentDao;
-    private LectureLikeDao lectureLikeDao;
-    private LectureReviewDao lectureReviewDao;
+	private static LectureManager instance = new LectureManager();
+	private LectureDao lectureDao;
+	private LectureScheduleDao scheduleDao;
+	private LectureNoticeDao noticeDao;
+	private LectureAssignmentDao assignmentDao;
+	private LectureLikeDao lectureLikeDao;
+	private LectureReviewDao lectureReviewDao;
 
-    private LectureManager() {
-        lectureDao = new LectureDao();
-        scheduleDao = new LectureScheduleDao();
-        noticeDao = new LectureNoticeDao();
-        assignmentDao = new LectureAssignmentDao();
-        lectureLikeDao = new LectureLikeDao();
-        lectureReviewDao = new LectureReviewDao();
+	private LectureManager() {
+		lectureDao = new LectureDao();
+		scheduleDao = new LectureScheduleDao();
+		noticeDao = new LectureNoticeDao();
+		assignmentDao = new LectureAssignmentDao();
+		lectureLikeDao = new LectureLikeDao();
+		lectureReviewDao = new LectureReviewDao();
 
-    }
+	}
 
-    public static LectureManager getInstance() {
-        return instance;
-    }
+	public static LectureManager getInstance() {
+		return instance;
+	}
 
-    /*
-     * public List<Lecture> findLectureList() throws SQLException{ return
-     * lectureDao.getAllLectures(); }
-     */
-    // 특정 연도와 월의 데이터를 캘린더에 띄우기
-    public List<Schedule> getScheduleCalendarList(int year, int month) {
-        // DTO List 생성
+	/*
+	 * public List<Lecture> findLectureList() throws SQLException{ return
+	 * lectureDao.getAllLectures(); }
+	 */
+	// 특정 연도와 월의 데이터를 캘린더에 띄우기
+	public List<Schedule> getScheduleCalendarList(int year, int month) {
+		// DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-        // DAO 호출
-        List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
+		// DAO 호출
+		List<Schedule> schedules = scheduleDao.findSchedulesByDate(year, month);
 
-        // 데이터 통합
+		// 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-        return schedules;
-    }
+		return schedules;
+	}
 
-    public List<Notice> getNoticeCalendarList(int year, int month) {
-        // DTO List 생성
+	public List<Notice> getNoticeCalendarList(int year, int month) {
+		// DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-        // DAO 호출
-        List<Notice> notices = noticeDao.findNoticesByDate(year, month);
+		// DAO 호출
+		List<Notice> notices = noticeDao.findNoticesByDate(year, month);
 
-        // 데이터 통합
+		// 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-        return notices;
-    }
+		return notices;
+	}
 
-    public List<Assignment> getAssignmentCalendarList(int year, int month) {
-        // DTO List 생성
+	public List<Assignment> getAssignmentCalendarList(int year, int month) {
+		// DTO List 생성
 //       List<Schedule> calendarEntries = new ArrayList<>();
 
-        // DAO 호출
-        List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
+		// DAO 호출
+		List<Assignment> assignments = assignmentDao.findAssignmentsByDate(year, month);
 
-        // 데이터 통합
+		// 데이터 통합
 //        calendarEntries.addAll(schedules);
 //        calendarEntries.addAll(assignments);
 //        calendarEntries.addAll(notices);
 
-        return assignments;
-    }
+		return assignments;
+	}
 
-    public Lecture findLectureById(long lectureId) throws SQLException {
-        return lectureDao.findLectureById(lectureId);
-    }
+	public Lecture findLectureById(long lectureId) throws SQLException {
+		return lectureDao.findLectureById(lectureId);
+	}
 
-    public Lecture createLecture(Lecture lecture) throws SQLException {
-        return lectureDao.createLecture(lecture);
-    }
+	public Lecture createLecture(Lecture lecture) throws SQLException {
+		return lectureDao.createLecture(lecture);
+	}
 
-    public int updateLecture(Lecture lecture) throws SQLException {// , LectureNotFoundException {
-        return lectureDao.updateLecture(lecture);
-    }
+	public int updateLecture(Lecture lecture) throws SQLException {// , LectureNotFoundException {
+		return lectureDao.updateLecture(lecture);
+	}
 
-    public Lecture getLectureById(long lectureId) throws SQLException {
-        return lectureDao.getLectureById(lectureId);
-    }
+	public Lecture getLectureById(long lectureId) throws SQLException {
+		return lectureDao.getLectureById(lectureId);
+	}
 
-    public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
-        return lectureDao.getLecturesExcludingStudent(stuId);
-    }
-    
-    public List<Lecture> getLecturesSearch(String stuId, String searchName) throws SQLException {
-        return lectureDao.getLecturesSearch(stuId, searchName);
-    }
+	public List<Lecture> getLecturesExcludingStudent(String stuId) throws SQLException {
+		return lectureDao.getLecturesExcludingStudent(stuId);
+	}
+
+	public List<Lecture> getLecturesSearch(String stuId, String searchName) throws SQLException {
+		return lectureDao.getLecturesSearch(stuId, searchName);
+	}
 
 	public List<Lecture> MyLectureList(String stuId) throws SQLException {
 		return lectureDao.getMyLectureList(stuId);
@@ -191,56 +191,69 @@ public class LectureManager {
 		return lectureDao.isLectureConflict(memberId, lectureId);
 	}
 
-    public boolean isLectureConflict(String teacherId, String newDayOfWeek, LocalTime newStartTime, LocalTime newEndTime) throws SQLException {
+	public boolean isLectureConflict(String teacherId, String newDayOfWeek, LocalTime newStartTime,
+			LocalTime newEndTime) throws SQLException {
 		return lectureDao.isLectureConflict(teacherId, newDayOfWeek, newStartTime, newEndTime);
-    }
-	
+	}
+
 	public boolean isEnrollmentExists(String memberId, long lectureId) throws SQLException {
 		return lectureDao.isEnrollmentExists(memberId, lectureId);
 	}
-		 //스터디 과제 목록 조회(특정 날짜)
-    public List<Assignment> findAssignmentsByLectureIdAndDueDate(int lectureId, LocalDate dueDate) {
-    	return assignmentDao.findAssignmentsByLectureIdAndDueDate(lectureId, dueDate);
-    }
-    //스터디 공지 목록 조회(특정 날짜)
-    public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt){
-    	return noticeDao.findNoticesByLectureIdAndDate(lectureId, createdAt);
-    }
-    
-    //스터디 일정 목록 조회
-    public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type, String dayOfWeek) {
-    	return scheduleDao.findSchedulesByFilters(lectureId, startDate, type, dayOfWeek);
-    }
 
-    //스터디 공지 추가
-    public void createNotice(Notice notice) {
-    	noticeDao.createNotice(notice.getLectureId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
-    }
-    public void createAssignment(Assignment ass) {
-    	assignmentDao.createAssignment(ass.getLectureId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
-    }
-    //스터디 멤버 조회
-    public List<String> findLectureMembers(int lectureId) throws SQLException {
-    	return lectureDao.findLectureMembers(lectureId);
+	// 스터디 과제 목록 조회(특정 날짜)
+	public List<Assignment> findAssignmentsByLectureIdAndDueDate(int lectureId, LocalDate dueDate) {
+		return assignmentDao.findAssignmentsByLectureIdAndDueDate(lectureId, dueDate);
+	}
 
-    }
-    //월 단위 일정 유무 확인.
-    public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
-    	return lectureDao.findMonthSchedule(lectureId, month, year);
+	// 스터디 공지 목록 조회(특정 날짜)
+	public List<Notice> findNoticesByLectureIdAndDate(int lectureId, LocalDate createdAt) {
+		return noticeDao.findNoticesByLectureIdAndDate(lectureId, createdAt);
+	}
 
-    }
+	// 스터디 일정 목록 조회
+	public List<Schedule> findSchedulesByFilters(long lectureId, LocalDate startDate, String type, String dayOfWeek) {
+		return scheduleDao.findSchedulesByFilters(lectureId, startDate, type, dayOfWeek);
+	}
 
-    public List<Notice> findNoticesByLectureId(int lectureId) {
-        return  noticeDao.findNoticesByLectureId(lectureId);
-    }
-    
-    public List<Notice> searchNotices(int lectureId, String searchParam) {
-        return noticeDao.searchNotices(lectureId, searchParam);
-    }
-    //월 단위 일정 유무 확인.
-    public List<LocalDate> findMonthSchedule(int lectureId, int month, int year)throws SQLException {
-    	return lectureDao.findMonthSchedule(lectureId, month, year);
+	// 스터디 공지 추가
+	public void createNotice(Notice notice) {
+		noticeDao.createNotice(notice.getLectureId(), notice.getTitle(), notice.getDescription(), notice.getCreateat());
+	}
 
-    }
+	public void createAssignment(Assignment ass) {
+		assignmentDao.createAssignment(ass.getLectureId(), ass.getTitle(), ass.getDescription(), ass.getDueDate(), "");
+	}
+
+	// 스터디 멤버 조회
+	public List<String> findLectureMembers(int lectureId) throws SQLException {
+		return lectureDao.findLectureMembers(lectureId);
+
+	}
+
+	// 월 단위 일정 유무 확인.
+	public List<LocalDate> findMonthSchedule(int lectureId, int month, int year) throws SQLException {
+		return lectureDao.findMonthSchedule(lectureId, month, year);
+
+	}
+
+	public List<Notice> findNoticesByLectureId(int lectureId) {
+		return noticeDao.findNoticesByLectureId(lectureId);
+	}
+
+	public List<Notice> searchNotices(int lectureId, String searchParam) {
+		return noticeDao.searchNotices(lectureId, searchParam);
+	}
+
+	// 월 단위 일정 유무 확인.
+	public List<LocalDate> findMonthSchedule(int lectureId, int month, int year) throws SQLException {
+		return lectureDao.findMonthSchedule(lectureId, month, year);
+
+	}
+
+}
+
+	public List<Assignment> findAssignmentsByLectureId(int lectureId) {
+		return assignmentDao.findAssignmentsByLectureId(lectureId);
+	}
 
 }
