@@ -25,6 +25,12 @@
 								</c:url>">강의
 					정보 수정하기</a>
 			</c:if>
+			<c:if test="${!isTeacher}">
+				<a class="complete-button"
+					href="<c:url value="/lecture/over-view">
+				<c:param name="lectureId" value="${lectureInfo.lectureId}" />
+								</c:url>">강의 후기 작성하기</a>
+			</c:if>
 
 
 			<div class="study-info-box"></div>
