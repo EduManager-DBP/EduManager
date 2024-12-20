@@ -1,0 +1,134 @@
+body,
+html {
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   font-family: 'Pretendard'
+}
+
+ul {
+   list-style: none;
+}
+
+a {
+   text-decoration: none;
+   outline: none;
+}
+
+.page {
+   width: 1300px;
+   margin: 0 auto;
+}
+
+.subTitle {
+   margin-top: 50px;
+   font-size: 20px;
+   color: #643E23;
+   font-weight: bold;
+}
+
+/* 검색창 스타일 */
+.search-container {
+   margin-top: 30px;
+   text-align: center;
+}
+
+.search-input {
+   padding: 10px;
+   font-size: 16px;
+   width: 300px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   margin-right: 10px;
+}
+
+.search-button {
+   padding: 10px 20px;
+   font-size: 16px;
+   background-color: #643E23;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+}
+
+.search-button:hover {
+   background-color: #7a5a41;
+}
+
+/* 테이블 스타일 */
+.table {
+   width: 100%;
+   margin-top: 40px;
+   border-collapse: collapse;
+   border-radius: 10px;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 테이블에 그림자 효과 추가 */
+}
+
+
+.table-header {
+   background-color: #643E23;
+   color: white;
+   padding: 12px;
+   text-align: left;
+   font-weight: bold;
+}
+
+.notice-row {
+   background-color: #fff;
+   border-bottom: 1px solid #ddd;
+}
+
+
+.title, .description, .createat {
+   padding: 12px;
+   text-align: left;
+}
+
+.title {
+   font-weight: bold;
+   color: black;
+}
+
+.description {
+   color: #555;
+}
+
+.createat {
+   color: #888;
+}
+
+/* 테이블의 마지막 행에 여백 추가 */
+.table tr:last-child {
+   border-bottom: none;
+}
+
+.search {
+	position: relative;
+	width: 300px;
+	float: right;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	margin-right:15px;
+}
+
+.search input {
+	width: 100%;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	padding: 10px 8px;
+	font-size: 16px;
+	border: 1px solid white;
+	/* 테두리를 제거 */
+	box-shadow: 0px 4px 20px rgba(44, 44, 44, 0.1);
+	/* 그림자 추가 */
+}
+
+.search img {
+	position: absolute;
+	width: 17px;
+	top: 10px;
+	right: 0px;
+	margin: 0;
+	cursor: pointer;
+}

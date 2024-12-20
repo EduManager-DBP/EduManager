@@ -35,23 +35,24 @@ public class CreateLectureAssignmentController implements Controller {
 			request.setAttribute("lectureId", request.getParameter("lectureId"));
 			request.setAttribute("startDate", LocalDate.parse(request.getParameter("selectedDate")));
 			return "/lecture/addAssignment.jsp";
-		};
+		}
+		;
 
 		// POST요청
 		try {
 			Assignment assignment = new Assignment();
-			
+
 			assignment.setTitle(request.getParameter("title"));
 			assignment.setDescription(request.getParameter("description"));
 			assignment.setDueDate(LocalDate.parse(request.getParameter("dueDate")));
 			assignment.setLectureId(Integer.parseInt(request.getParameter("lectureId")));
-			
-			LectureManager manager = LectureManager.getInstance();
-			manager.createAssignment(assignment);
 
-			return "redirect:/mylecture/view?lectureId=" + Long.parseLong(request.getParameter("lectureId")) 
-		       + "&selectedDate=" + LocalDate.parse(request.getParameter("startDate"));
-			
+			LectureManager manager = LectureManager.getInstance();
+			// manager.createAssignment(assignment);
+
+			return "redirect:/mylecture/view?lectureId=" + Long.parseLong(request.getParameter("lectureId"))
+					+ "&selectedDate=" + LocalDate.parse(request.getParameter("startDate"));
+
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);

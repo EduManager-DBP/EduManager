@@ -34,6 +34,9 @@ public class MainController implements Controller {
 		// 파라미터로 연도와 월 가져오기 (기본값: 현재 날짜)
 		String yearParam = request.getParameter("year");
 		String monthParam = request.getParameter("month");
+		String selectedDayParam = request.getParameter("selectedDay");
+		int selectedDay = (selectedDayParam != null && !selectedDayParam.isEmpty()) ? Integer.parseInt(selectedDayParam)
+				: currentDate.getDayOfMonth();
 
 		// 파라미터가 없으면 현재 연도와 월을 기본값으로 설정
 		int year = (yearParam != null && !yearParam.isEmpty()) ? Integer.parseInt(yearParam) : currentDate.getYear();
@@ -53,6 +56,7 @@ public class MainController implements Controller {
 		request.setAttribute("assignmentEntries", assignmentEntries);
 		request.setAttribute("year", year);
 		request.setAttribute("month", month);
+		request.setAttribute("selectedDay", selectedDay);
 
 		// main 화면으로 이동(forwarding)
 		return "/main/main.jsp";
