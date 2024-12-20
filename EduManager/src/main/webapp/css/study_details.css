@@ -68,7 +68,7 @@ header>nav {
 }
 
 .year {
-/*	font-size: 25px;
+	/*	font-size: 25px;
 	font-weight: bold;
 	float: right;
 	padding-top: 10px;
@@ -76,7 +76,7 @@ header>nav {
 	font-size: 1.5em;
 	font-weight: bold;
 	vertical-align: middle;
-		float: right;
+	float: right;
 
 }
 
@@ -157,7 +157,7 @@ header>nav {
 	z-index: 19;
 	width: 180px;
 	justify-self: center;
-	margin-top:11px;
+	margin-top: 11px;
 }
 
 .study-info-box {
@@ -171,6 +171,20 @@ header>nav {
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
 	justify-self: center;
 	z-index: 18;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#studyGroupOverviewImg {
+	width: 100%;
+	/* 부모의 너비를 가득 채우도록 설정 */
+	height: 75%;
+	/* 비율을 유지하면서 높이 설정 */
+	object-fit: contain;
+	/* 이미지가 부모 안에 맞게 조정되도록 설정 */
+	display: block;
+	/* 이미지 하단 여백 제거 */
 }
 
 .team-members-box {
@@ -181,8 +195,10 @@ header>nav {
 	border: 1px solid rgba(170, 170, 170, 0.02);
 	border-radius: 15px;
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-	overflow-y: auto; /* 세로 스크롤만 활성화 */
-	overflow-x: hidden; /* 가로 스크롤 비활성화 */
+	overflow-y: auto;
+	/* 세로 스크롤만 활성화 */
+	overflow-x: hidden;
+	/* 가로 스크롤 비활성화 */
 	z-index: 1;
 	justify-self: center;
 }
@@ -227,12 +243,14 @@ header>nav {
 	font-weight: 400;
 	line-height: 17px;
 }
-#teacher_name{
-	width: 150px; 
-	justify-self:center;
-		color: #633d22;
+
+#teacher_name {
+	width: 150px;
+	justify-self: center;
+	color: #633d22;
 
 }
+
 .study-location {
 	align-items: center;
 	color: #633d22;
@@ -299,11 +317,13 @@ button {
 	border: 1px solid rgba(170, 170, 170, 0.02);
 	border-radius: 15px;
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
-    height: fit-content; /* 부모 요소 높이를 자식 요소의 내용에 맞춤 */
+	height: fit-content;
+	/* 부모 요소 높이를 자식 요소의 내용에 맞춤 */
 	padding-bottom: 20px;
 
 }
-.rectangle-1 ul{
+
+.rectangle-1 ul {
 	margin: 0;
 	list-style: disc;
 	padding-inline-start: 20px;
@@ -313,7 +333,9 @@ button {
 
 
 
-.schedule_content,.notice_content, .assignment_content  {
+.schedule_content,
+.notice_content,
+.assignment_content {
 	display: block;
 	font-size: 18px;
 	font-weight: 400;
@@ -323,7 +345,9 @@ button {
 	font-size: 18px;
 }
 
-.notice, .assignment, .schedule {
+.notice,
+.assignment,
+.schedule {
 	margin-top: 15px;
 	width: 30%;
 	height: fit-content;
@@ -332,7 +356,8 @@ button {
 }
 
 .schedule_title,
-.notice_title ,.assignment_title {
+.notice_title,
+.assignment_title {
 	display: block;
 	height: 40px;
 	color: #000000;
@@ -349,13 +374,19 @@ button {
 	height: 30px;
 	align-content: center;
 }
-.schedule-item, .notice-item, .assignment-item{
+
+.schedule-item,
+.notice-item,
+.assignment-item {
 	font-size: 0.9em;
 	height: fit-content;
 	width: 100%;
-	 word-wrap: break-word; /* 줄바꿈 허용 */
-    overflow-wrap: break-word; /* 최신 표준 */
-    white-space: normal; /* 텍스트를 자동으로 줄바꿈 */
+	word-wrap: break-word;
+	/* 줄바꿈 허용 */
+	overflow-wrap: break-word;
+	/* 최신 표준 */
+	white-space: normal;
+	/* 텍스트를 자동으로 줄바꿈 */
 	margin-bottom: 5px;
 }
 
@@ -430,6 +461,10 @@ button {
 	line-height: 23.867px;
 	text-align: left;
 	white-space: nowrap;
+}
+
+.important-notice ul {
+	list-style-type: disc;
 }
 
 .flex-column-df {
@@ -525,17 +560,20 @@ button {
 }
 
 .plus_button {
-	display: flex; /* Flexbox 사용 */
-    justify-content: center; /* 가로 중앙 정렬 */
-    align-items: center; /* 세로 중앙 정렬 */
-    margin-top: 5px;
-    width: 90%;
-    height: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #E5E5EA;
-    color: #643e23;
-    font-size: medium;
+	display: flex;
+	/* Flexbox 사용 */
+	justify-content: center;
+	/* 가로 중앙 정렬 */
+	align-items: center;
+	/* 세로 중앙 정렬 */
+	margin-top: 5px;
+	width: 90%;
+	height: 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #E5E5EA;
+	color: #643e23;
+	font-size: medium;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -560,4 +598,3 @@ button {
 	font-family: 'Pretendard';
 
 }
-

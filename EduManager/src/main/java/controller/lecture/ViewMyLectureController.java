@@ -64,13 +64,20 @@ public class ViewMyLectureController implements Controller {
             List<Schedule> specialSchedules = manager.findSchedulesByFilters(lectureId, selectedDate, "special", null);
             log.debug("특수일정: " + specialSchedules);
             
+            List<Notice> notices = manager.findNoticesByLectureId(lectureId);
+            log.debug("공지: " + notices);
             
+            List<Assignment> assignments = manager.findAssignmentsByLectureId(lectureId);
+            log.debug("공지: " + assignments);
+
             // 필요한 비즈니스 로직 수행 (예: DB 조회)
             request.setAttribute("selectedDate", selectedDate);
             request.setAttribute("assignmentList", assignmentList);
             request.setAttribute("noticeList", noticeList);
             request.setAttribute("regularSchedules", regularSchedules);
             request.setAttribute("specialSchedules", specialSchedules);
+            request.setAttribute("noticeList", notices);
+            request.setAttribute("assignmentList", assignments);
 
             Lecture lectureInfo = manager.findLectureById(lectureId);
             log.debug("lectureInfo: " + lectureId);
