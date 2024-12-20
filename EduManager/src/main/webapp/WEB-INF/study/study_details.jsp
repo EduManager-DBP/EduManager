@@ -60,11 +60,6 @@
          </div>
       </div>
 
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
 
 		<div class="mainInform">
 			<div class="title">${studyInfo.name}</div>
