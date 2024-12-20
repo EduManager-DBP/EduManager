@@ -47,15 +47,17 @@ public class MainController implements Controller {
 
 		// LectureManager를 통해 데이터 가져오기
 		LectureManager manager = LectureManager.getInstance();
-		List<Schedule> scheduleEntries = manager.getScheduleCalendarList(year, month);// LectureManager를 통해 데이터 가져오기
-		List<Notice> noticeEntries = manager.getNoticeCalendarList(year, month);// LectureManager를 통해 데이터 가져오기
-		List<Assignment> assignmentEntries = manager.getAssignmentCalendarList(year, month);// LectureManager를 통해 데이터
-																							// 가져오기
+		List<Schedule> lectureScheduleEntries = manager.getScheduleCalendarList(year, month);// LectureManager를 통해 데이터
+																								// 가져오기
+		List<Notice> lectureNoticeEntries = manager.getNoticeCalendarList(year, month);// LectureManager를 통해 데이터 가져오기
+		List<Assignment> lectureAssignmentEntries = manager.getAssignmentCalendarList(year, month);// LectureManager를 통해
+																									// 데이터
+		// 가져오기
 
 		// 데이터를 JSP에 전달
-		request.setAttribute("scheduleEntries", scheduleEntries);
-		request.setAttribute("noticeEntries", noticeEntries);
-		request.setAttribute("assignmentEntries", assignmentEntries);
+		request.setAttribute("lectureScheduleEntries", lectureScheduleEntries);
+		request.setAttribute("lectureNoticeEntries", lectureNoticeEntries);
+		request.setAttribute("lectureAssignmentEntries", lectureAssignmentEntries);
 		request.setAttribute("year", year);
 		request.setAttribute("month", month);
 		request.setAttribute("selectedDay", selectedDay);
