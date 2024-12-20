@@ -37,6 +37,7 @@ import controller.studyGroup.StudyGroupJoinRequestController;
 import controller.studyGroup.ToggleStudyGroupLikeController;
 import controller.studyGroup.ViewMyStudyListController;
 import controller.studyGroup.ViewStudyGroupController;
+import controller.studyGroup.ViewStudyNoticeListController;
 import controller.studyGroup.ViewStudyRequestListController;
 import controller.mypage.DeleteAccountController;
 import controller.mypage.EditController;
@@ -178,6 +179,9 @@ public class RequestMapping {
         logger.info("Mappings initialized: {}", mappings.keySet());
         logger.info("Initialized Request Mapping!");
 
+        mappings.put("/study/listNotice", new ViewStudyNoticeListController());
+        mappings.put("/study/searchListNotice", new ViewStudyNoticeListController());
+        mappings.put("/study/listAssignment", new ForwardController("/study/listAssignment.jsp"));
 
         mappings.put("/confirmId", new ForwardController("/member/confirmId.jsp"));
     }

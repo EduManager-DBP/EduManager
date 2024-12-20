@@ -109,12 +109,12 @@
 								</li>
 							</c:forEach>
 						</ul>
-							<c:if test="${isLeader}">
+							
 								<a class="plus_button" href="<c:url value="/study/addSchedule">
 									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 									<c:param name="selectedDate" value="${selectedDate}" />
 								</c:url>"> + </a>
-							</c:if>
+							
 							
 						</div>
 					</div>
@@ -126,12 +126,12 @@
 									<li class="notice-item">${notice.title}</li>
 								</c:forEach>
 							</ul>
-							<c:if test="${isLeader}">
+							
 								<a class="plus_button" href="<c:url value="/study/addNotice">
 									<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 									<c:param name="selectedDate" value="${selectedDate}" />
 								</c:url>"> + </a>
-							</c:if>
+							
 						</div>
 					</div>
 					<div class="assignment">
@@ -142,12 +142,12 @@
 									<li class="assignment-item">${assignment.title}</li>
 								</c:forEach>
 							</ul>
-							<c:if test="${isLeader}">
+							
 								<a class="plus_button" href="<c:url value="/study/addAssignment">
 										<c:param name="groupId" value="${studyInfo.studyGroupId}" />
 										<c:param name="selectedDate" value="${selectedDate}" />
 									</c:url>"> + </a>
-							</c:if>
+							
 						</div>
 					</div>
 				</div>
@@ -156,7 +156,9 @@
 				<div class="flex-column-fc">
 					<div class="flex-column">
 						<div class="notice_main">공지사항</div>
-						<a href="<c:url value='/study/listNotice' />" class="more-link">더보기</a>
+						<a href="<c:url value='/study/listNotice'/>?groupId=${studyInfo.studyGroupId}" class="more-link">
+    더보기
+</a>
 					</div>
 					<div class="important-notice">
 						<li>아주아주아주아주아주아주 중요한 공지</li>

@@ -6,51 +6,52 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>공지사항 리스트</title>
-<link rel="stylesheet" href="<c:url value='/css/listNotice.css' />"
+<link rel=stylesheet href="<c:url value='/css/listAssignmentAndNotice.css' />"
 	type="text/css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;900&amp;display=swap" />
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" />
 </head>
 <body>
-	<!-- Navigation Bar -->
-	<div style="width: 90%; justify-self: center;"><jsp:include
-			page="../navigation/navigation.jsp" /></div>
-
-
-	<!-- Main Container -->
-	<div class="main-container">
-		<h2 class="page-title">공지사항 리스트</h2>
+	<div class="page">
+		<jsp:include page="../navigation/navigation.jsp" />
+		<div class="subTitle">공지사항 리스트</div>
 
 		<!-- 검색창 -->
-		<div class="search-container">
-			<form action="/study/listNotice" method="GET">
-				<input type="text" name="searchKeyword" placeholder="검색어를 입력하세요"
-					class="search-input" />
-				<button type="submit" class="search-button">검색</button>
-			</form>
-		</div>
+		 
+         <div class="search">
+            <form action="<c:url value='/study/searchListNotice' />"
+               method="post" id="searchStudyNoticeForm">
+               <input type="hidden" name="groupId" value="${groupId}" />
+               <c:choose>
+                  <c:when test="${searchParam == null}">
+                     <input type="text" name="searchParam" placeholder="검색어를 입력하세요">
+                  </c:when>
+                  <c:otherwise>
+                     <input type="text" name="searchParam" placeholder="${searchParam}">
+                  </c:otherwise>
+               </c:choose>
+               
+               <img src="<c:url value='/images/searchIcon.svg' />"
+                  onclick="document.getElementById('searchStudyNoticeForm').submit();">
+            </form>
+
+         </div>
+      
 
 		<!-- 공지사항 리스트 -->
-		<table class="notice-table">
+		<table class="table">
 			<thead>
 				<tr>
 					<th class="table-header">제목</th>
-					<th class="table-header">올린 사람</th>
+					<th class="table-header">내용</th>
 					<th class="table-header">등록일</th>
-					<th class="table-header">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- JSTL 반복문으로 리스트 출력 -->
-				<c:forEach var="notice" items="${noticeList}">
+				<c:forEach var="notice" items="${studyGroupNoticeList}">
 					<tr class="notice-row">
-						<td class="notice-title"><a
-							href="<c:url value='/study/noticeDetail?id=${notice.id}' />">${notice.title}</a></td>
-						<td class="notice-writer">${notice.writer}</td>
-						<td class="notice-date">${notice.date}</td>
-						<td class="notice-views">${notice.views}</td>
+						<td class="title">${notice.title}</td>
+						<td class="description">${notice.description}</td>
+						<td class="createat">${notice.createat}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

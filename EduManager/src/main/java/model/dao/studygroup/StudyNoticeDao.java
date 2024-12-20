@@ -107,6 +107,52 @@ public class StudyNoticeDao {
 
         return notices;
     }
+    
+    public List<Notice> searchNotices(int studygroupid, String searchParam) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT studynoticeid, title, description, createat ");
+        query.append("FROM studynotice ");
+        query.append("WHERE studygroupid = ? ");
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            query.append("AND (title LIKE ? OR description LIKE ?) ");
+        }
+
+        List<Object> params = new ArrayList<>();
+        params.add(studygroupid); // studygroupid 추가
+
+        if (searchParam != null && !searchParam.trim().isEmpty()) {
+            params.add("%" + searchParam + "%"); // 제목 검색 조건
+            params.add("%" + searchParam + "%"); // 내용 검색 조건
+        }
+
+        jdbcUtil.setSqlAndParameters(query.toString(), params.toArray()); // SQL과 파라미터 설정
+        List<Notice> notices = new ArrayList<>();
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+            while (rs.next()) {
+                Notice notice = new Notice();
+                notice.setId(rs.getInt("studynoticeid"));
+                notice.setTitle(rs.getString("title"));
+                notice.setDescription(rs.getString("description"));
+                notice.setStudyId(studygroupid);
+
+                Date sqlDate = rs.getDate("createat");
+                LocalDate localDate = sqlDate.toLocalDate();
+                notice.setCreateat(localDate);
+
+                notices.add(notice); // 리스트에 공지 추가
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close(); // ResultSet, PreparedStatement, Connection 등 해제
+        }
+
+        return notices;
+    }
+    
  // 강의 아이디로 강의 공지 목록 조회
     public List<Notice> findNoticesByStudyIdAndDueDate(int studygroupid, LocalDate createdAt) {
         StringBuffer query = new StringBuffer();
