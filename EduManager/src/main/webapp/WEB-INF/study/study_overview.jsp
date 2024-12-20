@@ -13,11 +13,11 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">스터디 그룹 가입</div>
+		<div class="subTitle">스터디그룹 가입</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
-					<img src="<c:url value='${groupImg}' />"
+					<img src="<c:url value='/images/white.png' />"
 						id="studyGroupOverviewImg">
 				</div>
 				<div class="overViewInfo">

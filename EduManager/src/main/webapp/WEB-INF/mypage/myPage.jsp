@@ -41,7 +41,7 @@
 							목록</button>
 						<button class="mypageBtn mystudyroom"
 							onclick="window.location.href='<c:url value='/study/list' />'">
-							내스터디그룹</button>
+							내 스터디그룹</button>
 					</c:when>
 
 				</c:choose>
