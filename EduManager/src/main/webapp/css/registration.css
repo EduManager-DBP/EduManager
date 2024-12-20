@@ -214,11 +214,13 @@ li {
 	margin-right: 10px;
 }
 
-#makeStudyBtn-container {
+#makeStudyBtn-container{
 	display: none;
 	margin-top: 50px;
 }
-
+#makeLectureBtn-container{
+	margin-top: 50px;
+}
 #makeStudyBtn {
 	border-radius: 18px;
 	width: 170px;

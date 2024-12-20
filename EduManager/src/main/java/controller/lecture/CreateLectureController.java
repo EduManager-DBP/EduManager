@@ -2,6 +2,8 @@ package controller.lecture;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.member.MemberSessionUtils;
+import model.dao.member.InterestCategoryDAO;
 import model.domain.Schedule;
 import model.domain.lecture.Lecture;
 import model.service.LectureManager;
@@ -33,6 +36,13 @@ public class CreateLectureController implements Controller {
 			MemberManager memberManager = MemberManager.getInstance();
 			String teacherName = memberManager.findName(teacherId);
 
+			
+			InterestCategoryDAO interestCategoryDAO = new InterestCategoryDAO();
+
+			// DB에서 관심 분야 목록을 가져옴
+			List<Map<String, Object>> categories = interestCategoryDAO.getCategories();
+			
+			request.setAttribute("categories", categories);
 			request.setAttribute("teacherName", teacherName);
 			return "/lecture/creationForm.jsp";
 		}
@@ -75,7 +85,7 @@ public class CreateLectureController implements Controller {
 				log.debug("Create Schedule : {}", scheduleId);
 			}
 
-		 return "redirect:/main/main";
+		 return "redirect:/lecture/list";
 		} catch (Exception e) { // 예외 발생 시 입력 form으로 forwarding
 			request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
