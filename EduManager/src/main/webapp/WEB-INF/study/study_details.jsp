@@ -66,7 +66,7 @@
             <div class="team-header">
                <img src="<c:url value='/images/members.png' />" alt="members" 
                style="height: 10px; margin-right: 5px"/>
-               <span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity})</span>
+             <span class="team-count">스터디원 (${fn:length(members) + 1}/${studyInfo.capacity+1})</span>
             </div>
             <ul class="member-list">
                <li class="member-item">

@@ -627,5 +627,25 @@ public class LectureDao {
       return null;
    }
     
+   public int getAvailableSeatsByLectureId(long lectureId) {
+       String sql = "SELECT (l.CAPACITY - COUNT(le.ENROLLMENTID)) AS AVAILABLE_SEATS " +
+                    "FROM LECTURE l " +
+                    "LEFT JOIN LECTUREENROLLMENT le ON l.LECTUREID = le.LECTUREID " +
+                    "WHERE l.LECTUREID = ? " +
+                    "GROUP BY l.CAPACITY";
+       jdbcUtil.setSqlAndParameters(sql, new Object[] { lectureId }); // SQL과 파라미터 설정
+       try {
+           ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+           if (rs.next()) {
+               return rs.getInt("AVAILABLE_SEATS"); // 잔여 좌석 수 반환
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       } finally {
+           jdbcUtil.close(); // 자원 해제
+       }
+       return -1; // 강의가 없거나 에러 발생 시 -1 반환
+   }
+
 }
 

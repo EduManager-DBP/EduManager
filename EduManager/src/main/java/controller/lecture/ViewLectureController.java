@@ -53,6 +53,8 @@ public class ViewLectureController implements Controller {
         boolean isConflict = lectureManager. isLectureConflict(stuId, lectureId); // 인스턴스를 통해 호출
         request.setAttribute("isConflict", isConflict);
        
+        int availableSeats = lectureManager.getAvailableSeatsByLectureId(lectureId);
+        request.setAttribute("availableSeats", availableSeats);
         
         // 로그인한 사용자 ID를 request에 저장
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
