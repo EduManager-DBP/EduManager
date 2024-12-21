@@ -58,6 +58,7 @@ public class ViewLectureController implements Controller {
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("lectureId",  lectureId);
         request.setAttribute("lectureName",  lecture.getName());
+        request.setAttribute("lectureImg",  lecture.getImg());
         request.setAttribute("teacherName", lecture.getTeacherName());
         request.setAttribute("teacherPhone", lecture.getPhone());
         request.setAttribute("lectureroom", lecture.getLectureRoom());

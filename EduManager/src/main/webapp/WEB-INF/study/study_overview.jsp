@@ -17,7 +17,7 @@
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
-					<img src="<c:url value='/images/white.png' />"
+					<img src="<c:url value='${groupImg}' />"
 						id="studyGroupOverviewImg">
 				</div>
 				<div class="overViewInfo">

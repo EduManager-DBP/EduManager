@@ -28,7 +28,7 @@ public class LoginController implements Controller {
 			request.setAttribute("curUserId", manager.findName(id));
 			session.setAttribute("curUserId", manager.findName(id));
 
-			return "redirect:/main/main";
+			return "redirect:/mypage";
 		} catch (Exception e) {
 			/*
 			 * UserNotFoundException이나 PasswordMismatchException 발생 시 다시 login form을 사용자에게

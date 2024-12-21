@@ -81,7 +81,7 @@ public StudyGroup findGroupInfo(long groupId) {
                        "m.name AS leaderName " +
                        "FROM StudyGroup sg " +
                        "JOIN Member m ON sg.leaderId = m.id " +
-                       "JOIN Studyschedule ss ON sg.studyGroupId = ss.studyGroupId " +
+                       "LEFT JOIN Studyschedule ss ON sg.studyGroupId = ss.studyGroupId " +
                        "WHERE sg.studyGroupId = ?";
         jdbcUtil.setSqlAndParameters(query, new Object[] { groupId });
 
@@ -189,8 +189,65 @@ public StudyGroup findGroupInfo(long groupId) {
       }
    }    
     
-    public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
-        StringBuffer query = new StringBuffer();
+   public List<StudyGroup> getStudyGroupsExcludingStudent(String stuId) {
+     
+       StringBuffer query = new StringBuffer();
+       query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ");
+       query.append("ic.name AS categoryName, ic.color ");
+       query.append("FROM StudyGroup S ");
+       query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
+       query.append("WHERE S.studyGroupId NOT IN ( ");
+       query.append("    SELECT studyGroupId ");
+       query.append("    FROM StudyGroupApplication ");
+       query.append("    WHERE stuId = ? AND status = '수락' ");
+       query.append(") ");
+       query.append("AND S.leaderId != ? ");
+       query.append("ORDER BY ");
+       query.append("    CASE ");
+       query.append("        WHEN S.category IN (");
+       query.append("            SELECT INTERESTID ");
+       query.append("            FROM studentInterestCategory ");
+       query.append("            WHERE stuId = ? ");
+       query.append("        ) THEN 1 ");
+       query.append("        ELSE 2 ");
+       query.append("    END");
+       jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId, stuId });
+       List<StudyGroup> studyGroupList = new ArrayList<>(); // 변수 선언
+       
+       try {
+           ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
+           
+           while (rs.next()) {
+               StudyGroup studyGroup = new StudyGroup();
+               studyGroup.setStudyGroupId(rs.getLong("studyGroupId"));
+               studyGroup.setName(rs.getString("name"));
+               studyGroup.setCategory(rs.getString("category"));
+               studyGroup.setCapacity(rs.getInt("capacity"));
+               studyGroup.setImg(rs.getString("img"));
+               studyGroup.setDescription(rs.getString("description"));
+               studyGroup.setCreateAt(rs.getDate("createAt"));
+               studyGroup.setPlace(rs.getString("place"));
+               studyGroup.setCategoryColor(rs.getString("color"));
+               studyGroup.setCategoryName(rs.getString("categoryName"));
+
+               // 디버깅 출력
+               System.out.println("Lecture Name: " + studyGroup.getName());
+               System.out.println("Lecture Category: " + studyGroup.getCategory());
+               System.out.println("Lecture Capacity: " + studyGroup.getCapacity());
+
+               studyGroupList.add(studyGroup); // 리스트에 추가
+           }
+       } catch (Exception ex) {
+           ex.printStackTrace();
+       } finally {
+           jdbcUtil.close();
+       }
+
+       return studyGroupList;
+   }
+    
+    public List<StudyGroup> getStudyGroupsSearch(String stuid, String searchParam) {
+        StringBuilder query = new StringBuilder();
         query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ");
         query.append("ic.name AS categoryName, ic.color ");
         query.append("FROM StudyGroup S ");
@@ -201,57 +258,7 @@ public StudyGroup findGroupInfo(long groupId) {
         query.append("    WHERE stuId = ? AND status = '수락' ");
         query.append(") ");
         query.append("AND S.leaderId != ? ");
-        query.append("ORDER BY ");
-        query.append("    CASE ");
-        query.append("        WHEN S.category IN (");
-        query.append("            SELECT INTERESTID ");
-        query.append("            FROM studentInterestCategory ");
-        query.append("            WHERE stuId = ? ");
-        query.append("        ) THEN 1 ");
-        query.append("        ELSE 2 ");
-        query.append("    END");
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[] { stuId, stuId, stuId }); 
-        List<StudyGroup> studyGroupList = new ArrayList<>();
-
-        try {
-            ResultSet rs = jdbcUtil.executeQuery(); // 쿼리 실행
-
-            while (rs.next()) {
-                StudyGroup studyGroup = new StudyGroup();
-                studyGroup.setStudyGroupId(rs.getLong("studyGroupId"));
-                studyGroup.setName(rs.getString("name"));
-                studyGroup.setCategory(rs.getString("category"));
-                studyGroup.setCapacity(rs.getInt("capacity"));
-                studyGroup.setImg(rs.getString("img"));
-                studyGroup.setDescription(rs.getString("description"));
-                studyGroup.setCreateAt(rs.getDate("createAt"));
-                studyGroup.setPlace(rs.getString("place"));
-                studyGroup.setCategoryColor(rs.getString("color"));
-                studyGroup.setCategoryName(rs.getString("categoryName"));
-                studyGroupList.add(studyGroup);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-
-        return studyGroupList;
-    }
-    
-    
-    public List<StudyGroup> getStudyGroupsSearch(String stuid, String searchParam) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT S.studyGroupId, S.name, S.img, S.category, S.description, S.capacity, S.createAt, S.place, ic.name AS categoryName, ic.color ");
-        query.append("FROM StudyGroup S ");
-        query.append("JOIN InterestCategory ic ON S.category = ic.Id ");
-        query.append("WHERE S.studyGroupId NOT IN ( ");
-        query.append("    SELECT studyGroupId ");
-        query.append("    FROM StudyGroupApplication ");
-        query.append("    WHERE stuId = ? AND status = '수락' ");
-        query.append(") ");
-        query.append("AND S.leaderId != ? ");
-
+       
         if (searchParam != null && !searchParam.trim().isEmpty()) {
             query.append("AND (S.name LIKE ? OR ic.name LIKE ?) ");
         }
@@ -735,4 +742,3 @@ public StudyGroup findGroupInfo(long groupId) {
         }
     }
 }
-

@@ -38,7 +38,7 @@ public class ViewStudyGroupController implements Controller {
         
 
         // 강의 상세 정보 출력 (디버깅용)
-        System.out.println("그룹 ID: " + group.getStudyGroupId()+
+        System.out.println("그룹 ID: " + groupId+
                            ", 그룹 이름: " + group.getName() +
                            ", 카테고리: " + group.getCategory() +
                            ", 설명: " + group.getDescription() 
@@ -47,7 +47,8 @@ public class ViewStudyGroupController implements Controller {
         // 로그인한 사용자 ID를 request에 저장
         request.setAttribute("userId", MemberSessionUtils.getLoginMemberId(request.getSession()));
         request.setAttribute("groupId", groupId);
-        request.setAttribute("groupName",  group.getName());
+        request.setAttribute("groupImg", group.getImg());
+        
         request.setAttribute("groupName",  group.getName());
         request.setAttribute("description", group.getDescription());
         request.setAttribute("dayOfWeek", group.getDayOfWeek());

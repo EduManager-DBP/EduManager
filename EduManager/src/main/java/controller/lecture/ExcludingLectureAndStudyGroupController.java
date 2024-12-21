@@ -60,3 +60,4 @@ public class ExcludingLectureAndStudyGroupController implements Controller {
     }
 
 }
+
