@@ -112,6 +112,11 @@ public class StudyGroupManager {
         return  studyGroupDao.getReviewsByGroupId(groupId);
     }
     
+    public int getAvailableSeatsByStudyGroupId(long studyGroupId) {
+        return studyGroupDao.getAvailableSeatsByStudyGroupId(studyGroupId);
+      }
+
+    
     
    
   

@@ -13,7 +13,7 @@
 		<jsp:include page="../navigation/navigation.jsp" />
 
 		<!-- 제목 -->
-		<div class="subTitle">스터디 그룹 가입</div>
+		<div class="subTitle">스터디그룹 가입</div>
 		<div class="sectionContainer">
 			<div class="section1">
 				<div>
@@ -70,8 +70,16 @@
 									<input type="button" class="statusAccepted" value="가입 완료" disabled/>
 								</c:when>
 								<c:otherwise>
-									<input type="button" class="applyButton" value="가입 요청하기"
-										onclick="document.getElementById('requestForm').submit();" />
+									<c:choose>
+										<c:when test="${studyAvailableSeats > 0}">
+											<input type="button" class="applyButton" value="가입 요청하기"
+												onclick="document.getElementById('requestForm').submit();" />
+										</c:when>
+										<c:otherwise>
+											<input type="button" class="applyButton" value="가입 요청하기"
+												onclick="alert('정원을 초과했습니다!');" />
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</form>

@@ -68,6 +68,9 @@ public class ViewStudyGroupController implements Controller {
         System.out.println("요청 상태: "+ requestStatus);
         request.setAttribute("requestStatus", requestStatus);
    
+        int studyAvailableSeats = manager.getAvailableSeatsByStudyGroupId(groupId);
+        request.setAttribute("studyAvailableSeats",studyAvailableSeats);
+        
         // 강의 상세 페이지로 이동
         return "/study/study_overview.jsp";
     }
