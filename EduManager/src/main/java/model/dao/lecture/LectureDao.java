@@ -25,9 +25,9 @@ public class LectureDao {
         StringBuffer query = new StringBuffer();
         int result = 0;
         query.append("INSERT INTO Lecture (lectureId, name, img, category, capacity, lectureLevel, createdAt, teacherId, lectureRoom, description) ");
-        query.append("VALUES (SEQ_LECTURE_ID.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?) ");
+        query.append("VALUES (SEQ_LECTURE_ID.nextval, ?, '/images/eduLogo.png', ?, ?, ?, SYSDATE, ?, ?, ?) ");
 
-        Object[] param = new Object[] {lecture.getName(), lecture.getImg(),
+        Object[] param = new Object[] {lecture.getName(), 
                 lecture.getCategory(), lecture.getCapacity(), lecture.getLevel(), lecture.getTeacherId(), lecture.getLectureRoom(), lecture.getDescription()};
 
         jdbcUtil.setSqlAndParameters(query.toString(), param); // JDBCUtil에 질의문과 파라미터 설정
@@ -36,12 +36,12 @@ public class LectureDao {
         try {
             result = jdbcUtil.executeUpdate(key);
             if (result > 0) {
-            	ResultSet rs = jdbcUtil.getGeneratedKeys();
-    		   	if(rs.next()) {
-    		   		long generatedKey = rs.getLong(1);   // 생성된 PK 값
-    		   		lecture.setLectureId(generatedKey); 	// id필드에 저장  
-    		   	}
-    		   	return lecture;
+               ResultSet rs = jdbcUtil.getGeneratedKeys();
+                if(rs.next()) {
+                   long generatedKey = rs.getLong(1);   // 생성된 PK 값
+                   lecture.setLectureId(generatedKey);    // id필드에 저장  
+                }
+                return lecture;
             }
             
             
@@ -556,7 +556,7 @@ public class LectureDao {
     
   //수강생 조회
     public List<String> findLectureMembers(int lectureId) throws SQLException {
-    	List<String> members = new ArrayList<>();
+       List<String> members = new ArrayList<>();
        
         String sql = "SELECT s.name " +
                      "FROM Student s " +
@@ -567,20 +567,21 @@ public class LectureDao {
         ResultSet rs = jdbcUtil.executeQuery();
         
         while (rs.next()) {
-        	members.add(rs.getString("name"));
+           members.add(rs.getString("name"));
         }
         
         jdbcUtil.close();
         return members;
     }
 
-	public List<LocalDate> findMonthSchedule(int lectureId, int month, int year) {
+   public List<LocalDate> findMonthSchedule(int lectureId, int month, int year) {
         List<LocalDate> eventDates = new ArrayList<>();
         
         String sql = 
                 "SELECT DISTINCT TRUNC(startDate) AS eventDate " +
                 "FROM lectureSchedule " +
-                "WHERE EXTRACT(MONTH FROM startDate) = ? " +
+                "WHERE type = 'special' " +
+                "AND EXTRACT(MONTH FROM startDate) = ? " +
                 "AND EXTRACT(YEAR FROM startDate) = ? " +
                 "AND lectureId = ? " +
 
@@ -605,10 +606,10 @@ public class LectureDao {
         jdbcUtil.setSqlAndParameters(sql, new Object[]{month, year, lectureId,month, year, lectureId,month, year, lectureId}); // memberId를 두 번 파라미터로 설정
         
         try {
-        	ResultSet rs = jdbcUtil.executeQuery();
+           ResultSet rs = jdbcUtil.executeQuery();
             
             while (rs.next()) {
-            	 Date eventDate = rs.getDate("eventDate");
+                Date eventDate = rs.getDate("eventDate");
                  // java.sql.Date를 LocalDate로 변환
                  if (eventDate != null) {
                      eventDates.add(eventDate.toLocalDate());
@@ -623,8 +624,8 @@ public class LectureDao {
         }
         
         
-		return null;
-	}
+      return null;
+   }
     
 }
 
